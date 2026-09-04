@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>KSS Matterkey Legal Closing Tracker</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b3d3f'/%3E%3Crect x='14' y='10' width='36' height='44' rx='4' fill='white'/%3E%3Crect x='14' y='10' width='36' height='8' rx='4' fill='%230d7377'/%3E%3Cline x1='20' y1='28' x2='44' y2='28' stroke='%23e6f4f4' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='20' y1='35' x2='44' y2='35' stroke='%23e6f4f4' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='20' y1='42' x2='36' y2='42' stroke='%23e6f4f4' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='48' cy='46' r='10' fill='%23e8705a'/%3E%3Cpath d='M43 46 L46.5 49.5 L53 43' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -77,8 +78,11 @@ header {
   display: flex; align-items: center; justify-content: space-between;
   box-shadow: 0 4px 20px rgba(11,61,63,0.4);
 }
+.header-logo-area {
+  display: flex; align-items: center; gap: 12px;
+}
 .header-title-kss2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; color: #e8705a; letter-spacing: 1px; }
-.header-sub-kss3 { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px; color: #b2d8d8; letter-spacing: 3px; text-transform: uppercase; padding-left: 30px; }
+.header-sub-kss3 { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px; color: #b2d8d8; letter-spacing: 3px; text-transform: uppercase; padding-left: 0; }
 #btn-hamburger-kss4 {
   background: var(--grad-coral); color: #fff; border: none; border-radius: 10px;
   padding: 10px 18px; font-size: 18px; font-weight: 700; cursor: pointer;
@@ -152,6 +156,9 @@ header {
   background: linear-gradient(180deg, #e6f4f4, #d4ecec);
   min-height: 320px; padding: 12px;
   transition: background 0.2s, border 0.2s;
+  overflow-y: auto;
+  max-height: calc(100vh - 260px);
+  scroll-behavior: smooth;
 }
 .col-cards.drag-over {
   background: linear-gradient(180deg, #d4ecec, #b2d8d8);
@@ -404,7 +411,7 @@ header {
 @media (max-width: 767px) {
   header { padding: 12px 16px; }
   .header-title-kss2 { font-size: 18px; }
-  .header-sub-kss3 { font-size: 9px; letter-spacing: 2px; padding-left: 24px; }
+  .header-sub-kss3 { font-size: 9px; letter-spacing: 2px; }
   #tab-bar-kss7 { padding: 0 12px; overflow-x: auto; }
   .tab-btn { padding: 10px 14px; font-size: 12px; white-space: nowrap; }
   #tab-matters-kss12, #tab-dashboard-kss13, #tab-calendar-kss14 { padding: 16px !important; }
@@ -423,6 +430,7 @@ header {
   .cal-nav-new { padding: 18px 16px; }
   .cal-nav-new .cal-month-label-new { font-size: 22px; }
   #splash-screen-kss1 .splash-title { font-size: 28px; }
+  .header-logo-area .header-logo-svg { width: 28px; height: 28px; }
 }
 </style>
 </head>
@@ -433,10 +441,22 @@ header {
 <!-- SPLASH -->
 <div data-id="3" id="splash-screen-kss1">
   <div data-id="4" class="accent-line"></div>
-  <div data-id="5" class="splash-title">⚖ KSS Matterkey Inc.</div>
-  <div data-id="6" class="splash-sub">Real Estate Closing Tracker</div>
-  <div data-id="7" class="accent-line"></div>
-  <div data-id="8" class="dots"><div data-id="9" class="dot"></div><div data-id="10" class="dot"></div><div data-id="11" class="dot"></div></div>
+  <svg data-id="5" width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;opacity:0.9">
+    <rect data-id="6" x="10" y="6" width="38" height="50" rx="5" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+    <rect data-id="7" x="10" y="6" width="38" height="10" rx="5" fill="rgba(232,112,90,0.7)"/>
+    <circle data-id="8" cx="18" cy="26" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+    <path data-id="9" d="M15.5 26 L17.2 27.7 L20.5 24.3" stroke="#e8705a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect data-id="10" x="25" y="24.5" width="16" height="2.5" rx="1.2" fill="rgba(255,255,255,0.5)"/>
+    <circle data-id="11" cx="18" cy="35" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+    <path data-id="12" d="M15.5 35 L17.2 36.7 L20.5 33.3" stroke="#e8705a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect data-id="13" x="25" y="33.5" width="14" height="2.5" rx="1.2" fill="rgba(255,255,255,0.5)"/>
+    <circle data-id="14" cx="18" cy="44" r="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <rect data-id="15" x="25" y="42.5" width="10" height="2.5" rx="1.2" fill="rgba(255,255,255,0.3)"/>
+  </svg>
+  <div data-id="16" class="splash-title">KSS Matterkey Inc.</div>
+  <div data-id="17" class="splash-sub">Real Estate Closing Tracker</div>
+  <div data-id="18" class="accent-line"></div>
+  <div data-id="19" class="dots"><div data-id="20" class="dot"></div><div data-id="21" class="dot"></div><div data-id="22" class="dot"></div></div>
 </div>
 <script>
 (function() {
@@ -463,107 +483,121 @@ header {
 </script>
 
 <!-- HEADER -->
-<header data-id="12">
-  <div data-id="13">
-    <div data-id="14" class="header-title-kss2">⚖ KSS Matterkey Inc.</div>
-    <div data-id="15" class="header-sub-kss3">Real Estate Closing Tracker</div>
+<header data-id="23">
+  <div data-id="24" class="header-logo-area">
+    <svg data-id="25" class="header-logo-svg" width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+      <rect data-id="26" x="10" y="6" width="38" height="50" rx="5" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+      <rect data-id="27" x="10" y="6" width="38" height="10" rx="5" fill="rgba(232,112,90,0.7)"/>
+      <circle data-id="28" cx="18" cy="26" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+      <path data-id="29" d="M15.5 26 L17.2 27.7 L20.5 24.3" stroke="#e8705a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect data-id="30" x="25" y="24.5" width="16" height="2.5" rx="1.2" fill="rgba(255,255,255,0.5)"/>
+      <circle data-id="31" cx="18" cy="35" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+      <path data-id="32" d="M15.5 35 L17.2 36.7 L20.5 33.3" stroke="#e8705a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect data-id="33" x="25" y="33.5" width="14" height="2.5" rx="1.2" fill="rgba(255,255,255,0.5)"/>
+      <circle data-id="34" cx="18" cy="44" r="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+      <rect data-id="35" x="25" y="42.5" width="10" height="2.5" rx="1.2" fill="rgba(255,255,255,0.3)"/>
+    </svg>
+    <div data-id="36">
+      <div data-id="37" class="header-title-kss2">KSS Matterkey Inc.</div>
+      <div data-id="38" class="header-sub-kss3">Real Estate Closing Tracker</div>
+    </div>
   </div>
-  <button data-id="16" id="btn-hamburger-kss4">☰</button>
+  <button data-id="39" id="btn-hamburger-kss4">☰</button>
 </header>
 
 <!-- HAMBURGER MENU -->
-<div data-id="17" id="hamburger-menu-kss5">
-  <button data-id="18" class="hmenu-btn-kss6" id="hm-add-kss15">＋ Add New File</button>
-  <button data-id="19" class="hmenu-btn-kss6" id="hm-alerts-kss16">🔔 Alerts</button>
-  <button data-id="20" class="hmenu-btn-kss6" id="hm-backup-kss17">💾 Backup Data</button>
-  <button data-id="21" class="hmenu-btn-kss6" id="hm-restore-kss18">📂 Restore Data</button>
-  <button data-id="22" class="hmenu-btn-kss6" id="hm-print-kss19">🖨 Save as PDF</button>
+<div data-id="40" id="hamburger-menu-kss5">
+  <button data-id="41" class="hmenu-btn-kss6" id="hm-add-kss15">＋ Add New File</button>
+  <button data-id="42" class="hmenu-btn-kss6" id="hm-alerts-kss16">🔔 Alerts</button>
+  <button data-id="43" class="hmenu-btn-kss6" id="hm-backup-kss17">💾 Backup Data</button>
+  <button data-id="44" class="hmenu-btn-kss6" id="hm-restore-kss18">📂 Restore Data</button>
+  <button data-id="45" class="hmenu-btn-kss6" id="hm-print-kss19">🖨 Save as PDF</button>
 </div>
 
 <!-- TAB BAR -->
-<div data-id="23" id="tab-bar-kss7">
-  <button data-id="24" class="tab-btn" data-tab="dashboard">📊 Dashboard</button>
-  <button data-id="25" class="tab-btn active" data-tab="matters">📁 Matters</button>
-  <button data-id="26" class="tab-btn" data-tab="calendar">📅 Calendar</button>
+<div data-id="46" id="tab-bar-kss7">
+  <button data-id="47" class="tab-btn" data-tab="dashboard">📊 Dashboard</button>
+  <button data-id="48" class="tab-btn active" data-tab="matters">📁 Matters</button>
+  <button data-id="49" class="tab-btn" data-tab="calendar">📅 Calendar</button>
 </div>
 
 <!-- TAB: DASHBOARD -->
-<div data-id="27" id="tab-dashboard-kss13" style="padding:28px;display:none">
-  <div data-id="28" style="font-family:'Playfair Display',serif;font-weight:700;font-size:30px;color:#0b3d3f;margin-bottom:4px">📊 Analytics Dashboard</div>
-  <div data-id="29" style="font-size:13px;color:#7a9f9f;margin-bottom:24px">KSS Matterkey Inc. — Live Closing Intelligence</div>
-  <div data-id="30" id="dash-kpi-container" class="dash-kpi-grid"></div>
-  <div data-id="31" id="dash-row2-container"></div>
-  <div data-id="32" id="dash-row3-container"></div>
-  <div data-id="33" id="dash-row4-container"></div>
+<div data-id="50" id="tab-dashboard-kss13" style="padding:28px;display:none">
+  <div data-id="51" style="font-family:'Playfair Display',serif;font-weight:700;font-size:30px;color:#0b3d3f;margin-bottom:4px">📊 Analytics Dashboard</div>
+  <div data-id="52" style="font-size:13px;color:#7a9f9f;margin-bottom:24px">KSS Matterkey Inc. — Live Closing Intelligence</div>
+  <div data-id="53" id="dash-kpi-container" class="dash-kpi-grid"></div>
+  <div data-id="54" id="dash-row2-container"></div>
+  <div data-id="55" id="dash-row3-container"></div>
+  <div data-id="56" id="dash-row4-container"></div>
 </div>
 
 <!-- TAB: MATTERS -->
-<div data-id="34" id="tab-matters-kss12" style="padding:24px 28px;display:block">
-  <div data-id="35" class="filter-bar">
-    <span data-id="36" style="font-size:16px">🔍</span>
-    <input data-id="37" type="text" id="filter-search-kss26" placeholder="Search file # or client name..." style="flex:1;min-width:180px" autocomplete="off" spellcheck="false">
-    <select data-id="38" id="filter-lawyer-kss27"><option data-id="39" value="">All Lawyers</option></select>
-    <select data-id="40" id="filter-type-kss28"><option data-id="41" value="">All Types</option><option data-id="42">Purchase</option><option data-id="43">Sale</option><option data-id="44">Refinance</option><option data-id="45">Transfer</option></select>
-    <select data-id="46" id="filter-priority-kss29"><option data-id="47" value="">All Priorities</option><option data-id="48">Urgent</option><option data-id="49">High</option><option data-id="50">Normal</option></select>
-    <select data-id="51" id="filter-clerk-kss50"><option data-id="52" value="">All Clerks</option></select>
-    <div data-id="53" style="flex:1;min-width:8px"></div>
-    <button data-id="54" class="btn-expand-filter" id="btn-expand-all-kss24" style="background:var(--grad-teal);box-shadow:0 3px 12px rgba(13,115,119,0.3)">⊞ Expand All</button>
-    <button data-id="55" class="btn-expand-filter" id="btn-collapse-all-kss25" style="background:var(--grad-coral);box-shadow:0 3px 12px rgba(232,112,90,0.3)">⊟ Collapse All</button>
+<div data-id="57" id="tab-matters-kss12" style="padding:24px 28px;display:block">
+  <div data-id="58" class="filter-bar">
+    <span data-id="59" style="font-size:16px">🔍</span>
+    <input data-id="60" type="text" id="filter-search-kss26" placeholder="Search file # or client name..." style="flex:1;min-width:180px" autocomplete="off" spellcheck="false">
+    <select data-id="61" id="filter-lawyer-kss27"><option data-id="62" value="">All Lawyers</option></select>
+    <select data-id="63" id="filter-type-kss28"><option data-id="64" value="">All Types</option><option data-id="65">Purchase</option><option data-id="66">Sale</option><option data-id="67">Refinance</option><option data-id="68">Transfer</option></select>
+    <select data-id="69" id="filter-priority-kss29"><option data-id="70" value="">All Priorities</option><option data-id="71">Urgent</option><option data-id="72">High</option><option data-id="73">Normal</option></select>
+    <select data-id="74" id="filter-clerk-kss50"><option data-id="75" value="">All Clerks</option></select>
+    <div data-id="76" style="flex:1;min-width:8px"></div>
+    <button data-id="77" class="btn-expand-filter" id="btn-expand-all-kss24" style="background:var(--grad-teal);box-shadow:0 3px 12px rgba(13,115,119,0.3)">⊞ Expand All</button>
+    <button data-id="78" class="btn-expand-filter" id="btn-collapse-all-kss25" style="background:var(--grad-coral);box-shadow:0 3px 12px rgba(232,112,90,0.3)">⊟ Collapse All</button>
   </div>
-  <div data-id="56" id="board-kss9"></div>
+  <div data-id="79" id="board-kss9"></div>
 </div>
 
 <!-- TAB: CALENDAR -->
-<div data-id="57" id="tab-calendar-kss14" style="padding:28px;display:none">
-  <div data-id="58" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--teal-deep);margin-bottom:4px">📅 Closing Calendar</div>
-  <div data-id="59" style="font-size:13px;color:var(--text-light);margin-bottom:24px">All upcoming closing dates</div>
-  <div data-id="60" class="cal-wrapper">
-    <div data-id="61" class="cal-nav-new">
-      <button data-id="62" class="cal-nav-btn-new" id="btn-prev-month-kss30">‹</button>
-      <span data-id="63" class="cal-month-label-new" id="cal-month-label-kss31"></span>
-      <button data-id="64" class="cal-nav-btn-new" id="btn-next-month-kss32">›</button>
+<div data-id="80" id="tab-calendar-kss14" style="padding:28px;display:none">
+  <div data-id="81" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--teal-deep);margin-bottom:4px">📅 Closing Calendar</div>
+  <div data-id="82" style="font-size:13px;color:var(--text-light);margin-bottom:24px">All upcoming closing dates</div>
+  <div data-id="83" class="cal-wrapper">
+    <div data-id="84" class="cal-nav-new">
+      <button data-id="85" class="cal-nav-btn-new" id="btn-prev-month-kss30">‹</button>
+      <span data-id="86" class="cal-month-label-new" id="cal-month-label-kss31"></span>
+      <button data-id="87" class="cal-nav-btn-new" id="btn-next-month-kss32">›</button>
     </div>
-    <div data-id="65" class="cal-weekday-row"><span data-id="66">Sun</span><span data-id="67">Mon</span><span data-id="68">Tue</span><span data-id="69">Wed</span><span data-id="70">Thu</span><span data-id="71">Fri</span><span data-id="72">Sat</span></div>
-    <div data-id="73" class="cal-day-grid" id="cal-grid-kss33"></div>
+    <div data-id="88" class="cal-weekday-row"><span data-id="89">Sun</span><span data-id="90">Mon</span><span data-id="91">Tue</span><span data-id="92">Wed</span><span data-id="93">Thu</span><span data-id="94">Fri</span><span data-id="95">Sat</span></div>
+    <div data-id="96" class="cal-day-grid" id="cal-grid-kss33"></div>
   </div>
-  <div data-id="74" class="cal-legend" id="cal-legend-bar">
-    <div data-id="75" class="cal-legend-item"><span data-id="76" class="cal-legend-dot" style="background:#14a09a"></span>New/Open</div>
-    <div data-id="77" class="cal-legend-item"><span data-id="78" class="cal-legend-dot" style="background:#d97706"></span>Requisition</div>
-    <div data-id="79" class="cal-legend-item"><span data-id="80" class="cal-legend-dot" style="background:#16a34a"></span>Closing Soon</div>
-    <div data-id="81" class="cal-legend-item"><span data-id="82" class="cal-legend-dot" style="background:#dc2626"></span>Reporting</div>
-    <div data-id="83" class="cal-legend-item"><span data-id="84" class="cal-legend-dot" style="background:#64748b"></span>Closed</div>
+  <div data-id="97" class="cal-legend" id="cal-legend-bar">
+    <div data-id="98" class="cal-legend-item"><span data-id="99" class="cal-legend-dot" style="background:#14a09a"></span>New/Open</div>
+    <div data-id="100" class="cal-legend-item"><span data-id="101" class="cal-legend-dot" style="background:#d97706"></span>Requisition</div>
+    <div data-id="102" class="cal-legend-item"><span data-id="103" class="cal-legend-dot" style="background:#16a34a"></span>Closing Soon</div>
+    <div data-id="104" class="cal-legend-item"><span data-id="105" class="cal-legend-dot" style="background:#dc2626"></span>Reporting</div>
+    <div data-id="106" class="cal-legend-item"><span data-id="107" class="cal-legend-dot" style="background:#64748b"></span>Closed</div>
   </div>
 </div>
 
 <!-- DAY POPUP -->
-<div data-id="85" id="day-popup-kss11"></div>
+<div data-id="108" id="day-popup-kss11"></div>
 
 <!-- FILE MODAL -->
-<div data-id="86" id="file-modal-kss10">
-  <div data-id="87" class="modal-box">
-    <div data-id="88" id="modal-title-kss34" style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--teal-deep);margin-bottom:24px">Add New File</div>
-    <div data-id="89" class="modal-grid">
-      <div data-id="90"><label data-id="91">File #</label><input data-id="92" type="text" id="m-filenum-kss35" autocomplete="off" spellcheck="false"></div>
-      <div data-id="93"><label data-id="94">Client Name</label><input data-id="95" type="text" id="m-client-kss36" autocomplete="off" spellcheck="false"></div>
-      <div data-id="96" class="modal-full"><label data-id="97">Address</label><input data-id="98" type="text" id="m-address-kss37" autocomplete="off" spellcheck="false"></div>
-      <div data-id="99"><label data-id="100">Type</label><select data-id="101" id="m-type-kss38"><option data-id="102">Purchase</option><option data-id="103">Sale</option><option data-id="104">Refinance</option><option data-id="105">Transfer</option></select></div>
-      <div data-id="106"><label data-id="107">Lawyer</label><select data-id="108" id="m-lawyer-kss39"></select></div>
-      <div data-id="109"><label data-id="110">Clerk</label><select data-id="111" id="m-clerk-kss40"></select></div>
-      <div data-id="112"><label data-id="113">Price</label><input data-id="114" type="text" id="m-price-kss41" autocomplete="off" spellcheck="false"></div>
-      <div data-id="115"><label data-id="116">Req Date</label><input data-id="117" type="date" id="m-reqdate-kss42"></div>
-      <div data-id="118"><label data-id="119">Closing Date</label><input data-id="120" type="date" id="m-closedate-kss43"></div>
-      <div data-id="121"><label data-id="122">Status</label><select data-id="123" id="m-status-kss44"><option data-id="124" value="col-new">NEW / OPEN</option><option data-id="125" value="col-req">REQUISITION</option><option data-id="126" value="col-closing">CLOSING SOON</option><option data-id="127" value="col-reporting">REPORTING</option><option data-id="128" value="col-closed">CLOSED</option></select></div>
-      <div data-id="129"><label data-id="130">Priority</label><select data-id="131" id="m-priority-kss45"><option data-id="132">Normal</option><option data-id="133">High</option><option data-id="134">Urgent</option></select></div>
-      <div data-id="135" class="modal-full"><label data-id="136">Notes</label><textarea data-id="137" id="m-notes-kss46" rows="3" autocomplete="off" spellcheck="false"></textarea></div>
+<div data-id="109" id="file-modal-kss10">
+  <div data-id="110" class="modal-box">
+    <div data-id="111" id="modal-title-kss34" style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--teal-deep);margin-bottom:24px">Add New File</div>
+    <div data-id="112" class="modal-grid">
+      <div data-id="113"><label data-id="114">File #</label><input data-id="115" type="text" id="m-filenum-kss35" autocomplete="off" spellcheck="false"></div>
+      <div data-id="116"><label data-id="117">Client Name</label><input data-id="118" type="text" id="m-client-kss36" autocomplete="off" spellcheck="false"></div>
+      <div data-id="119" class="modal-full"><label data-id="120">Address</label><input data-id="121" type="text" id="m-address-kss37" autocomplete="off" spellcheck="false"></div>
+      <div data-id="122"><label data-id="123">Type</label><select data-id="124" id="m-type-kss38"><option data-id="125">Purchase</option><option data-id="126">Sale</option><option data-id="127">Refinance</option><option data-id="128">Transfer</option></select></div>
+      <div data-id="129"><label data-id="130">Lawyer</label><select data-id="131" id="m-lawyer-kss39"></select></div>
+      <div data-id="132"><label data-id="133">Clerk</label><select data-id="134" id="m-clerk-kss40"></select></div>
+      <div data-id="135"><label data-id="136">Price</label><input data-id="137" type="text" id="m-price-kss41" autocomplete="off" spellcheck="false"></div>
+      <div data-id="138"><label data-id="139">Req Date</label><input data-id="140" type="date" id="m-reqdate-kss42"></div>
+      <div data-id="141"><label data-id="142">Closing Date</label><input data-id="143" type="date" id="m-closedate-kss43"></div>
+      <div data-id="144"><label data-id="145">Status</label><select data-id="146" id="m-status-kss44"><option data-id="147" value="col-new">NEW / OPEN</option><option data-id="148" value="col-req">REQUISITION</option><option data-id="149" value="col-closing">CLOSING SOON</option><option data-id="150" value="col-reporting">REPORTING</option><option data-id="151" value="col-closed">CLOSED</option></select></div>
+      <div data-id="152"><label data-id="153">Priority</label><select data-id="154" id="m-priority-kss45"><option data-id="155">Normal</option><option data-id="156">High</option><option data-id="157">Urgent</option></select></div>
+      <div data-id="158" class="modal-full"><label data-id="159">Notes</label><textarea data-id="160" id="m-notes-kss46" rows="3" autocomplete="off" spellcheck="false"></textarea></div>
     </div>
-    <div data-id="138" class="modal-footer">
-      <button data-id="139" class="btn-cancel-modal" id="btn-modal-cancel-kss47">Cancel</button>
-      <button data-id="140" class="btn-save-modal" id="btn-modal-save-kss48">Save</button>
+    <div data-id="161" class="modal-footer">
+      <button data-id="162" class="btn-cancel-modal" id="btn-modal-cancel-kss47">Cancel</button>
+      <button data-id="163" class="btn-save-modal" id="btn-modal-save-kss48">Save</button>
     </div>
   </div>
 </div>
 
-<footer data-id="141" style="text-align:center;padding:24px;font-size:12px;color:var(--text-light);background:linear-gradient(90deg,#e6f4f4,#f0fafa)">
+<footer data-id="164" style="text-align:center;padding:24px;font-size:12px;color:var(--text-light);background:linear-gradient(90deg,#e6f4f4,#f0fafa)">
   Made by Copilot
 </footer>
 
@@ -577,6 +611,46 @@ document.querySelectorAll('input, textarea, select').forEach(function(el) {
   el.addEventListener('paste', function(e) { e.stopPropagation(); });
   el.addEventListener('cut', function(e) { e.stopPropagation(); });
 });
+
+// ── AUTO-SCROLL DURING DRAG ──
+(function() {
+  var scrollInterval = null;
+  var EDGE = 120;
+  var SPEED = 10;
+
+  function startAutoScroll(direction) {
+    if (scrollInterval) return;
+    scrollInterval = setInterval(function() {
+      window.scrollBy(0, direction * SPEED);
+      var board = document.getElementById('board-kss9');
+      if (board) board.scrollTop += direction * SPEED;
+      var colBodies = document.querySelectorAll('.col-cards');
+      colBodies.forEach(function(col) { col.scrollTop += direction * SPEED; });
+    }, 16);
+  }
+
+  function stopAutoScroll() {
+    if (scrollInterval) { clearInterval(scrollInterval); scrollInterval = null; }
+  }
+
+  document.addEventListener('dragover', function(e) {
+    var y = e.clientY;
+    var h = window.innerHeight;
+    if (y < EDGE) {
+      startAutoScroll(-1);
+    } else if (y > h - EDGE) {
+      startAutoScroll(1);
+    } else {
+      stopAutoScroll();
+    }
+  });
+
+  document.addEventListener('dragend', stopAutoScroll);
+  document.addEventListener('drop', stopAutoScroll);
+  document.addEventListener('dragleave', function(e) {
+    if (!e.relatedTarget) stopAutoScroll();
+  });
+})();
 
 // ── DATA ──
 var COLUMNS = [
@@ -930,11 +1004,21 @@ function bindDragDrop() {
       dragFileId = null;
     });
   });
+
+  var scrollIntoViewThrottled = {};
   document.querySelectorAll('.col-cards').forEach(function(col){
     col.addEventListener('dragover', function(e){
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
       this.classList.add('drag-over');
+      // Throttled scrollIntoView
+      var colId = this.getAttribute('data-col');
+      if (!scrollIntoViewThrottled[colId]) {
+        scrollIntoViewThrottled[colId] = true;
+        this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        var that = this;
+        setTimeout(function() { scrollIntoViewThrottled[colId] = false; }, 500);
+      }
     });
     col.addEventListener('dragleave', function(){
       this.classList.remove('drag-over');
@@ -1244,7 +1328,6 @@ function renderDashboard() {
   var r = 70, strokeW = 40, cx = 100, cy = 100;
   var circumference = 2 * Math.PI * r;
   var svgParts = '<svg width="200" height="200" viewBox="0 0 200 200" style="flex-shrink:0">';
-  // Background circle
   svgParts += '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#f1f5f9" stroke-width="'+strokeW+'"/>';
   var cumOffset = 0;
   typeArr.forEach(function(t){
@@ -1313,7 +1396,6 @@ function renderDashboard() {
     '<div class="dash-row3-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px">' + donutCard + kanbanCard + '</div>';
 
   // ── ROW 4: MONTHLY VERTICAL BAR CHART + REPORTING FILES ──
-  // Monthly bar chart: last 6 months + next 4
   var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var monthBuckets = [];
   for(var mi = -6; mi < 4; mi++) {
