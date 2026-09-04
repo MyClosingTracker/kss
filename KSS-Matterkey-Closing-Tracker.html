@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KSS Matterkey Legal Closing Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest" defer></script>
+<style>
+:root {
+  --teal-deep: #0b3d3f;
+  --teal-mid: #0d7377;
+  --teal-bright: #14a09a;
+  --teal-pale: #e6f4f4;
+  --coral: #e8705a;
+  --coral-dark: #cf5e4a;
+  --coral-pale: #fdf0ed;
+  --white: #ffffff;
+  --text-dark: #1a3030;
+  --text-mid: #3d5c5c;
+  --text-light: #7a9f9f;
+  --shadow: rgba(11,61,63,0.13);
+  --grad-header: linear-gradient(135deg, #0b3d3f 0%, #0d7377 100%);
+  --grad-coral: linear-gradient(135deg, #e8705a 0%, #f4a08e 100%);
+  --grad-teal: linear-gradient(135deg, #0d7377 0%, #14a09a 100%);
+  --grad-page: linear-gradient(160deg, #e6f4f4 0%, #f0fafa 50%, #fdf5f3 100%);
+  --grad-card: linear-gradient(180deg, #ffffff 0%, #f8fdfd 100%);
+}
+* { box-sizing: border-box; }
+body { margin:0; font-family:'Inter',sans-serif; background:var(--grad-page); min-height:100vh; color:var(--text-dark); }
+button, input, select, textarea { font-family:'Inter',sans-serif; }
+::-webkit-scrollbar { width:6px; height:6px; }
+::-webkit-scrollbar-track { background:#e6f4f4; border-radius:3px; }
+::-webkit-scrollbar-thumb { background:linear-gradient(180deg,#0d7377,#14a09a); border-radius:3px; }
+
+@keyframes pulse {
+  from { opacity:0.3; transform:scale(0.7); }
+  to { opacity:1; transform:scale(1.3); }
+}
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+#splash {
+  position:fixed; inset:0; z-index:9999;
+  background:linear-gradient(135deg,#0b3d3f 0%,#0d5c5f 60%,#1a4a3a 100%);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+  transition: opacity 0.9s ease;
+}
+.splash-line { width:80px; height:3px; background:linear-gradient(90deg,#e8705a,#f4a08e); border-radius:2px; }
+.splash-title { font-family:'Playfair Display',serif; font-size:48px; font-weight:700; color:#e8705a; letter-spacing:2px; text-shadow:0 2px 20px rgba(232,112,90,0.4); text-align:center; }
+.splash-sub { font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:#a8d4d4; letter-spacing:5px; text-transform:uppercase; }
+.splash-dot { width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,#e8705a,#f4a08e); animation:pulse 1.4s ease infinite alternate; }
+
+header {
+  position:sticky; top:0; z-index:200;
+  background:var(--grad-header);
+  padding:14px 28px;
+  display:flex; align-items:center; justify-content:space-between;
+  box-shadow:0 4px 20px rgba(0,0,0,0.25);
+}
+.logo-main { font-family:'Playfair Display',serif; font-weight:700; font-size:22px; color:#e8705a; letter-spacing:1px; display:flex; align-items:center; gap:8px; }
+.logo-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:11px; color:#a8d4d4; letter-spacing:3px; text-transform:uppercase; padding-left:32px; }
+.hamburger-btn {
+  background:linear-gradient(135deg,#e8705a,#cf5e4a); color:#fff; border:none; border-radius:10px;
+  padding:10px 18px; font-size:18px; cursor:pointer; font-weight:700;
+  box-shadow:0 2px 10px rgba(232,112,90,0.4); transition:all 0.2s;
+}
+.hamburger-btn:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(232,112,90,0.5); }
+
+#hamburger-menu {
+  position:fixed; top:64px; right:24px; z-index:300;
+  background:linear-gradient(160deg,#0b3d3f,#0d5c5f);
+  border-radius:14px; padding:12px;
+  box-shadow:0 8px 40px rgba(0,0,0,0.35);
+  display:none; flex-direction:column; gap:8px; min-width:200px;
+  border:1px solid rgba(255,255,255,0.1);
+}
+.menu-item {
+  width:100%; background:rgba(255,255,255,0.08); color:#fff;
+  border:1px solid rgba(255,255,255,0.12); border-radius:9px;
+  padding:11px 16px; text-align:left; font-size:13px; font-weight:600;
+  cursor:pointer; transition:all 0.18s; display:flex; align-items:center; gap:10px;
+}
+.menu-item:hover {
+  background:linear-gradient(135deg,rgba(232,112,90,0.3),rgba(232,112,90,0.1));
+  border-color:rgba(232,112,90,0.5); transform:translateX(3px);
+}
+
+#tab-bar {
+  background:linear-gradient(90deg,#0b3d3f,#0d5c5f);
+  padding:0 28px; display:flex; gap:4px;
+  border-bottom:3px solid rgba(232,112,90,0.3);
+}
+.tab-btn {
+  background:transparent; color:#a8d4d4; border:none;
+  padding:13px 24px; font-size:13px; font-weight:600;
+  cursor:pointer; border-bottom:3px solid transparent;
+  margin-bottom:-3px; transition:all 0.2s; letter-spacing:0.5px;
+}
+.tab-btn.active { color:#e8705a; border-bottom:3px solid #e8705a; background:rgba(232,112,90,0.08); }
+.tab-btn:hover { color:#fff; }
+
+.filter-bar-wrap {
+  background:linear-gradient(90deg,rgba(255,255,255,0.9),rgba(240,250,250,0.9));
+  backdrop-filter:blur(10px); border-radius:12px; padding:14px 20px;
+  margin-bottom:20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  box-shadow:0 2px 12px var(--shadow); border:1px solid rgba(20,160,154,0.15);
+}
+.filter-label { font-size:12px; font-weight:600; color:var(--teal-mid); text-transform:uppercase; letter-spacing:1px; }
+.filter-el {
+  border:1.5px solid rgba(13,115,119,0.25); border-radius:8px; padding:8px 14px;
+  background:white; font-size:13px; color:var(--text-dark); outline:none; transition:all 0.2s;
+}
+.filter-el:focus { border-color:var(--teal-mid); }
+
+#board { display:flex; gap:18px; overflow-x:auto; align-items:flex-start; padding-bottom:20px; }
+.column { width:290px; min-width:290px; flex-shrink:0; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px var(--shadow); }
+.column-header { padding:14px 18px; display:flex; align-items:center; justify-content:space-between; }
+.col-label { font-size:11px; font-weight:700; color:white; letter-spacing:2px; text-transform:uppercase; }
+.col-count { background:rgba(255,255,255,0.25); color:white; border-radius:12px; padding:2px 10px; font-size:12px; font-weight:700; }
+.col-cards { background:linear-gradient(180deg,#f5fbfb,#f0f8f8); min-height:300px; padding:12px; }
+
+.card {
+  background:var(--grad-card); border-radius:12px; padding:14px 15px; margin-bottom:10px;
+  box-shadow:0 2px 10px var(--shadow); cursor:grab; transition:all 0.2s; position:relative;
+  animation: fadeIn 0.3s ease;
+}
+.card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(11,61,63,0.18); }
+.card.dragging { opacity:0.5; transform:rotate(2deg); }
+
+.card-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.file-num { font-size:11px; font-weight:700; color:var(--teal-mid); letter-spacing:1px; font-family:'Inter',monospace; }
+.priority-badge { border-radius:10px; padding:2px 8px; font-size:10px; font-weight:700; }
+.priority-Urgent { background:linear-gradient(135deg,#fdecea,#ffe0dc); color:#c0392b; }
+.priority-High { background:linear-gradient(135deg,#fdf0ed,#ffe8e0); color:#e8705a; }
+.priority-Normal { background:linear-gradient(135deg,#f0f4f4,#e6f0f0); color:#7a9f9f; }
+
+.client-name { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px; }
+.address { font-size:12px; font-style:italic; color:var(--text-light); margin-bottom:8px; }
+
+.type-badge { background:linear-gradient(135deg,#e6f4f4,#d0eeed); color:#0d7377; border-radius:10px; padding:3px 10px; font-size:11px; font-weight:500; }
+.expand-btn {
+  background:linear-gradient(135deg,var(--teal-pale),#daf0ef); color:var(--teal-mid);
+  border:none; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:700; cursor:pointer; transition:all 0.2s;
+}
+.expand-btn:hover { background:linear-gradient(135deg,#d0eeed,#c0e6e5); }
+
+.lawyer-badge { background:linear-gradient(135deg,#e6f4f4,#d0eeed); color:#0d7377; border-radius:10px; padding:3px 10px; font-size:11px; }
+.clerk-badge { background:linear-gradient(135deg,#dceeff,#c8e4ff); color:#1565c0; border-radius:10px; padding:3px 10px; font-size:11px; }
+
+.card-notes { font-size:11px; color:var(--text-light); padding-top:8px; border-top:1px dashed rgba(13,115,119,0.2); margin-top:8px; }
+
+.card-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:10px; }
+.act-edit { background:linear-gradient(135deg,#e6f4f4,#d0eeed); color:#0d7377; border:none; border-radius:8px; padding:6px 12px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s; }
+.act-copy { background:linear-gradient(135deg,#fdf0ed,#ffe0d6); color:#e8705a; border:none; border-radius:8px; padding:6px 12px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s; }
+.act-delete { background:linear-gradient(135deg,#fdecea,#ffe0dc); color:#c0392b; border:none; border-radius:8px; padding:6px 12px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s; }
+.act-edit:hover,.act-copy:hover,.act-delete:hover { transform:translateY(-1px); }
+
+.dup-ribbon { background:linear-gradient(135deg,#f59e0b,#fbbf24); color:#78350f; font-size:9px; font-weight:700; padding:2px 8px; border-radius:6px; display:inline-block; margin-bottom:6px; }
+
+.bulk-btns { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.bulk-btn-expand {
+  background:linear-gradient(135deg,#0d7377,#14a09a); color:white; border:none; border-radius:9px;
+  padding:9px 20px; font-weight:700; font-size:13px; cursor:pointer;
+  box-shadow:0 3px 12px rgba(13,115,119,0.35); transition:all 0.2s;
+}
+.bulk-btn-expand:hover { transform:translateY(-2px); box-shadow:0 5px 18px rgba(13,115,119,0.45); }
+.bulk-btn-collapse {
+  background:linear-gradient(135deg,#e8705a,#cf5e4a); color:white; border:none; border-radius:9px;
+  padding:9px 20px; font-weight:700; font-size:13px; cursor:pointer;
+  box-shadow:0 3px 12px rgba(232,112,90,0.35); transition:all 0.2s;
+}
+.bulk-btn-collapse:hover { transform:translateY(-2px); box-shadow:0 5px 18px rgba(232,112,90,0.45); }
+
+/* MODAL */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(11,61,63,0.65); align-items:center; justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.modal-overlay.open { display:flex; }
+.modal-box {
+  background:linear-gradient(160deg,#fff,#f8fdfd); border-radius:18px; padding:32px;
+  width:540px; max-width:95vw; max-height:90vh; overflow-y:auto;
+  border-top:5px solid #e8705a; box-shadow:0 24px 80px rgba(0,0,0,0.3);
+}
+.modal-box.manage { border-top-color:#0d7377; }
+.modal-title { font-family:'Playfair Display',serif; font-size:24px; font-weight:700; color:var(--teal-deep); margin-bottom:24px; }
+.form-group { margin-bottom:16px; }
+.form-label { display:block; font-size:12px; font-weight:600; color:var(--text-mid); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+.form-input {
+  width:100%; border:1.5px solid rgba(13,115,119,0.25); border-radius:9px;
+  padding:10px 14px; font-size:13px; color:var(--text-dark); background:white; outline:none; transition:all 0.2s;
+}
+.form-input:focus { border-color:var(--teal-mid); box-shadow:0 0 0 3px rgba(13,115,119,0.1); }
+.modal-actions { display:flex; justify-content:flex-end; gap:12px; margin-top:24px; }
+.btn-cancel { background:linear-gradient(135deg,#f0f4f4,#e6f0f0); color:var(--text-mid); border:none; border-radius:9px; padding:11px 24px; font-weight:600; font-size:13px; cursor:pointer; transition:all 0.2s; }
+.btn-save {
+  background:linear-gradient(135deg,#e8705a,#cf5e4a); color:#fff; border:none; border-radius:9px;
+  padding:11px 28px; font-weight:700; font-size:13px; cursor:pointer;
+  box-shadow:0 4px 14px rgba(232,112,90,0.4); transition:all 0.2s;
+}
+.btn-save:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(232,112,90,0.5); }
+
+/* DASHBOARD */
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:18px; margin-bottom:32px; }
+.stat-card {
+  border-radius:16px; padding:22px; position:relative; overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,0.1); cursor:default; transition:all 0.2s;
+}
+.stat-card:hover { transform:translateY(-4px); box-shadow:0 10px 32px rgba(0,0,0,0.15); }
+.stat-bar { position:absolute; top:0; left:0; right:0; height:5px; }
+.stat-emoji { font-size:32px; margin-bottom:10px; }
+.stat-num { font-family:'Playfair Display',serif; font-size:42px; font-weight:700; color:var(--text-dark); }
+.stat-label { font-size:12px; font-weight:600; color:var(--text-mid); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+
+.breakdown-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; }
+.breakdown-card {
+  background:linear-gradient(160deg,#fff,#f5fbfb); border-radius:16px; padding:22px;
+  box-shadow:0 4px 16px var(--shadow);
+}
+.breakdown-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--teal-deep); margin-bottom:16px; }
+.bar-row { margin-bottom:12px; }
+.bar-label { display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px; }
+.bar-track { background:linear-gradient(90deg,#e6f4f4,#f0fafa); border-radius:6px; height:10px; overflow:hidden; }
+.bar-fill { border-radius:6px; height:10px; transition:width 0.5s ease; }
+
+/* CALENDAR */
+.cal-container {
+  background:linear-gradient(160deg,#fff,#f5fbfb); border-radius:20px;
+  box-shadow:0 6px 32px var(--shadow); overflow:hidden; border:1px solid rgba(13,115,119,0.12);
+}
+.cal-header {
+  background:var(--grad-header); padding:18px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.cal-nav {
+  background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.25);
+  border-radius:50%; width:36px; height:36px; font-size:20px; cursor:pointer; transition:all 0.2s;
+  display:flex; align-items:center; justify-content:center;
+}
+.cal-nav:hover { background:rgba(232,112,90,0.5); }
+.cal-month { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:white; text-shadow:0 2px 8px rgba(0,0,0,0.2); }
+.cal-weekdays {
+  display:grid; grid-template-columns:repeat(7,1fr);
+  background:linear-gradient(90deg,#0d5c5f,#0d7377); padding:10px 16px;
+}
+.cal-weekday { font-size:11px; font-weight:700; color:#a8d4d4; text-transform:uppercase; letter-spacing:1px; text-align:center; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; padding:12px; background:linear-gradient(180deg,#f8fdfd,#f0fafa); }
+.cal-day {
+  min-height:80px; border-radius:12px; padding:8px; cursor:pointer; position:relative; transition:all 0.2s;
+  background:linear-gradient(145deg,#fff,#f0f8f8); border:1px solid rgba(13,115,119,0.08);
+}
+.cal-day:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(13,115,119,0.15); background:linear-gradient(145deg,#f0f8f8,#e6f4f4); }
+.cal-day.other { opacity:0.35; pointer-events:none; }
+.cal-day-num { font-size:14px; font-weight:600; color:var(--text-dark); margin-bottom:4px; }
+.cal-day-num.today {
+  background:linear-gradient(135deg,#e8705a,#f4a08e); color:white; border-radius:50%;
+  width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 12px rgba(232,112,90,0.5); font-weight:700;
+}
+.cal-dot {
+  border-radius:6px; font-size:9px; font-weight:600; padding:2px 5px; margin-top:2px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; display:block; color:white;
+}
+
+.day-popup {
+  position:fixed; z-index:400;
+  background:linear-gradient(160deg,rgba(11,61,63,0.95),rgba(13,92,95,0.95));
+  backdrop-filter:blur(12px); border-radius:16px; padding:20px; min-width:260px;
+  box-shadow:0 16px 50px rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.12); color:white;
+  display:none;
+}
+.popup-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:#e8705a; margin-bottom:12px; }
+.popup-file { background:rgba(255,255,255,0.08); border-radius:10px; padding:10px 12px; margin-bottom:8px; }
+
+/* MANAGE MODAL */
+.team-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.team-section-title { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--teal-deep); margin-bottom:10px; }
+.team-item {
+  display:flex; align-items:center; justify-content:space-between;
+  border-radius:9px; padding:8px 12px; margin-bottom:6px; font-size:13px; font-weight:500;
+}
+.team-item-lawyer { background:linear-gradient(135deg,#e6f4f4,#d0eeed); color:#0d7377; }
+.team-item-clerk { background:linear-gradient(135deg,#dceeff,#c8e4ff); color:#1565c0; }
+.team-remove { background:none; border:none; color:inherit; cursor:pointer; font-size:16px; font-weight:700; opacity:0.6; transition:all 0.2s; }
+.team-remove:hover { opacity:1; transform:scale(1.2); }
+.team-add-row { display:flex; gap:6px; margin-top:8px; }
+.team-add-input { flex:1; border:1.5px solid rgba(13,115,119,0.25); border-radius:8px; padding:7px 10px; font-size:12px; outline:none; }
+.team-add-btn { background:var(--grad-teal); color:white; border:none; border-radius:8px; padding:7px 14px; font-size:12px; font-weight:700; cursor:pointer; }
+
+@media (max-width:767px) {
+  header { padding:12px 16px; }
+  .logo-main { font-size:17px; }
+  .logo-sub { font-size:9px; letter-spacing:2px; padding-left:26px; }
+  #tab-bar { padding:0 12px; overflow-x:auto; }
+  .tab-btn { padding:11px 14px; font-size:12px; white-space:nowrap; }
+  #tab-matters, #tab-dashboard, #tab-calendar { padding:16px !important; }
+  .filter-bar-wrap { flex-direction:column; align-items:stretch; }
+  #board { gap:14px; }
+  .column { width:270px; min-width:270px; }
+  .stat-grid { grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+  .breakdown-grid { grid-template-columns:1fr; }
+  .team-grid { grid-template-columns:1fr; }
+  .splash-title { font-size:30px; }
+  .modal-box { padding:20px; }
+}
+
+@media print {
+  #splash, header, #tab-bar, #hamburger-menu, .card-actions, .filter-bar-wrap, .bulk-btns, button, footer { display:none!important; }
+  body { background:#fff!important; }
+  #tab-matters { display:block!important; }
+  #board { flex-wrap:wrap!important; overflow:visible!important; }
+  .column { width:48%!important; break-inside:avoid; margin-bottom:16px; }
+  .card { break-inside:avoid; box-shadow:none!important; }
+}
+</style>
+</head>
+<body data-id="0">
+<app-icon data-id="1" hidden data-icon="scale" data-palette="Green"></app-icon>
+<app-disclaimer data-id="2" intent="legal"></app-disclaimer>
+
+<!-- SPLASH SCREEN -->
+<div data-id="3" id="splash">
+  <div data-id="4" class="splash-line"></div>
+  <div data-id="5" class="splash-title">KSS Matterkey Inc.</div>
+  <div data-id="6" class="splash-sub">Real Estate Closing Tracker</div>
+  <div data-id="7" class="splash-line"></div>
+  <div data-id="8" style="display:flex;gap:12px;margin-top:10px;">
+    <div data-id="9" class="splash-dot" style="animation-delay:0s"></div>
+    <div data-id="10" class="splash-dot" style="animation-delay:0.3s"></div>
+    <div data-id="11" class="splash-dot" style="animation-delay:0.6s"></div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header data-id="12">
+  <div data-id="13">
+    <div data-id="14" class="logo-main"><span data-id="15" style="color:#e8705a;font-size:22px;">⚖</span> KSS Matterkey Inc.</div>
+    <div data-id="16" class="logo-sub">Real Estate Closing Tracker</div>
+  </div>
+  <button data-id="17" class="hamburger-btn" id="btn-hamburger">☰</button>
+</header>
+
+<!-- HAMBURGER MENU -->
+<div data-id="18" id="hamburger-menu">
+  <button data-id="19" class="menu-item" id="hm-add">＋ Add New File</button>
+  <button data-id="20" class="menu-item" id="hm-manage">👥 Manage Team</button>
+  <button data-id="21" class="menu-item" id="hm-alerts">🔔 Alerts</button>
+  <button data-id="22" class="menu-item" id="hm-backup">💾 Backup Data</button>
+  <button data-id="23" class="menu-item" id="hm-restore">📂 Restore Data</button>
+  <button data-id="24" class="menu-item" id="hm-print">🖨 Save as PDF</button>
+</div>
+
+<!-- TAB BAR -->
+<div data-id="25" id="tab-bar">
+  <button data-id="26" class="tab-btn" data-tab="dashboard">📊 Dashboard</button>
+  <button data-id="27" class="tab-btn active" data-tab="matters">📁 Matters</button>
+  <button data-id="28" class="tab-btn" data-tab="calendar">📅 Calendar</button>
+</div>
+
+<!-- DASHBOARD TAB -->
+<div data-id="29" id="tab-dashboard" style="padding:28px;display:none;">
+  <div data-id="30" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--teal-deep);margin-bottom:6px;">📊 Closing Dashboard</div>
+  <div data-id="31" style="font-size:13px;color:var(--text-light);margin-bottom:28px;">Live overview of all active matters</div>
+  <div data-id="32" class="stat-grid" id="stat-grid"></div>
+  <div data-id="33" class="breakdown-grid" id="breakdown-grid"></div>
+</div>
+
+<!-- MATTERS TAB -->
+<div data-id="34" id="tab-matters" style="padding:24px 28px;display:none;">
+  <div data-id="35" class="filter-bar-wrap">
+    <span data-id="36" class="filter-label">Filter:</span>
+    <select data-id="37" id="filter-lawyer" class="filter-el"><option data-id="38" value="">All Lawyers</option></select>
+    <select data-id="39" id="filter-clerk" class="filter-el"><option data-id="40" value="">All Clerks</option></select>
+    <input data-id="41" id="filter-search" class="filter-el" placeholder="Search file # or client…" style="min-width:180px;" />
+  </div>
+  <div data-id="42" class="bulk-btns">
+    <button data-id="43" class="bulk-btn-expand" id="btn-expand-all">⊞ Expand All</button>
+    <button data-id="44" class="bulk-btn-collapse" id="btn-collapse-all">⊟ Collapse All</button>
+  </div>
+  <div data-id="45" id="board"></div>
+</div>
+
+<!-- CALENDAR TAB -->
+<div data-id="46" id="tab-calendar" style="padding:28px;display:none;">
+  <div data-id="47" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--teal-deep);margin-bottom:6px;">📅 Closing Calendar</div>
+  <div data-id="48" style="font-size:13px;color:var(--text-light);margin-bottom:24px;">All upcoming closing dates</div>
+  <div data-id="49" class="cal-container">
+    <div data-id="50" class="cal-header">
+      <button data-id="51" class="cal-nav" id="cal-prev">‹</button>
+      <div data-id="52" class="cal-month" id="cal-month-label"></div>
+      <button data-id="53" class="cal-nav" id="cal-next">›</button>
+    </div>
+    <div data-id="54" class="cal-weekdays">
+      <div data-id="55" class="cal-weekday">Sun</div><div data-id="56" class="cal-weekday">Mon</div><div data-id="57" class="cal-weekday">Tue</div>
+      <div data-id="58" class="cal-weekday">Wed</div><div data-id="59" class="cal-weekday">Thu</div><div data-id="60" class="cal-weekday">Fri</div><div data-id="61" class="cal-weekday">Sat</div>
+    </div>
+    <div data-id="62" class="cal-grid" id="cal-grid"></div>
+  </div>
+</div>
+
+<!-- DAY POPUP -->
+<div data-id="63" class="day-popup" id="day-popup"></div>
+
+<!-- FILE MODAL -->
+<div data-id="64" class="modal-overlay" id="file-modal">
+  <div data-id="65" class="modal-box">
+    <div data-id="66" class="modal-title" id="modal-title">Add New File</div>
+    <input data-id="67" type="hidden" id="f-id" />
+    <div data-id="68" class="form-group"><label data-id="69" class="form-label">File #</label><input data-id="70" class="form-input" id="f-num" /></div>
+    <div data-id="71" class="form-group"><label data-id="72" class="form-label">Client Name *</label><input data-id="73" class="form-input" id="f-client" required /></div>
+    <div data-id="74" class="form-group"><label data-id="75" class="form-label">Address</label><input data-id="76" class="form-input" id="f-address" /></div>
+    <div data-id="77" class="form-group"><label data-id="78" class="form-label">Type</label>
+      <select data-id="79" class="form-input" id="f-type"><option data-id="80">Purchase</option><option data-id="81">Sale</option><option data-id="82">Refinance</option><option data-id="83">Transfer</option></select>
+    </div>
+    <div data-id="84" class="form-group"><label data-id="85" class="form-label">Lawyer</label><select data-id="86" class="form-input" id="f-lawyer"></select></div>
+    <div data-id="87" class="form-group"><label data-id="88" class="form-label">Clerk</label><select data-id="89" class="form-input" id="f-clerk"></select></div>
+    <div data-id="90" class="form-group"><label data-id="91" class="form-label">Closing Date</label><input data-id="92" class="form-input" id="f-date" type="date" /></div>
+    <div data-id="93" class="form-group"><label data-id="94" class="form-label">Status</label>
+      <select data-id="95" class="form-input" id="f-status">
+        <option data-id="96" value="col-new">New</option><option data-id="97" value="col-requisition">Requisition</option>
+        <option data-id="98" value="col-closing-soon">Closing Soon</option><option data-id="99" value="col-reporting-due">Reporting Due</option>
+        <option data-id="100" value="col-closed">Closed</option>
+      </select>
+    </div>
+    <div data-id="101" class="form-group"><label data-id="102" class="form-label">Priority</label>
+      <select data-id="103" class="form-input" id="f-priority"><option data-id="104">Normal</option><option data-id="105">High</option><option data-id="106">Urgent</option></select>
+    </div>
+    <div data-id="107" class="form-group"><label data-id="108" class="form-label">Notes</label><textarea data-id="109" class="form-input" id="f-notes" rows="3"></textarea></div>
+    <div data-id="110" class="modal-actions">
+      <button data-id="111" class="btn-cancel" id="btn-modal-cancel">Cancel</button>
+      <button data-id="112" class="btn-save" id="btn-modal-save">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- MANAGE MODAL -->
+<div data-id="113" class="modal-overlay" id="manage-modal">
+  <div data-id="114" class="modal-box manage">
+    <div data-id="115" class="modal-title">👥 Manage Team</div>
+    <div data-id="116" class="team-grid" id="team-grid"></div>
+    <div data-id="117" class="modal-actions" style="margin-top:20px;">
+      <button data-id="118" class="btn-save" id="btn-manage-done" style="background:var(--grad-header);">Done</button>
+    </div>
+  </div>
+</div>
+
+<footer data-id="119" style="text-align:center;padding:20px;font-size:12px;color:var(--text-light);">Made by Copilot</footer>
+
+<script>
+if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
+  lucide.createIcons();
+}
+
+/* ═══ DATA MODEL ═══ */
+var COL_META = [
+  {id:'col-new',label:'NEW',grad:'linear-gradient(135deg,#0d7377,#14a09a)'},
+  {id:'col-requisition',label:'REQUISITION',grad:'linear-gradient(135deg,#e8705a,#f4a08e)'},
+  {id:'col-closing-soon',label:'CLOSING SOON',grad:'linear-gradient(135deg,#c0392b,#e74c3c)'},
+  {id:'col-reporting-due',label:'REPORTING DUE',grad:'linear-gradient(135deg,#0e7490,#17a4c4)'},
+  {id:'col-closed',label:'CLOSED',grad:'linear-gradient(135deg,#2a9d8f,#3dbcae)'}
+];
+var COL_ACCENT = {'col-new':'#0d7377','col-requisition':'#e8705a','col-closing-soon':'#c0392b','col-reporting-due':'#0e7490','col-closed':'#2a9d8f'};
+
+var appData = {files:[],lawyers:[],clerks:[]};
+var calYear = 2026, calMonth = 8; // September 2026
+var editingId = null;
+var dragId = null;
+
+function loadData() {
+  try {
+    var d = JSON.parse(localStorage.getItem('kss_v3'));
+    if (d && d.files) { appData = d; }
+  } catch(e) {}
+}
+function saveData() { localStorage.setItem('kss_v3', JSON.stringify(appData)); }
+
+function seedData() {
+  appData.lawyers = ['Sarah Mitchell','James Okafor','Priya Sharma','David Chen'];
+  appData.clerks = ['Nilufa','Huma','Maria','Asees','Jasneet','Kimberly','Dave'];
+  appData.files = [
+    {id:'1',fileNumber:'KSS-2026-001',clientName:'Emily Johnson',address:'42 Maple Ave, Brampton ON',type:'Purchase',lawyer:'Sarah Mitchell',clerk:'Nilufa',closingDate:'2026-09-08',status:'col-closing-soon',priority:'Urgent',notes:'First-time buyer. Mortgage approved. Keys to be released at closing.',expanded:false},
+    {id:'2',fileNumber:'KSS-2026-002',clientName:'Robert & Sandra Smith',address:'88 King Street W, Toronto ON',type:'Sale',lawyer:'James Okafor',clerk:'Huma',closingDate:'2026-10-03',status:'col-requisition',priority:'Normal',notes:'Awaiting discharge statement from existing lender.',expanded:false},
+    {id:'3',fileNumber:'KSS-2026-003',clientName:'Michael Chen',address:'15 Lakeview Dr, Mississauga ON',type:'Refinance',lawyer:'Priya Sharma',clerk:'Maria',closingDate:'2026-09-30',status:'col-new',priority:'Normal',notes:'Title search ordered. Awaiting survey confirmation.',expanded:false},
+    {id:'4',fileNumber:'KSS-2026-004',clientName:'Patel Family Trust',address:'200 Bay St, Toronto ON',type:'Transfer',lawyer:'David Chen',clerk:'Asees',closingDate:'2026-09-05',status:'col-reporting-due',priority:'High',notes:'Reporting letter due. All trust conditions met.',expanded:false},
+    {id:'5',fileNumber:'KSS-2026-005',clientName:'Northern Realty Corp',address:'550 Hwy 7, Richmond Hill ON',type:'Purchase',lawyer:'Sarah Mitchell',clerk:'Jasneet',closingDate:'2026-07-10',status:'col-closed',priority:'Normal',notes:'File fully closed and reported to client.',expanded:false},
+    {id:'6',fileNumber:'KSS-2026-006',clientName:'Anya Kowalski',address:'3 Birchwood Cres, Oakville ON',type:'Sale',lawyer:'James Okafor',clerk:'Kimberly',closingDate:'2026-09-25',status:'col-new',priority:'Normal',notes:'Condition removal pending. Buyers financing confirmed.',expanded:false}
+  ];
+  saveData();
+}
+
+/* ═══ UTILITIES ═══ */
+function daysUntil(dateStr) {
+  if (!dateStr) return 9999;
+  var today = new Date(2026,8,3); // Sept 3 2026
+  today.setHours(0,0,0,0);
+  var d = new Date(dateStr + 'T00:00:00');
+  return Math.ceil((d - today) / 86400000);
+}
+function getDateColor(dateStr) {
+  var d = daysUntil(dateStr);
+  if (d <= 7) return '#c0392b';
+  if (d <= 14) return '#e67e22';
+  return '#0d7377';
+}
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  var d = new Date(dateStr + 'T00:00:00');
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+function generateFileNumber() {
+  var max = 0;
+  appData.files.forEach(function(f) {
+    var m = f.fileNumber.match(/KSS-2026-(\d+)/);
+    if (m) { var n = parseInt(m[1]); if (n > max) max = n; }
+  });
+  return 'KSS-2026-' + String(max + 1).padStart(3, '0');
+}
+
+/* ═══ FILTERS ═══ */
+function renderFilters() {
+  var ls = document.getElementById('filter-lawyer');
+  var cs = document.getElementById('filter-clerk');
+  var lv = ls.value, cv = cs.value;
+  ls.innerHTML = '<option value="">All Lawyers</option>';
+  cs.innerHTML = '<option value="">All Clerks</option>';
+  appData.lawyers.forEach(function(l) { ls.innerHTML += '<option value="'+l+'">'+l+'</option>'; });
+  appData.clerks.forEach(function(c) { cs.innerHTML += '<option value="'+c+'">'+c+'</option>'; });
+  ls.value = lv; cs.value = cv;
+  populateModalSelects();
+}
+
+function populateModalSelects() {
+  var fl = document.getElementById('f-lawyer');
+  var fc = document.getElementById('f-clerk');
+  fl.innerHTML = '<option value="">— Select —</option>';
+  fc.innerHTML = '<option value="">— Select —</option>';
+  appData.lawyers.forEach(function(l) { fl.innerHTML += '<option value="'+l+'">'+l+'</option>'; });
+  appData.clerks.forEach(function(c) { fc.innerHTML += '<option value="'+c+'">'+c+'</option>'; });
+}
+
+/* ═══ BOARD RENDER ═══ */
+function renderBoard() {
+  var board = document.getElementById('board');
+  board.innerHTML = '';
+  var fLawyer = document.getElementById('filter-lawyer').value;
+  var fClerk = document.getElementById('filter-clerk').value;
+  var fSearch = document.getElementById('filter-search').value.toLowerCase();
+
+  var filtered = appData.files.filter(function(f) {
+    if (fLawyer && f.lawyer !== fLawyer) return false;
+    if (fClerk && f.clerk !== fClerk) return false;
+    if (fSearch && f.fileNumber.toLowerCase().indexOf(fSearch) === -1 && f.clientName.toLowerCase().indexOf(fSearch) === -1) return false;
+    return true;
+  });
+
+  COL_META.forEach(function(col) {
+    var colDiv = document.createElement('div');
+    colDiv.className = 'column';
+
+    // Build card entries for this column
+    var entries = [];
+    filtered.forEach(function(f) {
+      if (f.status === col.id) { entries.push({file:f, isDuplicate:false}); }
+      // Duplicate logic
+      var du = daysUntil(f.closingDate);
+      if (du <= 7 && f.status !== 'col-closed') {
+        if (f.status === 'col-requisition' && col.id === 'col-closing-soon') {
+          entries.push({file:f, isDuplicate:true, dupLabel:'⚡ Also in Requisition'});
+        }
+        if (f.status === 'col-closing-soon' && col.id === 'col-requisition') {
+          entries.push({file:f, isDuplicate:true, dupLabel:'⚡ Also in Closing Soon'});
+        }
+      }
+    });
+
+    // Sort by closing date ascending
+    entries.sort(function(a,b) {
+      var da = a.file.closingDate || '9999-99-99';
+      var db = b.file.closingDate || '9999-99-99';
+      return da < db ? -1 : da > db ? 1 : 0;
+    });
+
+    var headerDiv = document.createElement('div');
+    headerDiv.className = 'column-header';
+    headerDiv.style.background = col.grad;
+    headerDiv.innerHTML = '<span class="col-label">'+col.label+'</span><span class="col-count">'+entries.length+'</span>';
+    colDiv.appendChild(headerDiv);
+
+    var cardsDiv = document.createElement('div');
+    cardsDiv.className = 'col-cards';
+    cardsDiv.dataset.col = col.id;
+
+    // Drop events
+    cardsDiv.addEventListener('dragover', function(e) { e.preventDefault(); this.style.background = 'linear-gradient(180deg,#e6f4f4,#daf0ef)'; });
+    cardsDiv.addEventListener('dragleave', function() { this.style.background = ''; });
+    cardsDiv.addEventListener('drop', function(e) {
+      e.preventDefault();
+      this.style.background = '';
+      handleDrop(e, this.dataset.col);
+    });
+
+    entries.forEach(function(entry) {
+      var card = renderCard(entry.file, col.id, entry.isDuplicate, entry.dupLabel);
+      cardsDiv.appendChild(card);
+    });
+
+    colDiv.appendChild(cardsDiv);
+    board.appendChild(colDiv);
+  });
+}
+
+function renderCard(file, colId, isDuplicate, dupLabel) {
+  var card = document.createElement('div');
+  card.className = 'card';
+  card.style.borderLeft = '5px solid ' + COL_ACCENT[colId];
+  card.draggable = !isDuplicate;
+  card.dataset.id = file.id;
+
+  card.addEventListener('dragstart', function(e) {
+    dragId = file.id;
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+  });
+  card.addEventListener('dragend', function() { this.classList.remove('dragging'); dragId = null; });
+
+  var html = '';
+  if (isDuplicate) { html += '<div class="dup-ribbon">'+(dupLabel||'⚡ Duplicate')+'</div>'; }
+
+  // Row 1
+  html += '<div class="card-row"><span class="file-num">'+file.fileNumber+'</span><span class="priority-badge priority-'+file.priority+'">'+file.priority+'</span></div>';
+  // Row 2
+  html += '<div class="client-name">'+file.clientName+'</div>';
+  // Row 3
+  html += '<div class="address">'+file.address+'</div>';
+  // Row 4
+  var dateCol = getDateColor(file.closingDate);
+  html += '<div class="card-row"><span class="type-badge">'+file.type+'</span>';
+  html += '<span style="font-size:12px;font-weight:600;color:'+dateCol+'">'+formatDate(file.closingDate)+'</span></div>';
+  // Expand/collapse
+  html += '<div style="text-align:right;margin-top:4px;"><button class="expand-btn" data-toggle="'+file.id+'">'+(file.expanded?'▲ Less':'▼ More')+'</button></div>';
+
+  // Expanded rows
+  if (file.expanded) {
+    // Row 5
+    html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">';
+    if (file.lawyer) html += '<span class="lawyer-badge">⚖ '+file.lawyer+'</span>';
+    if (file.clerk) html += '<span class="clerk-badge">📋 '+file.clerk+'</span>';
+    html += '</div>';
+    // Row 6
+    if (file.notes) html += '<div class="card-notes">'+file.notes+'</div>';
+    // Row 7
+    if (!isDuplicate) {
+      html += '<div class="card-actions">';
+      html += '<button class="act-edit" data-edit="'+file.id+'">Edit</button>';
+      html += '<button class="act-copy" data-copy="'+file.id+'">Copy</button>';
+      html += '<button class="act-delete" data-delete="'+file.id+'">Delete</button>';
+      html += '</div>';
+    }
+  }
+
+  card.innerHTML = html;
+
+  // Bind events after setting innerHTML
+  setTimeout(function() {
+    var tBtn = card.querySelector('[data-toggle="'+file.id+'"]');
+    if (tBtn) tBtn.addEventListener('click', function(e) { e.stopPropagation(); toggleCard(file.id); });
+    var eBtn = card.querySelector('[data-edit="'+file.id+'"]');
+    if (eBtn) eBtn.addEventListener('click', function(e) { e.stopPropagation(); openEditModal(file.id); });
+    var cBtn = card.querySelector('[data-copy="'+file.id+'"]');
+    if (cBtn) cBtn.addEventListener('click', function(e) { e.stopPropagation(); copyCard(file.id); });
+    var dBtn = card.querySelector('[data-delete="'+file.id+'"]');
+    if (dBtn) dBtn.addEventListener('click', function(e) { e.stopPropagation(); deleteFile(file.id); });
+  }, 0);
+
+  return card;
+}
+
+function handleDrop(e, colId) {
+  if (!dragId) return;
+  var f = appData.files.find(function(x) { return x.id === dragId; });
+  if (f) { f.status = colId; saveData(); renderBoard(); renderDashboard(); renderCalendar(); }
+}
+
+function toggleCard(id) {
+  var f = appData.files.find(function(x) { return x.id === id; });
+  if (f) { f.expanded = !f.expanded; saveData(); renderBoard(); }
+}
+function expandAll() { appData.files.forEach(function(f) { f.expanded = true; }); saveData(); renderBoard(); }
+function collapseAll() { appData.files.forEach(function(f) { f.expanded = false; }); saveData(); renderBoard(); }
+
+/* ═══ MODALS ═══ */
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modal-title').textContent = 'Add New File';
+  document.getElementById('f-id').value = '';
+  document.getElementById('f-num').value = generateFileNumber();
+  document.getElementById('f-client').value = '';
+  document.getElementById('f-address').value = '';
+  document.getElementById('f-type').value = 'Purchase';
+  document.getElementById('f-date').value = '';
+  document.getElementById('f-status').value = 'col-new';
+  document.getElementById('f-priority').value = 'Normal';
+  document.getElementById('f-notes').value = '';
+  populateModalSelects();
+  document.getElementById('f-lawyer').value = '';
+  document.getElementById('f-clerk').value = '';
+  document.getElementById('file-modal').classList.add('open');
+}
+
+function openEditModal(id) {
+  var f = appData.files.find(function(x) { return x.id === id; });
+  if (!f) return;
+  editingId = id;
+  document.getElementById('modal-title').textContent = 'Edit File — ' + f.fileNumber;
+  document.getElementById('f-id').value = f.id;
+  document.getElementById('f-num').value = f.fileNumber;
+  document.getElementById('f-client').value = f.clientName;
+  document.getElementById('f-address').value = f.address;
+  document.getElementById('f-type').value = f.type;
+  document.getElementById('f-date').value = f.closingDate;
+  document.getElementById('f-status').value = f.status;
+  document.getElementById('f-priority').value = f.priority;
+  document.getElementById('f-notes').value = f.notes || '';
+  populateModalSelects();
+  document.getElementById('f-lawyer').value = f.lawyer;
+  document.getElementById('f-clerk').value = f.clerk;
+  document.getElementById('file-modal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('file-modal').classList.remove('open'); editingId = null; }
+
+function saveFile() {
+  var client = document.getElementById('f-client').value.trim();
+  if (!client) { alert('Client name is required.'); return; }
+  var data = {
+    fileNumber: document.getElementById('f-num').value.trim() || generateFileNumber(),
+    clientName: client,
+    address: document.getElementById('f-address').value.trim(),
+    type: document.getElementById('f-type').value,
+    lawyer: document.getElementById('f-lawyer').value,
+    clerk: document.getElementById('f-clerk').value,
+    closingDate: document.getElementById('f-date').value,
+    status: document.getElementById('f-status').value,
+    priority: document.getElementById('f-priority').value,
+    notes: document.getElementById('f-notes').value.trim(),
+    expanded: false
+  };
+  if (editingId) {
+    var f = appData.files.find(function(x) { return x.id === editingId; });
+    if (f) { Object.assign(f, data); }
+  } else {
+    data.id = String(Date.now());
+    appData.files.push(data);
+  }
+  saveData(); closeModal(); renderBoard(); renderDashboard(); renderCalendar();
+}
+
+function deleteFile(id) {
+  var f = appData.files.find(function(x) { return x.id === id; });
+  if (!f) return;
+  if (!confirm('Delete file ' + f.fileNumber + ' (' + f.clientName + ')?')) return;
+  appData.files = appData.files.filter(function(x) { return x.id !== id; });
+  saveData(); renderBoard(); renderDashboard(); renderCalendar();
+}
+
+function copyCard(id) {
+  var f = appData.files.find(function(x) { return x.id === id; });
+  if (!f) return;
+  var c = JSON.parse(JSON.stringify(f));
+  c.id = String(Date.now());
+  c.fileNumber = generateFileNumber();
+  c.clientName = f.clientName + ' (Copy)';
+  c.expanded = false;
+  appData.files.push(c);
+  saveData(); renderBoard(); renderDashboard(); renderCalendar();
+}
+
+/* ═══ MANAGE TEAM ═══ */
+function openManage() {
+  renderManage();
+  document.getElementById('manage-modal').classList.add('open');
+}
+function closeManage() { document.getElementById('manage-modal').classList.remove('open'); }
+
+function renderManage() {
+  var grid = document.getElementById('team-grid');
+  var html = '<div><div class="team-section-title">⚖ Lawyers</div>';
+  appData.lawyers.forEach(function(l) {
+    html += '<div class="team-item team-item-lawyer"><span>'+l+'</span><button class="team-remove" data-rm-lawyer="'+l+'">×</button></div>';
+  });
+  html += '<div class="team-add-row"><input class="team-add-input" id="add-lawyer-input" placeholder="New lawyer…" /><button class="team-add-btn" id="btn-add-lawyer">Add</button></div></div>';
+
+  html += '<div><div class="team-section-title">📋 Clerks</div>';
+  appData.clerks.forEach(function(c) {
+    html += '<div class="team-item team-item-clerk"><span>'+c+'</span><button class="team-remove" data-rm-clerk="'+c+'">×</button></div>';
+  });
+  html += '<div class="team-add-row"><input class="team-add-input" id="add-clerk-input" placeholder="New clerk…" /><button class="team-add-btn" id="btn-add-clerk">Add</button></div></div>';
+
+  grid.innerHTML = html;
+
+  setTimeout(function() {
+    document.querySelectorAll('[data-rm-lawyer]').forEach(function(btn) {
+      btn.addEventListener('click', function() { removeLawyer(this.dataset.rmLawyer); });
+    });
+    document.querySelectorAll('[data-rm-clerk]').forEach(function(btn) {
+      btn.addEventListener('click', function() { removeClerk(this.dataset.rmClerk); });
+    });
+    var alBtn = document.getElementById('btn-add-lawyer');
+    if (alBtn) alBtn.addEventListener('click', addLawyer);
+    var acBtn = document.getElementById('btn-add-clerk');
+    if (acBtn) acBtn.addEventListener('click', addClerk);
+  }, 0);
+}
+
+function addLawyer() {
+  var inp = document.getElementById('add-lawyer-input');
+  var v = inp.value.trim();
+  if (v && appData.lawyers.indexOf(v) === -1) { appData.lawyers.push(v); saveData(); renderManage(); renderFilters(); }
+}
+function removeLawyer(name) {
+  appData.lawyers = appData.lawyers.filter(function(l) { return l !== name; });
+  saveData(); renderManage(); renderFilters();
+}
+function addClerk() {
+  var inp = document.getElementById('add-clerk-input');
+  var v = inp.value.trim();
+  if (v && appData.clerks.indexOf(v) === -1) { appData.clerks.push(v); saveData(); renderManage(); renderFilters(); }
+}
+function removeClerk(name) {
+  appData.clerks = appData.clerks.filter(function(c) { return c !== name; });
+  saveData(); renderManage(); renderFilters();
+}
+
+/* ═══ TABS ═══ */
+function showTab(tab) {
+  ['dashboard','matters','calendar'].forEach(function(t) {
+    var el = document.getElementById('tab-' + t);
+    if (el) el.style.display = (t === tab) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+  if (tab === 'dashboard') renderDashboard();
+  if (tab === 'calendar') renderCalendar();
+}
+
+/* ═══ DASHBOARD ═══ */
+function renderDashboard() {
+  var files = appData.files;
+  var total = files.length;
+  var week = files.filter(function(f) { return f.status !== 'col-closed' && daysUntil(f.closingDate) <= 7 && daysUntil(f.closingDate) >= 0; }).length;
+  var month = files.filter(function(f) { return f.status !== 'col-closed' && daysUntil(f.closingDate) <= 30 && daysUntil(f.closingDate) >= 0; }).length;
+  var urgent = files.filter(function(f) { return f.priority === 'Urgent'; }).length;
+  var closed = files.filter(function(f) { return f.status === 'col-closed'; }).length;
+  var reporting = files.filter(function(f) { return f.status === 'col-reporting-due'; }).length;
+
+  var stats = [
+    {emoji:'📁',num:total,label:'Total Files',bg:'linear-gradient(145deg,#e6f4f4,#d0eeed)',bar:'linear-gradient(90deg,#0d7377,#14a09a)'},
+    {emoji:'🔴',num:week,label:'Closing This Week',bg:'linear-gradient(145deg,#fdecea,#ffe0dc)',bar:'linear-gradient(90deg,#c0392b,#e74c3c)'},
+    {emoji:'🟠',num:month,label:'Closing This Month',bg:'linear-gradient(145deg,#fff5e6,#ffe8cc)',bar:'linear-gradient(90deg,#e67e22,#f39c12)'},
+    {emoji:'⚡',num:urgent,label:'Urgent Priority',bg:'linear-gradient(145deg,#fdf0ed,#ffe0d6)',bar:'linear-gradient(90deg,#e8705a,#f4a08e)'},
+    {emoji:'✅',num:closed,label:'Closed Files',bg:'linear-gradient(145deg,#e8f8f5,#d0f0ea)',bar:'linear-gradient(90deg,#2a9d8f,#3dbcae)'},
+    {emoji:'📋',num:reporting,label:'Reporting Due',bg:'linear-gradient(145deg,#e8f4fd,#d0e8fa)',bar:'linear-gradient(90deg,#0e7490,#17a4c4)'}
+  ];
+
+  var sg = document.getElementById('stat-grid');
+  sg.innerHTML = '';
+  stats.forEach(function(s) {
+    sg.innerHTML += '<div class="stat-card" style="background:'+s.bg+'"><div class="stat-bar" style="background:'+s.bar+'"></div><div class="stat-emoji">'+s.emoji+'</div><div class="stat-num">'+s.num+'</div><div class="stat-label">'+s.label+'</div></div>';
+  });
+
+  // Breakdowns
+  var bg = document.getElementById('breakdown-grid');
+  var html = '';
+
+  // By Lawyer
+  html += '<div class="breakdown-card" style="border-top:4px solid #0d7377;"><div class="breakdown-title">⚖ By Lawyer</div>';
+  appData.lawyers.forEach(function(l) {
+    var cnt = files.filter(function(f) { return f.lawyer === l; }).length;
+    var pct = total > 0 ? (cnt/total)*100 : 0;
+    html += '<div class="bar-row"><div class="bar-label"><span>'+l+'</span><span style="font-weight:700;color:#0d7377;">'+cnt+'</span></div>';
+    html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:linear-gradient(90deg,#0d7377,#14a09a);"></div></div></div>';
+  });
+  html += '</div>';
+
+  // By Status
+  html += '<div class="breakdown-card" style="border-top:4px solid #e8705a;"><div class="breakdown-title">📋 By Status</div>';
+  COL_META.forEach(function(col) {
+    var cnt = files.filter(function(f) { return f.status === col.id; }).length;
+    var pct = total > 0 ? (cnt/total)*100 : 0;
+    html += '<div class="bar-row"><div class="bar-label"><span>'+col.label+'</span><span style="font-weight:700;color:'+COL_ACCENT[col.id]+'">'+cnt+'</span></div>';
+    html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+col.grad+';"></div></div></div>';
+  });
+  html += '</div>';
+
+  bg.innerHTML = html;
+}
+
+/* ═══ CALENDAR ═══ */
+function renderCalendar() {
+  var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month-label').textContent = monthNames[calMonth] + ' ' + calYear;
+
+  var firstDay = new Date(calYear, calMonth, 1).getDay();
+  var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  var prevDays = new Date(calYear, calMonth, 0).getDate();
+
+  var grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+
+  var today = new Date(2026,8,3);
+  var todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+
+  // Build file lookup by date
+  var filesByDate = {};
+  appData.files.forEach(function(f) {
+    if (f.closingDate) {
+      if (!filesByDate[f.closingDate]) filesByDate[f.closingDate] = [];
+      filesByDate[f.closingDate].push(f);
+    }
+  });
+
+  // Previous month days
+  for (var i = firstDay - 1; i >= 0; i--) {
+    var d = prevDays - i;
+    var cell = document.createElement('div');
+    cell.className = 'cal-day other';
+    cell.innerHTML = '<div class="cal-day-num">'+d+'</div>';
+    grid.appendChild(cell);
+  }
+
+  // Current month days
+  for (var day = 1; day <= daysInMonth; day++) {
+    var dateStr = calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+    var cell = document.createElement('div');
+    cell.className = 'cal-day';
+    var isToday = (dateStr === todayStr);
+    cell.innerHTML = '<div class="cal-day-num'+(isToday?' today':'')+'">'+day+'</div>';
+
+    var dayFiles = filesByDate[dateStr] || [];
+    var maxDots = 2;
+    for (var fi = 0; fi < Math.min(dayFiles.length, maxDots); fi++) {
+      var dotFile = dayFiles[fi];
+      var accent = COL_ACCENT[dotFile.status] || '#0d7377';
+      cell.innerHTML += '<span class="cal-dot" style="background:linear-gradient(135deg,'+accent+','+lighten(accent)+');">'+dotFile.fileNumber.replace('KSS-2026-','KSS-')+'</span>';
+    }
+    if (dayFiles.length > maxDots) {
+      cell.innerHTML += '<span class="cal-dot" style="background:linear-gradient(135deg,#98918b,#b3ada8);">+' + (dayFiles.length - maxDots) + ' more</span>';
+    }
+
+    if (dayFiles.length > 0) {
+      (function(ds, dfs) {
+        cell.addEventListener('click', function(e) { showDayPopup(e, ds, dfs); });
+      })(dateStr, dayFiles);
+    }
+
+    grid.appendChild(cell);
+  }
+
+  // Next month days
+  var totalCells = firstDay + daysInMonth;
+  var remaining = (7 - (totalCells % 7)) % 7;
+  for (var n = 1; n <= remaining; n++) {
+    var cell = document.createElement('div');
+    cell.className = 'cal-day other';
+    cell.innerHTML = '<div class="cal-day-num">'+n+'</div>';
+    grid.appendChild(cell);
+  }
+}
+
+function lighten(hex) {
+  var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  r = Math.min(255, r + 60); g = Math.min(255, g + 60); b = Math.min(255, b + 60);
+  return '#'+r.toString(16).padStart(2,'0')+g.toString(16).padStart(2,'0')+b.toString(16).padStart(2,'0');
+}
+
+function prevMonth() { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); }
+function nextMonth() { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); }
+
+function showDayPopup(event, dateStr, files) {
+  var popup = document.getElementById('day-popup');
+  var html = '<div class="popup-title">'+formatDate(dateStr)+'</div>';
+  files.forEach(function(f) {
+    html += '<div class="popup-file" style="border-left:3px solid '+COL_ACCENT[f.status]+'">';
+    html += '<div style="font-size:11px;font-weight:700;color:#a8d4d4;">'+f.fileNumber+'</div>';
+    html += '<div style="font-size:14px;font-weight:600;color:white;">'+f.clientName+'</div>';
+    html += '<div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">';
+    html += '<span style="background:rgba(255,255,255,0.15);border-radius:6px;padding:2px 8px;font-size:10px;">'+f.type+'</span>';
+    if (f.lawyer) html += '<span style="background:rgba(255,255,255,0.1);border-radius:6px;padding:2px 8px;font-size:10px;">'+f.lawyer+'</span>';
+    html += '</div></div>';
+  });
+  popup.innerHTML = html;
+  popup.style.display = 'block';
+
+  // Position near click
+  var x = event.clientX, y = event.clientY;
+  var pw = 280, ph = popup.offsetHeight || 200;
+  if (x + pw > window.innerWidth) x = window.innerWidth - pw - 20;
+  if (y + ph > window.innerHeight) y = window.innerHeight - ph - 20;
+  if (x < 10) x = 10; if (y < 10) y = 10;
+  popup.style.left = x + 'px'; popup.style.top = y + 'px';
+}
+
+/* ═══ ALERTS ═══ */
+function showAlerts() {
+  var urgent = appData.files.filter(function(f) { return f.status !== 'col-closed' && daysUntil(f.closingDate) <= 7 && daysUntil(f.closingDate) >= 0; });
+  if (urgent.length === 0) { alert('✅ No urgent closings in the next 7 days.'); return; }
+  var msg = '⚠️ URGENT CLOSING ALERTS\n\n';
+  urgent.forEach(function(f) {
+    msg += '• ' + f.fileNumber + ' — ' + f.clientName + '\n  Closing: ' + formatDate(f.closingDate) + ' (' + daysUntil(f.closingDate) + ' days)\n\n';
+  });
+  alert(msg);
+}
+
+/* ═══ BACKUP & RESTORE ═══ */
+function backupData() {
+  var json = JSON.stringify(appData, null, 2);
+  var blob = new Blob([json], {type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'kss-backup-' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function restoreData() {
+  var inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = '.json';
+  inp.addEventListener('change', function(e) {
+    var file = e.target.files[0]; if (!file) return;
+    var reader = new FileReader();
+    reader.addEventListener('load', function(ev) {
+      try {
+        var d = JSON.parse(ev.target.result);
+        if (d.files && d.lawyers && d.clerks) {
+          appData = d; saveData(); renderFilters(); renderBoard(); renderDashboard(); renderCalendar();
+          alert('✅ Data restored successfully!');
+        } else { alert('❌ Invalid backup file.'); }
+      } catch(err) { alert('❌ Could not read file.'); }
+    });
+    reader.readAsText(file);
+  });
+  inp.click();
+}
+
+/* ═══ INIT ═══ */
+loadData();
+if (!appData.files || appData.files.length === 0) seedData();
+renderFilters();
+renderBoard();
+renderDashboard();
+renderCalendar();
+showTab('matters');
+
+// Splash dismiss
+setTimeout(function() {
+  var splash = document.getElementById('splash');
+  splash.style.opacity = '0';
+  setTimeout(function() { splash.style.display = 'none'; }, 900);
+}, 3000);
+
+// Hamburger toggle
+document.getElementById('btn-hamburger').addEventListener('click', function(e) {
+  e.stopPropagation();
+  var m = document.getElementById('hamburger-menu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+});
+document.addEventListener('click', function(e) {
+  var hm = document.getElementById('hamburger-menu');
+  if (hm) hm.style.display = 'none';
+  // Close day popup
+  var dp = document.getElementById('day-popup');
+  if (dp && !dp.contains(e.target)) dp.style.display = 'none';
+});
+document.getElementById('hamburger-menu').addEventListener('click', function(e) { e.stopPropagation(); });
+
+// Menu items
+document.getElementById('hm-add').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; openAddModal(); });
+document.getElementById('hm-manage').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; openManage(); });
+document.getElementById('hm-alerts').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; showAlerts(); });
+document.getElementById('hm-backup').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; backupData(); });
+document.getElementById('hm-restore').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; restoreData(); });
+document.getElementById('hm-print').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; window.print(); });
+
+// Tab buttons
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { showTab(this.dataset.tab); });
+});
+
+// Filter events
+document.getElementById('filter-lawyer').addEventListener('change', renderBoard);
+document.getElementById('filter-clerk').addEventListener('change', renderBoard);
+document.getElementById('filter-search').addEventListener('input', renderBoard);
+
+// Expand/collapse all
+document.getElementById('btn-expand-all').addEventListener('click', expandAll);
+document.getElementById('btn-collapse-all').addEventListener('click', collapseAll);
+
+// Modal buttons
+document.getElementById('btn-modal-cancel').addEventListener('click', closeModal);
+document.getElementById('btn-modal-save').addEventListener('click', saveFile);
+document.getElementById('btn-manage-done').addEventListener('click', function() { closeManage(); renderFilters(); renderBoard(); });
+
+// Close modals on overlay click
+document.getElementById('file-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.getElementById('manage-modal').addEventListener('click', function(e) { if (e.target === this) closeManage(); });
+
+// Calendar nav
+document.getElementById('cal-prev').addEventListener('click', prevMonth);
+document.getElementById('cal-next').addEventListener('click', nextMonth);
+</script>
+</body>
+</html>
