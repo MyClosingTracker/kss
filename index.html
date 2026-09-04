@@ -118,26 +118,10 @@ header {
 .tab-btn.active { color: #e8705a; border-bottom-color: #e8705a; background: rgba(232,112,90,0.08); }
 .tab-btn:hover { color: #e6f4f4; }
 
-.stats-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
-.stat-pill {
-  border-radius: 50px; padding: 8px 18px; display: flex; align-items: center; gap: 8px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12); cursor: default; transition: all 0.2s;
-}
-.stat-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
-.stat-pill .label { font-size: 11px; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 1px; }
-.stat-pill .count { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: white; }
-
-.expand-row { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; }
-.btn-expand-kss8 {
-  color: #fff; border: none; border-radius: 10px; padding: 10px 22px;
-  font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
-}
-.btn-expand-kss8:hover { transform: translateY(-2px); }
-
 .filter-bar {
   background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(230,244,244,0.95));
   border-radius: 12px; padding: 14px 20px; margin-bottom: 20px;
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   box-shadow: var(--shadow); border: 1px solid rgba(13,115,119,0.12); backdrop-filter: blur(8px);
 }
 .filter-bar input, .filter-bar select {
@@ -147,6 +131,12 @@ header {
 .filter-bar input:focus, .filter-bar select:focus {
   border-color: #0d7377; box-shadow: 0 0 0 3px rgba(13,115,119,0.15);
 }
+
+.btn-expand-filter {
+  border: none; border-radius: 9px; padding: 9px 18px; font-weight: 700; font-size: 12px;
+  cursor: pointer; white-space: nowrap; color: #fff; transition: all 0.2s;
+}
+.btn-expand-filter:hover { transform: translateY(-2px); }
 
 #board-kss9 { display: flex; gap: 18px; overflow-x: auto; align-items: flex-start; padding-bottom: 24px; }
 .kanban-col { width: 290px; flex-shrink: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 28px rgba(13,115,119,0.12); }
@@ -197,6 +187,28 @@ header {
 .card .lawyer-line { font-size: 12px; color: var(--text-mid); }
 .card .address-line { font-size: 11px; color: var(--text-light); font-style: italic; }
 .card .price-line { font-weight: 700; font-size: 15px; color: #16a34a; }
+
+.card .row-clerk { padding: 2px 14px 6px; position: relative; }
+.btn-assign-clerk {
+  background: linear-gradient(135deg,#e6f4f4,#b2d8d8); color:#0b3d3f; border:none; border-radius:8px;
+  padding:4px 12px; font-weight:600; font-size:11px; cursor:pointer; transition: all 0.15s;
+}
+.btn-assign-clerk:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(13,115,119,0.2); }
+.clerk-assigned-badge {
+  background: linear-gradient(135deg,#dbeafe,#bfdbfe); color:#1d4ed8; border-radius:20px;
+  padding:4px 12px; font-weight:700; font-size:11px; display:inline-flex; align-items:center; gap:6px;
+}
+.clerk-unassign-x { color:#1d4ed8; background:none; border:none; cursor:pointer; font-size:13px; padding:0; line-height:1; }
+.clerk-dropdown {
+  position:absolute; top:100%; left:14px; z-index:400;
+  background: linear-gradient(160deg,#0b3d3f,#0d7377); border-radius:10px; padding:6px; min-width:150px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1);
+}
+.clerk-dropdown-item {
+  color:#e6f4f4; padding:8px 14px; font-weight:600; font-size:12px; cursor:pointer; border-radius:7px;
+  border:none; background:none; display:block; width:100%; text-align:left; transition: all 0.15s;
+}
+.clerk-dropdown-item:hover { background:rgba(232,112,90,0.25); color:#fff; }
 
 .card .row-d { padding: 6px 14px 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
 .date-pill { border-radius: 8px; padding: 3px 9px; font-weight: 600; font-size: 10px; }
@@ -292,81 +304,93 @@ header {
 }
 .btn-save-modal:hover { transform: translateY(-1px); box-shadow: 0 7px 22px rgba(232,112,90,0.5); }
 
-.dash-stat-card {
-  border-radius: 18px; padding: 22px; position: relative; overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.2s;
+/* Dashboard styles */
+.dash-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 20px; }
+.dash-kpi-card {
+  background: #fff; border-radius: 18px; padding: 22px 20px 18px; position: relative; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(11,61,63,0.10); transition: all 0.2s;
 }
-.dash-stat-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(0,0,0,0.15); }
-.dash-stat-card .top-bar {
-  position: absolute; top: 0; left: 0; right: 0; height: 5px;
-}
-.dash-stat-card .emoji { font-size: 30px; margin-bottom: 10px; display: block; }
-.dash-stat-card .num { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 44px; color: var(--text-dark); }
-.dash-stat-card .lbl { font-weight: 600; font-size: 11px; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.dash-kpi-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(11,61,63,0.18); }
+.dash-kpi-card .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 5px; }
+.dash-kpi-card .kpi-emoji { font-size: 28px; margin-bottom: 8px; display: block; }
+.dash-kpi-card .kpi-num { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: var(--text-dark); line-height: 1; }
+.dash-kpi-card .kpi-label { font-weight: 600; font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+.dash-kpi-card .kpi-sub { font-weight: 500; font-size: 10px; color: var(--text-light); margin-top: 3px; }
 
-.breakdown-card {
-  background: linear-gradient(160deg, #fff, #e6f4f4); border-radius: 16px;
-  padding: 22px; box-shadow: var(--shadow);
+.dash-wide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.dash-tri-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 20px; }
+.dash-panel {
+  background: #fff; border-radius: 18px; padding: 24px; box-shadow: 0 4px 20px rgba(11,61,63,0.10);
 }
-.breakdown-card h3 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: var(--teal-deep); margin: 0 0 14px; }
-.bar-track { background: linear-gradient(90deg, #d4ecec, #e6f4f4); border-radius: 6px; height: 10px; width: 100%; overflow: hidden; }
-.bar-fill { border-radius: 6px; height: 10px; transition: width 0.4s ease; }
+.dash-panel h3 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; color: var(--teal-deep); margin: 0 0 18px; }
 
-.cal-nav {
-  background: var(--grad-header); padding: 18px 28px;
-  display: flex; align-items: center; justify-content: space-between;
+/* Calendar styles */
+.cal-wrapper {
+  background: linear-gradient(160deg,#0b3d3f,#0d7377); border-radius:24px; overflow:hidden;
+  box-shadow: 0 20px 60px rgba(11,61,63,0.4); max-width:1000px; margin:0 auto;
 }
-.cal-nav-btn {
-  background: rgba(255,255,255,0.15); color: #fff;
-  border: 1px solid rgba(255,255,255,0.25); border-radius: 50%;
-  width: 38px; height: 38px; font-size: 22px; cursor: pointer; transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center;
+.cal-nav-new {
+  padding:28px 36px; display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.1);
 }
-.cal-nav-btn:hover { background: rgba(232,112,90,0.5); }
-.cal-month-label { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-.weekday-row {
-  display: grid; grid-template-columns: repeat(7, 1fr);
-  background: linear-gradient(90deg, #0b3d3f, #0d7377); padding: 10px 16px;
+.cal-nav-new .cal-month-label-new {
+  font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:#fff;
+  text-shadow:0 2px 12px rgba(0,0,0,0.2);
 }
-.weekday-row span { font-size: 11px; font-weight: 700; color: #7fbfbf; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
-.day-grid {
-  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 14px;
-  background: linear-gradient(180deg, #e6f4f4, #f0fafa);
+.cal-nav-btn-new {
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); color:#fff;
+  border-radius:50%; width:44px; height:44px; font-size:20px; cursor:pointer; transition:all .2s;
+  display:flex; align-items:center; justify-content:center;
 }
-.day-cell {
-  min-height: 85px; border-radius: 12px; padding: 8px; cursor: pointer; transition: all 0.2s;
-  background: linear-gradient(145deg, #fff, #f0fafa); border: 1px solid rgba(13,115,119,0.08);
+.cal-nav-btn-new:hover { background:var(--grad-coral); border-color:transparent; transform:scale(1.1); }
+.cal-weekday-row {
+  display:grid; grid-template-columns:repeat(7,1fr); background:rgba(0,0,0,0.2); padding:12px 16px;
 }
-.day-cell:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(13,115,119,0.18); background: linear-gradient(145deg, #e6f4f4, #b2d8d8); }
-.day-cell.other-month { opacity: 0.3; pointer-events: none; }
-.day-num { font-weight: 700; font-size: 14px; color: var(--text-dark); margin-bottom: 4px; }
-.today-num {
-  background: var(--grad-coral); color: #fff; border-radius: 50%;
-  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 2px 14px rgba(232,112,90,0.5); font-weight: 700; font-size: 14px;
+.cal-weekday-row span { color:rgba(255,255,255,0.6); font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; text-align:center; }
+.cal-day-grid {
+  display:grid; grid-template-columns:repeat(7,1fr); gap:8px; padding:16px; background:rgba(255,255,255,0.04);
 }
-.cal-dot {
-  color: #fff; border-radius: 6px; font-weight: 700; font-size: 9px;
-  padding: 2px 6px; margin-top: 2px; white-space: nowrap; overflow: hidden;
-  text-overflow: ellipsis; max-width: 100%; display: block;
+.cal-day-cell {
+  min-height:90px; border-radius:14px; padding:10px; cursor:pointer; transition:all .25s;
+  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);
 }
+.cal-day-cell:hover { background:rgba(232,112,90,0.2); border-color:rgba(232,112,90,0.4); transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.2); }
+.cal-day-cell.other-month { opacity:0.25; pointer-events:none; }
+.cal-day-num { color:rgba(255,255,255,0.8); font-weight:700; font-size:14px; margin-bottom:6px; }
+.cal-today-num {
+  background:var(--grad-coral); color:#fff; width:30px; height:30px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;
+  box-shadow:0 0 0 4px rgba(232,112,90,0.3), 0 4px 16px rgba(232,112,90,0.5);
+}
+.cal-event-pill {
+  background:rgba(255,255,255,0.15); backdrop-filter:blur(4px); color:#fff; border-radius:6px;
+  font-weight:600; font-size:9px; padding:3px 7px; margin-top:3px; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; max-width:100%; display:block;
+}
+.cal-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:16px; justify-content:center; }
+.cal-legend-item { display:flex; align-items:center; gap:6px; font-weight:600; font-size:11px; color:var(--text-mid); }
+.cal-legend-dot { width:10px; height:10px; border-radius:50%; }
 
 #day-popup-kss11 {
   position: fixed; z-index: 600; display: none;
-  background: linear-gradient(160deg, rgba(11,61,63,0.96), rgba(13,115,119,0.96));
-  backdrop-filter: blur(14px); border-radius: 16px; padding: 22px;
-  min-width: 270px; max-width: 320px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.12); color: #fff;
+  background: linear-gradient(160deg,rgba(11,61,63,0.97),rgba(13,115,119,0.97));
+  backdrop-filter: blur(20px); border-radius: 20px; padding: 24px;
+  min-width: 280px; max-width: 340px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff;
 }
-#day-popup-kss11 .popup-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: #e8705a; margin-bottom: 12px; }
+#day-popup-kss11 .popup-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; color: #f4a08e; margin-bottom: 14px; }
 #day-popup-kss11 .popup-file {
-  background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px;
+  background: rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; margin-bottom: 10px;
 }
-#day-popup-kss11 .popup-fnum { font-size: 10px; font-weight: 700; color: #7fbfbf; }
-#day-popup-kss11 .popup-client { font-size: 14px; font-weight: 700; color: #fff; }
+#day-popup-kss11 .popup-fnum { font-weight: 700; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 1px; margin-bottom: 3px; }
+#day-popup-kss11 .popup-client { font-weight: 700; font-size: 14px; color: #fff; }
+#day-popup-kss11 .popup-close {
+  position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.1); border:none; color:#fff;
+  border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;
+}
 
 @media print {
-  #splash-screen-kss1, header, #tab-bar-kss7, #hamburger-menu-kss5, .filter-bar, .expand-row, button { display: none !important; }
+  #splash-screen-kss1, header, #tab-bar-kss7, #hamburger-menu-kss5, .filter-bar, button { display: none !important; }
   body { background: #fff !important; }
   #tab-matters-kss12 { display: block !important; }
   #board-kss9 { flex-wrap: wrap !important; overflow: visible !important; }
@@ -381,19 +405,19 @@ header {
   #tab-bar-kss7 { padding: 0 12px; overflow-x: auto; }
   .tab-btn { padding: 10px 14px; font-size: 12px; white-space: nowrap; }
   #tab-matters-kss12, #tab-dashboard-kss13, #tab-calendar-kss14 { padding: 16px !important; }
-  .stats-bar { gap: 8px; }
-  .stat-pill { padding: 6px 12px; }
-  .stat-pill .count { font-size: 16px; }
-  .stat-pill .label { font-size: 9px; }
   .filter-bar { flex-direction: column; gap: 8px; }
   .filter-bar input, .filter-bar select { width: 100%; }
   #board-kss9 { gap: 14px; }
   .kanban-col { width: 260px; }
   .modal-grid { grid-template-columns: 1fr; }
-  .dash-breakdown-grid { grid-template-columns: 1fr !important; }
-  .day-cell { min-height: 60px; padding: 4px; }
-  .day-num { font-size: 11px; }
-  .cal-dot { font-size: 7px; padding: 1px 3px; }
+  .dash-kpi-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .dash-wide-grid { grid-template-columns: 1fr !important; }
+  .dash-tri-grid { grid-template-columns: 1fr !important; }
+  .cal-day-cell { min-height: 60px; padding: 6px; }
+  .cal-day-num { font-size: 11px; }
+  .cal-event-pill { font-size: 7px; padding: 1px 3px; }
+  .cal-nav-new { padding: 18px 16px; }
+  .cal-nav-new .cal-month-label-new { font-size: 22px; }
   #splash-screen-kss1 .splash-title { font-size: 28px; }
 }
 </style>
@@ -438,82 +462,80 @@ header {
 
 <!-- TAB: DASHBOARD -->
 <div data-id="27" id="tab-dashboard-kss13" style="padding:28px;display:none">
-  <div data-id="28" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--teal-deep);margin-bottom:4px">📊 Closing Dashboard</div>
-  <div data-id="29" style="font-size:13px;color:var(--text-light);margin-bottom:28px">Live overview — all active matters</div>
-  <div data-id="30" id="dash-stats-grid-kss20" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:32px"></div>
-  <div data-id="31" class="dash-breakdown-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
-    <div data-id="32" class="breakdown-card" style="border-top:4px solid #0d7377">
-      <h3 data-id="33">⚖ By Lawyer</h3>
-      <div data-id="34" id="dash-lawyers-kss21"></div>
-    </div>
-    <div data-id="35" class="breakdown-card" style="border-top:4px solid #e8705a">
-      <h3 data-id="36">📋 By Status</h3>
-      <div data-id="37" id="dash-status-kss22"></div>
-    </div>
-  </div>
+  <div data-id="28" style="font-family:'Playfair Display',serif;font-weight:700;font-size:30px;color:var(--teal-deep);margin-bottom:4px">📊 Analytics Dashboard</div>
+  <div data-id="29" style="font-size:13px;color:var(--text-light);margin-bottom:28px">KSS Matterkey Inc. — Live Closing Intelligence</div>
+  <div data-id="30" id="dash-kpi-container" class="dash-kpi-grid"></div>
+  <div data-id="31" class="dash-wide-grid" id="dash-wide-container"></div>
+  <div data-id="32" class="dash-tri-grid" id="dash-tri-container"></div>
 </div>
 
 <!-- TAB: MATTERS -->
-<div data-id="38" id="tab-matters-kss12" style="padding:24px 28px;display:block">
-  <div data-id="39" class="stats-bar" id="stats-bar-kss23"></div>
-  <div data-id="40" class="expand-row">
-    <button data-id="41" class="btn-expand-kss8" id="btn-expand-all-kss24" style="background:var(--grad-teal);box-shadow:0 3px 14px rgba(13,115,119,0.35)">⊞ Expand All</button>
-    <button data-id="42" class="btn-expand-kss8" id="btn-collapse-all-kss25" style="background:var(--grad-coral);box-shadow:0 3px 14px rgba(232,112,90,0.35)">⊟ Collapse All</button>
+<div data-id="33" id="tab-matters-kss12" style="padding:24px 28px;display:block">
+  <div data-id="34" class="filter-bar">
+    <span data-id="35" style="font-size:16px">🔍</span>
+    <input data-id="36" type="text" id="filter-search-kss26" placeholder="Search file # or client name..." style="flex:1;min-width:180px" autocomplete="off" spellcheck="false">
+    <select data-id="37" id="filter-lawyer-kss27"><option data-id="38" value="">All Lawyers</option></select>
+    <select data-id="39" id="filter-type-kss28"><option data-id="40" value="">All Types</option><option data-id="41">Purchase</option><option data-id="42">Sale</option><option data-id="43">Refinance</option><option data-id="44">Transfer</option></select>
+    <select data-id="45" id="filter-priority-kss29"><option data-id="46" value="">All Priorities</option><option data-id="47">Urgent</option><option data-id="48">High</option><option data-id="49">Normal</option></select>
+    <select data-id="50" id="filter-clerk-kss50"><option data-id="51" value="">All Clerks</option></select>
+    <div data-id="52" style="flex:1;min-width:8px"></div>
+    <button data-id="53" class="btn-expand-filter" id="btn-expand-all-kss24" style="background:var(--grad-teal);box-shadow:0 3px 12px rgba(13,115,119,0.3)">⊞ Expand All</button>
+    <button data-id="54" class="btn-expand-filter" id="btn-collapse-all-kss25" style="background:var(--grad-coral);box-shadow:0 3px 12px rgba(232,112,90,0.3)">⊟ Collapse All</button>
   </div>
-  <div data-id="43" class="filter-bar">
-    <span data-id="44" style="font-size:16px">🔍</span>
-    <input data-id="45" type="text" id="filter-search-kss26" placeholder="Search file # or client name..." style="flex:1;min-width:180px" autocomplete="off" spellcheck="false">
-    <select data-id="46" id="filter-lawyer-kss27"><option data-id="47" value="">All Lawyers</option></select>
-    <select data-id="48" id="filter-type-kss28"><option data-id="49" value="">All Types</option><option data-id="50">Purchase</option><option data-id="51">Sale</option><option data-id="52">Refinance</option><option data-id="53">Transfer</option></select>
-    <select data-id="54" id="filter-priority-kss29"><option data-id="55" value="">All Priorities</option><option data-id="56">Urgent</option><option data-id="57">High</option><option data-id="58">Normal</option></select>
-  </div>
-  <div data-id="59" id="board-kss9"></div>
+  <div data-id="55" id="board-kss9"></div>
 </div>
 
 <!-- TAB: CALENDAR -->
-<div data-id="60" id="tab-calendar-kss14" style="padding:28px;display:none">
-  <div data-id="61" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--teal-deep);margin-bottom:4px">📅 Closing Calendar</div>
-  <div data-id="62" style="font-size:13px;color:var(--text-light);margin-bottom:24px">All upcoming closing dates</div>
-  <div data-id="63" style="background:linear-gradient(160deg,#fff,#e6f4f4);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(13,115,119,0.15);border:1px solid rgba(13,115,119,0.1)">
-    <div data-id="64" class="cal-nav">
-      <button data-id="65" class="cal-nav-btn" id="btn-prev-month-kss30">‹</button>
-      <span data-id="66" class="cal-month-label" id="cal-month-label-kss31"></span>
-      <button data-id="67" class="cal-nav-btn" id="btn-next-month-kss32">›</button>
+<div data-id="56" id="tab-calendar-kss14" style="padding:28px;display:none">
+  <div data-id="57" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--teal-deep);margin-bottom:4px">📅 Closing Calendar</div>
+  <div data-id="58" style="font-size:13px;color:var(--text-light);margin-bottom:24px">All upcoming closing dates</div>
+  <div data-id="59" class="cal-wrapper">
+    <div data-id="60" class="cal-nav-new">
+      <button data-id="61" class="cal-nav-btn-new" id="btn-prev-month-kss30">‹</button>
+      <span data-id="62" class="cal-month-label-new" id="cal-month-label-kss31"></span>
+      <button data-id="63" class="cal-nav-btn-new" id="btn-next-month-kss32">›</button>
     </div>
-    <div data-id="68" class="weekday-row"><span data-id="69">Sun</span><span data-id="70">Mon</span><span data-id="71">Tue</span><span data-id="72">Wed</span><span data-id="73">Thu</span><span data-id="74">Fri</span><span data-id="75">Sat</span></div>
-    <div data-id="76" class="day-grid" id="cal-grid-kss33"></div>
+    <div data-id="64" class="cal-weekday-row"><span data-id="65">Sun</span><span data-id="66">Mon</span><span data-id="67">Tue</span><span data-id="68">Wed</span><span data-id="69">Thu</span><span data-id="70">Fri</span><span data-id="71">Sat</span></div>
+    <div data-id="72" class="cal-day-grid" id="cal-grid-kss33"></div>
+  </div>
+  <div data-id="73" class="cal-legend" id="cal-legend-bar">
+    <div data-id="74" class="cal-legend-item"><span data-id="75" class="cal-legend-dot" style="background:#14a09a"></span>New/Open</div>
+    <div data-id="76" class="cal-legend-item"><span data-id="77" class="cal-legend-dot" style="background:#f59e0b"></span>Requisition</div>
+    <div data-id="78" class="cal-legend-item"><span data-id="79" class="cal-legend-dot" style="background:#22c55e"></span>Closing Soon</div>
+    <div data-id="80" class="cal-legend-item"><span data-id="81" class="cal-legend-dot" style="background:#ef4444"></span>Reporting</div>
+    <div data-id="82" class="cal-legend-item"><span data-id="83" class="cal-legend-dot" style="background:#64748b"></span>Closed</div>
   </div>
 </div>
 
 <!-- DAY POPUP -->
-<div data-id="77" id="day-popup-kss11"></div>
+<div data-id="84" id="day-popup-kss11"></div>
 
 <!-- FILE MODAL -->
-<div data-id="78" id="file-modal-kss10">
-  <div data-id="79" class="modal-box">
-    <div data-id="80" id="modal-title-kss34" style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--teal-deep);margin-bottom:24px">Add New File</div>
-    <div data-id="81" class="modal-grid">
-      <div data-id="82"><label data-id="83">File #</label><input data-id="84" type="text" id="m-filenum-kss35" autocomplete="off" spellcheck="false"></div>
-      <div data-id="85"><label data-id="86">Client Name</label><input data-id="87" type="text" id="m-client-kss36" autocomplete="off" spellcheck="false"></div>
-      <div data-id="88" class="modal-full"><label data-id="89">Address</label><input data-id="90" type="text" id="m-address-kss37" autocomplete="off" spellcheck="false"></div>
-      <div data-id="91"><label data-id="92">Type</label><select data-id="93" id="m-type-kss38"><option data-id="94">Purchase</option><option data-id="95">Sale</option><option data-id="96">Refinance</option><option data-id="97">Transfer</option></select></div>
-      <div data-id="98"><label data-id="99">Lawyer</label><select data-id="100" id="m-lawyer-kss39"></select></div>
-      <div data-id="101"><label data-id="102">Clerk</label><select data-id="103" id="m-clerk-kss40"></select></div>
-      <div data-id="104"><label data-id="105">Price</label><input data-id="106" type="text" id="m-price-kss41" autocomplete="off" spellcheck="false"></div>
-      <div data-id="107"><label data-id="108">Req Date</label><input data-id="109" type="date" id="m-reqdate-kss42"></div>
-      <div data-id="110"><label data-id="111">Closing Date</label><input data-id="112" type="date" id="m-closedate-kss43"></div>
-      <div data-id="113"><label data-id="114">Status</label><select data-id="115" id="m-status-kss44"><option data-id="116" value="col-new">NEW / OPEN</option><option data-id="117" value="col-req">REQUISITION</option><option data-id="118" value="col-closing">CLOSING SOON</option><option data-id="119" value="col-reporting">REPORTING</option><option data-id="120" value="col-closed">CLOSED</option></select></div>
-      <div data-id="121"><label data-id="122">Priority</label><select data-id="123" id="m-priority-kss45"><option data-id="124">Normal</option><option data-id="125">High</option><option data-id="126">Urgent</option></select></div>
-      <div data-id="127" class="modal-full"><label data-id="128">Notes</label><textarea data-id="129" id="m-notes-kss46" rows="3" autocomplete="off" spellcheck="false"></textarea></div>
+<div data-id="85" id="file-modal-kss10">
+  <div data-id="86" class="modal-box">
+    <div data-id="87" id="modal-title-kss34" style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--teal-deep);margin-bottom:24px">Add New File</div>
+    <div data-id="88" class="modal-grid">
+      <div data-id="89"><label data-id="90">File #</label><input data-id="91" type="text" id="m-filenum-kss35" autocomplete="off" spellcheck="false"></div>
+      <div data-id="92"><label data-id="93">Client Name</label><input data-id="94" type="text" id="m-client-kss36" autocomplete="off" spellcheck="false"></div>
+      <div data-id="95" class="modal-full"><label data-id="96">Address</label><input data-id="97" type="text" id="m-address-kss37" autocomplete="off" spellcheck="false"></div>
+      <div data-id="98"><label data-id="99">Type</label><select data-id="100" id="m-type-kss38"><option data-id="101">Purchase</option><option data-id="102">Sale</option><option data-id="103">Refinance</option><option data-id="104">Transfer</option></select></div>
+      <div data-id="105"><label data-id="106">Lawyer</label><select data-id="107" id="m-lawyer-kss39"></select></div>
+      <div data-id="108"><label data-id="109">Clerk</label><select data-id="110" id="m-clerk-kss40"></select></div>
+      <div data-id="111"><label data-id="112">Price</label><input data-id="113" type="text" id="m-price-kss41" autocomplete="off" spellcheck="false"></div>
+      <div data-id="114"><label data-id="115">Req Date</label><input data-id="116" type="date" id="m-reqdate-kss42"></div>
+      <div data-id="117"><label data-id="118">Closing Date</label><input data-id="119" type="date" id="m-closedate-kss43"></div>
+      <div data-id="120"><label data-id="121">Status</label><select data-id="122" id="m-status-kss44"><option data-id="123" value="col-new">NEW / OPEN</option><option data-id="124" value="col-req">REQUISITION</option><option data-id="125" value="col-closing">CLOSING SOON</option><option data-id="126" value="col-reporting">REPORTING</option><option data-id="127" value="col-closed">CLOSED</option></select></div>
+      <div data-id="128"><label data-id="129">Priority</label><select data-id="130" id="m-priority-kss45"><option data-id="131">Normal</option><option data-id="132">High</option><option data-id="133">Urgent</option></select></div>
+      <div data-id="134" class="modal-full"><label data-id="135">Notes</label><textarea data-id="136" id="m-notes-kss46" rows="3" autocomplete="off" spellcheck="false"></textarea></div>
     </div>
-    <div data-id="130" class="modal-footer">
-      <button data-id="131" class="btn-cancel-modal" id="btn-modal-cancel-kss47">Cancel</button>
-      <button data-id="132" class="btn-save-modal" id="btn-modal-save-kss48">Save</button>
+    <div data-id="137" class="modal-footer">
+      <button data-id="138" class="btn-cancel-modal" id="btn-modal-cancel-kss47">Cancel</button>
+      <button data-id="139" class="btn-save-modal" id="btn-modal-save-kss48">Save</button>
     </div>
   </div>
 </div>
 
-<footer data-id="133" style="text-align:center;padding:24px;font-size:12px;color:var(--text-light);background:linear-gradient(90deg,#e6f4f4,#f0fafa)">
+<footer data-id="140" style="text-align:center;padding:24px;font-size:12px;color:var(--text-light);background:linear-gradient(90deg,#e6f4f4,#f0fafa)">
   Made by Copilot
 </footer>
 
@@ -522,7 +544,6 @@ if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
   lucide.createIcons();
 }
 
-// ── CLIPBOARD SAFETY — ensure copy/paste works in all fields ──
 document.querySelectorAll('input, textarea, select').forEach(function(el) {
   el.addEventListener('copy', function(e) { e.stopPropagation(); });
   el.addEventListener('paste', function(e) { e.stopPropagation(); });
@@ -531,11 +552,11 @@ document.querySelectorAll('input, textarea, select').forEach(function(el) {
 
 // ── DATA ──
 var COLUMNS = [
-  {id:'col-new', label:'NEW / OPEN', grad:'linear-gradient(135deg,#0d7377,#14a09a)', accent:'#0d7377'},
-  {id:'col-req', label:'REQUISITION', grad:'linear-gradient(135deg,#d97706,#f59e0b)', accent:'#d97706'},
-  {id:'col-closing', label:'CLOSING SOON', grad:'linear-gradient(135deg,#16a34a,#22c55e)', accent:'#16a34a'},
-  {id:'col-reporting', label:'REPORTING', grad:'linear-gradient(135deg,#dc2626,#ef4444)', accent:'#dc2626'},
-  {id:'col-closed', label:'CLOSED', grad:'linear-gradient(135deg,#475569,#64748b)', accent:'#475569'}
+  {id:'col-new', label:'NEW / OPEN', grad:'linear-gradient(135deg,#0d7377,#14a09a)', accent:'#14a09a'},
+  {id:'col-req', label:'REQUISITION', grad:'linear-gradient(135deg,#d97706,#f59e0b)', accent:'#f59e0b'},
+  {id:'col-closing', label:'CLOSING SOON', grad:'linear-gradient(135deg,#16a34a,#22c55e)', accent:'#22c55e'},
+  {id:'col-reporting', label:'REPORTING', grad:'linear-gradient(135deg,#dc2626,#ef4444)', accent:'#ef4444'},
+  {id:'col-closed', label:'CLOSED', grad:'linear-gradient(135deg,#475569,#64748b)', accent:'#64748b'}
 ];
 
 var SEED = [
@@ -607,9 +628,8 @@ var editingId = null;
 var calYear, calMonth;
 var dragFileId = null;
 
-// ── VERSION CHECK — clear old localStorage ──
 var KSS_VERSION_KEY = 'kss_version';
-var KSS_CURRENT_VERSION = '3';
+var KSS_CURRENT_VERSION = '4';
 if (localStorage.getItem(KSS_VERSION_KEY) !== KSS_CURRENT_VERSION) {
   localStorage.removeItem('kss_matters_v1');
   localStorage.setItem(KSS_VERSION_KEY, KSS_CURRENT_VERSION);
@@ -656,27 +676,6 @@ function getTypeBg(type) {
   return map[type] || map.Purchase;
 }
 
-// ── RENDER STATS ──
-function renderStats() {
-  var files = appData.files;
-  var counts = {total:files.length, 'col-new':0, 'col-req':0, 'col-closing':0, 'col-reporting':0, 'col-closed':0};
-  files.forEach(function(f){ if(counts[f.status] !== undefined) counts[f.status]++; });
-  var pills = [
-    {label:'📁 Total',count:counts.total,bg:'var(--grad-purple)'},
-    {label:'🟢 New',count:counts['col-new'],bg:'var(--grad-blue)'},
-    {label:'🟡 Requisition',count:counts['col-req'],bg:'var(--grad-amber)'},
-    {label:'🔴 Closing Soon',count:counts['col-closing'],bg:'var(--grad-green)'},
-    {label:'📋 Reporting',count:counts['col-reporting'],bg:'var(--grad-red)'},
-    {label:'✅ Closed',count:counts['col-closed'],bg:'linear-gradient(135deg,#475569,#64748b)'}
-  ];
-  var html = '';
-  pills.forEach(function(p){
-    html += '<div class="stat-pill" style="background:'+p.bg+'"><span class="label">'+p.label+'</span><span class="count">'+p.count+'</span></div>';
-  });
-  document.getElementById('stats-bar-kss23').innerHTML = html;
-}
-
-// ── TYPE COLORS ──
 function priorityClass(p) {
   if(p==='Urgent') return 'priority-urgent';
   if(p==='High') return 'priority-high';
@@ -708,10 +707,19 @@ function renderCard(file, colId, isDuplicate) {
     dupHtml = '<div class="dup-badge">⚡ Also in Closing Soon</div>';
   }
 
+  // Clerk row (always visible)
+  var clerkRowHtml = '<div class="row-clerk">';
+  if(file.clerk && file.clerk.trim()) {
+    clerkRowHtml += '<span class="clerk-assigned-badge">🗂 '+escH(file.clerk)+'<button class="clerk-unassign-x" data-action="unassign-clerk" data-id="'+file.id+'">✕</button></span>';
+  } else {
+    clerkRowHtml += '<button class="btn-assign-clerk" data-action="assign-clerk" data-id="'+file.id+'">👤 Assign Clerk ▾</button>';
+  }
+  clerkRowHtml += '</div>';
+
   var expanded = file.expanded;
   var expandedHtml = '';
   if(expanded) {
-    expandedHtml = '<div class="row-e"><span class="clerk-badge">🗂 '+(escH(file.clerk)||'Unassigned')+'</span><div class="notes-text">'+escH(file.notes)+'</div></div>';
+    expandedHtml = '<div class="row-e"><div class="notes-text">'+escH(file.notes)+'</div></div>';
     if(!isDuplicate) {
       expandedHtml += '<div class="row-f"><button class="btn-move-card" data-action="move" data-id="'+file.id+'" data-status="'+file.status+'">📦 Move to…</button><button class="btn-edit-card" data-action="edit" data-id="'+file.id+'">✏ Edit</button><button class="btn-copy-card" data-action="copy" data-id="'+file.id+'">📋 Copy</button><button class="btn-delete-card" data-action="delete" data-id="'+file.id+'">🗑 Delete</button></div>';
     }
@@ -722,6 +730,7 @@ function renderCard(file, colId, isDuplicate) {
     + '<div class="row-a"><span class="file-num">'+escH(file.fileNumber)+'</span><span class="priority-badge '+priorityClass(file.priority)+'">'+escH(file.priority)+'</span></div>'
     + '<div class="row-b"><span class="type-dot" style="background:'+getTypeColor(file.type)+'"></span><span class="type-badge" style="background:linear-gradient(135deg,'+tb.from+','+tb.to+');color:'+tb.text+'">'+escH(file.type)+'</span><span class="client-name">'+escH(file.clientName)+'</span></div>'
     + '<div class="row-c"><span class="lawyer-line">👤 '+escH(file.lawyer)+'</span><span class="address-line">📍 '+escH(file.address)+'</span><span class="price-line">'+escH(file.price)+'</span></div>'
+    + clerkRowHtml
     + '<div class="row-d"><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="date-pill" style="background:linear-gradient(135deg,#e6f4f4,#b2d8d8);color:#0b3d3f">REQ '+formatDate(file.reqDate)+'</span><span class="date-pill" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">CLOSE '+formatDate(file.closingDate)+'</span>'+daysBadge+'</div><button class="btn-toggle" data-action="toggle" data-id="'+file.id+'">'+(expanded?'▲ Less':'▼ More')+'</button></div>'
     + expandedHtml
     + '</div>';
@@ -738,12 +747,17 @@ function renderBoard() {
   var lawyer = document.getElementById('filter-lawyer-kss27').value;
   var type = document.getElementById('filter-type-kss28').value;
   var priority = document.getElementById('filter-priority-kss29').value;
+  var clerkFilter = document.getElementById('filter-clerk-kss50').value;
 
   var filtered = appData.files.filter(function(f){
     if(search && f.fileNumber.toLowerCase().indexOf(search)===-1 && f.clientName.toLowerCase().indexOf(search)===-1) return false;
     if(lawyer && f.lawyer !== lawyer) return false;
     if(type && f.type !== type) return false;
     if(priority && f.priority !== priority) return false;
+    if(clerkFilter) {
+      if(clerkFilter === '__unassigned__') { if(f.clerk && f.clerk.trim()) return false; }
+      else { if(f.clerk !== clerkFilter) return false; }
+    }
     return true;
   });
 
@@ -759,7 +773,6 @@ function renderBoard() {
         }
       });
     }
-    // CHANGE 5: Sort DESCENDING by closing date (latest first)
     colFiles.sort(function(a,b){
       if(!a.closingDate) return 1;
       if(!b.closingDate) return -1;
@@ -780,43 +793,69 @@ function renderBoard() {
     html += '</div></div>';
   });
   boardEl.innerHTML = html;
-  renderStats();
   bindCardEvents();
   bindDragDrop();
 }
 
+var activeClerkDropdown = null;
+function closeClerkDropdown() {
+  if(activeClerkDropdown && activeClerkDropdown.parentNode) {
+    activeClerkDropdown.parentNode.removeChild(activeClerkDropdown);
+  }
+  activeClerkDropdown = null;
+}
+
+function showClerkDropdown(btnEl, fileId) {
+  closeClerkDropdown();
+  var dropdown = document.createElement('div');
+  dropdown.className = 'clerk-dropdown';
+  appData.clerks.forEach(function(clerk) {
+    var item = document.createElement('button');
+    item.className = 'clerk-dropdown-item';
+    item.textContent = clerk;
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var file = appData.files.find(function(f){ return f.id === fileId; });
+      if(file) { file.clerk = clerk; saveData(); renderBoard(); }
+      closeClerkDropdown();
+    });
+    dropdown.appendChild(item);
+  });
+  var rowClerk = btnEl.closest('.row-clerk');
+  if(rowClerk) { rowClerk.appendChild(dropdown); }
+  activeClerkDropdown = dropdown;
+}
+
 function bindCardEvents() {
   document.querySelectorAll('[data-action="toggle"]').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      toggleExpand(this.getAttribute('data-id'));
-    });
+    btn.addEventListener('click', function(e){ e.stopPropagation(); toggleExpand(this.getAttribute('data-id')); });
   });
   document.querySelectorAll('[data-action="edit"]').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      openEditModal(this.getAttribute('data-id'));
-    });
+    btn.addEventListener('click', function(e){ e.stopPropagation(); openEditModal(this.getAttribute('data-id')); });
   });
   document.querySelectorAll('[data-action="copy"]').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      copyCard(this.getAttribute('data-id'));
-    });
+    btn.addEventListener('click', function(e){ e.stopPropagation(); copyCard(this.getAttribute('data-id')); });
   });
   document.querySelectorAll('[data-action="delete"]').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      deleteFile(this.getAttribute('data-id'));
-    });
+    btn.addEventListener('click', function(e){ e.stopPropagation(); deleteFile(this.getAttribute('data-id')); });
   });
-  // CHANGE 2B: Move to… button
   document.querySelectorAll('[data-action="move"]').forEach(function(btn){
     btn.addEventListener('click', function(e){
       e.stopPropagation();
-      var fileId = this.getAttribute('data-id');
-      var currentStatus = this.getAttribute('data-status');
-      showMoveDropdown(this, fileId, currentStatus);
+      showMoveDropdown(this, this.getAttribute('data-id'), this.getAttribute('data-status'));
+    });
+  });
+  document.querySelectorAll('[data-action="assign-clerk"]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      showClerkDropdown(this, this.getAttribute('data-id'));
+    });
+  });
+  document.querySelectorAll('[data-action="unassign-clerk"]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var file = appData.files.find(function(f){ return f.id === btn.getAttribute('data-id'); });
+      if(file) { file.clerk = ''; saveData(); renderBoard(); }
     });
   });
 }
@@ -842,19 +881,13 @@ function showMoveDropdown(btnEl, fileId, currentStatus) {
     item.addEventListener('click', function(e) {
       e.stopPropagation();
       var file = appData.files.find(function(f){ return f.id === fileId; });
-      if (file) {
-        file.status = col.id;
-        saveData();
-        renderAll();
-      }
+      if (file) { file.status = col.id; saveData(); renderAll(); }
       closeMoveDropdown();
     });
     dropdown.appendChild(item);
   });
   var rowF = btnEl.closest('.row-f');
-  if (rowF) {
-    rowF.appendChild(dropdown);
-  }
+  if (rowF) { rowF.appendChild(dropdown); }
   activeMoveDropdown = dropdown;
 }
 
@@ -916,7 +949,7 @@ function openAddModal() {
   document.getElementById('m-address-kss37').value = '';
   document.getElementById('m-type-kss38').value = 'Purchase';
   document.getElementById('m-lawyer-kss39').value = appData.lawyers[0];
-  document.getElementById('m-clerk-kss40').value = appData.clerks[0];
+  document.getElementById('m-clerk-kss40').value = '';
   document.getElementById('m-price-kss41').value = '';
   document.getElementById('m-reqdate-kss42').value = '';
   document.getElementById('m-closedate-kss43').value = '';
@@ -937,7 +970,7 @@ function openEditModal(id) {
   document.getElementById('m-address-kss37').value = f.address;
   document.getElementById('m-type-kss38').value = f.type;
   document.getElementById('m-lawyer-kss39').value = f.lawyer;
-  document.getElementById('m-clerk-kss40').value = f.clerk;
+  document.getElementById('m-clerk-kss40').value = f.clerk || '';
   document.getElementById('m-price-kss41').value = f.price;
   document.getElementById('m-reqdate-kss42').value = f.reqDate;
   document.getElementById('m-closedate-kss43').value = f.closingDate;
@@ -986,7 +1019,6 @@ function deleteFile(id) {
   saveData(); renderAll();
 }
 
-// CHANGE 3: Copy card — duplicates allowed, append " (Copy)" to file number
 function copyCard(id) {
   var f = appData.files.find(function(x){ return x.id === id; });
   if(!f) return;
@@ -1034,21 +1066,13 @@ function mapOldStatusToNew(statusOverride, closingDate) {
     if (d <= 30) return 'col-req';
     return 'col-new';
   }
-  var map = {
-    'closed': 'col-closed',
-    'overdue': 'col-reporting',
-    'req': 'col-req',
-    'open': 'col-new',
-    'closing': 'col-closing'
-  };
+  var map = {'closed':'col-closed','overdue':'col-reporting','req':'col-req','open':'col-new','closing':'col-closing'};
   return map[statusOverride.toLowerCase()] || 'col-new';
 }
 
 function formatPriceToString(price) {
   if (typeof price === 'string' && price.indexOf('$') === 0) return price;
-  if (typeof price === 'number') {
-    return '$' + price.toLocaleString('en-US');
-  }
+  if (typeof price === 'number') return '$' + price.toLocaleString('en-US');
   if (typeof price === 'string') {
     var num = parseFloat(price.replace(/[^0-9.]/g, ''));
     if (!isNaN(num)) return '$' + num.toLocaleString('en-US');
@@ -1059,42 +1083,26 @@ function formatPriceToString(price) {
 
 function normalizeFile(f) {
   var isOldFormat = f.hasOwnProperty('fileNo') || f.hasOwnProperty('property') || f.hasOwnProperty('lawyerName') || f.hasOwnProperty('requisitionDate') || f.hasOwnProperty('statusOverride');
-
   if (isOldFormat) {
     var closingDate = f.closingDate || '';
     return {
-      id: f.id || String(Date.now() + Math.random()),
-      fileNumber: f.fileNo || f.fileNumber || '',
-      clientName: f.clientName || '',
-      address: f.property || f.address || '',
-      type: f.type || 'Purchase',
-      price: formatPriceToString(f.price),
-      lawyer: f.lawyerName || f.lawyer || '',
-      clerk: f.clerk || '',
-      reqDate: f.requisitionDate || f.reqDate || '',
-      closingDate: closingDate,
+      id: f.id || String(Date.now() + Math.random()), fileNumber: f.fileNo || f.fileNumber || '',
+      clientName: f.clientName || '', address: f.property || f.address || '',
+      type: f.type || 'Purchase', price: formatPriceToString(f.price),
+      lawyer: f.lawyerName || f.lawyer || '', clerk: f.clerk || '',
+      reqDate: f.requisitionDate || f.reqDate || '', closingDate: closingDate,
       status: f.statusOverride ? mapOldStatusToNew(f.statusOverride, closingDate) : (f.status || 'col-new'),
-      priority: f.priority || 'Normal',
-      notes: f.notes || '',
-      expanded: false
+      priority: f.priority || 'Normal', notes: f.notes || '', expanded: false
     };
   }
-
   return {
-    id: f.id || String(Date.now() + Math.random()),
-    fileNumber: f.fileNumber || '',
-    clientName: f.clientName || '',
-    address: f.address || '',
-    type: f.type || 'Purchase',
-    price: f.price || '$0',
-    lawyer: f.lawyer || '',
-    clerk: f.clerk || '',
-    reqDate: f.reqDate || '',
-    closingDate: f.closingDate || '',
-    status: f.status || 'col-new',
-    priority: f.priority || 'Normal',
-    notes: f.notes || '',
-    expanded: false
+    id: f.id || String(Date.now() + Math.random()), fileNumber: f.fileNumber || '',
+    clientName: f.clientName || '', address: f.address || '',
+    type: f.type || 'Purchase', price: f.price || '$0',
+    lawyer: f.lawyer || '', clerk: f.clerk || '',
+    reqDate: f.reqDate || '', closingDate: f.closingDate || '',
+    status: f.status || 'col-new', priority: f.priority || 'Normal',
+    notes: f.notes || '', expanded: false
   };
 }
 
@@ -1108,20 +1116,17 @@ function restoreData() {
         var d = JSON.parse(ev.target.result);
         if(d.files && d.lawyers && d.clerks) {
           d.files = d.files.map(normalizeFile);
-          appData = d;
-          saveData(); renderAll(); alert('✅ Restored ' + d.files.length + ' files!');
+          appData = d; saveData(); renderAll(); alert('✅ Restored ' + d.files.length + ' files!');
         }
         else if (Array.isArray(d)) {
           var normalized = d.map(normalizeFile);
-          appData.files = normalized;
-          saveData(); renderAll(); alert('✅ Restored ' + normalized.length + ' files from legacy format!');
+          appData.files = normalized; saveData(); renderAll(); alert('✅ Restored ' + normalized.length + ' files from legacy format!');
         }
         else if (d.matters && Array.isArray(d.matters)) {
           var normalized2 = d.matters.map(normalizeFile);
-          appData.files = normalized2;
-          saveData(); renderAll(); alert('✅ Restored ' + normalized2.length + ' files from legacy format!');
+          appData.files = normalized2; saveData(); renderAll(); alert('✅ Restored ' + normalized2.length + ' files from legacy format!');
         }
-        else { alert('Invalid file format. Expected a KSS backup JSON.'); }
+        else { alert('Invalid file format.'); }
       } catch(ex) { alert('Error reading file: ' + ex.message); }
     });
     r.readAsText(e.target.files[0]);
@@ -1130,13 +1135,12 @@ function restoreData() {
   closeHamburger();
 }
 
-// ── DASHBOARD ──
+// ── DASHBOARD (NEW) ──
 function renderDashboard() {
   var files = appData.files;
   var total = files.length;
   var today = new Date(); today.setHours(0,0,0,0);
   var weekEnd = new Date(today); weekEnd.setDate(weekEnd.getDate() + 7);
-  var monthEnd = new Date(today); monthEnd.setDate(monthEnd.getDate() + 30);
 
   var closingWeek = files.filter(function(f){
     if(!f.closingDate || f.status==='col-closed') return false;
@@ -1144,59 +1148,127 @@ function renderDashboard() {
     return d >= today && d <= weekEnd;
   }).length;
 
-  var closingMonth = files.filter(function(f){
-    if(!f.closingDate || f.status==='col-closed') return false;
+  var reporting = files.filter(function(f){ return f.status==='col-reporting'; }).length;
+  var urgent = files.filter(function(f){ return f.priority==='Urgent' && f.status!=='col-closed'; }).length;
+
+  var currentMonth = today.getMonth();
+  var currentYear = today.getFullYear();
+  var closedThisMonth = files.filter(function(f){
+    if(f.status !== 'col-closed' || !f.closingDate) return false;
     var d = new Date(f.closingDate+'T00:00:00');
-    return d >= today && d <= monthEnd;
+    return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
   }).length;
 
-  var urgent = files.filter(function(f){ return f.priority==='Urgent' && f.status!=='col-closed'; }).length;
-  var closed = files.filter(function(f){ return f.status==='col-closed'; }).length;
-  var reporting = files.filter(function(f){ return f.status==='col-reporting'; }).length;
-
-  var cards = [
-    {emoji:'📁',num:total,label:'Total Files',bg:'linear-gradient(145deg,#e6f4f4,#b2d8d8)',bar:'var(--grad-purple)'},
-    {emoji:'🔴',num:closingWeek,label:'Closing This Week',bg:'linear-gradient(145deg,#fef2f2,#fee2e2)',bar:'var(--grad-red)'},
-    {emoji:'🟡',num:closingMonth,label:'Closing This Month',bg:'linear-gradient(145deg,#fffbeb,#fef3c7)',bar:'var(--grad-amber)'},
-    {emoji:'⚡',num:urgent,label:'Urgent',bg:'linear-gradient(145deg,#fdf0ed,#f4a08e33)',bar:'var(--grad-coral)'},
-    {emoji:'✅',num:closed,label:'Closed',bg:'linear-gradient(145deg,#f0fdf4,#dcfce7)',bar:'var(--grad-green)'},
-    {emoji:'📋',num:reporting,label:'Reporting Due',bg:'linear-gradient(145deg,#fef2f2,#fecaca)',bar:'var(--grad-red)'}
+  // ROW 1 - KPI cards
+  var kpis = [
+    {emoji:'📁',num:total,label:'Total Files',bar:'var(--grad-teal)',sub:'all matters'},
+    {emoji:'⚡',num:closingWeek,label:'Closing This Week',bar:'var(--grad-coral)',sub:'next 7 days'},
+    {emoji:'📋',num:reporting,label:'Reporting',bar:'var(--grad-red)',sub:'need attention'},
+    {emoji:'🔴',num:urgent,label:'Urgent Priority',bar:'var(--grad-amber)',sub:'high priority'},
+    {emoji:'✅',num:closedThisMonth,label:'Closed This Month',bar:'var(--grad-green)',sub:'this month'}
   ];
-
-  var html = '';
-  cards.forEach(function(c){
-    html += '<div class="dash-stat-card" style="background:'+c.bg+'"><div class="top-bar" style="background:'+c.bar+'"></div><span class="emoji">'+c.emoji+'</span><div class="num">'+c.num+'</div><div class="lbl">'+c.label+'</div></div>';
+  var kpiHtml = '';
+  kpis.forEach(function(k){
+    kpiHtml += '<div class="dash-kpi-card"><div class="top-bar" style="background:'+k.bar+'"></div><span class="kpi-emoji">'+k.emoji+'</span><div class="kpi-num">'+k.num+'</div><div class="kpi-label">'+k.label+'</div><div class="kpi-sub">'+k.sub+'</div></div>';
   });
-  document.getElementById('dash-stats-grid-kss20').innerHTML = html;
+  document.getElementById('dash-kpi-container').innerHTML = kpiHtml;
 
-  // By Lawyer
+  // ROW 2 - Workload by Lawyer + Closing Timeline
   var lawyerCounts = {};
   appData.lawyers.forEach(function(l){ lawyerCounts[l] = 0; });
   files.forEach(function(f){ if(lawyerCounts[f.lawyer] !== undefined) lawyerCounts[f.lawyer]++; });
-  var maxL = Math.max.apply(null, Object.values(lawyerCounts)) || 1;
+  var lawyerArr = appData.lawyers.slice().sort(function(a,b){ return lawyerCounts[b] - lawyerCounts[a]; });
+  var maxL = Math.max.apply(null, lawyerArr.map(function(l){ return lawyerCounts[l]; })) || 1;
+
   var lhtml = '';
-  appData.lawyers.forEach(function(l){
+  lawyerArr.forEach(function(l){
     var c = lawyerCounts[l];
     var pct = Math.round((c/maxL)*100);
-    lhtml += '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:13px;font-weight:600;color:var(--text-dark)">'+escH(l)+'</span><span style="font-size:13px;font-weight:700;color:#0d7377">'+c+'</span></div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:var(--grad-teal)"></div></div></div>';
+    lhtml += '<div style="margin-bottom:14px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:6px"><span style="flex:1;font-weight:600;font-size:13px;color:var(--text-dark)">'+escH(l)+'</span><span style="background:linear-gradient(135deg,#e6f4f4,#b2d8d8);color:#0b3d3f;border-radius:20px;padding:3px 12px;font-weight:700;font-size:12px">'+c+'</span></div><div style="width:100%;height:8px;background:#f1f5f9;border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--grad-teal);border-radius:6px;width:'+pct+'%;transition:width 0.8s ease"></div></div></div>';
   });
-  document.getElementById('dash-lawyers-kss21').innerHTML = lhtml;
 
-  // By Status
+  // Closing Timeline (next 4 months)
+  var timelineHtml = '';
+  var upcomingFiles = files.filter(function(f){ return f.status !== 'col-closed' && f.closingDate; });
+  var totalUpcoming = upcomingFiles.length || 1;
+  for(var mi = 0; mi < 4; mi++) {
+    var tm = new Date(today.getFullYear(), today.getMonth() + mi, 1);
+    var tmMonth = tm.getMonth(); var tmYear = tm.getFullYear();
+    var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var monthFiles = upcomingFiles.filter(function(f){
+      var d = new Date(f.closingDate+'T00:00:00');
+      return d.getMonth() === tmMonth && d.getFullYear() === tmYear;
+    });
+    var pct2 = Math.round((monthFiles.length / totalUpcoming) * 100);
+    var preview = monthFiles.slice(0,2).map(function(f){ return escH(f.clientName); }).join(', ');
+    if(monthFiles.length > 2) preview += ' +' + (monthFiles.length - 2) + ' more';
+    timelineHtml += '<div style="margin-bottom:16px"><div style="font-weight:700;font-size:13px;color:var(--teal-deep);margin-bottom:6px">'+monthNames[tmMonth]+' '+tmYear+' <span style="font-weight:500;font-size:12px;color:var(--text-light)">('+monthFiles.length+' files)</span></div><div style="width:100%;height:8px;background:#f1f5f9;border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--grad-coral);border-radius:6px;width:'+pct2+'%;transition:width 0.8s ease"></div></div><div style="font-size:10px;color:var(--text-light);margin-top:3px">'+preview+'</div></div>';
+  }
+
+  document.getElementById('dash-wide-container').innerHTML =
+    '<div class="dash-panel" style="border-top:5px solid #0d7377"><h3>⚖️ Workload by Lawyer</h3>'+lhtml+'</div>' +
+    '<div class="dash-panel" style="border-top:5px solid #e8705a"><h3>📅 Closing Timeline</h3>'+timelineHtml+'</div>';
+
+  // ROW 3 - By File Type, Pipeline Health, Overdue Summary
+  // Card C — By File Type
+  var typeCounts = {Purchase:0,Sale:0,Refinance:0,Transfer:0};
+  files.forEach(function(f){ if(typeCounts[f.type] !== undefined) typeCounts[f.type]++; });
+  var typeTotal = total || 1;
+  var typeColors = {Purchase:'#0d7377',Sale:'#e8705a',Refinance:'#d97706',Transfer:'#0b3d3f'};
+  var typeHtml = '';
+  ['Purchase','Sale','Refinance','Transfer'].forEach(function(t){
+    var c = typeCounts[t]; var pct3 = Math.round((c/typeTotal)*100);
+    typeHtml += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="width:12px;height:12px;border-radius:50%;background:'+typeColors[t]+';flex-shrink:0"></span><span style="flex:1;font-weight:600;font-size:13px;color:var(--text-dark)">'+t+'</span><span style="background:linear-gradient(135deg,#e6f4f4,#b2d8d8);color:#0b3d3f;border-radius:20px;padding:3px 10px;font-weight:700;font-size:11px">'+c+'</span><span style="font-size:11px;color:var(--text-light)">'+pct3+'%</span></div>';
+  });
+  typeHtml += '<div style="display:flex;height:12px;border-radius:8px;overflow:hidden;margin-top:8px">';
+  ['Purchase','Sale','Refinance','Transfer'].forEach(function(t){
+    if(typeCounts[t] > 0) typeHtml += '<div style="flex:'+typeCounts[t]+';background:'+typeColors[t]+'"></div>';
+  });
+  typeHtml += '</div>';
+
+  // Card D — Pipeline Health
   var statusCounts = {};
   COLUMNS.forEach(function(col){ statusCounts[col.id] = 0; });
   files.forEach(function(f){ if(statusCounts[f.status] !== undefined) statusCounts[f.status]++; });
   var maxS = Math.max.apply(null, Object.values(statusCounts)) || 1;
-  var shtml = '';
+  var pipeHtml = '<div style="display:flex;align-items:flex-end;gap:12px;height:120px;margin-top:12px">';
+  var shortLabels = {'col-new':'New','col-req':'Req','col-closing':'Closing','col-reporting':'Report','col-closed':'Closed'};
   COLUMNS.forEach(function(col){
     var c = statusCounts[col.id];
-    var pct = Math.round((c/maxS)*100);
-    shtml += '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:13px;font-weight:600;color:var(--text-dark)">'+col.label+'</span><span style="font-size:13px;font-weight:700;color:'+col.accent+'">'+c+'</span></div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+col.grad+'"></div></div></div>';
+    var h = Math.max(8, Math.round((c/maxS)*120));
+    pipeHtml += '<div style="flex:1;display:flex;flex-direction:column;align-items:center"><div style="font-weight:700;font-size:12px;color:var(--text-dark);margin-bottom:4px">'+c+'</div><div style="width:100%;height:'+h+'px;border-radius:8px 8px 0 0;background:'+col.grad+'"></div><div style="font-weight:700;font-size:10px;color:var(--text-mid);margin-top:6px;text-align:center">'+shortLabels[col.id]+'</div></div>';
   });
-  document.getElementById('dash-status-kss22').innerHTML = shtml;
+  pipeHtml += '</div>';
+
+  // Card E — Overdue / Reporting Summary
+  var reportingFiles = files.filter(function(f){ return f.status === 'col-reporting'; });
+  reportingFiles.sort(function(a,b){ return daysUntil(a.closingDate) - daysUntil(b.closingDate); });
+  var overdueHtml = '';
+  if(reportingFiles.length === 0) {
+    overdueHtml = '<div style="text-align:center;padding:24px;color:#16a34a;font-weight:600">✅ No files in Reporting</div>';
+  } else {
+    reportingFiles.slice(0,5).forEach(function(f){
+      var d = daysUntil(f.closingDate);
+      var badge = d < 0 ? '<span style="background:linear-gradient(135deg,#fef2f2,#fecaca);color:#dc2626;border-radius:20px;padding:2px 10px;font-weight:700;font-size:10px">'+Math.abs(d)+'d overdue</span>' : '<span style="background:linear-gradient(135deg,#fffbeb,#fef3c7);color:#b45309;border-radius:20px;padding:2px 10px;font-weight:700;font-size:10px">'+d+'d</span>';
+      overdueHtml += '<div style="background:linear-gradient(90deg,#fef2f2,#fff);border-radius:10px;padding:10px 14px;margin-bottom:8px;border-left:4px solid #dc2626;display:flex;align-items:center;gap:10px"><div style="flex:1"><span style="font-size:10px;color:#0d7377;font-weight:700">'+escH(f.fileNumber)+'</span><br><span style="font-size:13px;font-weight:700;color:var(--text-dark)">'+escH(f.clientName)+'</span></div>'+badge+'</div>';
+    });
+  }
+
+  // Card F — Recent Activity
+  var recentFiles = files.slice().reverse().slice(0,5);
+  var recentHtml = '';
+  recentFiles.forEach(function(f){
+    var col = getColMeta(f.status);
+    recentHtml += '<div style="background:linear-gradient(90deg,#f8fdfd,#fff);border-radius:10px;padding:10px 14px;margin-bottom:8px;border-left:4px solid '+col.accent+';display:flex;align-items:center;gap:10px"><div style="flex:1"><span style="font-size:10px;color:#0d7377;font-weight:700">'+escH(f.fileNumber)+'</span><br><span style="font-size:13px;font-weight:700;color:var(--text-dark)">'+escH(f.clientName)+'</span></div><span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;color:white;background:'+col.grad+'">'+col.label+'</span></div>';
+  });
+
+  document.getElementById('dash-tri-container').innerHTML =
+    '<div class="dash-panel" style="border-top:5px solid #0d7377"><h3>🏷️ By File Type</h3>'+typeHtml+'</div>' +
+    '<div class="dash-panel" style="border-top:5px solid #dc2626"><h3>🚦 Pipeline Health</h3>'+pipeHtml+'</div>' +
+    '<div class="dash-panel" style="border-top:5px solid #e8705a"><h3>⏰ Reporting Summary</h3>'+overdueHtml+'<h3 style="margin-top:18px">📌 Recent Activity</h3>'+recentHtml+'</div>';
 }
 
-// ── CALENDAR ──
+// ── CALENDAR (NEW) ──
 function renderCalendar() {
   var year = calYear, month = calMonth;
   var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1220,14 +1292,12 @@ function renderCalendar() {
   for(var i = 0; i < totalCells; i++) {
     var dayNum, dateStr, isOther = false;
     if(i < firstDay) {
-      dayNum = prevDays - firstDay + i + 1;
-      isOther = true;
+      dayNum = prevDays - firstDay + i + 1; isOther = true;
       var pm = month === 0 ? 11 : month - 1;
       var py = month === 0 ? year - 1 : year;
       dateStr = py + '-' + String(pm+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
     } else if(i - firstDay >= daysInMonth) {
-      dayNum = i - firstDay - daysInMonth + 1;
-      isOther = true;
+      dayNum = i - firstDay - daysInMonth + 1; isOther = true;
       var nm = month === 11 ? 0 : month + 1;
       var ny = month === 11 ? year + 1 : year;
       dateStr = ny + '-' + String(nm+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
@@ -1239,27 +1309,27 @@ function renderCalendar() {
     var isToday = !isOther && (new Date(year, month, dayNum).getTime() === today.getTime());
     var filesOnDay = fileMap[dateStr] || [];
 
-    html += '<div class="day-cell'+(isOther?' other-month':'')+'" data-date="'+dateStr+'">';
+    html += '<div class="cal-day-cell'+(isOther?' other-month':'')+'" data-date="'+dateStr+'">';
     if(isToday) {
-      html += '<div class="today-num">'+dayNum+'</div>';
+      html += '<div class="cal-today-num">'+dayNum+'</div>';
     } else {
-      html += '<div class="day-num">'+dayNum+'</div>';
+      html += '<div class="cal-day-num">'+dayNum+'</div>';
     }
 
     var maxDots = 2;
     filesOnDay.slice(0, maxDots).forEach(function(f){
       var col = getColMeta(f.status);
       var suffix = f.fileNumber.split('-').pop();
-      html += '<span class="cal-dot" style="background:linear-gradient(135deg,'+col.accent+','+col.accent+'cc)">'+suffix+'</span>';
+      html += '<span class="cal-event-pill" style="border-left:3px solid '+col.accent+'">'+escH(suffix)+' · '+escH(f.clientName.split(' ')[0])+'</span>';
     });
     if(filesOnDay.length > maxDots) {
-      html += '<span class="cal-dot" style="background:linear-gradient(135deg,#64748b,#94a3b8)">+' + (filesOnDay.length - maxDots) + '</span>';
+      html += '<span class="cal-event-pill" style="border-left:3px solid #e8705a;background:rgba(232,112,90,0.2)">+' + (filesOnDay.length - maxDots) + ' more</span>';
     }
     html += '</div>';
   }
   document.getElementById('cal-grid-kss33').innerHTML = html;
 
-  document.querySelectorAll('.day-cell:not(.other-month)').forEach(function(cell){
+  document.querySelectorAll('.cal-day-cell:not(.other-month)').forEach(function(cell){
     cell.addEventListener('click', function(e){
       var date = this.getAttribute('data-date');
       var filesOnDay = fileMap[date] || [];
@@ -1270,15 +1340,16 @@ function renderCalendar() {
 
 function showDayPopup(event, dateStr, filesOnDay) {
   var popup = document.getElementById('day-popup-kss11');
-  var html = '<div class="popup-title">📅 ' + formatDate(dateStr) + '</div>';
+  var html = '<button class="popup-close" id="popup-close-btn">✕</button>';
+  html += '<div class="popup-title">📅 ' + formatDate(dateStr) + '</div>';
   filesOnDay.forEach(function(f){
     var col = getColMeta(f.status);
-    html += '<div class="popup-file" style="border-left:3px solid '+col.accent+'"><div class="popup-fnum">'+escH(f.fileNumber)+'</div><div class="popup-client">'+escH(f.clientName)+'</div><div style="font-size:11px;color:#7fbfbf;margin-top:4px">'+escH(f.type)+' • '+escH(f.lawyer)+'</div></div>';
+    html += '<div class="popup-file" style="border-left:4px solid '+col.accent+'"><div class="popup-fnum">'+escH(f.fileNumber)+'</div><div class="popup-client">'+escH(f.clientName)+'</div><div style="font-weight:500;font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px">'+escH(f.type)+' • '+escH(f.lawyer)+'</div></div>';
   });
   popup.innerHTML = html;
 
   var x = event.clientX, y = event.clientY;
-  var pw = 300, ph = 200;
+  var pw = 340, ph = 200;
   if(x + pw > window.innerWidth) x = window.innerWidth - pw - 20;
   if(y + ph > window.innerHeight) y = y - ph;
   if(x < 10) x = 10;
@@ -1287,22 +1358,17 @@ function showDayPopup(event, dateStr, filesOnDay) {
   popup.style.left = x + 'px';
   popup.style.top = y + 'px';
   popup.style.display = 'block';
+
+  document.getElementById('popup-close-btn').addEventListener('click', function(e){
+    e.stopPropagation();
+    popup.style.display = 'none';
+  });
 }
 
 function prevMonth() { calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); }
 function nextMonth() { calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendar(); }
 
 // ── TABS ──
-function showTab(tab) {
-  document.getElementById('tab-dashboard-kss13').style.display = 'none';
-  document.getElementById('tab-matters-kss12').style.display = 'none';
-  document.getElementById('tab-calendar-kss14').style.display = 'none';
-  document.getElementById('tab-' + tab + (tab==='dashboard'?'-kss13':tab==='matters'?'-kss12':'-kss14')).style.display = 'block';
-  document.querySelectorAll('.tab-btn').forEach(function(b){
-    b.classList.toggle('active', b.getAttribute('data-tab') === tab);
-  });
-}
-
 function showTabById(tab) {
   var idMap = {dashboard:'tab-dashboard-kss13', matters:'tab-matters-kss12', calendar:'tab-calendar-kss14'};
   Object.keys(idMap).forEach(function(k){ document.getElementById(idMap[k]).style.display = 'none'; });
@@ -1316,12 +1382,16 @@ function renderFilters() {
   ls.innerHTML = '<option value="">All Lawyers</option>';
   appData.lawyers.forEach(function(l){ ls.innerHTML += '<option>'+escH(l)+'</option>'; });
 
+  var cs = document.getElementById('filter-clerk-kss50');
+  cs.innerHTML = '<option value="">All Clerks</option><option value="__unassigned__">Unassigned</option>';
+  appData.clerks.forEach(function(c){ cs.innerHTML += '<option>'+escH(c)+'</option>'; });
+
   var ml = document.getElementById('m-lawyer-kss39');
   ml.innerHTML = '';
   appData.lawyers.forEach(function(l){ ml.innerHTML += '<option>'+escH(l)+'</option>'; });
 
   var mc = document.getElementById('m-clerk-kss40');
-  mc.innerHTML = '';
+  mc.innerHTML = '<option value="">Unassigned</option>';
   appData.clerks.forEach(function(c){ mc.innerHTML += '<option>'+escH(c)+'</option>'; });
 }
 
@@ -1357,59 +1427,46 @@ document.addEventListener('click', function(e){
   var popup = document.getElementById('day-popup-kss11');
   if(popup.style.display === 'block' && !popup.contains(e.target)) { popup.style.display = 'none'; }
   document.getElementById('hamburger-menu-kss5').style.display = 'none';
-  // Close move dropdown if clicking outside
   if(activeMoveDropdown && !activeMoveDropdown.contains(e.target)) { closeMoveDropdown(); }
+  if(activeClerkDropdown && !activeClerkDropdown.contains(e.target)) { closeClerkDropdown(); }
 });
 document.getElementById('hamburger-menu-kss5').addEventListener('click', function(e){ e.stopPropagation(); });
 
-// ── HAMBURGER MENU BUTTONS ──
 document.getElementById('hm-add-kss15').addEventListener('click', function(){ openAddModal(); });
 document.getElementById('hm-alerts-kss16').addEventListener('click', function(){ showAlerts(); });
 document.getElementById('hm-backup-kss17').addEventListener('click', function(){ backupData(); });
 document.getElementById('hm-restore-kss18').addEventListener('click', function(){ restoreData(); });
 document.getElementById('hm-print-kss19').addEventListener('click', function(){ closeHamburger(); window.print(); });
 
-// ── TABS ──
 document.querySelectorAll('.tab-btn').forEach(function(b){
   b.addEventListener('click', function(){ showTabById(this.getAttribute('data-tab')); });
 });
 
-// ── FILTERS ──
-['filter-search-kss26','filter-lawyer-kss27','filter-type-kss28','filter-priority-kss29'].forEach(function(id){
+['filter-search-kss26','filter-lawyer-kss27','filter-type-kss28','filter-priority-kss29','filter-clerk-kss50'].forEach(function(id){
   document.getElementById(id).addEventListener('input', renderBoard);
   document.getElementById(id).addEventListener('change', renderBoard);
 });
 
-// ── EXPAND/COLLAPSE ──
 document.getElementById('btn-expand-all-kss24').addEventListener('click', expandAll);
 document.getElementById('btn-collapse-all-kss25').addEventListener('click', collapseAll);
 
-// ── CALENDAR NAV ──
 document.getElementById('btn-prev-month-kss30').addEventListener('click', prevMonth);
 document.getElementById('btn-next-month-kss32').addEventListener('click', nextMonth);
 
-// ── MODAL ──
 document.getElementById('btn-modal-cancel-kss47').addEventListener('click', closeModal);
 document.getElementById('btn-modal-save-kss48').addEventListener('click', saveFile);
 document.getElementById('file-modal-kss10').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
 
-// ── CHANGE 4: Ensure clipboard works on dynamically added fields too ──
 document.addEventListener('copy', function(e) {
-  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) {
-    e.stopPropagation();
-  }
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) { e.stopPropagation(); }
 }, true);
 document.addEventListener('paste', function(e) {
-  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) {
-    e.stopPropagation();
-  }
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) { e.stopPropagation(); }
 }, true);
 document.addEventListener('cut', function(e) {
-  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) {
-    e.stopPropagation();
-  }
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) { e.stopPropagation(); }
 }, true);
 </script>
 </body>
