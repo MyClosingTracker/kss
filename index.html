@@ -4,1118 +4,1309 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>KSS Matterkey Legal Closing Tracker</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal-deep: #0b3d3f;
-  --teal-mid: #0d7377;
-  --teal-bright: #14a09a;
-  --teal-pale: #e6f4f4;
-  --coral: #e8705a;
-  --coral-dark: #cf5e4a;
-  --coral-pale: #fdf0ed;
+  --purple-deep: #312e81;
+  --purple-mid: #4f46e5;
+  --purple-bright: #818cf8;
+  --indigo-dark: #1e1b4b;
+  --teal: #0d9488;
+  --teal-light: #5eead4;
+  --coral: #f97316;
+  --coral-light: #fdba74;
+  --red: #dc2626;
+  --amber: #d97706;
+  --green: #16a34a;
+  --blue: #1d4ed8;
+  --blue-light: #93c5fd;
+  --gray-bg: #f8fafc;
   --white: #ffffff;
-  --text-dark: #1a3030;
-  --text-mid: #3d5c5c;
-  --text-light: #7a9f9f;
-  --shadow: rgba(11,61,63,0.13);
-  --grad-header: linear-gradient(135deg, #0b3d3f 0%, #0d7377 100%);
-  --grad-coral: linear-gradient(135deg, #e8705a 0%, #f4a08e 100%);
-  --grad-teal: linear-gradient(135deg, #0d7377 0%, #14a09a 100%);
-  --grad-page: linear-gradient(160deg, #e6f4f4 0%, #f0fafa 50%, #fdf5f3 100%);
-  --grad-card: linear-gradient(180deg, #ffffff 0%, #f8fdfd 100%);
+  --text-dark: #1e293b;
+  --text-mid: #475569;
+  --text-light: #94a3b8;
+  --shadow: 0 4px 24px rgba(79,70,229,0.10);
+  --grad-header: linear-gradient(135deg, #312e81 0%, #4f46e5 60%, #7c3aed 100%);
+  --grad-teal: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  --grad-coral: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  --grad-page: linear-gradient(160deg, #eef2ff 0%, #f8fafc 60%, #fdf4ff 100%);
+  --grad-card: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --grad-green: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  --grad-red: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  --grad-amber: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+  --grad-blue: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+  --grad-purple: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
 }
 * { box-sizing: border-box; }
-body { margin:0; font-family:'Inter',sans-serif; background:var(--grad-page); min-height:100vh; color:var(--text-dark); }
-button, input, select, textarea { font-family:'Inter',sans-serif; }
-::-webkit-scrollbar { width:6px; height:6px; }
-::-webkit-scrollbar-track { background:#e6f4f4; border-radius:3px; }
-::-webkit-scrollbar-thumb { background:linear-gradient(180deg,#0d7377,#14a09a); border-radius:3px; }
+body { background: var(--grad-page); font-family: 'Inter', sans-serif; margin: 0; min-height: 100vh; color: var(--text-dark); }
+button, input, select, textarea { font-family: 'Inter', sans-serif; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: linear-gradient(180deg, #eef2ff, #e0e7ff); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #4f46e5, #818cf8); border-radius: 3px; }
 
-@keyframes pulse {
-  from { opacity:0.3; transform:scale(0.7); }
-  to { opacity:1; transform:scale(1.3); }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.3; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(8px); }
-  to { opacity:1; transform:translateY(0); }
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
-#splash {
-  position:fixed; inset:0; z-index:9999;
-  background:linear-gradient(135deg,#0b3d3f 0%,#0d5c5f 60%,#1a4a3a 100%);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
-  transition: opacity 0.9s ease;
+#splash-screen-kss1 {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--grad-header);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  transition: opacity 0.7s ease;
 }
-.splash-line { width:80px; height:3px; background:linear-gradient(90deg,#e8705a,#f4a08e); border-radius:2px; }
-.splash-title { font-family:'Playfair Display',serif; font-size:48px; font-weight:700; color:#e8705a; letter-spacing:2px; text-shadow:0 2px 20px rgba(232,112,90,0.4); text-align:center; }
-.splash-sub { font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:#a8d4d4; letter-spacing:5px; text-transform:uppercase; }
-.splash-dot { width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,#e8705a,#f4a08e); animation:pulse 1.4s ease infinite alternate; }
+#splash-screen-kss1 .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #f97316, #fdba74); border-radius: 2px; }
+#splash-screen-kss1 .splash-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 44px; color: #fdba74; letter-spacing: 1px; text-shadow: 0 2px 20px rgba(253,186,116,0.4); text-align: center; }
+#splash-screen-kss1 .splash-sub { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px; color: #c7d2fe; letter-spacing: 4px; text-transform: uppercase; }
+#splash-screen-kss1 .dots { display: flex; gap: 10px; }
+#splash-screen-kss1 .dot { width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, #f97316, #fdba74); animation: pulse-dot 1s ease-in-out infinite; }
+#splash-screen-kss1 .dot:nth-child(2) { animation-delay: 0.3s; }
+#splash-screen-kss1 .dot:nth-child(3) { animation-delay: 0.6s; }
 
 header {
-  position:sticky; top:0; z-index:200;
-  background:var(--grad-header);
-  padding:14px 28px;
-  display:flex; align-items:center; justify-content:space-between;
-  box-shadow:0 4px 20px rgba(0,0,0,0.25);
+  position: sticky; top: 0; z-index: 200;
+  background: var(--grad-header);
+  padding: 14px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(49,46,129,0.4);
 }
-.logo-main { font-family:'Playfair Display',serif; font-weight:700; font-size:22px; color:#e8705a; letter-spacing:1px; display:flex; align-items:center; gap:8px; }
-.logo-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:11px; color:#a8d4d4; letter-spacing:3px; text-transform:uppercase; padding-left:32px; }
-.hamburger-btn {
-  background:linear-gradient(135deg,#e8705a,#cf5e4a); color:#fff; border:none; border-radius:10px;
-  padding:10px 18px; font-size:18px; cursor:pointer; font-weight:700;
-  box-shadow:0 2px 10px rgba(232,112,90,0.4); transition:all 0.2s;
+.header-title-kss2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; color: #fdba74; letter-spacing: 1px; }
+.header-sub-kss3 { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px; color: #c7d2fe; letter-spacing: 3px; text-transform: uppercase; padding-left: 30px; }
+#btn-hamburger-kss4 {
+  background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border: none; border-radius: 10px;
+  padding: 10px 18px; font-size: 18px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 2px 12px rgba(249,115,22,0.4); transition: all 0.2s;
 }
-.hamburger-btn:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(232,112,90,0.5); }
+#btn-hamburger-kss4:hover { transform: translateY(-2px); box-shadow: 0 5px 18px rgba(249,115,22,0.5); }
 
-#hamburger-menu {
-  position:fixed; top:64px; right:24px; z-index:300;
-  background:linear-gradient(160deg,#0b3d3f,#0d5c5f);
-  border-radius:14px; padding:12px;
-  box-shadow:0 8px 40px rgba(0,0,0,0.35);
-  display:none; flex-direction:column; gap:8px; min-width:200px;
-  border:1px solid rgba(255,255,255,0.1);
+#hamburger-menu-kss5 {
+  position: fixed; top: 66px; right: 24px; z-index: 500;
+  display: none; flex-direction: column; gap: 8px;
+  background: linear-gradient(160deg, #1e1b4b, #312e81);
+  border-radius: 14px; padding: 12px; min-width: 210px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
 }
-.menu-item {
-  width:100%; background:rgba(255,255,255,0.08); color:#fff;
-  border:1px solid rgba(255,255,255,0.12); border-radius:9px;
-  padding:11px 16px; text-align:left; font-size:13px; font-weight:600;
-  cursor:pointer; transition:all 0.18s; display:flex; align-items:center; gap:10px;
+.hmenu-btn-kss6 {
+  width: 100%; background: rgba(255,255,255,0.07); color: #e0e7ff;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 9px;
+  padding: 11px 16px; text-align: left; font-weight: 600; font-size: 13px;
+  cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.18s;
 }
-.menu-item:hover {
-  background:linear-gradient(135deg,rgba(232,112,90,0.3),rgba(232,112,90,0.1));
-  border-color:rgba(232,112,90,0.5); transform:translateX(3px);
+.hmenu-btn-kss6:hover {
+  background: linear-gradient(135deg, rgba(249,115,22,0.25), rgba(249,115,22,0.08));
+  border-color: rgba(249,115,22,0.5); transform: translateX(3px); color: #fff;
 }
 
-#tab-bar {
-  background:linear-gradient(90deg,#0b3d3f,#0d5c5f);
-  padding:0 28px; display:flex; gap:4px;
-  border-bottom:3px solid rgba(232,112,90,0.3);
+#tab-bar-kss7 {
+  background: linear-gradient(90deg, #1e1b4b, #312e81);
+  padding: 0 28px; display: flex; gap: 4px;
+  border-bottom: 3px solid rgba(249,115,22,0.3);
 }
 .tab-btn {
-  background:transparent; color:#a8d4d4; border:none;
-  padding:13px 24px; font-size:13px; font-weight:600;
-  cursor:pointer; border-bottom:3px solid transparent;
-  margin-bottom:-3px; transition:all 0.2s; letter-spacing:0.5px;
+  background: transparent; color: #a5b4fc; border: none;
+  border-bottom: 3px solid transparent; margin-bottom: -3px;
+  padding: 13px 24px; font-weight: 600; font-size: 13px;
+  cursor: pointer; letter-spacing: 0.5px; transition: all 0.2s;
 }
-.tab-btn.active { color:#e8705a; border-bottom:3px solid #e8705a; background:rgba(232,112,90,0.08); }
-.tab-btn:hover { color:#fff; }
+.tab-btn.active { color: #fdba74; border-bottom-color: #f97316; background: rgba(249,115,22,0.08); }
+.tab-btn:hover { color: #e0e7ff; }
 
-.filter-bar-wrap {
-  background:linear-gradient(90deg,rgba(255,255,255,0.9),rgba(240,250,250,0.9));
-  backdrop-filter:blur(10px); border-radius:12px; padding:14px 20px;
-  margin-bottom:20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-  box-shadow:0 2px 12px var(--shadow); border:1px solid rgba(20,160,154,0.15);
+.stats-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.stat-pill {
+  border-radius: 50px; padding: 8px 18px; display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12); cursor: default; transition: all 0.2s;
 }
-.filter-label { font-size:12px; font-weight:600; color:var(--teal-mid); text-transform:uppercase; letter-spacing:1px; }
-.filter-el {
-  border:1.5px solid rgba(13,115,119,0.25); border-radius:8px; padding:8px 14px;
-  background:white; font-size:13px; color:var(--text-dark); outline:none; transition:all 0.2s;
-}
-.filter-el:focus { border-color:var(--teal-mid); }
+.stat-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+.stat-pill .label { font-size: 11px; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 1px; }
+.stat-pill .count { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: white; }
 
-#board { display:flex; gap:18px; overflow-x:auto; align-items:flex-start; padding-bottom:20px; }
-.column { width:290px; min-width:290px; flex-shrink:0; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px var(--shadow); }
-.column-header { padding:14px 18px; display:flex; align-items:center; justify-content:space-between; }
-.col-label { font-size:11px; font-weight:700; color:white; letter-spacing:2px; text-transform:uppercase; }
-.col-count { background:rgba(255,255,255,0.25); color:white; border-radius:12px; padding:2px 10px; font-size:12px; font-weight:700; }
-.col-cards { background:linear-gradient(180deg,#f5fbfb,#f0f8f8); min-height:300px; padding:12px; }
+.expand-row { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; }
+.btn-expand-kss8 {
+  color: #fff; border: none; border-radius: 10px; padding: 10px 22px;
+  font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
+}
+.btn-expand-kss8:hover { transform: translateY(-2px); }
+
+.filter-bar {
+  background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(238,242,255,0.95));
+  border-radius: 12px; padding: 14px 20px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  box-shadow: var(--shadow); border: 1px solid rgba(79,70,229,0.12); backdrop-filter: blur(8px);
+}
+.filter-bar input, .filter-bar select {
+  border: 1.5px solid rgba(79,70,229,0.2); border-radius: 8px; padding: 8px 14px;
+  background: #fff; font-size: 13px; color: var(--text-dark); outline: none;
+}
+.filter-bar input:focus, .filter-bar select:focus {
+  border-color: var(--purple-mid); box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+}
+
+#board-kss9 { display: flex; gap: 18px; overflow-x: auto; align-items: flex-start; padding-bottom: 24px; }
+.kanban-col { width: 290px; flex-shrink: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 28px rgba(79,70,229,0.12); }
+.col-header {
+  padding: 14px 18px; display: flex; align-items: center; justify-content: space-between;
+}
+.col-header .col-label { font-size: 11px; font-weight: 700; color: white; letter-spacing: 2px; text-transform: uppercase; }
+.col-header .col-count {
+  background: rgba(255,255,255,0.25); color: white; border-radius: 20px; padding: 2px 10px;
+  font-weight: 700; font-size: 12px;
+}
+.col-cards {
+  background: linear-gradient(180deg, #f1f5f9, #e8eef8);
+  min-height: 320px; padding: 12px;
+}
 
 .card {
-  background:var(--grad-card); border-radius:12px; padding:14px 15px; margin-bottom:10px;
-  box-shadow:0 2px 10px var(--shadow); cursor:grab; transition:all 0.2s; position:relative;
-  animation: fadeIn 0.3s ease;
+  background: var(--grad-card); border-radius: 12px; margin-bottom: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08); cursor: grab; transition: all 0.2s;
+  overflow: hidden; position: relative;
 }
-.card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(11,61,63,0.18); }
-.card.dragging { opacity:0.5; transform:rotate(2deg); }
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(79,70,229,0.16); }
+.card.dragging { opacity: 0.5; }
 
-.card-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
-.file-num { font-size:11px; font-weight:700; color:var(--teal-mid); letter-spacing:1px; font-family:'Inter',monospace; }
-.priority-badge { border-radius:10px; padding:2px 8px; font-size:10px; font-weight:700; }
-.priority-Urgent { background:linear-gradient(135deg,#fdecea,#ffe0dc); color:#c0392b; }
-.priority-High { background:linear-gradient(135deg,#fdf0ed,#ffe8e0); color:#e8705a; }
-.priority-Normal { background:linear-gradient(135deg,#f0f4f4,#e6f0f0); color:#7a9f9f; }
-
-.client-name { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px; }
-.address { font-size:12px; font-style:italic; color:var(--text-light); margin-bottom:8px; }
-
-.type-badge { background:linear-gradient(135deg,#e6f4f4,#d0eeed); color:#0d7377; border-radius:10px; padding:3px 10px; font-size:11px; font-weight:500; }
-.expand-btn {
-  background:linear-gradient(135deg,var(--teal-pale),#daf0ef); color:var(--teal-mid);
-  border:none; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:700; cursor:pointer; transition:all 0.2s;
+.card .row-a { padding: 12px 14px 6px; display: flex; justify-content: space-between; align-items: center; }
+.card .file-num {
+  font-size: 10px; font-weight: 700; color: white;
+  background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+  border-radius: 6px; padding: 3px 8px; letter-spacing: 0.5px;
 }
-.expand-btn:hover { background:linear-gradient(135deg,#d0eeed,#c0e6e5); }
+.card .priority-badge { border-radius: 8px; padding: 2px 8px; font-weight: 700; font-size: 10px; }
+.priority-urgent { background: linear-gradient(135deg, #fef2f2, #fee2e2); color: #dc2626; }
+.priority-high { background: linear-gradient(135deg, #fff7ed, #fed7aa); color: #c2410c; }
+.priority-normal { background: linear-gradient(135deg, #f0fdf4, #bbf7d0); color: #15803d; }
 
-.lawyer-badge { background:linear-gradient(135deg,#e6f4f4,#d0eeed); color:#0d7377; border-radius:10px; padding:3px 10px; font-size:11px; }
-.clerk-badge { background:linear-gradient(135deg,#dceeff,#c8e4ff); color:#1565c0; border-radius:10px; padding:3px 10px; font-size:11px; }
+.card .row-b { padding: 4px 14px; display: flex; align-items: center; gap: 8px; }
+.type-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.type-badge { border-radius: 8px; padding: 3px 10px; font-weight: 600; font-size: 11px; }
+.card .client-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: var(--text-dark); flex: 1; }
 
-.card-notes { font-size:11px; color:var(--text-light); padding-top:8px; border-top:1px dashed rgba(13,115,119,0.2); margin-top:8px; }
+.card .row-c { padding: 4px 14px 6px; display: flex; flex-direction: column; gap: 3px; }
+.card .lawyer-line { font-size: 12px; color: var(--text-mid); }
+.card .address-line { font-size: 11px; color: var(--text-light); font-style: italic; }
+.card .price-line { font-weight: 700; font-size: 15px; color: #16a34a; }
 
-.card-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:10px; }
-.act-edit { background:linear-gradient(135deg,#e6f4f4,#d0eeed); color:#0d7377; border:none; border-radius:8px; padding:6px 12px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s; }
-.act-copy { background:linear-gradient(135deg,#fdf0ed,#ffe0d6); color:#e8705a; border:none; border-radius:8px; padding:6px 12px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s; }
-.act-delete { background:linear-gradient(135deg,#fdecea,#ffe0dc); color:#c0392b; border:none; border-radius:8px; padding:6px 12px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s; }
-.act-edit:hover,.act-copy:hover,.act-delete:hover { transform:translateY(-1px); }
-
-.dup-ribbon { background:linear-gradient(135deg,#f59e0b,#fbbf24); color:#78350f; font-size:9px; font-weight:700; padding:2px 8px; border-radius:6px; display:inline-block; margin-bottom:6px; }
-
-.bulk-btns { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
-.bulk-btn-expand {
-  background:linear-gradient(135deg,#0d7377,#14a09a); color:white; border:none; border-radius:9px;
-  padding:9px 20px; font-weight:700; font-size:13px; cursor:pointer;
-  box-shadow:0 3px 12px rgba(13,115,119,0.35); transition:all 0.2s;
+.card .row-d { padding: 6px 14px 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+.date-pill { border-radius: 8px; padding: 3px 9px; font-weight: 600; font-size: 10px; }
+.days-badge { font-weight: 700; font-size: 10px; border-radius: 8px; padding: 2px 8px; }
+.btn-toggle {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff); color: #4f46e5;
+  border: none; border-radius: 8px; padding: 5px 12px; font-weight: 700; font-size: 11px; cursor: pointer;
 }
-.bulk-btn-expand:hover { transform:translateY(-2px); box-shadow:0 5px 18px rgba(13,115,119,0.45); }
-.bulk-btn-collapse {
-  background:linear-gradient(135deg,#e8705a,#cf5e4a); color:white; border:none; border-radius:9px;
-  padding:9px 20px; font-weight:700; font-size:13px; cursor:pointer;
-  box-shadow:0 3px 12px rgba(232,112,90,0.35); transition:all 0.2s;
-}
-.bulk-btn-collapse:hover { transform:translateY(-2px); box-shadow:0 5px 18px rgba(232,112,90,0.45); }
 
-/* MODAL */
-.modal-overlay {
-  display:none; position:fixed; inset:0; z-index:500;
-  background:rgba(11,61,63,0.65); align-items:center; justify-content:center;
-  backdrop-filter:blur(4px);
+.card .row-e { padding: 8px 14px; border-top: 1px dashed rgba(79,70,229,0.15); }
+.clerk-badge {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1d4ed8;
+  border-radius: 8px; padding: 4px 12px; font-weight: 600; font-size: 11px; display: inline-block;
 }
-.modal-overlay.open { display:flex; }
+.card .notes-text { font-size: 11px; color: var(--text-light); font-style: italic; margin-top: 6px; }
+
+.card .row-f { padding: 6px 14px 12px; display: flex; gap: 8px; justify-content: flex-end; }
+.btn-edit-card {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff); color: #4f46e5;
+  border: none; border-radius: 8px; padding: 6px 14px; font-weight: 600; font-size: 12px; cursor: pointer;
+}
+.btn-copy-card {
+  background: linear-gradient(135deg, #fff7ed, #fed7aa); color: #c2410c;
+  border: none; border-radius: 8px; padding: 6px 14px; font-weight: 600; font-size: 12px; cursor: pointer;
+}
+.btn-delete-card {
+  background: linear-gradient(135deg, #fef2f2, #fecaca); color: #dc2626;
+  border: none; border-radius: 8px; padding: 6px 14px; font-weight: 600; font-size: 12px; cursor: pointer;
+}
+
+.dup-badge {
+  background: linear-gradient(135deg, #fff7ed, #fed7aa); color: #c2410c;
+  border-radius: 8px; padding: 3px 10px; font-weight: 700; font-size: 10px;
+  margin: 8px 14px 0; display: inline-block;
+}
+
+#file-modal-kss10 {
+  display: none; position: fixed; inset: 0; z-index: 700;
+  background: rgba(30,27,75,0.7); align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+}
 .modal-box {
-  background:linear-gradient(160deg,#fff,#f8fdfd); border-radius:18px; padding:32px;
-  width:540px; max-width:95vw; max-height:90vh; overflow-y:auto;
-  border-top:5px solid #e8705a; box-shadow:0 24px 80px rgba(0,0,0,0.3);
+  background: linear-gradient(160deg, #fff, #eef2ff);
+  border-radius: 20px; padding: 32px; width: 560px; max-width: 95vw;
+  max-height: 90vh; overflow-y: auto;
+  border-top: 5px solid #f97316; box-shadow: 0 28px 80px rgba(0,0,0,0.35);
 }
-.modal-box.manage { border-top-color:#0d7377; }
-.modal-title { font-family:'Playfair Display',serif; font-size:24px; font-weight:700; color:var(--teal-deep); margin-bottom:24px; }
-.form-group { margin-bottom:16px; }
-.form-label { display:block; font-size:12px; font-weight:600; color:var(--text-mid); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
-.form-input {
-  width:100%; border:1.5px solid rgba(13,115,119,0.25); border-radius:9px;
-  padding:10px 14px; font-size:13px; color:var(--text-dark); background:white; outline:none; transition:all 0.2s;
+.modal-box label {
+  font-weight: 600; font-size: 11px; color: var(--text-mid);
+  text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px;
 }
-.form-input:focus { border-color:var(--teal-mid); box-shadow:0 0 0 3px rgba(13,115,119,0.1); }
-.modal-actions { display:flex; justify-content:flex-end; gap:12px; margin-top:24px; }
-.btn-cancel { background:linear-gradient(135deg,#f0f4f4,#e6f0f0); color:var(--text-mid); border:none; border-radius:9px; padding:11px 24px; font-weight:600; font-size:13px; cursor:pointer; transition:all 0.2s; }
-.btn-save {
-  background:linear-gradient(135deg,#e8705a,#cf5e4a); color:#fff; border:none; border-radius:9px;
-  padding:11px 28px; font-weight:700; font-size:13px; cursor:pointer;
-  box-shadow:0 4px 14px rgba(232,112,90,0.4); transition:all 0.2s;
+.modal-box input, .modal-box select, .modal-box textarea {
+  width: 100%; border: 1.5px solid rgba(79,70,229,0.2); border-radius: 10px;
+  padding: 10px 14px; font-size: 13px; color: var(--text-dark);
+  background: #fff; outline: none; box-sizing: border-box;
 }
-.btn-save:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(232,112,90,0.5); }
+.modal-box input:focus, .modal-box select:focus, .modal-box textarea:focus {
+  border-color: var(--purple-mid); box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+}
+.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.modal-full { grid-column: 1 / -1; }
+.modal-footer { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
+.btn-cancel-modal {
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0); color: var(--text-mid);
+  border: none; border-radius: 10px; padding: 12px 24px; font-weight: 600; font-size: 13px; cursor: pointer;
+}
+.btn-save-modal {
+  background: var(--grad-coral); color: #fff; border: none; border-radius: 10px;
+  padding: 12px 28px; font-weight: 700; font-size: 13px; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(249,115,22,0.4); transition: all 0.2s;
+}
+.btn-save-modal:hover { transform: translateY(-1px); box-shadow: 0 7px 22px rgba(249,115,22,0.5); }
 
-/* DASHBOARD */
-.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:18px; margin-bottom:32px; }
-.stat-card {
-  border-radius:16px; padding:22px; position:relative; overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,0.1); cursor:default; transition:all 0.2s;
+.dash-stat-card {
+  border-radius: 18px; padding: 22px; position: relative; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.2s;
 }
-.stat-card:hover { transform:translateY(-4px); box-shadow:0 10px 32px rgba(0,0,0,0.15); }
-.stat-bar { position:absolute; top:0; left:0; right:0; height:5px; }
-.stat-emoji { font-size:32px; margin-bottom:10px; }
-.stat-num { font-family:'Playfair Display',serif; font-size:42px; font-weight:700; color:var(--text-dark); }
-.stat-label { font-size:12px; font-weight:600; color:var(--text-mid); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+.dash-stat-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(0,0,0,0.15); }
+.dash-stat-card .top-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 5px;
+}
+.dash-stat-card .emoji { font-size: 30px; margin-bottom: 10px; display: block; }
+.dash-stat-card .num { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 44px; color: var(--text-dark); }
+.dash-stat-card .lbl { font-weight: 600; font-size: 11px; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-.breakdown-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; }
 .breakdown-card {
-  background:linear-gradient(160deg,#fff,#f5fbfb); border-radius:16px; padding:22px;
-  box-shadow:0 4px 16px var(--shadow);
+  background: linear-gradient(160deg, #fff, #eef2ff); border-radius: 16px;
+  padding: 22px; box-shadow: var(--shadow);
 }
-.breakdown-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--teal-deep); margin-bottom:16px; }
-.bar-row { margin-bottom:12px; }
-.bar-label { display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px; }
-.bar-track { background:linear-gradient(90deg,#e6f4f4,#f0fafa); border-radius:6px; height:10px; overflow:hidden; }
-.bar-fill { border-radius:6px; height:10px; transition:width 0.5s ease; }
+.breakdown-card h3 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: var(--purple-deep); margin: 0 0 14px; }
+.bar-track { background: linear-gradient(90deg, #e2e8f0, #eef2ff); border-radius: 6px; height: 10px; width: 100%; overflow: hidden; }
+.bar-fill { border-radius: 6px; height: 10px; transition: width 0.4s ease; }
 
-/* CALENDAR */
-.cal-container {
-  background:linear-gradient(160deg,#fff,#f5fbfb); border-radius:20px;
-  box-shadow:0 6px 32px var(--shadow); overflow:hidden; border:1px solid rgba(13,115,119,0.12);
-}
-.cal-header {
-  background:var(--grad-header); padding:18px 24px;
-  display:flex; align-items:center; justify-content:space-between;
-}
 .cal-nav {
-  background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.25);
-  border-radius:50%; width:36px; height:36px; font-size:20px; cursor:pointer; transition:all 0.2s;
-  display:flex; align-items:center; justify-content:center;
+  background: var(--grad-header); padding: 18px 28px;
+  display: flex; align-items: center; justify-content: space-between;
 }
-.cal-nav:hover { background:rgba(232,112,90,0.5); }
-.cal-month { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:white; text-shadow:0 2px 8px rgba(0,0,0,0.2); }
-.cal-weekdays {
-  display:grid; grid-template-columns:repeat(7,1fr);
-  background:linear-gradient(90deg,#0d5c5f,#0d7377); padding:10px 16px;
+.cal-nav-btn {
+  background: rgba(255,255,255,0.15); color: #fff;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 50%;
+  width: 38px; height: 38px; font-size: 22px; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
 }
-.cal-weekday { font-size:11px; font-weight:700; color:#a8d4d4; text-transform:uppercase; letter-spacing:1px; text-align:center; }
-.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; padding:12px; background:linear-gradient(180deg,#f8fdfd,#f0fafa); }
-.cal-day {
-  min-height:80px; border-radius:12px; padding:8px; cursor:pointer; position:relative; transition:all 0.2s;
-  background:linear-gradient(145deg,#fff,#f0f8f8); border:1px solid rgba(13,115,119,0.08);
+.cal-nav-btn:hover { background: rgba(249,115,22,0.5); }
+.cal-month-label { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.weekday-row {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  background: linear-gradient(90deg, #312e81, #4f46e5); padding: 10px 16px;
 }
-.cal-day:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(13,115,119,0.15); background:linear-gradient(145deg,#f0f8f8,#e6f4f4); }
-.cal-day.other { opacity:0.35; pointer-events:none; }
-.cal-day-num { font-size:14px; font-weight:600; color:var(--text-dark); margin-bottom:4px; }
-.cal-day-num.today {
-  background:linear-gradient(135deg,#e8705a,#f4a08e); color:white; border-radius:50%;
-  width:28px; height:28px; display:flex; align-items:center; justify-content:center;
-  box-shadow:0 2px 12px rgba(232,112,90,0.5); font-weight:700;
+.weekday-row span { font-size: 11px; font-weight: 700; color: #a5b4fc; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+.day-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 14px;
+  background: linear-gradient(180deg, #eef2ff, #f8fafc);
+}
+.day-cell {
+  min-height: 85px; border-radius: 12px; padding: 8px; cursor: pointer; transition: all 0.2s;
+  background: linear-gradient(145deg, #fff, #f1f5f9); border: 1px solid rgba(79,70,229,0.08);
+}
+.day-cell:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(79,70,229,0.18); background: linear-gradient(145deg, #eef2ff, #e0e7ff); }
+.day-cell.other-month { opacity: 0.3; pointer-events: none; }
+.day-num { font-weight: 700; font-size: 14px; color: var(--text-dark); margin-bottom: 4px; }
+.today-num {
+  background: linear-gradient(135deg, #f97316, #fdba74); color: #fff; border-radius: 50%;
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 14px rgba(249,115,22,0.5); font-weight: 700; font-size: 14px;
 }
 .cal-dot {
-  border-radius:6px; font-size:9px; font-weight:600; padding:2px 5px; margin-top:2px;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; display:block; color:white;
+  color: #fff; border-radius: 6px; font-weight: 700; font-size: 9px;
+  padding: 2px 6px; margin-top: 2px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; max-width: 100%; display: block;
 }
 
-.day-popup {
-  position:fixed; z-index:400;
-  background:linear-gradient(160deg,rgba(11,61,63,0.95),rgba(13,92,95,0.95));
-  backdrop-filter:blur(12px); border-radius:16px; padding:20px; min-width:260px;
-  box-shadow:0 16px 50px rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.12); color:white;
-  display:none;
+#day-popup-kss11 {
+  position: fixed; z-index: 600; display: none;
+  background: linear-gradient(160deg, rgba(30,27,75,0.96), rgba(49,46,129,0.96));
+  backdrop-filter: blur(14px); border-radius: 16px; padding: 22px;
+  min-width: 270px; max-width: 320px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.12); color: #fff;
 }
-.popup-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:#e8705a; margin-bottom:12px; }
-.popup-file { background:rgba(255,255,255,0.08); border-radius:10px; padding:10px 12px; margin-bottom:8px; }
-
-/* MANAGE MODAL */
-.team-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-.team-section-title { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--teal-deep); margin-bottom:10px; }
-.team-item {
-  display:flex; align-items:center; justify-content:space-between;
-  border-radius:9px; padding:8px 12px; margin-bottom:6px; font-size:13px; font-weight:500;
+#day-popup-kss11 .popup-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: #fdba74; margin-bottom: 12px; }
+#day-popup-kss11 .popup-file {
+  background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px;
 }
-.team-item-lawyer { background:linear-gradient(135deg,#e6f4f4,#d0eeed); color:#0d7377; }
-.team-item-clerk { background:linear-gradient(135deg,#dceeff,#c8e4ff); color:#1565c0; }
-.team-remove { background:none; border:none; color:inherit; cursor:pointer; font-size:16px; font-weight:700; opacity:0.6; transition:all 0.2s; }
-.team-remove:hover { opacity:1; transform:scale(1.2); }
-.team-add-row { display:flex; gap:6px; margin-top:8px; }
-.team-add-input { flex:1; border:1.5px solid rgba(13,115,119,0.25); border-radius:8px; padding:7px 10px; font-size:12px; outline:none; }
-.team-add-btn { background:var(--grad-teal); color:white; border:none; border-radius:8px; padding:7px 14px; font-size:12px; font-weight:700; cursor:pointer; }
-
-@media (max-width:767px) {
-  header { padding:12px 16px; }
-  .logo-main { font-size:17px; }
-  .logo-sub { font-size:9px; letter-spacing:2px; padding-left:26px; }
-  #tab-bar { padding:0 12px; overflow-x:auto; }
-  .tab-btn { padding:11px 14px; font-size:12px; white-space:nowrap; }
-  #tab-matters, #tab-dashboard, #tab-calendar { padding:16px !important; }
-  .filter-bar-wrap { flex-direction:column; align-items:stretch; }
-  #board { gap:14px; }
-  .column { width:270px; min-width:270px; }
-  .stat-grid { grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
-  .breakdown-grid { grid-template-columns:1fr; }
-  .team-grid { grid-template-columns:1fr; }
-  .splash-title { font-size:30px; }
-  .modal-box { padding:20px; }
-}
+#day-popup-kss11 .popup-fnum { font-size: 10px; font-weight: 700; color: #a5b4fc; }
+#day-popup-kss11 .popup-client { font-size: 14px; font-weight: 700; color: #fff; }
 
 @media print {
-  #splash, header, #tab-bar, #hamburger-menu, .card-actions, .filter-bar-wrap, .bulk-btns, button, footer { display:none!important; }
-  body { background:#fff!important; }
-  #tab-matters { display:block!important; }
-  #board { flex-wrap:wrap!important; overflow:visible!important; }
-  .column { width:48%!important; break-inside:avoid; margin-bottom:16px; }
-  .card { break-inside:avoid; box-shadow:none!important; }
+  #splash-screen-kss1, header, #tab-bar-kss7, #hamburger-menu-kss5, .filter-bar, .expand-row, button { display: none !important; }
+  body { background: #fff !important; }
+  #tab-matters-kss12 { display: block !important; }
+  #board-kss9 { flex-wrap: wrap !important; overflow: visible !important; }
+  .kanban-col { width: 48% !important; break-inside: avoid; }
+  .card { break-inside: avoid; box-shadow: none !important; }
+}
+
+@media (max-width: 767px) {
+  header { padding: 12px 16px; }
+  .header-title-kss2 { font-size: 18px; }
+  .header-sub-kss3 { font-size: 9px; letter-spacing: 2px; padding-left: 24px; }
+  #tab-bar-kss7 { padding: 0 12px; overflow-x: auto; }
+  .tab-btn { padding: 10px 14px; font-size: 12px; white-space: nowrap; }
+  #tab-matters-kss12, #tab-dashboard-kss13, #tab-calendar-kss14 { padding: 16px !important; }
+  .stats-bar { gap: 8px; }
+  .stat-pill { padding: 6px 12px; }
+  .stat-pill .count { font-size: 16px; }
+  .stat-pill .label { font-size: 9px; }
+  .filter-bar { flex-direction: column; gap: 8px; }
+  .filter-bar input, .filter-bar select { width: 100%; }
+  #board-kss9 { gap: 14px; }
+  .kanban-col { width: 260px; }
+  .modal-grid { grid-template-columns: 1fr; }
+  .dash-breakdown-grid { grid-template-columns: 1fr !important; }
+  .day-cell { min-height: 60px; padding: 4px; }
+  .day-num { font-size: 11px; }
+  .cal-dot { font-size: 7px; padding: 1px 3px; }
+  #splash-screen-kss1 .splash-title { font-size: 28px; }
 }
 </style>
 </head>
 <body data-id="0">
-<app-icon data-id="1" hidden data-icon="scale" data-palette="Green"></app-icon>
+<app-icon data-id="1" hidden data-icon="folder-kanban" data-palette="Dark"></app-icon>
 <app-disclaimer data-id="2" intent="legal"></app-disclaimer>
 
-<!-- SPLASH SCREEN -->
-<div data-id="3" id="splash">
-  <div data-id="4" class="splash-line"></div>
-  <div data-id="5" class="splash-title">KSS Matterkey Inc.</div>
+<!-- SPLASH -->
+<div data-id="3" id="splash-screen-kss1">
+  <div data-id="4" class="accent-line"></div>
+  <div data-id="5" class="splash-title">⚖ KSS Matterkey Inc.</div>
   <div data-id="6" class="splash-sub">Real Estate Closing Tracker</div>
-  <div data-id="7" class="splash-line"></div>
-  <div data-id="8" style="display:flex;gap:12px;margin-top:10px;">
-    <div data-id="9" class="splash-dot" style="animation-delay:0s"></div>
-    <div data-id="10" class="splash-dot" style="animation-delay:0.3s"></div>
-    <div data-id="11" class="splash-dot" style="animation-delay:0.6s"></div>
-  </div>
+  <div data-id="7" class="accent-line"></div>
+  <div data-id="8" class="dots"><div data-id="9" class="dot"></div><div data-id="10" class="dot"></div><div data-id="11" class="dot"></div></div>
 </div>
 
 <!-- HEADER -->
 <header data-id="12">
   <div data-id="13">
-    <div data-id="14" class="logo-main"><span data-id="15" style="color:#e8705a;font-size:22px;">⚖</span> KSS Matterkey Inc.</div>
-    <div data-id="16" class="logo-sub">Real Estate Closing Tracker</div>
+    <div data-id="14" class="header-title-kss2">⚖ KSS Matterkey Inc.</div>
+    <div data-id="15" class="header-sub-kss3">Real Estate Closing Tracker</div>
   </div>
-  <button data-id="17" class="hamburger-btn" id="btn-hamburger">☰</button>
+  <button data-id="16" id="btn-hamburger-kss4">☰</button>
 </header>
 
 <!-- HAMBURGER MENU -->
-<div data-id="18" id="hamburger-menu">
-  <button data-id="19" class="menu-item" id="hm-add">＋ Add New File</button>
-  <button data-id="20" class="menu-item" id="hm-manage">👥 Manage Team</button>
-  <button data-id="21" class="menu-item" id="hm-alerts">🔔 Alerts</button>
-  <button data-id="22" class="menu-item" id="hm-backup">💾 Backup Data</button>
-  <button data-id="23" class="menu-item" id="hm-restore">📂 Restore Data</button>
-  <button data-id="24" class="menu-item" id="hm-print">🖨 Save as PDF</button>
+<div data-id="17" id="hamburger-menu-kss5">
+  <button data-id="18" class="hmenu-btn-kss6" id="hm-add-kss15">＋ Add New File</button>
+  <button data-id="19" class="hmenu-btn-kss6" id="hm-alerts-kss16">🔔 Alerts</button>
+  <button data-id="20" class="hmenu-btn-kss6" id="hm-backup-kss17">💾 Backup Data</button>
+  <button data-id="21" class="hmenu-btn-kss6" id="hm-restore-kss18">📂 Restore Data</button>
+  <button data-id="22" class="hmenu-btn-kss6" id="hm-print-kss19">🖨 Save as PDF</button>
 </div>
 
 <!-- TAB BAR -->
-<div data-id="25" id="tab-bar">
-  <button data-id="26" class="tab-btn" data-tab="dashboard">📊 Dashboard</button>
-  <button data-id="27" class="tab-btn active" data-tab="matters">📁 Matters</button>
-  <button data-id="28" class="tab-btn" data-tab="calendar">📅 Calendar</button>
+<div data-id="23" id="tab-bar-kss7">
+  <button data-id="24" class="tab-btn" data-tab="dashboard">📊 Dashboard</button>
+  <button data-id="25" class="tab-btn active" data-tab="matters">📁 Matters</button>
+  <button data-id="26" class="tab-btn" data-tab="calendar">📅 Calendar</button>
 </div>
 
-<!-- DASHBOARD TAB -->
-<div data-id="29" id="tab-dashboard" style="padding:28px;display:none;">
-  <div data-id="30" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--teal-deep);margin-bottom:6px;">📊 Closing Dashboard</div>
-  <div data-id="31" style="font-size:13px;color:var(--text-light);margin-bottom:28px;">Live overview of all active matters</div>
-  <div data-id="32" class="stat-grid" id="stat-grid"></div>
-  <div data-id="33" class="breakdown-grid" id="breakdown-grid"></div>
-</div>
-
-<!-- MATTERS TAB -->
-<div data-id="34" id="tab-matters" style="padding:24px 28px;display:none;">
-  <div data-id="35" class="filter-bar-wrap">
-    <span data-id="36" class="filter-label">Filter:</span>
-    <select data-id="37" id="filter-lawyer" class="filter-el"><option data-id="38" value="">All Lawyers</option></select>
-    <select data-id="39" id="filter-clerk" class="filter-el"><option data-id="40" value="">All Clerks</option></select>
-    <input data-id="41" id="filter-search" class="filter-el" placeholder="Search file # or client…" style="min-width:180px;" />
-  </div>
-  <div data-id="42" class="bulk-btns">
-    <button data-id="43" class="bulk-btn-expand" id="btn-expand-all">⊞ Expand All</button>
-    <button data-id="44" class="bulk-btn-collapse" id="btn-collapse-all">⊟ Collapse All</button>
-  </div>
-  <div data-id="45" id="board"></div>
-</div>
-
-<!-- CALENDAR TAB -->
-<div data-id="46" id="tab-calendar" style="padding:28px;display:none;">
-  <div data-id="47" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--teal-deep);margin-bottom:6px;">📅 Closing Calendar</div>
-  <div data-id="48" style="font-size:13px;color:var(--text-light);margin-bottom:24px;">All upcoming closing dates</div>
-  <div data-id="49" class="cal-container">
-    <div data-id="50" class="cal-header">
-      <button data-id="51" class="cal-nav" id="cal-prev">‹</button>
-      <div data-id="52" class="cal-month" id="cal-month-label"></div>
-      <button data-id="53" class="cal-nav" id="cal-next">›</button>
+<!-- TAB: DASHBOARD -->
+<div data-id="27" id="tab-dashboard-kss13" style="padding:28px;display:none">
+  <div data-id="28" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--purple-deep);margin-bottom:4px">📊 Closing Dashboard</div>
+  <div data-id="29" style="font-size:13px;color:var(--text-light);margin-bottom:28px">Live overview — all active matters</div>
+  <div data-id="30" id="dash-stats-grid-kss20" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:32px"></div>
+  <div data-id="31" class="dash-breakdown-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    <div data-id="32" class="breakdown-card" style="border-top:4px solid #4f46e5">
+      <h3 data-id="33">⚖ By Lawyer</h3>
+      <div data-id="34" id="dash-lawyers-kss21"></div>
     </div>
-    <div data-id="54" class="cal-weekdays">
-      <div data-id="55" class="cal-weekday">Sun</div><div data-id="56" class="cal-weekday">Mon</div><div data-id="57" class="cal-weekday">Tue</div>
-      <div data-id="58" class="cal-weekday">Wed</div><div data-id="59" class="cal-weekday">Thu</div><div data-id="60" class="cal-weekday">Fri</div><div data-id="61" class="cal-weekday">Sat</div>
+    <div data-id="35" class="breakdown-card" style="border-top:4px solid #f97316">
+      <h3 data-id="36">📋 By Status</h3>
+      <div data-id="37" id="dash-status-kss22"></div>
     </div>
-    <div data-id="62" class="cal-grid" id="cal-grid"></div>
+  </div>
+</div>
+
+<!-- TAB: MATTERS -->
+<div data-id="38" id="tab-matters-kss12" style="padding:24px 28px;display:block">
+  <div data-id="39" class="stats-bar" id="stats-bar-kss23"></div>
+  <div data-id="40" class="expand-row">
+    <button data-id="41" class="btn-expand-kss8" id="btn-expand-all-kss24" style="background:var(--grad-teal);box-shadow:0 3px 14px rgba(13,148,136,0.35)">⊞ Expand All</button>
+    <button data-id="42" class="btn-expand-kss8" id="btn-collapse-all-kss25" style="background:var(--grad-coral);box-shadow:0 3px 14px rgba(249,115,22,0.35)">⊟ Collapse All</button>
+  </div>
+  <div data-id="43" class="filter-bar">
+    <span data-id="44" style="font-size:16px">🔍</span>
+    <input data-id="45" type="text" id="filter-search-kss26" placeholder="Search file # or client name..." style="flex:1;min-width:180px">
+    <select data-id="46" id="filter-lawyer-kss27"><option data-id="47" value="">All Lawyers</option></select>
+    <select data-id="48" id="filter-type-kss28"><option data-id="49" value="">All Types</option><option data-id="50">Purchase</option><option data-id="51">Sale</option><option data-id="52">Refinance</option><option data-id="53">Transfer</option></select>
+    <select data-id="54" id="filter-priority-kss29"><option data-id="55" value="">All Priorities</option><option data-id="56">Urgent</option><option data-id="57">High</option><option data-id="58">Normal</option></select>
+  </div>
+  <div data-id="59" id="board-kss9"></div>
+</div>
+
+<!-- TAB: CALENDAR -->
+<div data-id="60" id="tab-calendar-kss14" style="padding:28px;display:none">
+  <div data-id="61" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--purple-deep);margin-bottom:4px">📅 Closing Calendar</div>
+  <div data-id="62" style="font-size:13px;color:var(--text-light);margin-bottom:24px">All upcoming closing dates</div>
+  <div data-id="63" style="background:linear-gradient(160deg,#fff,#eef2ff);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(79,70,229,0.15);border:1px solid rgba(79,70,229,0.1)">
+    <div data-id="64" class="cal-nav">
+      <button data-id="65" class="cal-nav-btn" id="btn-prev-month-kss30">‹</button>
+      <span data-id="66" class="cal-month-label" id="cal-month-label-kss31"></span>
+      <button data-id="67" class="cal-nav-btn" id="btn-next-month-kss32">›</button>
+    </div>
+    <div data-id="68" class="weekday-row"><span data-id="69">Sun</span><span data-id="70">Mon</span><span data-id="71">Tue</span><span data-id="72">Wed</span><span data-id="73">Thu</span><span data-id="74">Fri</span><span data-id="75">Sat</span></div>
+    <div data-id="76" class="day-grid" id="cal-grid-kss33"></div>
   </div>
 </div>
 
 <!-- DAY POPUP -->
-<div data-id="63" class="day-popup" id="day-popup"></div>
+<div data-id="77" id="day-popup-kss11"></div>
 
 <!-- FILE MODAL -->
-<div data-id="64" class="modal-overlay" id="file-modal">
-  <div data-id="65" class="modal-box">
-    <div data-id="66" class="modal-title" id="modal-title">Add New File</div>
-    <input data-id="67" type="hidden" id="f-id" />
-    <div data-id="68" class="form-group"><label data-id="69" class="form-label">File #</label><input data-id="70" class="form-input" id="f-num" /></div>
-    <div data-id="71" class="form-group"><label data-id="72" class="form-label">Client Name *</label><input data-id="73" class="form-input" id="f-client" required /></div>
-    <div data-id="74" class="form-group"><label data-id="75" class="form-label">Address</label><input data-id="76" class="form-input" id="f-address" /></div>
-    <div data-id="77" class="form-group"><label data-id="78" class="form-label">Type</label>
-      <select data-id="79" class="form-input" id="f-type"><option data-id="80">Purchase</option><option data-id="81">Sale</option><option data-id="82">Refinance</option><option data-id="83">Transfer</option></select>
+<div data-id="78" id="file-modal-kss10">
+  <div data-id="79" class="modal-box">
+    <div data-id="80" id="modal-title-kss34" style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--purple-deep);margin-bottom:24px">Add New File</div>
+    <div data-id="81" class="modal-grid">
+      <div data-id="82"><label data-id="83">File #</label><input data-id="84" type="text" id="m-filenum-kss35"></div>
+      <div data-id="85"><label data-id="86">Client Name</label><input data-id="87" type="text" id="m-client-kss36"></div>
+      <div data-id="88" class="modal-full"><label data-id="89">Address</label><input data-id="90" type="text" id="m-address-kss37"></div>
+      <div data-id="91"><label data-id="92">Type</label><select data-id="93" id="m-type-kss38"><option data-id="94">Purchase</option><option data-id="95">Sale</option><option data-id="96">Refinance</option><option data-id="97">Transfer</option></select></div>
+      <div data-id="98"><label data-id="99">Lawyer</label><select data-id="100" id="m-lawyer-kss39"></select></div>
+      <div data-id="101"><label data-id="102">Clerk</label><select data-id="103" id="m-clerk-kss40"></select></div>
+      <div data-id="104"><label data-id="105">Price</label><input data-id="106" type="text" id="m-price-kss41"></div>
+      <div data-id="107"><label data-id="108">Req Date</label><input data-id="109" type="date" id="m-reqdate-kss42"></div>
+      <div data-id="110"><label data-id="111">Closing Date</label><input data-id="112" type="date" id="m-closedate-kss43"></div>
+      <div data-id="113"><label data-id="114">Status</label><select data-id="115" id="m-status-kss44"><option data-id="116" value="col-new">NEW / OPEN</option><option data-id="117" value="col-req">REQUISITION</option><option data-id="118" value="col-closing">CLOSING SOON</option><option data-id="119" value="col-reporting">REPORTING</option><option data-id="120" value="col-closed">CLOSED</option></select></div>
+      <div data-id="121"><label data-id="122">Priority</label><select data-id="123" id="m-priority-kss45"><option data-id="124">Normal</option><option data-id="125">High</option><option data-id="126">Urgent</option></select></div>
+      <div data-id="127" class="modal-full"><label data-id="128">Notes</label><textarea data-id="129" id="m-notes-kss46" rows="3"></textarea></div>
     </div>
-    <div data-id="84" class="form-group"><label data-id="85" class="form-label">Lawyer</label><select data-id="86" class="form-input" id="f-lawyer"></select></div>
-    <div data-id="87" class="form-group"><label data-id="88" class="form-label">Clerk</label><select data-id="89" class="form-input" id="f-clerk"></select></div>
-    <div data-id="90" class="form-group"><label data-id="91" class="form-label">Closing Date</label><input data-id="92" class="form-input" id="f-date" type="date" /></div>
-    <div data-id="93" class="form-group"><label data-id="94" class="form-label">Status</label>
-      <select data-id="95" class="form-input" id="f-status">
-        <option data-id="96" value="col-new">New</option><option data-id="97" value="col-requisition">Requisition</option>
-        <option data-id="98" value="col-closing-soon">Closing Soon</option><option data-id="99" value="col-reporting-due">Reporting Due</option>
-        <option data-id="100" value="col-closed">Closed</option>
-      </select>
-    </div>
-    <div data-id="101" class="form-group"><label data-id="102" class="form-label">Priority</label>
-      <select data-id="103" class="form-input" id="f-priority"><option data-id="104">Normal</option><option data-id="105">High</option><option data-id="106">Urgent</option></select>
-    </div>
-    <div data-id="107" class="form-group"><label data-id="108" class="form-label">Notes</label><textarea data-id="109" class="form-input" id="f-notes" rows="3"></textarea></div>
-    <div data-id="110" class="modal-actions">
-      <button data-id="111" class="btn-cancel" id="btn-modal-cancel">Cancel</button>
-      <button data-id="112" class="btn-save" id="btn-modal-save">Save</button>
+    <div data-id="130" class="modal-footer">
+      <button data-id="131" class="btn-cancel-modal" id="btn-modal-cancel-kss47">Cancel</button>
+      <button data-id="132" class="btn-save-modal" id="btn-modal-save-kss48">Save</button>
     </div>
   </div>
 </div>
 
-<!-- MANAGE MODAL -->
-<div data-id="113" class="modal-overlay" id="manage-modal">
-  <div data-id="114" class="modal-box manage">
-    <div data-id="115" class="modal-title">👥 Manage Team</div>
-    <div data-id="116" class="team-grid" id="team-grid"></div>
-    <div data-id="117" class="modal-actions" style="margin-top:20px;">
-      <button data-id="118" class="btn-save" id="btn-manage-done" style="background:var(--grad-header);">Done</button>
-    </div>
-  </div>
-</div>
-
-<footer data-id="119" style="text-align:center;padding:20px;font-size:12px;color:var(--text-light);">Made by Copilot</footer>
+<footer data-id="133" style="text-align:center;padding:24px;font-size:12px;color:var(--text-light);background:linear-gradient(90deg,#eef2ff,#f8fafc)">
+  Made by Copilot
+</footer>
 
 <script>
 if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
   lucide.createIcons();
 }
 
-/* ═══ DATA MODEL ═══ */
-var COL_META = [
-  {id:'col-new',label:'NEW',grad:'linear-gradient(135deg,#0d7377,#14a09a)'},
-  {id:'col-requisition',label:'REQUISITION',grad:'linear-gradient(135deg,#e8705a,#f4a08e)'},
-  {id:'col-closing-soon',label:'CLOSING SOON',grad:'linear-gradient(135deg,#c0392b,#e74c3c)'},
-  {id:'col-reporting-due',label:'REPORTING DUE',grad:'linear-gradient(135deg,#0e7490,#17a4c4)'},
-  {id:'col-closed',label:'CLOSED',grad:'linear-gradient(135deg,#2a9d8f,#3dbcae)'}
+// ── DATA ──
+var COLUMNS = [
+  {id:'col-new', label:'NEW / OPEN', grad:'linear-gradient(135deg,#1d4ed8,#3b82f6)', accent:'#1d4ed8'},
+  {id:'col-req', label:'REQUISITION', grad:'linear-gradient(135deg,#d97706,#f59e0b)', accent:'#d97706'},
+  {id:'col-closing', label:'CLOSING SOON', grad:'linear-gradient(135deg,#16a34a,#22c55e)', accent:'#16a34a'},
+  {id:'col-reporting', label:'REPORTING', grad:'linear-gradient(135deg,#dc2626,#ef4444)', accent:'#dc2626'},
+  {id:'col-closed', label:'CLOSED', grad:'linear-gradient(135deg,#475569,#64748b)', accent:'#475569'}
 ];
-var COL_ACCENT = {'col-new':'#0d7377','col-requisition':'#e8705a','col-closing-soon':'#c0392b','col-reporting-due':'#0e7490','col-closed':'#2a9d8f'};
 
-var appData = {files:[],lawyers:[],clerks:[]};
-var calYear = 2026, calMonth = 8; // September 2026
+var SEED = [
+  {"id":"c6c29736-d966-45c8-8b1b-b60f86a89d6c","fileNumber":"KSS-01001","clientName":"Divyendu Asthana","address":"11 Bertram Gate, Whitby, Ontario L1P 0M5","type":"Purchase","price":"$930,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-03","closingDate":"2026-07-29","status":"col-closed","priority":"High","notes":"Register transfer and charge on Tuesday morning and send copy of transfer to client.","expanded":false},
+  {"id":"a58d88fe-5c92-4798-ad5d-e020b4c05ff7","fileNumber":"KSS-01002","clientName":"Kaveh Zahedi","address":"169 Willowbrook Road, Markham, Ontario L3T 5L5","type":"Sale","price":"$1,290,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-28","closingDate":"2026-08-10","status":"col-reporting","priority":"Normal","notes":"Send SOA and response to requisition to buyer lawyer, Sending closing package to vendors for e-signing. Complete accounting and add tax bill payment receipt to invoice","expanded":false},
+  {"id":"318ae614-c689-4ef5-a86d-cff01cd415a4","fileNumber":"KSS-01003","clientName":"Shanta Bishwokarma","address":"105 Rollingwood Drive, Brampton, Ontario, L2P 3T2","type":"Refinance","price":"$1,000,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-27","closingDate":"2026-08-04","status":"col-reporting","priority":"High","notes":"Transfer of Title and Mortgage Registration Pending. Complete bank and client reporting. Sending balance to client","expanded":false},
+  {"id":"dcc8d41b-bc46-4c12-87e4-eeb70d76873b","fileNumber":"KSS-01005","clientName":"1001673211 ONTARIO INC","address":"105-15 Skyridge Dr, Brampton, Ontario L6P 4S3","type":"Purchase","price":"$1,825,000","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-07-15","closingDate":"2026-08-13","status":"col-closed","priority":"High","notes":"Extension is requested and wire transfer for additional deposit pending.","expanded":false},
+  {"id":"45a2136d-19e6-42d6-ab7d-64b09b410cb3","fileNumber":"KSS-01009","clientName":"Pankaj Salve","address":"1522 Zilio Terrace, Milton, Ontario L9E 2H8","type":"Purchase","price":"$1,139,990","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-22","closingDate":"2026-07-29","status":"col-reporting","priority":"Normal","notes":"Complete Bank and Client Reporting","expanded":false},
+  {"id":"6bb5a7be-f274-418d-bb5e-f416c8ea5a14","fileNumber":"KSS-01010","clientName":"Jasvinder Kochhar","address":"11 Natural Terrace, Brampton, Ontario L6Y 6A5","type":"Purchase","price":"$1,800,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-20","closingDate":"2026-08-10","status":"col-reporting","priority":"High","notes":"Follow up SOA, Complete Request for Funds, Follow up client for IDV completion. Complete closing documents and send package for signing.","expanded":false},
+  {"id":"907aefdb-d5bd-4ef4-8ec8-71147d81c6e2","fileNumber":"KSS-01013","clientName":"Kajenthini Mayuran","address":"25 Valley Centre Drive, Scarborough, ON M1X 1K9","type":"Sale","price":"$1,150,000","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-14","closingDate":"2026-08-28","status":"col-closed","priority":"Normal","notes":"Follow up on client information, send treefort IDV, request payout statement, prepare SOA and transfer","expanded":false},
+  {"id":"77b8c0b1-1ad5-4d34-905f-3174e18d9dc4","fileNumber":"KSS-01014","clientName":"Mehrdokht Vahedi","address":"Suite 1906, 29 Green Trail Court, Toronto, Ontario M2K 0J9","type":"Purchase","price":"$932,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-07","closingDate":"2026-09-15","status":"col-new","priority":"Normal","notes":"Follow up Vahedi for mortgage instructions, prepare closing documents","expanded":false},
+  {"id":"78cd3d66-3f33-4883-99df-8da9f3d99dd8","fileNumber":"KSS-01015","clientName":"1828788 Ontario Inc.","address":"7368 Yonge Street, Unit 6-13, Thornhill, Ontario, L4H 8H9","type":"Sale","price":"$1,565,000","lawyer":"Saloumeh Baghbani","clerk":"","reqDate":"2026-08-14","closingDate":"2026-09-08","status":"col-closed","priority":"Normal","notes":"Request advance fee, open new matter, prepare new SOA, prepare new transfer, prepare new closing documents.","expanded":false},
+  {"id":"57a9674d-2418-485b-8cf8-212fa41e957e","fileNumber":"KSS-01017","clientName":"Kamalpreet Mann","address":"22 Donomore Drive, Brampton, Ontario L7A 0S7","type":"Purchase","price":"$757,500","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-13","closingDate":"2026-07-29","status":"col-reporting","priority":"Normal","notes":"Complete Bank and Client Reporting.","expanded":false},
+  {"id":"eae277b0-eaea-4706-8608-9cdbde84b68c","fileNumber":"KSS-01018","clientName":"Sunilkumar Patel","address":"109 WOODSEND RUN, BRAMPTON, ON, L6Y 4H7","type":"Purchase","price":"$765,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-13","closingDate":"2026-08-27","status":"col-reporting","priority":"Normal","notes":"Send email to client, send requisition, send RFF, complete closing documents","expanded":false},
+  {"id":"9635f432-67d9-436b-a411-a35abdea92fc","fileNumber":"KSS-01019","clientName":"Wagma Miral","address":"5727 Keldrew Avenue, Mississauga, Ontario, L5M 7B9","type":"Purchase","price":"$920,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-13","closingDate":"2026-08-28","status":"col-reporting","priority":"Normal","notes":"Send client email, send requisition, follow up mortgage instructions, send RFF, complete signing package","expanded":false},
+  {"id":"b41b39ba-fe65-44db-bd2f-df5a12a190ce","fileNumber":"KSS-01020","clientName":"Ashini Sooryakumar","address":"25-3175 Denison St, Markham, ON L3S 0E3","type":"Purchase","price":"$759,990","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-03","closingDate":"2026-08-27","status":"col-reporting","priority":"High","notes":"Mortgage instructions and revised SOA follow up","expanded":false},
+  {"id":"314ffff2-527b-4df0-bc37-03f461949aed","fileNumber":"KSS-01021","clientName":"Arpit Saharan","address":"10 Pine Warbler Street, Kitchener, Ontario, N2P 0L6","type":"Purchase","price":"$814,900","lawyer":"Saloumeh Baghbani","clerk":"","reqDate":"2026-09-01","closingDate":"2026-09-18","status":"col-new","priority":"Normal","notes":"Send email to client","expanded":false},
+  {"id":"e74dd0c3-b9a1-499c-935f-4fb125d296de","fileNumber":"KSS-01022","clientName":"Rahul Badansinh Sharma","address":"132 Madison d'Andrea Avenue, Sarnia, Ontario N7S 6L9","type":"Refinance","price":"$504,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-07","closingDate":"2026-08-12","status":"col-reporting","priority":"High","notes":"Send client email for fire insurance, prepare and send signing package, complete request for funds","expanded":false},
+  {"id":"d13ffeaa-5f33-4057-8b9f-e64d56839d9d","fileNumber":"KSS-01023","clientName":"Anushooya Gunasaleen","address":"56 Stockell Crescent, Ajax, Ontario, L1T 0M4","type":"Sale","price":"$1,118,000","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-09-18","closingDate":"2026-10-07","status":"col-new","priority":"Normal","notes":"Treefort IDV, Letter to Vendor, Preparing response, SOA and Transfer","expanded":false},
+  {"id":"6b170954-3aef-487a-98fe-999deb024ad4","fileNumber":"KSS-01024","clientName":"Dhan Raj Gurung","address":"87 Woodsend Run, Brampton, Ontario L6Y 4H7","type":"Purchase","price":"$799,800","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-18","closingDate":"2026-08-27","status":"col-reporting","priority":"Normal","notes":"Complete file. Send documents for e-signing. Send intro email to client.","expanded":false},
+  {"id":"fad86673-6d50-4887-b586-cfd475da6f1f","fileNumber":"KSS-01025","clientName":"Susan Hamzavi","address":"27 Benson Ave, Richmond Hill","type":"Purchase","price":"$715,000","lawyer":"Daniel Larijani","clerk":"","reqDate":"2026-08-04","closingDate":"2026-08-25","status":"col-closed","priority":"Normal","notes":"email to client, requisition to top law firm and final closing documents for e-sign.","expanded":false},
+  {"id":"e41df7e4-f081-4067-9aa7-ea0e2c0d2247","fileNumber":"KSS-01026","clientName":"Mayuran Manokara","address":"Suite 901B, 7437 Kingston Road, Scarborough","type":"Purchase","price":"$804,900","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-20","closingDate":"2026-09-18","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"4001a8f3-266c-4535-8666-78d6e5a74023","fileNumber":"KSS-01027","clientName":"Kiranbir Kaur","address":"21 Sunnyview Road, Brampton, Ontario, L7A 3E4","type":"Purchase","price":"$830,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-30","closingDate":"2026-09-14","status":"col-new","priority":"Normal","notes":"Assigned to Nilufa (Clerk- Floater)","expanded":false},
+  {"id":"149f0f9d-7833-4fd3-9838-0a86a6898dac","fileNumber":"KSS-01028","clientName":"Seyed Hesam Emam","address":"485C County Rd, Trent Mills, Ontario K0L 1Z0","type":"Purchase","price":"$860,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-02","closingDate":"2026-09-17","status":"col-req","priority":"Normal","notes":"Assigned to Nilufa (Clerk-Floater)","expanded":false},
+  {"id":"9835fcdf-90d5-490a-80aa-48893afb5f93","fileNumber":"KSS-01029","clientName":"Anand Kumar and Ravisha","address":"55 Fisher Street, Brantford, Ontario, N3T 0G4","type":"Purchase","price":"$750,000","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-08-21","closingDate":"2026-08-31","status":"col-reporting","priority":"High","notes":"Send information to Maryam\nFill up the statement of Account\nSOA done","expanded":false},
+  {"id":"eae456c8-fdb8-4c28-8e03-55fb2bc61999","fileNumber":"KSS-01030","clientName":"Raju Arenja and Tina Kripalani","address":"89 Stewart Boulevard Brockville","type":"Purchase","price":"$549,900","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-08-25","closingDate":"2026-09-01","status":"col-reporting","priority":"High","notes":"647-308-4068 - Tina Kripalani.\nCall Client for Initial questions. Call for Vendor Lawyer Info. Conduct Searches. Prepare and Send Requisition.","expanded":false},
+  {"id":"a34510ff-dbbe-483d-89be-f767eb2ee608","fileNumber":"KSS-01007","clientName":"Nanthagopu Sangamoorthy","address":"3135 Concession Rd 10, Clarington, ON L1C 3K6","type":"Sale","price":"$950,000","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-13","closingDate":"2026-08-31","status":"col-closed","priority":"High","notes":"Sending Reporting Packages, get letter and accounting approved by lawyer before sending.","expanded":false},
+  {"id":"c564354a-91f5-4bcf-b877-532e68f4afa0","fileNumber":"KSS-01008","clientName":"Nanthiny Nanthagopu","address":"16 McQueen Cres, Ajax, ON L1T 4Y8","type":"Refinance","price":"$110,000","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-27","closingDate":"2026-07-31","status":"col-closed","priority":"High","notes":"Sending Reporting with Sangamoorthy's sale reporting package","expanded":false},
+  {"id":"9d52ac7d-8e2a-4fa6-bb1d-29a671ad579e","fileNumber":"KSS-01011","clientName":"Ramandeep Nannan","address":"1 Flavian Cres, Brampton, Ontario L6T 3P2","type":"Purchase","price":"$724,000","lawyer":"Saloumeh Baghbani","clerk":"","reqDate":"2026-07-27","closingDate":"2026-07-31","status":"col-closed","priority":"Normal","notes":"Complete bank and client reporting.","expanded":false},
+  {"id":"ea679fa3-6fbe-4114-8d80-1faa22ecd47c","fileNumber":"KSS-01012","clientName":"Vimalendran Thievendam","address":"1 Deborah Dr, Scarborough, ON M1H 2H5","type":"Purchase","price":"$820,000","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-05","closingDate":"2026-08-19","status":"col-closed","priority":"Normal","notes":"Complete requisition, closing documents and accounting.","expanded":false},
+  {"id":"414fd2de-11a5-4972-964e-f35e1178c3ac","fileNumber":"KSS-01016","clientName":"Pathmini Wignarajan","address":"46 Melchior Drive, Scarborough, ON M1E 3W5","type":"Purchase","price":"$805,000","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-13","closingDate":"2026-07-30","status":"col-closed","priority":"Normal","notes":"Client Reporting Package","expanded":false},
+  {"id":"4e046a2a-72be-4fcb-9949-4eec123a83a7","fileNumber":"KSS-01022","clientName":"Pejman Parsi-Mood","address":"1811-7165 Yonge Street Thornhill","type":"Refinance","price":"$600,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-01-05","closingDate":"2026-01-15","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"211b75dd-8c66-4e42-bfef-3c725cf3ce7e","fileNumber":"KSS-01023","clientName":"Murli / Manju Raheja","address":"153 Hickstead Way Ottawa","type":"Refinance","price":"$696,640","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-02-09","closingDate":"2026-02-09","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"d7c8b8f9-03a8-457e-b264-2db13231acab","fileNumber":"KSS-01024","clientName":"Hamid, Masih, Aamir","address":"212 Glenayr Rd Toronto","type":"Purchase","price":"$3,110,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-02-27","closingDate":"2026-03-17","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"9b76f201-d0d1-4623-b316-6749e5d3e689","fileNumber":"KSS-01025","clientName":"Randa Mahfouz","address":"76 Matteo Trail Hamilton","type":"Sale","price":"$1,050,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-01","closingDate":"2026-04-15","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"5c1c6085-8278-4397-ace8-0bd218edd3d2","fileNumber":"KSS-01026","clientName":"Saenarine Deonarine","address":"2603 - 300 Front Street, Toronto","type":"Sale","price":"$650,000","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-21","closingDate":"2026-02-10","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"d19f3617-d379-40f2-a7e7-35d80415fda7","fileNumber":"KSS-01027","clientName":"Kevin Parker","address":"44 Madelaine Crescent, Brampton","type":"Sale","price":"$1,200,000","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-15","closingDate":"2026-01-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"cf12ffd1-8cc2-4050-a44d-d1699c5d35e0","fileNumber":"KSS-01028","clientName":"Narinderpal Dayal","address":"44 Valleyway Drive, Brampton","type":"Purchase","price":"$250,000","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-07","closingDate":"2026-01-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"983c496b-ddc1-471f-8cf9-aa5d58bb28d2","fileNumber":"KSS-01029","clientName":"Naresh Jain / Pushpinder Josan","address":"13 - 30 Dean Park Road, Toronto","type":"Purchase","price":"$1,363,200","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-05","closingDate":"2026-04-01","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"715dbd2e-8168-4193-816d-3709a3c17057","fileNumber":"KSS-01030","clientName":"Naresh Jain / Pushpinder Josan","address":"200 Montclair Drive, Unit - 4, Woodstock","type":"Purchase","price":"$1,677,000","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"150fa8f0-d0c2-49e0-bf70-1e4bd74f3ba5","fileNumber":"KSS-01031","clientName":"Hamid, Masih, Aamir","address":"30 Hillhurst Boulevard, Toronto","type":"Sale","price":"$700,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-03-03","closingDate":"2026-03-23","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"c75d26af-4d21-4ceb-b242-5c788d481280","fileNumber":"KSS-01032","clientName":"Abbas Pirayesh Akbari","address":"3002-85 Queens Wharf Rd Toronto","type":"Sale","price":"$1,050,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-01","closingDate":"2026-04-16","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"55a38d2e-1d59-4128-905a-115bc93a6c1a","fileNumber":"KSS-01033","clientName":"Komal and Jagtar Dosanjh","address":"3353 Beau Rivage Crescent, Mississauga","type":"Refinance","price":"$1,087,400","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"2dae5f58-16d8-4d59-961d-19294a431fef","fileNumber":"KSS-01034","clientName":"Komal and Jagtar Dosanjh","address":"1104-425 Front Street East, Toronto","type":"Refinance","price":"$444,350","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"e3eb48d7-b571-4e18-917b-48be7d9bfdb5","fileNumber":"KSS-01035","clientName":"Afzal Yusuf Patel","address":"7765 Anaka Drive, Mississauga","type":"Refinance","price":"$702,100","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-07","closingDate":"2026-04-07","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"5389235b-c4c7-4f3a-8409-e5bd6f686c94","fileNumber":"KSS-01036","clientName":"Ben Azizi","address":"120 Sheppard Avenue West, Toronto","type":"Purchase","price":"$2,650,000","lawyer":"Sally Baghbani","clerk":"","reqDate":"2026-09-14","closingDate":"2026-09-15","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"2168298c-d5f4-4555-a3dc-5c1ba4c202ca","fileNumber":"KSS-01037","clientName":"Alap and Payalben Shah","address":"894 West Village Square London","type":"Refinance","price":"$480,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-05-22","closingDate":"2026-05-22","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"e963bddf-a3b4-4f08-8c30-03c6eef6ff16","fileNumber":"KSS-01038","clientName":"Shanta & Netra Bandhu Kafle","address":"7 Tarlton Court Thornhill","type":"Refinance","price":"$780,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-02","closingDate":"2026-04-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"df63f088-da24-481e-a4a5-4859da42b5cb","fileNumber":"KSS-01039","clientName":"Arun Darra and Amit Darira","address":"4508 Donegal Drive, Mississauga","type":"Purchase","price":"$1,250,000","lawyer":"Navneet Garcha","clerk":"","reqDate":"2026-05-15","closingDate":"2026-05-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"25b440d8-75dd-4b17-8c3d-f782e2a0018b","fileNumber":"KSS-01040","clientName":"Naresh and Anamika Jain","address":"415 Main Street West, Hamilton","type":"Purchase","price":"$296,500","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-05-29","closingDate":"2026-06-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"69c229c0-b03c-4f40-a06c-3c4fadf66b21","fileNumber":"KSS-01041","clientName":"Alap and Payalben Shah","address":"85-409 Joseph Street, Port Elgin","type":"Refinance","price":"$360,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-06-23","closingDate":"2026-06-23","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"d5ff4e8a-cea4-411c-a7b3-c8518a559830","fileNumber":"KSS-01042","clientName":"Vaibhav Nagpal and Navdeep Kaur","address":"33 Greig Street, Brantford","type":"Purchase","price":"$501,761","lawyer":"Navneet Garcha","clerk":"","reqDate":"2026-06-17","closingDate":"2026-06-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"2f6e500e-3731-44e2-b04b-ef0751d19e27","fileNumber":"KSS-01043","clientName":"Benjamin Ghotbi","address":"Suite 823, 858 Dupont Street, Toronto","type":"Purchase","price":"$800,000","lawyer":"Daniel Larijani","clerk":"","reqDate":"2026-06-02","closingDate":"2026-06-19","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"6ae77c9d-e44c-4f10-8172-7fb9340c46c3","fileNumber":"KSS-01044","clientName":"Benjamin Ghotbi","address":"Suite 1510 - 25 Cordova Avenue, Toronto","type":"Purchase","price":"$613,865","lawyer":"Daniel Larijani","clerk":"","reqDate":"2026-06-24","closingDate":"2026-06-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"f8b7f432-0abd-454e-af53-c6639103fa37","fileNumber":"KSS-01045","clientName":"Kishor Pun and Tulasi Pun","address":"214 Borrows St Thornhill","type":"Purchase","price":"$1,065,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-06-12","closingDate":"2026-06-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"f9828bc0-e012-497b-90ca-aa87c296b830","fileNumber":"KSS-01046","clientName":"Nageswar Rao Tamada and Jayashalini Puttachary","address":"115-2170 Bromsgrove Rd Mississauga","type":"Refinance","price":"$800,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-06-19","closingDate":"2026-06-19","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"a56f8515-eb6c-4e6b-a69b-b105081c1ba9","fileNumber":"KSS-01047","clientName":"Karmjit, Rajveer, Satveer Singh Bath","address":"38 Peacekeeping Crt, Brampton","type":"Refinance","price":"$1,300,000","lawyer":"Navneet Garcha","clerk":"","reqDate":"2026-07-06","closingDate":"2026-07-05","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"2c07c7eb-5501-4ae1-9116-004536ab8a54","fileNumber":"KSS-01031","clientName":"Wail Goryal and Maryam Mikho","address":"5600 Ethan Drive, Mississauga","type":"Refinance","price":"$990,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-03","closingDate":"2026-09-04","status":"col-closing","priority":"High","notes":"","expanded":false},
+  {"id":"b3f54791-b50c-48b4-85cb-302fa0ae6ac6","fileNumber":"KSS-01032","clientName":"Thirivarul Amirthalingam","address":"106 King St, Tiverton, Ontario N0G 2T0","type":"Sale","price":"$305,000","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-09-09","closingDate":"2026-09-23","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"4983ff14-8e1c-418c-9038-dae79d0e66c6","fileNumber":"KSS-01033","clientName":"Vamanan Thanabalasundram","address":"969 Applegrove Ave Oshawa Ontario L1H 1S5","type":"Purchase","price":"$670,000","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-14","closingDate":"2026-09-21","status":"col-new","priority":"Normal","notes":"","expanded":false}
+];
+
+var appData = {
+  files:[],
+  lawyers:["Arunjit Qaumi","Daniel Larijani","Gagan Lamba","Navneet Garcha","Neethan Selvan","Sally Baghbani","Saloumeh Baghbani","Saloumeh Baghbani Najafabad","Sassan Emam"],
+  clerks:['Nilufa','Huma','Maria','Asees','Jasneet','Kimberly','Dave']
+};
 var editingId = null;
-var dragId = null;
+var calYear, calMonth;
+var dragFileId = null;
+
+// ── VERSION CHECK — clear old localStorage ──
+var KSS_VERSION_KEY = 'kss_version';
+var KSS_CURRENT_VERSION = '2';
+if (localStorage.getItem(KSS_VERSION_KEY) !== KSS_CURRENT_VERSION) {
+  localStorage.removeItem('kss_matters_v1');
+  localStorage.setItem(KSS_VERSION_KEY, KSS_CURRENT_VERSION);
+}
 
 function loadData() {
   try {
-    var d = JSON.parse(localStorage.getItem('kss_v3'));
-    if (d && d.files) { appData = d; }
+    var d = JSON.parse(localStorage.getItem('kss_matters_v1'));
+    if (d && d.files && d.lawyers && d.clerks) { appData = d; }
   } catch(e) {}
 }
-function saveData() { localStorage.setItem('kss_v3', JSON.stringify(appData)); }
+function saveData() { localStorage.setItem('kss_matters_v1', JSON.stringify(appData)); }
+function seedData() { appData.files = JSON.parse(JSON.stringify(SEED)); saveData(); }
 
-function seedData() {
-  appData.lawyers = ['Sarah Mitchell','James Okafor','Priya Sharma','David Chen'];
-  appData.clerks = ['Nilufa','Huma','Maria','Asees','Jasneet','Kimberly','Dave'];
-  appData.files = [
-    {id:'1',fileNumber:'KSS-2026-001',clientName:'Emily Johnson',address:'42 Maple Ave, Brampton ON',type:'Purchase',lawyer:'Sarah Mitchell',clerk:'Nilufa',closingDate:'2026-09-08',status:'col-closing-soon',priority:'Urgent',notes:'First-time buyer. Mortgage approved. Keys to be released at closing.',expanded:false},
-    {id:'2',fileNumber:'KSS-2026-002',clientName:'Robert & Sandra Smith',address:'88 King Street W, Toronto ON',type:'Sale',lawyer:'James Okafor',clerk:'Huma',closingDate:'2026-10-03',status:'col-requisition',priority:'Normal',notes:'Awaiting discharge statement from existing lender.',expanded:false},
-    {id:'3',fileNumber:'KSS-2026-003',clientName:'Michael Chen',address:'15 Lakeview Dr, Mississauga ON',type:'Refinance',lawyer:'Priya Sharma',clerk:'Maria',closingDate:'2026-09-30',status:'col-new',priority:'Normal',notes:'Title search ordered. Awaiting survey confirmation.',expanded:false},
-    {id:'4',fileNumber:'KSS-2026-004',clientName:'Patel Family Trust',address:'200 Bay St, Toronto ON',type:'Transfer',lawyer:'David Chen',clerk:'Asees',closingDate:'2026-09-05',status:'col-reporting-due',priority:'High',notes:'Reporting letter due. All trust conditions met.',expanded:false},
-    {id:'5',fileNumber:'KSS-2026-005',clientName:'Northern Realty Corp',address:'550 Hwy 7, Richmond Hill ON',type:'Purchase',lawyer:'Sarah Mitchell',clerk:'Jasneet',closingDate:'2026-07-10',status:'col-closed',priority:'Normal',notes:'File fully closed and reported to client.',expanded:false},
-    {id:'6',fileNumber:'KSS-2026-006',clientName:'Anya Kowalski',address:'3 Birchwood Cres, Oakville ON',type:'Sale',lawyer:'James Okafor',clerk:'Kimberly',closingDate:'2026-09-25',status:'col-new',priority:'Normal',notes:'Condition removal pending. Buyers financing confirmed.',expanded:false}
-  ];
-  saveData();
-}
-
-/* ═══ UTILITIES ═══ */
 function daysUntil(dateStr) {
   if (!dateStr) return 9999;
-  var today = new Date(2026,8,3); // Sept 3 2026
-  today.setHours(0,0,0,0);
-  var d = new Date(dateStr + 'T00:00:00');
-  return Math.ceil((d - today) / 86400000);
+  var today = new Date(); today.setHours(0,0,0,0);
+  var d = new Date(dateStr + 'T00:00:00'); d.setHours(0,0,0,0);
+  return Math.round((d - today) / 86400000);
 }
-function getDateColor(dateStr) {
-  var d = daysUntil(dateStr);
-  if (d <= 7) return '#c0392b';
-  if (d <= 14) return '#e67e22';
-  return '#0d7377';
-}
+
 function formatDate(dateStr) {
   if (!dateStr) return '—';
   var d = new Date(dateStr + 'T00:00:00');
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 }
-function generateFileNumber() {
-  var max = 0;
-  appData.files.forEach(function(f) {
-    var m = f.fileNumber.match(/KSS-2026-(\d+)/);
-    if (m) { var n = parseInt(m[1]); if (n > max) max = n; }
-  });
-  return 'KSS-2026-' + String(max + 1).padStart(3, '0');
+
+function getColMeta(colId) {
+  return COLUMNS.find(function(c){ return c.id === colId; }) || COLUMNS[0];
 }
 
-/* ═══ FILTERS ═══ */
-function renderFilters() {
-  var ls = document.getElementById('filter-lawyer');
-  var cs = document.getElementById('filter-clerk');
-  var lv = ls.value, cv = cs.value;
-  ls.innerHTML = '<option value="">All Lawyers</option>';
-  cs.innerHTML = '<option value="">All Clerks</option>';
-  appData.lawyers.forEach(function(l) { ls.innerHTML += '<option value="'+l+'">'+l+'</option>'; });
-  appData.clerks.forEach(function(c) { cs.innerHTML += '<option value="'+c+'">'+c+'</option>'; });
-  ls.value = lv; cs.value = cv;
-  populateModalSelects();
+function getTypeColor(type) {
+  var map = {Purchase:'#4f46e5', Sale:'#16a34a', Refinance:'#d97706', Transfer:'#dc2626'};
+  return map[type] || '#4f46e5';
+}
+function getTypeBg(type) {
+  var map = {
+    Purchase:{from:'#eef2ff',to:'#e0e7ff',text:'#4338ca'},
+    Sale:{from:'#f0fdf4',to:'#bbf7d0',text:'#15803d'},
+    Refinance:{from:'#fffbeb',to:'#fef3c7',text:'#b45309'},
+    Transfer:{from:'#fef2f2',to:'#fee2e2',text:'#b91c1c'}
+  };
+  return map[type] || map.Purchase;
 }
 
-function populateModalSelects() {
-  var fl = document.getElementById('f-lawyer');
-  var fc = document.getElementById('f-clerk');
-  fl.innerHTML = '<option value="">— Select —</option>';
-  fc.innerHTML = '<option value="">— Select —</option>';
-  appData.lawyers.forEach(function(l) { fl.innerHTML += '<option value="'+l+'">'+l+'</option>'; });
-  appData.clerks.forEach(function(c) { fc.innerHTML += '<option value="'+c+'">'+c+'</option>'; });
-}
-
-/* ═══ BOARD RENDER ═══ */
-function renderBoard() {
-  var board = document.getElementById('board');
-  board.innerHTML = '';
-  var fLawyer = document.getElementById('filter-lawyer').value;
-  var fClerk = document.getElementById('filter-clerk').value;
-  var fSearch = document.getElementById('filter-search').value.toLowerCase();
-
-  var filtered = appData.files.filter(function(f) {
-    if (fLawyer && f.lawyer !== fLawyer) return false;
-    if (fClerk && f.clerk !== fClerk) return false;
-    if (fSearch && f.fileNumber.toLowerCase().indexOf(fSearch) === -1 && f.clientName.toLowerCase().indexOf(fSearch) === -1) return false;
-    return true;
-  });
-
-  COL_META.forEach(function(col) {
-    var colDiv = document.createElement('div');
-    colDiv.className = 'column';
-
-    // Build card entries for this column
-    var entries = [];
-    filtered.forEach(function(f) {
-      if (f.status === col.id) { entries.push({file:f, isDuplicate:false}); }
-      // Duplicate logic
-      var du = daysUntil(f.closingDate);
-      if (du <= 7 && f.status !== 'col-closed') {
-        if (f.status === 'col-requisition' && col.id === 'col-closing-soon') {
-          entries.push({file:f, isDuplicate:true, dupLabel:'⚡ Also in Requisition'});
-        }
-        if (f.status === 'col-closing-soon' && col.id === 'col-requisition') {
-          entries.push({file:f, isDuplicate:true, dupLabel:'⚡ Also in Closing Soon'});
-        }
-      }
-    });
-
-    // Sort by closing date ascending
-    entries.sort(function(a,b) {
-      var da = a.file.closingDate || '9999-99-99';
-      var db = b.file.closingDate || '9999-99-99';
-      return da < db ? -1 : da > db ? 1 : 0;
-    });
-
-    var headerDiv = document.createElement('div');
-    headerDiv.className = 'column-header';
-    headerDiv.style.background = col.grad;
-    headerDiv.innerHTML = '<span class="col-label">'+col.label+'</span><span class="col-count">'+entries.length+'</span>';
-    colDiv.appendChild(headerDiv);
-
-    var cardsDiv = document.createElement('div');
-    cardsDiv.className = 'col-cards';
-    cardsDiv.dataset.col = col.id;
-
-    // Drop events
-    cardsDiv.addEventListener('dragover', function(e) { e.preventDefault(); this.style.background = 'linear-gradient(180deg,#e6f4f4,#daf0ef)'; });
-    cardsDiv.addEventListener('dragleave', function() { this.style.background = ''; });
-    cardsDiv.addEventListener('drop', function(e) {
-      e.preventDefault();
-      this.style.background = '';
-      handleDrop(e, this.dataset.col);
-    });
-
-    entries.forEach(function(entry) {
-      var card = renderCard(entry.file, col.id, entry.isDuplicate, entry.dupLabel);
-      cardsDiv.appendChild(card);
-    });
-
-    colDiv.appendChild(cardsDiv);
-    board.appendChild(colDiv);
-  });
-}
-
-function renderCard(file, colId, isDuplicate, dupLabel) {
-  var card = document.createElement('div');
-  card.className = 'card';
-  card.style.borderLeft = '5px solid ' + COL_ACCENT[colId];
-  card.draggable = !isDuplicate;
-  card.dataset.id = file.id;
-
-  card.addEventListener('dragstart', function(e) {
-    dragId = file.id;
-    this.classList.add('dragging');
-    e.dataTransfer.effectAllowed = 'move';
-  });
-  card.addEventListener('dragend', function() { this.classList.remove('dragging'); dragId = null; });
-
+// ── RENDER STATS ──
+function renderStats() {
+  var files = appData.files;
+  var counts = {total:files.length, 'col-new':0, 'col-req':0, 'col-closing':0, 'col-reporting':0, 'col-closed':0};
+  files.forEach(function(f){ if(counts[f.status] !== undefined) counts[f.status]++; });
+  var pills = [
+    {label:'📁 Total',count:counts.total,bg:'var(--grad-purple)'},
+    {label:'🟢 New',count:counts['col-new'],bg:'var(--grad-blue)'},
+    {label:'🟡 Requisition',count:counts['col-req'],bg:'var(--grad-amber)'},
+    {label:'🔴 Closing Soon',count:counts['col-closing'],bg:'var(--grad-green)'},
+    {label:'📋 Reporting',count:counts['col-reporting'],bg:'var(--grad-red)'},
+    {label:'✅ Closed',count:counts['col-closed'],bg:'linear-gradient(135deg,#475569,#64748b)'}
+  ];
   var html = '';
-  if (isDuplicate) { html += '<div class="dup-ribbon">'+(dupLabel||'⚡ Duplicate')+'</div>'; }
+  pills.forEach(function(p){
+    html += '<div class="stat-pill" style="background:'+p.bg+'"><span class="label">'+p.label+'</span><span class="count">'+p.count+'</span></div>';
+  });
+  document.getElementById('stats-bar-kss23').innerHTML = html;
+}
 
-  // Row 1
-  html += '<div class="card-row"><span class="file-num">'+file.fileNumber+'</span><span class="priority-badge priority-'+file.priority+'">'+file.priority+'</span></div>';
-  // Row 2
-  html += '<div class="client-name">'+file.clientName+'</div>';
-  // Row 3
-  html += '<div class="address">'+file.address+'</div>';
-  // Row 4
-  var dateCol = getDateColor(file.closingDate);
-  html += '<div class="card-row"><span class="type-badge">'+file.type+'</span>';
-  html += '<span style="font-size:12px;font-weight:600;color:'+dateCol+'">'+formatDate(file.closingDate)+'</span></div>';
-  // Expand/collapse
-  html += '<div style="text-align:right;margin-top:4px;"><button class="expand-btn" data-toggle="'+file.id+'">'+(file.expanded?'▲ Less':'▼ More')+'</button></div>';
+// ── TYPE COLORS ──
+function priorityClass(p) {
+  if(p==='Urgent') return 'priority-urgent';
+  if(p==='High') return 'priority-high';
+  return 'priority-normal';
+}
 
-  // Expanded rows
-  if (file.expanded) {
-    // Row 5
-    html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">';
-    if (file.lawyer) html += '<span class="lawyer-badge">⚖ '+file.lawyer+'</span>';
-    if (file.clerk) html += '<span class="clerk-badge">📋 '+file.clerk+'</span>';
-    html += '</div>';
-    // Row 6
-    if (file.notes) html += '<div class="card-notes">'+file.notes+'</div>';
-    // Row 7
-    if (!isDuplicate) {
-      html += '<div class="card-actions">';
-      html += '<button class="act-edit" data-edit="'+file.id+'">Edit</button>';
-      html += '<button class="act-copy" data-copy="'+file.id+'">Copy</button>';
-      html += '<button class="act-delete" data-delete="'+file.id+'">Delete</button>';
-      html += '</div>';
+// ── RENDER CARD ──
+function renderCard(file, colId, isDuplicate) {
+  var col = getColMeta(colId);
+  var tb = getTypeBg(file.type);
+  var d = daysUntil(file.closingDate);
+  var urgFrom, urgTo, urgText;
+  if(d<=7){urgFrom='#fef2f2';urgTo='#fee2e2';urgText='#dc2626';}
+  else if(d<=14){urgFrom='#fffbeb';urgTo='#fef3c7';urgText='#b45309';}
+  else{urgFrom='#f0fdf4';urgTo='#bbf7d0';urgText='#15803d';}
+
+  var daysBadge = '';
+  if(file.closingDate){
+    if(d<0) daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,#fef2f2,#fee2e2);color:#dc2626">'+Math.abs(d)+'d overdue</span>';
+    else if(d===0) daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,#fef2f2,#fee2e2);color:#dc2626">Today!</span>';
+    else daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">'+d+'d left</span>';
+  }
+
+  var dupHtml = '';
+  if(isDuplicate) {
+    var origCol = getColMeta(file.status);
+    dupHtml = '<div class="dup-badge">⚡ Duplicate — also in '+origCol.label+'</div>';
+  } else if(file.status==='col-req' && d<=7) {
+    dupHtml = '<div class="dup-badge">⚡ Also in Closing Soon</div>';
+  }
+
+  var expanded = file.expanded;
+  var expandedHtml = '';
+  if(expanded) {
+    expandedHtml = '<div class="row-e"><span class="clerk-badge">🗂 '+(escH(file.clerk)||'Unassigned')+'</span><div class="notes-text">'+escH(file.notes)+'</div></div>';
+    if(!isDuplicate) {
+      expandedHtml += '<div class="row-f"><button class="btn-edit-card" data-action="edit" data-id="'+file.id+'">✏ Edit</button><button class="btn-copy-card" data-action="copy" data-id="'+file.id+'">📋 Copy</button><button class="btn-delete-card" data-action="delete" data-id="'+file.id+'">🗑 Delete</button></div>';
     }
   }
 
-  card.innerHTML = html;
-
-  // Bind events after setting innerHTML
-  setTimeout(function() {
-    var tBtn = card.querySelector('[data-toggle="'+file.id+'"]');
-    if (tBtn) tBtn.addEventListener('click', function(e) { e.stopPropagation(); toggleCard(file.id); });
-    var eBtn = card.querySelector('[data-edit="'+file.id+'"]');
-    if (eBtn) eBtn.addEventListener('click', function(e) { e.stopPropagation(); openEditModal(file.id); });
-    var cBtn = card.querySelector('[data-copy="'+file.id+'"]');
-    if (cBtn) cBtn.addEventListener('click', function(e) { e.stopPropagation(); copyCard(file.id); });
-    var dBtn = card.querySelector('[data-delete="'+file.id+'"]');
-    if (dBtn) dBtn.addEventListener('click', function(e) { e.stopPropagation(); deleteFile(file.id); });
-  }, 0);
-
-  return card;
+  return '<div class="card" draggable="'+(isDuplicate?'false':'true')+'" data-file-id="'+file.id+'" data-dup="'+(isDuplicate?'1':'0')+'" style="border-left:5px solid '+col.accent+'">'
+    + dupHtml
+    + '<div class="row-a"><span class="file-num">'+escH(file.fileNumber)+'</span><span class="priority-badge '+priorityClass(file.priority)+'">'+escH(file.priority)+'</span></div>'
+    + '<div class="row-b"><span class="type-dot" style="background:'+getTypeColor(file.type)+'"></span><span class="type-badge" style="background:linear-gradient(135deg,'+tb.from+','+tb.to+');color:'+tb.text+'">'+escH(file.type)+'</span><span class="client-name">'+escH(file.clientName)+'</span></div>'
+    + '<div class="row-c"><span class="lawyer-line">👤 '+escH(file.lawyer)+'</span><span class="address-line">📍 '+escH(file.address)+'</span><span class="price-line">'+escH(file.price)+'</span></div>'
+    + '<div class="row-d"><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="date-pill" style="background:linear-gradient(135deg,#eef2ff,#e0e7ff);color:#4338ca">REQ '+formatDate(file.reqDate)+'</span><span class="date-pill" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">CLOSE '+formatDate(file.closingDate)+'</span>'+daysBadge+'</div><button class="btn-toggle" data-action="toggle" data-id="'+file.id+'">'+(expanded?'▲ Less':'▼ More')+'</button></div>'
+    + expandedHtml
+    + '</div>';
 }
 
-function handleDrop(e, colId) {
-  if (!dragId) return;
-  var f = appData.files.find(function(x) { return x.id === dragId; });
-  if (f) { f.status = colId; saveData(); renderBoard(); renderDashboard(); renderCalendar(); }
+function escH(s) {
+  if(!s) return '';
+  var d = document.createElement('div'); d.textContent = s; return d.innerHTML;
 }
 
-function toggleCard(id) {
-  var f = appData.files.find(function(x) { return x.id === id; });
-  if (f) { f.expanded = !f.expanded; saveData(); renderBoard(); }
-}
-function expandAll() { appData.files.forEach(function(f) { f.expanded = true; }); saveData(); renderBoard(); }
-function collapseAll() { appData.files.forEach(function(f) { f.expanded = false; }); saveData(); renderBoard(); }
+// ── RENDER BOARD ──
+function renderBoard() {
+  var search = document.getElementById('filter-search-kss26').value.toLowerCase();
+  var lawyer = document.getElementById('filter-lawyer-kss27').value;
+  var type = document.getElementById('filter-type-kss28').value;
+  var priority = document.getElementById('filter-priority-kss29').value;
 
-/* ═══ MODALS ═══ */
+  var filtered = appData.files.filter(function(f){
+    if(search && f.fileNumber.toLowerCase().indexOf(search)===-1 && f.clientName.toLowerCase().indexOf(search)===-1) return false;
+    if(lawyer && f.lawyer !== lawyer) return false;
+    if(type && f.type !== type) return false;
+    if(priority && f.priority !== priority) return false;
+    return true;
+  });
+
+  var boardEl = document.getElementById('board-kss9');
+  var html = '';
+  COLUMNS.forEach(function(col){
+    var colFiles = filtered.filter(function(f){ return f.status === col.id; });
+    var dupFiles = [];
+    if(col.id === 'col-closing') {
+      filtered.forEach(function(f){
+        if(f.status === 'col-req' && daysUntil(f.closingDate) <= 7) {
+          dupFiles.push(f);
+        }
+      });
+    }
+    colFiles.sort(function(a,b){ return daysUntil(a.closingDate) - daysUntil(b.closingDate); });
+    dupFiles.sort(function(a,b){ return daysUntil(a.closingDate) - daysUntil(b.closingDate); });
+
+    var totalCount = colFiles.length + dupFiles.length;
+
+    html += '<div class="kanban-col"><div class="col-header" style="background:'+col.grad+'"><span class="col-label">'+col.label+'</span><span class="col-count">'+totalCount+'</span></div>';
+    html += '<div class="col-cards" data-col="'+col.id+'">';
+    colFiles.forEach(function(f){ html += renderCard(f, col.id, false); });
+    dupFiles.forEach(function(f){ html += renderCard(f, col.id, true); });
+    html += '</div></div>';
+  });
+  boardEl.innerHTML = html;
+  renderStats();
+  bindCardEvents();
+  bindDragDrop();
+}
+
+function bindCardEvents() {
+  document.querySelectorAll('[data-action="toggle"]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      toggleExpand(this.getAttribute('data-id'));
+    });
+  });
+  document.querySelectorAll('[data-action="edit"]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      openEditModal(this.getAttribute('data-id'));
+    });
+  });
+  document.querySelectorAll('[data-action="copy"]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      copyCard(this.getAttribute('data-id'));
+    });
+  });
+  document.querySelectorAll('[data-action="delete"]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      deleteFile(this.getAttribute('data-id'));
+    });
+  });
+}
+
+function bindDragDrop() {
+  document.querySelectorAll('.card[draggable="true"]').forEach(function(card){
+    card.addEventListener('dragstart', function(e){
+      dragFileId = this.getAttribute('data-file-id');
+      this.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    card.addEventListener('dragend', function(){
+      this.classList.remove('dragging');
+      dragFileId = null;
+    });
+  });
+  document.querySelectorAll('.col-cards').forEach(function(col){
+    col.addEventListener('dragover', function(e){
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      this.style.background = 'linear-gradient(180deg,#e0e7ff,#ddd6fe)';
+    });
+    col.addEventListener('dragleave', function(){
+      this.style.background = '';
+    });
+    col.addEventListener('drop', function(e){
+      e.preventDefault();
+      this.style.background = '';
+      var newStatus = this.getAttribute('data-col');
+      if(dragFileId && newStatus) {
+        var file = appData.files.find(function(f){ return f.id === dragFileId; });
+        if(file) { file.status = newStatus; saveData(); renderAll(); }
+      }
+    });
+  });
+}
+
+function toggleExpand(id) {
+  var f = appData.files.find(function(x){ return x.id === id; });
+  if(f) { f.expanded = !f.expanded; saveData(); renderBoard(); }
+}
+
+function expandAll() {
+  appData.files.forEach(function(f){ f.expanded = true; });
+  saveData(); renderBoard();
+}
+function collapseAll() {
+  appData.files.forEach(function(f){ f.expanded = false; });
+  saveData(); renderBoard();
+}
+
+// ── MODAL ──
 function openAddModal() {
   editingId = null;
-  document.getElementById('modal-title').textContent = 'Add New File';
-  document.getElementById('f-id').value = '';
-  document.getElementById('f-num').value = generateFileNumber();
-  document.getElementById('f-client').value = '';
-  document.getElementById('f-address').value = '';
-  document.getElementById('f-type').value = 'Purchase';
-  document.getElementById('f-date').value = '';
-  document.getElementById('f-status').value = 'col-new';
-  document.getElementById('f-priority').value = 'Normal';
-  document.getElementById('f-notes').value = '';
-  populateModalSelects();
-  document.getElementById('f-lawyer').value = '';
-  document.getElementById('f-clerk').value = '';
-  document.getElementById('file-modal').classList.add('open');
+  document.getElementById('modal-title-kss34').textContent = 'Add New File';
+  document.getElementById('m-filenum-kss35').value = 'KSS-' + String(appData.files.length + 1).padStart(5, '0');
+  document.getElementById('m-client-kss36').value = '';
+  document.getElementById('m-address-kss37').value = '';
+  document.getElementById('m-type-kss38').value = 'Purchase';
+  document.getElementById('m-lawyer-kss39').value = appData.lawyers[0];
+  document.getElementById('m-clerk-kss40').value = appData.clerks[0];
+  document.getElementById('m-price-kss41').value = '';
+  document.getElementById('m-reqdate-kss42').value = '';
+  document.getElementById('m-closedate-kss43').value = '';
+  document.getElementById('m-status-kss44').value = 'col-new';
+  document.getElementById('m-priority-kss45').value = 'Normal';
+  document.getElementById('m-notes-kss46').value = '';
+  document.getElementById('file-modal-kss10').style.display = 'flex';
+  closeHamburger();
 }
 
 function openEditModal(id) {
-  var f = appData.files.find(function(x) { return x.id === id; });
-  if (!f) return;
+  var f = appData.files.find(function(x){ return x.id === id; });
+  if(!f) return;
   editingId = id;
-  document.getElementById('modal-title').textContent = 'Edit File — ' + f.fileNumber;
-  document.getElementById('f-id').value = f.id;
-  document.getElementById('f-num').value = f.fileNumber;
-  document.getElementById('f-client').value = f.clientName;
-  document.getElementById('f-address').value = f.address;
-  document.getElementById('f-type').value = f.type;
-  document.getElementById('f-date').value = f.closingDate;
-  document.getElementById('f-status').value = f.status;
-  document.getElementById('f-priority').value = f.priority;
-  document.getElementById('f-notes').value = f.notes || '';
-  populateModalSelects();
-  document.getElementById('f-lawyer').value = f.lawyer;
-  document.getElementById('f-clerk').value = f.clerk;
-  document.getElementById('file-modal').classList.add('open');
+  document.getElementById('modal-title-kss34').textContent = 'Edit File';
+  document.getElementById('m-filenum-kss35').value = f.fileNumber;
+  document.getElementById('m-client-kss36').value = f.clientName;
+  document.getElementById('m-address-kss37').value = f.address;
+  document.getElementById('m-type-kss38').value = f.type;
+  document.getElementById('m-lawyer-kss39').value = f.lawyer;
+  document.getElementById('m-clerk-kss40').value = f.clerk;
+  document.getElementById('m-price-kss41').value = f.price;
+  document.getElementById('m-reqdate-kss42').value = f.reqDate;
+  document.getElementById('m-closedate-kss43').value = f.closingDate;
+  document.getElementById('m-status-kss44').value = f.status;
+  document.getElementById('m-priority-kss45').value = f.priority;
+  document.getElementById('m-notes-kss46').value = f.notes;
+  document.getElementById('file-modal-kss10').style.display = 'flex';
 }
 
-function closeModal() { document.getElementById('file-modal').classList.remove('open'); editingId = null; }
+function closeModal() {
+  document.getElementById('file-modal-kss10').style.display = 'none';
+  editingId = null;
+}
 
 function saveFile() {
-  var client = document.getElementById('f-client').value.trim();
-  if (!client) { alert('Client name is required.'); return; }
+  var client = document.getElementById('m-client-kss36').value.trim();
+  if(!client) { alert('Client name is required.'); return; }
   var data = {
-    fileNumber: document.getElementById('f-num').value.trim() || generateFileNumber(),
+    fileNumber: document.getElementById('m-filenum-kss35').value.trim(),
     clientName: client,
-    address: document.getElementById('f-address').value.trim(),
-    type: document.getElementById('f-type').value,
-    lawyer: document.getElementById('f-lawyer').value,
-    clerk: document.getElementById('f-clerk').value,
-    closingDate: document.getElementById('f-date').value,
-    status: document.getElementById('f-status').value,
-    priority: document.getElementById('f-priority').value,
-    notes: document.getElementById('f-notes').value.trim(),
+    address: document.getElementById('m-address-kss37').value.trim(),
+    type: document.getElementById('m-type-kss38').value,
+    lawyer: document.getElementById('m-lawyer-kss39').value,
+    clerk: document.getElementById('m-clerk-kss40').value,
+    price: document.getElementById('m-price-kss41').value.trim(),
+    reqDate: document.getElementById('m-reqdate-kss42').value,
+    closingDate: document.getElementById('m-closedate-kss43').value,
+    status: document.getElementById('m-status-kss44').value,
+    priority: document.getElementById('m-priority-kss45').value,
+    notes: document.getElementById('m-notes-kss46').value.trim(),
     expanded: false
   };
-  if (editingId) {
-    var f = appData.files.find(function(x) { return x.id === editingId; });
-    if (f) { Object.assign(f, data); }
+  if(editingId) {
+    var f = appData.files.find(function(x){ return x.id === editingId; });
+    if(f) Object.assign(f, data);
   } else {
     data.id = String(Date.now());
     appData.files.push(data);
   }
-  saveData(); closeModal(); renderBoard(); renderDashboard(); renderCalendar();
+  saveData(); renderAll(); closeModal();
 }
 
 function deleteFile(id) {
-  var f = appData.files.find(function(x) { return x.id === id; });
-  if (!f) return;
-  if (!confirm('Delete file ' + f.fileNumber + ' (' + f.clientName + ')?')) return;
-  appData.files = appData.files.filter(function(x) { return x.id !== id; });
-  saveData(); renderBoard(); renderDashboard(); renderCalendar();
+  if(!confirm('Delete this file?')) return;
+  appData.files = appData.files.filter(function(f){ return f.id !== id; });
+  saveData(); renderAll();
 }
 
 function copyCard(id) {
-  var f = appData.files.find(function(x) { return x.id === id; });
-  if (!f) return;
+  var f = appData.files.find(function(x){ return x.id === id; });
+  if(!f) return;
   var c = JSON.parse(JSON.stringify(f));
   c.id = String(Date.now());
-  c.fileNumber = generateFileNumber();
-  c.clientName = f.clientName + ' (Copy)';
+  var num = appData.files.length + 1;
+  c.fileNumber = 'KSS-' + String(num).padStart(5, '0');
   c.expanded = false;
   appData.files.push(c);
-  saveData(); renderBoard(); renderDashboard(); renderCalendar();
+  saveData(); renderAll();
 }
 
-/* ═══ MANAGE TEAM ═══ */
-function openManage() {
-  renderManage();
-  document.getElementById('manage-modal').classList.add('open');
-}
-function closeManage() { document.getElementById('manage-modal').classList.remove('open'); }
-
-function renderManage() {
-  var grid = document.getElementById('team-grid');
-  var html = '<div><div class="team-section-title">⚖ Lawyers</div>';
-  appData.lawyers.forEach(function(l) {
-    html += '<div class="team-item team-item-lawyer"><span>'+l+'</span><button class="team-remove" data-rm-lawyer="'+l+'">×</button></div>';
-  });
-  html += '<div class="team-add-row"><input class="team-add-input" id="add-lawyer-input" placeholder="New lawyer…" /><button class="team-add-btn" id="btn-add-lawyer">Add</button></div></div>';
-
-  html += '<div><div class="team-section-title">📋 Clerks</div>';
-  appData.clerks.forEach(function(c) {
-    html += '<div class="team-item team-item-clerk"><span>'+c+'</span><button class="team-remove" data-rm-clerk="'+c+'">×</button></div>';
-  });
-  html += '<div class="team-add-row"><input class="team-add-input" id="add-clerk-input" placeholder="New clerk…" /><button class="team-add-btn" id="btn-add-clerk">Add</button></div></div>';
-
-  grid.innerHTML = html;
-
-  setTimeout(function() {
-    document.querySelectorAll('[data-rm-lawyer]').forEach(function(btn) {
-      btn.addEventListener('click', function() { removeLawyer(this.dataset.rmLawyer); });
-    });
-    document.querySelectorAll('[data-rm-clerk]').forEach(function(btn) {
-      btn.addEventListener('click', function() { removeClerk(this.dataset.rmClerk); });
-    });
-    var alBtn = document.getElementById('btn-add-lawyer');
-    if (alBtn) alBtn.addEventListener('click', addLawyer);
-    var acBtn = document.getElementById('btn-add-clerk');
-    if (acBtn) acBtn.addEventListener('click', addClerk);
-  }, 0);
-}
-
-function addLawyer() {
-  var inp = document.getElementById('add-lawyer-input');
-  var v = inp.value.trim();
-  if (v && appData.lawyers.indexOf(v) === -1) { appData.lawyers.push(v); saveData(); renderManage(); renderFilters(); }
-}
-function removeLawyer(name) {
-  appData.lawyers = appData.lawyers.filter(function(l) { return l !== name; });
-  saveData(); renderManage(); renderFilters();
-}
-function addClerk() {
-  var inp = document.getElementById('add-clerk-input');
-  var v = inp.value.trim();
-  if (v && appData.clerks.indexOf(v) === -1) { appData.clerks.push(v); saveData(); renderManage(); renderFilters(); }
-}
-function removeClerk(name) {
-  appData.clerks = appData.clerks.filter(function(c) { return c !== name; });
-  saveData(); renderManage(); renderFilters();
-}
-
-/* ═══ TABS ═══ */
-function showTab(tab) {
-  ['dashboard','matters','calendar'].forEach(function(t) {
-    var el = document.getElementById('tab-' + t);
-    if (el) el.style.display = (t === tab) ? 'block' : 'none';
-  });
-  document.querySelectorAll('.tab-btn').forEach(function(btn) {
-    btn.classList.toggle('active', btn.dataset.tab === tab);
-  });
-  if (tab === 'dashboard') renderDashboard();
-  if (tab === 'calendar') renderCalendar();
-}
-
-/* ═══ DASHBOARD ═══ */
-function renderDashboard() {
-  var files = appData.files;
-  var total = files.length;
-  var week = files.filter(function(f) { return f.status !== 'col-closed' && daysUntil(f.closingDate) <= 7 && daysUntil(f.closingDate) >= 0; }).length;
-  var month = files.filter(function(f) { return f.status !== 'col-closed' && daysUntil(f.closingDate) <= 30 && daysUntil(f.closingDate) >= 0; }).length;
-  var urgent = files.filter(function(f) { return f.priority === 'Urgent'; }).length;
-  var closed = files.filter(function(f) { return f.status === 'col-closed'; }).length;
-  var reporting = files.filter(function(f) { return f.status === 'col-reporting-due'; }).length;
-
-  var stats = [
-    {emoji:'📁',num:total,label:'Total Files',bg:'linear-gradient(145deg,#e6f4f4,#d0eeed)',bar:'linear-gradient(90deg,#0d7377,#14a09a)'},
-    {emoji:'🔴',num:week,label:'Closing This Week',bg:'linear-gradient(145deg,#fdecea,#ffe0dc)',bar:'linear-gradient(90deg,#c0392b,#e74c3c)'},
-    {emoji:'🟠',num:month,label:'Closing This Month',bg:'linear-gradient(145deg,#fff5e6,#ffe8cc)',bar:'linear-gradient(90deg,#e67e22,#f39c12)'},
-    {emoji:'⚡',num:urgent,label:'Urgent Priority',bg:'linear-gradient(145deg,#fdf0ed,#ffe0d6)',bar:'linear-gradient(90deg,#e8705a,#f4a08e)'},
-    {emoji:'✅',num:closed,label:'Closed Files',bg:'linear-gradient(145deg,#e8f8f5,#d0f0ea)',bar:'linear-gradient(90deg,#2a9d8f,#3dbcae)'},
-    {emoji:'📋',num:reporting,label:'Reporting Due',bg:'linear-gradient(145deg,#e8f4fd,#d0e8fa)',bar:'linear-gradient(90deg,#0e7490,#17a4c4)'}
-  ];
-
-  var sg = document.getElementById('stat-grid');
-  sg.innerHTML = '';
-  stats.forEach(function(s) {
-    sg.innerHTML += '<div class="stat-card" style="background:'+s.bg+'"><div class="stat-bar" style="background:'+s.bar+'"></div><div class="stat-emoji">'+s.emoji+'</div><div class="stat-num">'+s.num+'</div><div class="stat-label">'+s.label+'</div></div>';
-  });
-
-  // Breakdowns
-  var bg = document.getElementById('breakdown-grid');
-  var html = '';
-
-  // By Lawyer
-  html += '<div class="breakdown-card" style="border-top:4px solid #0d7377;"><div class="breakdown-title">⚖ By Lawyer</div>';
-  appData.lawyers.forEach(function(l) {
-    var cnt = files.filter(function(f) { return f.lawyer === l; }).length;
-    var pct = total > 0 ? (cnt/total)*100 : 0;
-    html += '<div class="bar-row"><div class="bar-label"><span>'+l+'</span><span style="font-weight:700;color:#0d7377;">'+cnt+'</span></div>';
-    html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:linear-gradient(90deg,#0d7377,#14a09a);"></div></div></div>';
-  });
-  html += '</div>';
-
-  // By Status
-  html += '<div class="breakdown-card" style="border-top:4px solid #e8705a;"><div class="breakdown-title">📋 By Status</div>';
-  COL_META.forEach(function(col) {
-    var cnt = files.filter(function(f) { return f.status === col.id; }).length;
-    var pct = total > 0 ? (cnt/total)*100 : 0;
-    html += '<div class="bar-row"><div class="bar-label"><span>'+col.label+'</span><span style="font-weight:700;color:'+COL_ACCENT[col.id]+'">'+cnt+'</span></div>';
-    html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+col.grad+';"></div></div></div>';
-  });
-  html += '</div>';
-
-  bg.innerHTML = html;
-}
-
-/* ═══ CALENDAR ═══ */
-function renderCalendar() {
-  var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('cal-month-label').textContent = monthNames[calMonth] + ' ' + calYear;
-
-  var firstDay = new Date(calYear, calMonth, 1).getDay();
-  var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-  var prevDays = new Date(calYear, calMonth, 0).getDate();
-
-  var grid = document.getElementById('cal-grid');
-  grid.innerHTML = '';
-
-  var today = new Date(2026,8,3);
-  var todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
-
-  // Build file lookup by date
-  var filesByDate = {};
-  appData.files.forEach(function(f) {
-    if (f.closingDate) {
-      if (!filesByDate[f.closingDate]) filesByDate[f.closingDate] = [];
-      filesByDate[f.closingDate].push(f);
-    }
-  });
-
-  // Previous month days
-  for (var i = firstDay - 1; i >= 0; i--) {
-    var d = prevDays - i;
-    var cell = document.createElement('div');
-    cell.className = 'cal-day other';
-    cell.innerHTML = '<div class="cal-day-num">'+d+'</div>';
-    grid.appendChild(cell);
-  }
-
-  // Current month days
-  for (var day = 1; day <= daysInMonth; day++) {
-    var dateStr = calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
-    var cell = document.createElement('div');
-    cell.className = 'cal-day';
-    var isToday = (dateStr === todayStr);
-    cell.innerHTML = '<div class="cal-day-num'+(isToday?' today':'')+'">'+day+'</div>';
-
-    var dayFiles = filesByDate[dateStr] || [];
-    var maxDots = 2;
-    for (var fi = 0; fi < Math.min(dayFiles.length, maxDots); fi++) {
-      var dotFile = dayFiles[fi];
-      var accent = COL_ACCENT[dotFile.status] || '#0d7377';
-      cell.innerHTML += '<span class="cal-dot" style="background:linear-gradient(135deg,'+accent+','+lighten(accent)+');">'+dotFile.fileNumber.replace('KSS-2026-','KSS-')+'</span>';
-    }
-    if (dayFiles.length > maxDots) {
-      cell.innerHTML += '<span class="cal-dot" style="background:linear-gradient(135deg,#98918b,#b3ada8);">+' + (dayFiles.length - maxDots) + ' more</span>';
-    }
-
-    if (dayFiles.length > 0) {
-      (function(ds, dfs) {
-        cell.addEventListener('click', function(e) { showDayPopup(e, ds, dfs); });
-      })(dateStr, dayFiles);
-    }
-
-    grid.appendChild(cell);
-  }
-
-  // Next month days
-  var totalCells = firstDay + daysInMonth;
-  var remaining = (7 - (totalCells % 7)) % 7;
-  for (var n = 1; n <= remaining; n++) {
-    var cell = document.createElement('div');
-    cell.className = 'cal-day other';
-    cell.innerHTML = '<div class="cal-day-num">'+n+'</div>';
-    grid.appendChild(cell);
-  }
-}
-
-function lighten(hex) {
-  var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-  r = Math.min(255, r + 60); g = Math.min(255, g + 60); b = Math.min(255, b + 60);
-  return '#'+r.toString(16).padStart(2,'0')+g.toString(16).padStart(2,'0')+b.toString(16).padStart(2,'0');
-}
-
-function prevMonth() { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); }
-function nextMonth() { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); }
-
-function showDayPopup(event, dateStr, files) {
-  var popup = document.getElementById('day-popup');
-  var html = '<div class="popup-title">'+formatDate(dateStr)+'</div>';
-  files.forEach(function(f) {
-    html += '<div class="popup-file" style="border-left:3px solid '+COL_ACCENT[f.status]+'">';
-    html += '<div style="font-size:11px;font-weight:700;color:#a8d4d4;">'+f.fileNumber+'</div>';
-    html += '<div style="font-size:14px;font-weight:600;color:white;">'+f.clientName+'</div>';
-    html += '<div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">';
-    html += '<span style="background:rgba(255,255,255,0.15);border-radius:6px;padding:2px 8px;font-size:10px;">'+f.type+'</span>';
-    if (f.lawyer) html += '<span style="background:rgba(255,255,255,0.1);border-radius:6px;padding:2px 8px;font-size:10px;">'+f.lawyer+'</span>';
-    html += '</div></div>';
-  });
-  popup.innerHTML = html;
-  popup.style.display = 'block';
-
-  // Position near click
-  var x = event.clientX, y = event.clientY;
-  var pw = 280, ph = popup.offsetHeight || 200;
-  if (x + pw > window.innerWidth) x = window.innerWidth - pw - 20;
-  if (y + ph > window.innerHeight) y = window.innerHeight - ph - 20;
-  if (x < 10) x = 10; if (y < 10) y = 10;
-  popup.style.left = x + 'px'; popup.style.top = y + 'px';
-}
-
-/* ═══ ALERTS ═══ */
+// ── ALERTS ──
 function showAlerts() {
-  var urgent = appData.files.filter(function(f) { return f.status !== 'col-closed' && daysUntil(f.closingDate) <= 7 && daysUntil(f.closingDate) >= 0; });
-  if (urgent.length === 0) { alert('✅ No urgent closings in the next 7 days.'); return; }
-  var msg = '⚠️ URGENT CLOSING ALERTS\n\n';
-  urgent.forEach(function(f) {
-    msg += '• ' + f.fileNumber + ' — ' + f.clientName + '\n  Closing: ' + formatDate(f.closingDate) + ' (' + daysUntil(f.closingDate) + ' days)\n\n';
-  });
+  var files = appData.files.filter(function(f){ return daysUntil(f.closingDate) <= 7 && f.status !== 'col-closed'; });
+  var msg;
+  if(files.length) {
+    msg = '⚠️ URGENT — Closing within 7 days:\n\n';
+    files.forEach(function(f){
+      var d = daysUntil(f.closingDate);
+      msg += f.fileNumber + ' | ' + f.clientName + ' | Closes: ' + formatDate(f.closingDate) + ' (' + (d<0 ? Math.abs(d)+'d overdue' : d+'d left') + ')\n';
+    });
+  } else {
+    msg = '✅ No urgent closings in the next 7 days.';
+  }
   alert(msg);
+  closeHamburger();
 }
 
-/* ═══ BACKUP & RESTORE ═══ */
+// ── BACKUP / RESTORE ──
 function backupData() {
-  var json = JSON.stringify(appData, null, 2);
-  var blob = new Blob([json], {type:'application/json'});
-  var url = URL.createObjectURL(blob);
+  var blob = new Blob([JSON.stringify(appData, null, 2)], {type: 'application/json'});
   var a = document.createElement('a');
-  a.href = url; a.download = 'kss-backup-' + new Date().toISOString().slice(0,10) + '.json';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  a.href = URL.createObjectURL(blob);
+  a.download = 'kss-backup-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  closeHamburger();
+}
+
+function mapOldStatusToNew(statusOverride, closingDate) {
+  if (!statusOverride || statusOverride === 'auto') {
+    // Auto-detect by closing date
+    if (!closingDate) return 'col-new';
+    var d = daysUntil(closingDate);
+    if (d < 0) return 'col-reporting';
+    if (d <= 7) return 'col-closing';
+    if (d <= 30) return 'col-req';
+    return 'col-new';
+  }
+  var map = {
+    'closed': 'col-closed',
+    'overdue': 'col-reporting',
+    'req': 'col-req',
+    'open': 'col-new',
+    'closing': 'col-closing'
+  };
+  return map[statusOverride.toLowerCase()] || 'col-new';
+}
+
+function formatPriceToString(price) {
+  if (typeof price === 'string' && price.indexOf('$') === 0) return price;
+  if (typeof price === 'number') {
+    return '$' + price.toLocaleString('en-US');
+  }
+  if (typeof price === 'string') {
+    var num = parseFloat(price.replace(/[^0-9.]/g, ''));
+    if (!isNaN(num)) return '$' + num.toLocaleString('en-US');
+    return price;
+  }
+  return '$0';
+}
+
+function normalizeFile(f) {
+  // Detect old format by checking for old field names
+  var isOldFormat = f.hasOwnProperty('fileNo') || f.hasOwnProperty('property') || f.hasOwnProperty('lawyerName') || f.hasOwnProperty('requisitionDate') || f.hasOwnProperty('statusOverride');
+
+  if (isOldFormat) {
+    var closingDate = f.closingDate || '';
+    return {
+      id: f.id || String(Date.now() + Math.random()),
+      fileNumber: f.fileNo || f.fileNumber || '',
+      clientName: f.clientName || '',
+      address: f.property || f.address || '',
+      type: f.type || 'Purchase',
+      price: formatPriceToString(f.price),
+      lawyer: f.lawyerName || f.lawyer || '',
+      clerk: f.clerk || '',
+      reqDate: f.requisitionDate || f.reqDate || '',
+      closingDate: closingDate,
+      status: f.statusOverride ? mapOldStatusToNew(f.statusOverride, closingDate) : (f.status || 'col-new'),
+      priority: f.priority || 'Normal',
+      notes: f.notes || '',
+      expanded: false
+    };
+  }
+
+  // New format — return as-is with defaults
+  return {
+    id: f.id || String(Date.now() + Math.random()),
+    fileNumber: f.fileNumber || '',
+    clientName: f.clientName || '',
+    address: f.address || '',
+    type: f.type || 'Purchase',
+    price: f.price || '$0',
+    lawyer: f.lawyer || '',
+    clerk: f.clerk || '',
+    reqDate: f.reqDate || '',
+    closingDate: f.closingDate || '',
+    status: f.status || 'col-new',
+    priority: f.priority || 'Normal',
+    notes: f.notes || '',
+    expanded: false
+  };
 }
 
 function restoreData() {
   var inp = document.createElement('input');
   inp.type = 'file'; inp.accept = '.json';
-  inp.addEventListener('change', function(e) {
-    var file = e.target.files[0]; if (!file) return;
-    var reader = new FileReader();
-    reader.addEventListener('load', function(ev) {
+  inp.addEventListener('change', function(e){
+    var r = new FileReader();
+    r.addEventListener('load', function(ev){
       try {
         var d = JSON.parse(ev.target.result);
-        if (d.files && d.lawyers && d.clerks) {
-          appData = d; saveData(); renderFilters(); renderBoard(); renderDashboard(); renderCalendar();
-          alert('✅ Data restored successfully!');
-        } else { alert('❌ Invalid backup file.'); }
-      } catch(err) { alert('❌ Could not read file.'); }
+
+        // New format: has files, lawyers, clerks arrays
+        if(d.files && d.lawyers && d.clerks) {
+          // Normalize each file in case it's a mix of old/new
+          d.files = d.files.map(normalizeFile);
+          appData = d;
+          saveData(); renderAll(); alert('✅ Restored ' + d.files.length + ' files!');
+        }
+        // Old format: might be an array of files directly
+        else if (Array.isArray(d)) {
+          var normalized = d.map(normalizeFile);
+          appData.files = normalized;
+          saveData(); renderAll(); alert('✅ Restored ' + normalized.length + ' files from legacy format!');
+        }
+        // Old format: object with a different structure (e.g. { matters: [...] })
+        else if (d.matters && Array.isArray(d.matters)) {
+          var normalized2 = d.matters.map(normalizeFile);
+          appData.files = normalized2;
+          saveData(); renderAll(); alert('✅ Restored ' + normalized2.length + ' files from legacy format!');
+        }
+        else { alert('Invalid file format. Expected a KSS backup JSON.'); }
+      } catch(ex) { alert('Error reading file: ' + ex.message); }
     });
-    reader.readAsText(file);
+    r.readAsText(e.target.files[0]);
   });
   inp.click();
+  closeHamburger();
 }
 
-/* ═══ INIT ═══ */
+// ── DASHBOARD ──
+function renderDashboard() {
+  var files = appData.files;
+  var total = files.length;
+  var today = new Date(); today.setHours(0,0,0,0);
+  var weekEnd = new Date(today); weekEnd.setDate(weekEnd.getDate() + 7);
+  var monthEnd = new Date(today); monthEnd.setDate(monthEnd.getDate() + 30);
+
+  var closingWeek = files.filter(function(f){
+    if(!f.closingDate || f.status==='col-closed') return false;
+    var d = new Date(f.closingDate+'T00:00:00');
+    return d >= today && d <= weekEnd;
+  }).length;
+
+  var closingMonth = files.filter(function(f){
+    if(!f.closingDate || f.status==='col-closed') return false;
+    var d = new Date(f.closingDate+'T00:00:00');
+    return d >= today && d <= monthEnd;
+  }).length;
+
+  var urgent = files.filter(function(f){ return f.priority==='Urgent' && f.status!=='col-closed'; }).length;
+  var closed = files.filter(function(f){ return f.status==='col-closed'; }).length;
+  var reporting = files.filter(function(f){ return f.status==='col-reporting'; }).length;
+
+  var cards = [
+    {emoji:'📁',num:total,label:'Total Files',bg:'linear-gradient(145deg,#eef2ff,#e0e7ff)',bar:'var(--grad-purple)'},
+    {emoji:'🔴',num:closingWeek,label:'Closing This Week',bg:'linear-gradient(145deg,#fef2f2,#fee2e2)',bar:'var(--grad-red)'},
+    {emoji:'🟡',num:closingMonth,label:'Closing This Month',bg:'linear-gradient(145deg,#fffbeb,#fef3c7)',bar:'var(--grad-amber)'},
+    {emoji:'⚡',num:urgent,label:'Urgent',bg:'linear-gradient(145deg,#fff7ed,#fed7aa)',bar:'var(--grad-coral)'},
+    {emoji:'✅',num:closed,label:'Closed',bg:'linear-gradient(145deg,#f0fdf4,#dcfce7)',bar:'var(--grad-green)'},
+    {emoji:'📋',num:reporting,label:'Reporting Due',bg:'linear-gradient(145deg,#fef2f2,#fecaca)',bar:'var(--grad-red)'}
+  ];
+
+  var html = '';
+  cards.forEach(function(c){
+    html += '<div class="dash-stat-card" style="background:'+c.bg+'"><div class="top-bar" style="background:'+c.bar+'"></div><span class="emoji">'+c.emoji+'</span><div class="num">'+c.num+'</div><div class="lbl">'+c.label+'</div></div>';
+  });
+  document.getElementById('dash-stats-grid-kss20').innerHTML = html;
+
+  // By Lawyer
+  var lawyerCounts = {};
+  appData.lawyers.forEach(function(l){ lawyerCounts[l] = 0; });
+  files.forEach(function(f){ if(lawyerCounts[f.lawyer] !== undefined) lawyerCounts[f.lawyer]++; });
+  var maxL = Math.max.apply(null, Object.values(lawyerCounts)) || 1;
+  var lhtml = '';
+  appData.lawyers.forEach(function(l){
+    var c = lawyerCounts[l];
+    var pct = Math.round((c/maxL)*100);
+    lhtml += '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:13px;font-weight:600;color:var(--text-dark)">'+escH(l)+'</span><span style="font-size:13px;font-weight:700;color:var(--purple-mid)">'+c+'</span></div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:var(--grad-purple)"></div></div></div>';
+  });
+  document.getElementById('dash-lawyers-kss21').innerHTML = lhtml;
+
+  // By Status
+  var statusCounts = {};
+  COLUMNS.forEach(function(col){ statusCounts[col.id] = 0; });
+  files.forEach(function(f){ if(statusCounts[f.status] !== undefined) statusCounts[f.status]++; });
+  var maxS = Math.max.apply(null, Object.values(statusCounts)) || 1;
+  var shtml = '';
+  COLUMNS.forEach(function(col){
+    var c = statusCounts[col.id];
+    var pct = Math.round((c/maxS)*100);
+    shtml += '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:13px;font-weight:600;color:var(--text-dark)">'+col.label+'</span><span style="font-size:13px;font-weight:700;color:'+col.accent+'">'+c+'</span></div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+col.grad+'"></div></div></div>';
+  });
+  document.getElementById('dash-status-kss22').innerHTML = shtml;
+}
+
+// ── CALENDAR ──
+function renderCalendar() {
+  var year = calYear, month = calMonth;
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month-label-kss31').textContent = months[month] + ' ' + year;
+
+  var firstDay = new Date(year, month, 1).getDay();
+  var daysInMonth = new Date(year, month + 1, 0).getDate();
+  var prevDays = new Date(year, month, 0).getDate();
+  var today = new Date(); today.setHours(0,0,0,0);
+
+  var fileMap = {};
+  appData.files.forEach(function(f){
+    if(!f.closingDate) return;
+    if(!fileMap[f.closingDate]) fileMap[f.closingDate] = [];
+    fileMap[f.closingDate].push(f);
+  });
+
+  var html = '';
+  var totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+  for(var i = 0; i < totalCells; i++) {
+    var dayNum, dateStr, isOther = false;
+    if(i < firstDay) {
+      dayNum = prevDays - firstDay + i + 1;
+      isOther = true;
+      var pm = month === 0 ? 11 : month - 1;
+      var py = month === 0 ? year - 1 : year;
+      dateStr = py + '-' + String(pm+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+    } else if(i - firstDay >= daysInMonth) {
+      dayNum = i - firstDay - daysInMonth + 1;
+      isOther = true;
+      var nm = month === 11 ? 0 : month + 1;
+      var ny = month === 11 ? year + 1 : year;
+      dateStr = ny + '-' + String(nm+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+    } else {
+      dayNum = i - firstDay + 1;
+      dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+    }
+
+    var isToday = !isOther && (new Date(year, month, dayNum).getTime() === today.getTime());
+    var filesOnDay = fileMap[dateStr] || [];
+
+    html += '<div class="day-cell'+(isOther?' other-month':'')+'" data-date="'+dateStr+'">';
+    if(isToday) {
+      html += '<div class="today-num">'+dayNum+'</div>';
+    } else {
+      html += '<div class="day-num">'+dayNum+'</div>';
+    }
+
+    var maxDots = 2;
+    filesOnDay.slice(0, maxDots).forEach(function(f){
+      var col = getColMeta(f.status);
+      var suffix = f.fileNumber.split('-').pop();
+      html += '<span class="cal-dot" style="background:linear-gradient(135deg,'+col.accent+','+col.accent+'cc)">'+suffix+'</span>';
+    });
+    if(filesOnDay.length > maxDots) {
+      html += '<span class="cal-dot" style="background:linear-gradient(135deg,#64748b,#94a3b8)">+' + (filesOnDay.length - maxDots) + '</span>';
+    }
+    html += '</div>';
+  }
+  document.getElementById('cal-grid-kss33').innerHTML = html;
+
+  document.querySelectorAll('.day-cell:not(.other-month)').forEach(function(cell){
+    cell.addEventListener('click', function(e){
+      var date = this.getAttribute('data-date');
+      var filesOnDay = fileMap[date] || [];
+      if(filesOnDay.length) showDayPopup(e, date, filesOnDay);
+    });
+  });
+}
+
+function showDayPopup(event, dateStr, filesOnDay) {
+  var popup = document.getElementById('day-popup-kss11');
+  var html = '<div class="popup-title">📅 ' + formatDate(dateStr) + '</div>';
+  filesOnDay.forEach(function(f){
+    var col = getColMeta(f.status);
+    html += '<div class="popup-file" style="border-left:3px solid '+col.accent+'"><div class="popup-fnum">'+escH(f.fileNumber)+'</div><div class="popup-client">'+escH(f.clientName)+'</div><div style="font-size:11px;color:#a5b4fc;margin-top:4px">'+escH(f.type)+' • '+escH(f.lawyer)+'</div></div>';
+  });
+  popup.innerHTML = html;
+
+  var x = event.clientX, y = event.clientY;
+  var pw = 300, ph = 200;
+  if(x + pw > window.innerWidth) x = window.innerWidth - pw - 20;
+  if(y + ph > window.innerHeight) y = y - ph;
+  if(x < 10) x = 10;
+  if(y < 10) y = 10;
+
+  popup.style.left = x + 'px';
+  popup.style.top = y + 'px';
+  popup.style.display = 'block';
+}
+
+function prevMonth() { calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); }
+function nextMonth() { calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendar(); }
+
+// ── TABS ──
+function showTab(tab) {
+  document.getElementById('tab-dashboard-kss13').style.display = 'none';
+  document.getElementById('tab-matters-kss12').style.display = 'none';
+  document.getElementById('tab-calendar-kss14').style.display = 'none';
+  document.getElementById('tab-' + tab + (tab==='dashboard'?'-kss13':tab==='matters'?'-kss12':'-kss14')).style.display = 'block';
+  document.querySelectorAll('.tab-btn').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-tab') === tab);
+  });
+}
+
+function showTabById(tab) {
+  var idMap = {dashboard:'tab-dashboard-kss13', matters:'tab-matters-kss12', calendar:'tab-calendar-kss14'};
+  Object.keys(idMap).forEach(function(k){ document.getElementById(idMap[k]).style.display = 'none'; });
+  document.getElementById(idMap[tab]).style.display = 'block';
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab')===tab); });
+}
+
+// ── FILTERS ──
+function renderFilters() {
+  var ls = document.getElementById('filter-lawyer-kss27');
+  ls.innerHTML = '<option value="">All Lawyers</option>';
+  appData.lawyers.forEach(function(l){ ls.innerHTML += '<option>'+escH(l)+'</option>'; });
+
+  var ml = document.getElementById('m-lawyer-kss39');
+  ml.innerHTML = '';
+  appData.lawyers.forEach(function(l){ ml.innerHTML += '<option>'+escH(l)+'</option>'; });
+
+  var mc = document.getElementById('m-clerk-kss40');
+  mc.innerHTML = '';
+  appData.clerks.forEach(function(c){ mc.innerHTML += '<option>'+escH(c)+'</option>'; });
+}
+
+function closeHamburger() { document.getElementById('hamburger-menu-kss5').style.display = 'none'; }
+
+function renderAll() { renderBoard(); renderDashboard(); renderCalendar(); }
+
+// ── INIT ──
 loadData();
-if (!appData.files || appData.files.length === 0) seedData();
+if(!appData.files || !appData.files.length) seedData();
+calYear = new Date().getFullYear();
+calMonth = new Date().getMonth();
 renderFilters();
 renderBoard();
 renderDashboard();
 renderCalendar();
-showTab('matters');
+showTabById('matters');
 
-// Splash dismiss
-setTimeout(function() {
-  var splash = document.getElementById('splash');
-  splash.style.opacity = '0';
-  setTimeout(function() { splash.style.display = 'none'; }, 900);
-}, 3000);
+// ── SPLASH ──
+setTimeout(function(){
+  var sp = document.getElementById('splash-screen-kss1');
+  sp.style.animation = 'fadeOut 0.7s ease forwards';
+  setTimeout(function(){ sp.style.display = 'none'; }, 700);
+}, 2500);
 
-// Hamburger toggle
-document.getElementById('btn-hamburger').addEventListener('click', function(e) {
+// ── HAMBURGER ──
+document.getElementById('btn-hamburger-kss4').addEventListener('click', function(e){
   e.stopPropagation();
-  var m = document.getElementById('hamburger-menu');
+  var m = document.getElementById('hamburger-menu-kss5');
   m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
 });
-document.addEventListener('click', function(e) {
-  var hm = document.getElementById('hamburger-menu');
-  if (hm) hm.style.display = 'none';
-  // Close day popup
-  var dp = document.getElementById('day-popup');
-  if (dp && !dp.contains(e.target)) dp.style.display = 'none';
+document.addEventListener('click', function(e){
+  var popup = document.getElementById('day-popup-kss11');
+  if(popup.style.display === 'block' && !popup.contains(e.target)) { popup.style.display = 'none'; }
+  document.getElementById('hamburger-menu-kss5').style.display = 'none';
 });
-document.getElementById('hamburger-menu').addEventListener('click', function(e) { e.stopPropagation(); });
+document.getElementById('hamburger-menu-kss5').addEventListener('click', function(e){ e.stopPropagation(); });
 
-// Menu items
-document.getElementById('hm-add').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; openAddModal(); });
-document.getElementById('hm-manage').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; openManage(); });
-document.getElementById('hm-alerts').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; showAlerts(); });
-document.getElementById('hm-backup').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; backupData(); });
-document.getElementById('hm-restore').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; restoreData(); });
-document.getElementById('hm-print').addEventListener('click', function() { document.getElementById('hamburger-menu').style.display='none'; window.print(); });
+// ── HAMBURGER MENU BUTTONS ──
+document.getElementById('hm-add-kss15').addEventListener('click', function(){ openAddModal(); });
+document.getElementById('hm-alerts-kss16').addEventListener('click', function(){ showAlerts(); });
+document.getElementById('hm-backup-kss17').addEventListener('click', function(){ backupData(); });
+document.getElementById('hm-restore-kss18').addEventListener('click', function(){ restoreData(); });
+document.getElementById('hm-print-kss19').addEventListener('click', function(){ closeHamburger(); window.print(); });
 
-// Tab buttons
-document.querySelectorAll('.tab-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() { showTab(this.dataset.tab); });
+// ── TABS ──
+document.querySelectorAll('.tab-btn').forEach(function(b){
+  b.addEventListener('click', function(){ showTabById(this.getAttribute('data-tab')); });
 });
 
-// Filter events
-document.getElementById('filter-lawyer').addEventListener('change', renderBoard);
-document.getElementById('filter-clerk').addEventListener('change', renderBoard);
-document.getElementById('filter-search').addEventListener('input', renderBoard);
+// ── FILTERS ──
+['filter-search-kss26','filter-lawyer-kss27','filter-type-kss28','filter-priority-kss29'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', renderBoard);
+  document.getElementById(id).addEventListener('change', renderBoard);
+});
 
-// Expand/collapse all
-document.getElementById('btn-expand-all').addEventListener('click', expandAll);
-document.getElementById('btn-collapse-all').addEventListener('click', collapseAll);
+// ── EXPAND/COLLAPSE ──
+document.getElementById('btn-expand-all-kss24').addEventListener('click', expandAll);
+document.getElementById('btn-collapse-all-kss25').addEventListener('click', collapseAll);
 
-// Modal buttons
-document.getElementById('btn-modal-cancel').addEventListener('click', closeModal);
-document.getElementById('btn-modal-save').addEventListener('click', saveFile);
-document.getElementById('btn-manage-done').addEventListener('click', function() { closeManage(); renderFilters(); renderBoard(); });
+// ── CALENDAR NAV ──
+document.getElementById('btn-prev-month-kss30').addEventListener('click', prevMonth);
+document.getElementById('btn-next-month-kss32').addEventListener('click', nextMonth);
 
-// Close modals on overlay click
-document.getElementById('file-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
-document.getElementById('manage-modal').addEventListener('click', function(e) { if (e.target === this) closeManage(); });
-
-// Calendar nav
-document.getElementById('cal-prev').addEventListener('click', prevMonth);
-document.getElementById('cal-next').addEventListener('click', nextMonth);
+// ── MODAL ──
+document.getElementById('btn-modal-cancel-kss47').addEventListener('click', closeModal);
+document.getElementById('btn-modal-save-kss48').addEventListener('click', saveFile);
+document.getElementById('file-modal-kss10').addEventListener('click', function(e){
+  if(e.target === this) closeModal();
+});
 </script>
 </body>
 </html>
