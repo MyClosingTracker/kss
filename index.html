@@ -305,88 +305,91 @@ header {
 .btn-save-modal:hover { transform: translateY(-1px); box-shadow: 0 7px 22px rgba(232,112,90,0.5); }
 
 /* Dashboard styles */
-.dash-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 20px; }
+.dash-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 22px; }
 .dash-kpi-card {
-  background: #fff; border-radius: 18px; padding: 22px 20px 18px; position: relative; overflow: hidden;
-  box-shadow: 0 4px 20px rgba(11,61,63,0.10); transition: all 0.2s;
+  background: #fff; border-radius: 16px; padding: 20px 18px 16px; position: relative; overflow: hidden;
+  box-shadow: 0 4px 18px rgba(11,61,63,0.09); transition: all 0.2s;
 }
-.dash-kpi-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(11,61,63,0.18); }
+.dash-kpi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(11,61,63,0.16); }
 .dash-kpi-card .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 5px; }
-.dash-kpi-card .kpi-emoji { font-size: 28px; margin-bottom: 8px; display: block; }
-.dash-kpi-card .kpi-num { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: var(--text-dark); line-height: 1; }
-.dash-kpi-card .kpi-label { font-weight: 600; font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
-.dash-kpi-card .kpi-sub { font-weight: 500; font-size: 10px; color: var(--text-light); margin-top: 3px; }
+.dash-kpi-card .kpi-emoji { font-size: 26px; margin-bottom: 8px; display: block; }
+.dash-kpi-card .kpi-num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: #1a3030; line-height: 1; }
+.dash-kpi-card .kpi-label { font-weight: 600; font-size: 11px; color: #7a9f9f; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.dash-kpi-card .kpi-sub { font-weight: 500; font-size: 10px; color: #7a9f9f; margin-top: 2px; }
 
-.dash-wide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
-.dash-tri-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 20px; }
-.dash-panel {
-  background: #fff; border-radius: 18px; padding: 24px; box-shadow: 0 4px 20px rgba(11,61,63,0.10);
-}
-.dash-panel h3 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; color: var(--teal-deep); margin: 0 0 18px; }
-
-/* Calendar styles */
+/* Calendar light styles */
 .cal-wrapper {
-  background: linear-gradient(160deg,#0b3d3f,#0d7377); border-radius:24px; overflow:hidden;
-  box-shadow: 0 20px 60px rgba(11,61,63,0.4); max-width:1000px; margin:0 auto;
+  background: #fff; border-radius: 24px; overflow: hidden;
+  box-shadow: 0 12px 48px rgba(11,61,63,0.15); border: 1px solid rgba(13,115,119,0.12);
+  max-width: 1000px; margin: 0 auto;
 }
 .cal-nav-new {
-  padding:28px 36px; display:flex; align-items:center; justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,0.1);
+  background: var(--grad-header);
+  padding: 22px 32px; display: flex; align-items: center; justify-content: space-between;
 }
 .cal-nav-new .cal-month-label-new {
-  font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:#fff;
-  text-shadow:0 2px 12px rgba(0,0,0,0.2);
+  font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #fff;
 }
 .cal-nav-btn-new {
-  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); color:#fff;
-  border-radius:50%; width:44px; height:44px; font-size:20px; cursor:pointer; transition:all .2s;
-  display:flex; align-items:center; justify-content:center;
+  background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff;
+  border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; justify-content: center;
 }
-.cal-nav-btn-new:hover { background:var(--grad-coral); border-color:transparent; transform:scale(1.1); }
+.cal-nav-btn-new:hover { background: var(--grad-coral); border-color: transparent; transform: scale(1.1); }
 .cal-weekday-row {
-  display:grid; grid-template-columns:repeat(7,1fr); background:rgba(0,0,0,0.2); padding:12px 16px;
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  background: linear-gradient(90deg, #e6f4f4, #f0fafa); padding: 10px 16px;
 }
-.cal-weekday-row span { color:rgba(255,255,255,0.6); font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; text-align:center; }
+.cal-weekday-row span {
+  color: #0d7377; font-weight: 700; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; text-align: center;
+}
 .cal-day-grid {
-  display:grid; grid-template-columns:repeat(7,1fr); gap:8px; padding:16px; background:rgba(255,255,255,0.04);
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 14px; background: #fafffe;
 }
 .cal-day-cell {
-  min-height:90px; border-radius:14px; padding:10px; cursor:pointer; transition:all .25s;
-  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);
+  min-height: 88px; border-radius: 12px; padding: 9px; cursor: pointer; transition: all .2s;
+  background: #fff; border: 1.5px solid #e6f4f4;
 }
-.cal-day-cell:hover { background:rgba(232,112,90,0.2); border-color:rgba(232,112,90,0.4); transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.2); }
-.cal-day-cell.other-month { opacity:0.25; pointer-events:none; }
-.cal-day-num { color:rgba(255,255,255,0.8); font-weight:700; font-size:14px; margin-bottom:6px; }
+.cal-day-cell:hover {
+  background: linear-gradient(145deg, #e6f4f4, #f0fafa); border-color: #14a09a;
+  transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,115,119,0.12);
+}
+.cal-day-cell.other-month { background: #f8f9fa; opacity: 0.5; pointer-events: none; }
+.cal-day-cell.cal-today-cell { background: linear-gradient(145deg, #e6f4f4, #d4ecec); border-color: #0d7377; border-width: 2px; }
+.cal-day-num { color: #1a3030; font-weight: 700; font-size: 14px; margin-bottom: 5px; }
 .cal-today-num {
-  background:var(--grad-coral); color:#fff; width:30px; height:30px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;
-  box-shadow:0 0 0 4px rgba(232,112,90,0.3), 0 4px 16px rgba(232,112,90,0.5);
+  background: var(--grad-coral); color: #fff; width: 28px; height: 28px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;
+  box-shadow: 0 2px 10px rgba(232,112,90,0.4);
 }
 .cal-event-pill {
-  background:rgba(255,255,255,0.15); backdrop-filter:blur(4px); color:#fff; border-radius:6px;
-  font-weight:600; font-size:9px; padding:3px 7px; margin-top:3px; white-space:nowrap;
-  overflow:hidden; text-overflow:ellipsis; max-width:100%; display:block;
+  border-radius: 5px; font-weight: 600; font-size: 9px; padding: 2px 6px; margin-top: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block; color: #fff;
 }
-.cal-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:16px; justify-content:center; }
-.cal-legend-item { display:flex; align-items:center; gap:6px; font-weight:600; font-size:11px; color:var(--text-mid); }
-.cal-legend-dot { width:10px; height:10px; border-radius:50%; }
+.cal-event-pill-more {
+  background: #e6f4f4; color: #0d7377; border-radius: 5px; font-weight: 600; font-size: 9px;
+  padding: 2px 6px; margin-top: 3px; display: block; text-align: center;
+}
+.cal-legend { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; justify-content: center; padding: 8px 0; }
+.cal-legend-item { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 11px; color: #3d5c5c; }
+.cal-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
 
 #day-popup-kss11 {
   position: fixed; z-index: 600; display: none;
-  background: linear-gradient(160deg,rgba(11,61,63,0.97),rgba(13,115,119,0.97));
-  backdrop-filter: blur(20px); border-radius: 20px; padding: 24px;
-  min-width: 280px; max-width: 340px;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff;
+  background: #fff; border-radius: 18px; padding: 22px; min-width: 270px; max-width: 320px;
+  box-shadow: 0 20px 60px rgba(11,61,63,0.25); border: 1.5px solid rgba(13,115,119,0.15); color: #1a3030;
 }
-#day-popup-kss11 .popup-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; color: #f4a08e; margin-bottom: 14px; }
+#day-popup-kss11 .popup-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 17px; color: #0b3d3f; margin-bottom: 12px; }
 #day-popup-kss11 .popup-file {
-  background: rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; margin-bottom: 10px;
+  background: linear-gradient(90deg, #f8fdfd, #fff); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px;
 }
-#day-popup-kss11 .popup-fnum { font-weight: 700; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 1px; margin-bottom: 3px; }
-#day-popup-kss11 .popup-client { font-weight: 700; font-size: 14px; color: #fff; }
+#day-popup-kss11 .popup-fnum { font-weight: 700; font-size: 10px; color: #7a9f9f; letter-spacing: 1px; margin-bottom: 3px; }
+#day-popup-kss11 .popup-client { font-weight: 700; font-size: 13px; color: #1a3030; }
 #day-popup-kss11 .popup-close {
-  position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.1); border:none; color:#fff;
-  border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;
+  position: absolute; top: 14px; right: 14px; background: #f1f5f9; border: none; color: #3d5c5c;
+  border-radius: 50%; width: 26px; height: 26px; cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
 }
 
 @media print {
@@ -412,7 +415,8 @@ header {
   .modal-grid { grid-template-columns: 1fr; }
   .dash-kpi-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .dash-wide-grid { grid-template-columns: 1fr !important; }
-  .dash-tri-grid { grid-template-columns: 1fr !important; }
+  .dash-row3-grid { grid-template-columns: 1fr !important; }
+  .dash-row4-grid { grid-template-columns: 1fr !important; }
   .cal-day-cell { min-height: 60px; padding: 6px; }
   .cal-day-num { font-size: 11px; }
   .cal-event-pill { font-size: 7px; padding: 1px 3px; }
@@ -434,6 +438,29 @@ header {
   <div data-id="7" class="accent-line"></div>
   <div data-id="8" class="dots"><div data-id="9" class="dot"></div><div data-id="10" class="dot"></div><div data-id="11" class="dot"></div></div>
 </div>
+<script>
+(function() {
+  function dismissSplash() {
+    var splash = document.getElementById('splash-screen-kss1');
+    if (!splash) return;
+    splash.style.transition = 'opacity 0.7s ease';
+    splash.style.opacity = '0';
+    splash.style.pointerEvents = 'none';
+    setTimeout(function() {
+      splash.style.display = 'none';
+    }, 750);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(dismissSplash, 1800); });
+  } else {
+    setTimeout(dismissSplash, 1800);
+  }
+  document.addEventListener('click', function(e) {
+    var splash = document.getElementById('splash-screen-kss1');
+    if (splash && splash.style.display !== 'none' && splash.contains(e.target)) dismissSplash();
+  });
+})();
+</script>
 
 <!-- HEADER -->
 <header data-id="12">
@@ -462,80 +489,81 @@ header {
 
 <!-- TAB: DASHBOARD -->
 <div data-id="27" id="tab-dashboard-kss13" style="padding:28px;display:none">
-  <div data-id="28" style="font-family:'Playfair Display',serif;font-weight:700;font-size:30px;color:var(--teal-deep);margin-bottom:4px">📊 Analytics Dashboard</div>
-  <div data-id="29" style="font-size:13px;color:var(--text-light);margin-bottom:28px">KSS Matterkey Inc. — Live Closing Intelligence</div>
+  <div data-id="28" style="font-family:'Playfair Display',serif;font-weight:700;font-size:30px;color:#0b3d3f;margin-bottom:4px">📊 Analytics Dashboard</div>
+  <div data-id="29" style="font-size:13px;color:#7a9f9f;margin-bottom:24px">KSS Matterkey Inc. — Live Closing Intelligence</div>
   <div data-id="30" id="dash-kpi-container" class="dash-kpi-grid"></div>
-  <div data-id="31" class="dash-wide-grid" id="dash-wide-container"></div>
-  <div data-id="32" class="dash-tri-grid" id="dash-tri-container"></div>
+  <div data-id="31" id="dash-row2-container"></div>
+  <div data-id="32" id="dash-row3-container"></div>
+  <div data-id="33" id="dash-row4-container"></div>
 </div>
 
 <!-- TAB: MATTERS -->
-<div data-id="33" id="tab-matters-kss12" style="padding:24px 28px;display:block">
-  <div data-id="34" class="filter-bar">
-    <span data-id="35" style="font-size:16px">🔍</span>
-    <input data-id="36" type="text" id="filter-search-kss26" placeholder="Search file # or client name..." style="flex:1;min-width:180px" autocomplete="off" spellcheck="false">
-    <select data-id="37" id="filter-lawyer-kss27"><option data-id="38" value="">All Lawyers</option></select>
-    <select data-id="39" id="filter-type-kss28"><option data-id="40" value="">All Types</option><option data-id="41">Purchase</option><option data-id="42">Sale</option><option data-id="43">Refinance</option><option data-id="44">Transfer</option></select>
-    <select data-id="45" id="filter-priority-kss29"><option data-id="46" value="">All Priorities</option><option data-id="47">Urgent</option><option data-id="48">High</option><option data-id="49">Normal</option></select>
-    <select data-id="50" id="filter-clerk-kss50"><option data-id="51" value="">All Clerks</option></select>
-    <div data-id="52" style="flex:1;min-width:8px"></div>
-    <button data-id="53" class="btn-expand-filter" id="btn-expand-all-kss24" style="background:var(--grad-teal);box-shadow:0 3px 12px rgba(13,115,119,0.3)">⊞ Expand All</button>
-    <button data-id="54" class="btn-expand-filter" id="btn-collapse-all-kss25" style="background:var(--grad-coral);box-shadow:0 3px 12px rgba(232,112,90,0.3)">⊟ Collapse All</button>
+<div data-id="34" id="tab-matters-kss12" style="padding:24px 28px;display:block">
+  <div data-id="35" class="filter-bar">
+    <span data-id="36" style="font-size:16px">🔍</span>
+    <input data-id="37" type="text" id="filter-search-kss26" placeholder="Search file # or client name..." style="flex:1;min-width:180px" autocomplete="off" spellcheck="false">
+    <select data-id="38" id="filter-lawyer-kss27"><option data-id="39" value="">All Lawyers</option></select>
+    <select data-id="40" id="filter-type-kss28"><option data-id="41" value="">All Types</option><option data-id="42">Purchase</option><option data-id="43">Sale</option><option data-id="44">Refinance</option><option data-id="45">Transfer</option></select>
+    <select data-id="46" id="filter-priority-kss29"><option data-id="47" value="">All Priorities</option><option data-id="48">Urgent</option><option data-id="49">High</option><option data-id="50">Normal</option></select>
+    <select data-id="51" id="filter-clerk-kss50"><option data-id="52" value="">All Clerks</option></select>
+    <div data-id="53" style="flex:1;min-width:8px"></div>
+    <button data-id="54" class="btn-expand-filter" id="btn-expand-all-kss24" style="background:var(--grad-teal);box-shadow:0 3px 12px rgba(13,115,119,0.3)">⊞ Expand All</button>
+    <button data-id="55" class="btn-expand-filter" id="btn-collapse-all-kss25" style="background:var(--grad-coral);box-shadow:0 3px 12px rgba(232,112,90,0.3)">⊟ Collapse All</button>
   </div>
-  <div data-id="55" id="board-kss9"></div>
+  <div data-id="56" id="board-kss9"></div>
 </div>
 
 <!-- TAB: CALENDAR -->
-<div data-id="56" id="tab-calendar-kss14" style="padding:28px;display:none">
-  <div data-id="57" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--teal-deep);margin-bottom:4px">📅 Closing Calendar</div>
-  <div data-id="58" style="font-size:13px;color:var(--text-light);margin-bottom:24px">All upcoming closing dates</div>
-  <div data-id="59" class="cal-wrapper">
-    <div data-id="60" class="cal-nav-new">
-      <button data-id="61" class="cal-nav-btn-new" id="btn-prev-month-kss30">‹</button>
-      <span data-id="62" class="cal-month-label-new" id="cal-month-label-kss31"></span>
-      <button data-id="63" class="cal-nav-btn-new" id="btn-next-month-kss32">›</button>
+<div data-id="57" id="tab-calendar-kss14" style="padding:28px;display:none">
+  <div data-id="58" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--teal-deep);margin-bottom:4px">📅 Closing Calendar</div>
+  <div data-id="59" style="font-size:13px;color:var(--text-light);margin-bottom:24px">All upcoming closing dates</div>
+  <div data-id="60" class="cal-wrapper">
+    <div data-id="61" class="cal-nav-new">
+      <button data-id="62" class="cal-nav-btn-new" id="btn-prev-month-kss30">‹</button>
+      <span data-id="63" class="cal-month-label-new" id="cal-month-label-kss31"></span>
+      <button data-id="64" class="cal-nav-btn-new" id="btn-next-month-kss32">›</button>
     </div>
-    <div data-id="64" class="cal-weekday-row"><span data-id="65">Sun</span><span data-id="66">Mon</span><span data-id="67">Tue</span><span data-id="68">Wed</span><span data-id="69">Thu</span><span data-id="70">Fri</span><span data-id="71">Sat</span></div>
-    <div data-id="72" class="cal-day-grid" id="cal-grid-kss33"></div>
+    <div data-id="65" class="cal-weekday-row"><span data-id="66">Sun</span><span data-id="67">Mon</span><span data-id="68">Tue</span><span data-id="69">Wed</span><span data-id="70">Thu</span><span data-id="71">Fri</span><span data-id="72">Sat</span></div>
+    <div data-id="73" class="cal-day-grid" id="cal-grid-kss33"></div>
   </div>
-  <div data-id="73" class="cal-legend" id="cal-legend-bar">
-    <div data-id="74" class="cal-legend-item"><span data-id="75" class="cal-legend-dot" style="background:#14a09a"></span>New/Open</div>
-    <div data-id="76" class="cal-legend-item"><span data-id="77" class="cal-legend-dot" style="background:#f59e0b"></span>Requisition</div>
-    <div data-id="78" class="cal-legend-item"><span data-id="79" class="cal-legend-dot" style="background:#22c55e"></span>Closing Soon</div>
-    <div data-id="80" class="cal-legend-item"><span data-id="81" class="cal-legend-dot" style="background:#ef4444"></span>Reporting</div>
-    <div data-id="82" class="cal-legend-item"><span data-id="83" class="cal-legend-dot" style="background:#64748b"></span>Closed</div>
+  <div data-id="74" class="cal-legend" id="cal-legend-bar">
+    <div data-id="75" class="cal-legend-item"><span data-id="76" class="cal-legend-dot" style="background:#14a09a"></span>New/Open</div>
+    <div data-id="77" class="cal-legend-item"><span data-id="78" class="cal-legend-dot" style="background:#d97706"></span>Requisition</div>
+    <div data-id="79" class="cal-legend-item"><span data-id="80" class="cal-legend-dot" style="background:#16a34a"></span>Closing Soon</div>
+    <div data-id="81" class="cal-legend-item"><span data-id="82" class="cal-legend-dot" style="background:#dc2626"></span>Reporting</div>
+    <div data-id="83" class="cal-legend-item"><span data-id="84" class="cal-legend-dot" style="background:#64748b"></span>Closed</div>
   </div>
 </div>
 
 <!-- DAY POPUP -->
-<div data-id="84" id="day-popup-kss11"></div>
+<div data-id="85" id="day-popup-kss11"></div>
 
 <!-- FILE MODAL -->
-<div data-id="85" id="file-modal-kss10">
-  <div data-id="86" class="modal-box">
-    <div data-id="87" id="modal-title-kss34" style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--teal-deep);margin-bottom:24px">Add New File</div>
-    <div data-id="88" class="modal-grid">
-      <div data-id="89"><label data-id="90">File #</label><input data-id="91" type="text" id="m-filenum-kss35" autocomplete="off" spellcheck="false"></div>
-      <div data-id="92"><label data-id="93">Client Name</label><input data-id="94" type="text" id="m-client-kss36" autocomplete="off" spellcheck="false"></div>
-      <div data-id="95" class="modal-full"><label data-id="96">Address</label><input data-id="97" type="text" id="m-address-kss37" autocomplete="off" spellcheck="false"></div>
-      <div data-id="98"><label data-id="99">Type</label><select data-id="100" id="m-type-kss38"><option data-id="101">Purchase</option><option data-id="102">Sale</option><option data-id="103">Refinance</option><option data-id="104">Transfer</option></select></div>
-      <div data-id="105"><label data-id="106">Lawyer</label><select data-id="107" id="m-lawyer-kss39"></select></div>
-      <div data-id="108"><label data-id="109">Clerk</label><select data-id="110" id="m-clerk-kss40"></select></div>
-      <div data-id="111"><label data-id="112">Price</label><input data-id="113" type="text" id="m-price-kss41" autocomplete="off" spellcheck="false"></div>
-      <div data-id="114"><label data-id="115">Req Date</label><input data-id="116" type="date" id="m-reqdate-kss42"></div>
-      <div data-id="117"><label data-id="118">Closing Date</label><input data-id="119" type="date" id="m-closedate-kss43"></div>
-      <div data-id="120"><label data-id="121">Status</label><select data-id="122" id="m-status-kss44"><option data-id="123" value="col-new">NEW / OPEN</option><option data-id="124" value="col-req">REQUISITION</option><option data-id="125" value="col-closing">CLOSING SOON</option><option data-id="126" value="col-reporting">REPORTING</option><option data-id="127" value="col-closed">CLOSED</option></select></div>
-      <div data-id="128"><label data-id="129">Priority</label><select data-id="130" id="m-priority-kss45"><option data-id="131">Normal</option><option data-id="132">High</option><option data-id="133">Urgent</option></select></div>
-      <div data-id="134" class="modal-full"><label data-id="135">Notes</label><textarea data-id="136" id="m-notes-kss46" rows="3" autocomplete="off" spellcheck="false"></textarea></div>
+<div data-id="86" id="file-modal-kss10">
+  <div data-id="87" class="modal-box">
+    <div data-id="88" id="modal-title-kss34" style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--teal-deep);margin-bottom:24px">Add New File</div>
+    <div data-id="89" class="modal-grid">
+      <div data-id="90"><label data-id="91">File #</label><input data-id="92" type="text" id="m-filenum-kss35" autocomplete="off" spellcheck="false"></div>
+      <div data-id="93"><label data-id="94">Client Name</label><input data-id="95" type="text" id="m-client-kss36" autocomplete="off" spellcheck="false"></div>
+      <div data-id="96" class="modal-full"><label data-id="97">Address</label><input data-id="98" type="text" id="m-address-kss37" autocomplete="off" spellcheck="false"></div>
+      <div data-id="99"><label data-id="100">Type</label><select data-id="101" id="m-type-kss38"><option data-id="102">Purchase</option><option data-id="103">Sale</option><option data-id="104">Refinance</option><option data-id="105">Transfer</option></select></div>
+      <div data-id="106"><label data-id="107">Lawyer</label><select data-id="108" id="m-lawyer-kss39"></select></div>
+      <div data-id="109"><label data-id="110">Clerk</label><select data-id="111" id="m-clerk-kss40"></select></div>
+      <div data-id="112"><label data-id="113">Price</label><input data-id="114" type="text" id="m-price-kss41" autocomplete="off" spellcheck="false"></div>
+      <div data-id="115"><label data-id="116">Req Date</label><input data-id="117" type="date" id="m-reqdate-kss42"></div>
+      <div data-id="118"><label data-id="119">Closing Date</label><input data-id="120" type="date" id="m-closedate-kss43"></div>
+      <div data-id="121"><label data-id="122">Status</label><select data-id="123" id="m-status-kss44"><option data-id="124" value="col-new">NEW / OPEN</option><option data-id="125" value="col-req">REQUISITION</option><option data-id="126" value="col-closing">CLOSING SOON</option><option data-id="127" value="col-reporting">REPORTING</option><option data-id="128" value="col-closed">CLOSED</option></select></div>
+      <div data-id="129"><label data-id="130">Priority</label><select data-id="131" id="m-priority-kss45"><option data-id="132">Normal</option><option data-id="133">High</option><option data-id="134">Urgent</option></select></div>
+      <div data-id="135" class="modal-full"><label data-id="136">Notes</label><textarea data-id="137" id="m-notes-kss46" rows="3" autocomplete="off" spellcheck="false"></textarea></div>
     </div>
-    <div data-id="137" class="modal-footer">
-      <button data-id="138" class="btn-cancel-modal" id="btn-modal-cancel-kss47">Cancel</button>
-      <button data-id="139" class="btn-save-modal" id="btn-modal-save-kss48">Save</button>
+    <div data-id="138" class="modal-footer">
+      <button data-id="139" class="btn-cancel-modal" id="btn-modal-cancel-kss47">Cancel</button>
+      <button data-id="140" class="btn-save-modal" id="btn-modal-save-kss48">Save</button>
     </div>
   </div>
 </div>
 
-<footer data-id="140" style="text-align:center;padding:24px;font-size:12px;color:var(--text-light);background:linear-gradient(90deg,#e6f4f4,#f0fafa)">
+<footer data-id="141" style="text-align:center;padding:24px;font-size:12px;color:var(--text-light);background:linear-gradient(90deg,#e6f4f4,#f0fafa)">
   Made by Copilot
 </footer>
 
@@ -707,7 +735,6 @@ function renderCard(file, colId, isDuplicate) {
     dupHtml = '<div class="dup-badge">⚡ Also in Closing Soon</div>';
   }
 
-  // Clerk row (always visible)
   var clerkRowHtml = '<div class="row-clerk">';
   if(file.clerk && file.clerk.trim()) {
     clerkRowHtml += '<span class="clerk-assigned-badge">🗂 '+escH(file.clerk)+'<button class="clerk-unassign-x" data-action="unassign-clerk" data-id="'+file.id+'">✕</button></span>';
@@ -860,7 +887,6 @@ function bindCardEvents() {
   });
 }
 
-// ── Move Dropdown ──
 var activeMoveDropdown = null;
 function closeMoveDropdown() {
   if (activeMoveDropdown && activeMoveDropdown.parentNode) {
@@ -1135,7 +1161,7 @@ function restoreData() {
   closeHamburger();
 }
 
-// ── DASHBOARD (NEW) ──
+// ── DASHBOARD (RICH) ──
 function renderDashboard() {
   var files = appData.files;
   var total = files.length;
@@ -1159,11 +1185,11 @@ function renderDashboard() {
     return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
   }).length;
 
-  // ROW 1 - KPI cards
+  // ── ROW 1: KPI CARDS ──
   var kpis = [
     {emoji:'📁',num:total,label:'Total Files',bar:'var(--grad-teal)',sub:'all matters'},
-    {emoji:'⚡',num:closingWeek,label:'Closing This Week',bar:'var(--grad-coral)',sub:'next 7 days'},
-    {emoji:'📋',num:reporting,label:'Reporting',bar:'var(--grad-red)',sub:'need attention'},
+    {emoji:'⚡',num:closingWeek,label:'Closing ≤7 Days',bar:'var(--grad-coral)',sub:'urgent this week'},
+    {emoji:'📋',num:reporting,label:'In Reporting',bar:'var(--grad-red)',sub:'need attention'},
     {emoji:'🔴',num:urgent,label:'Urgent Priority',bar:'var(--grad-amber)',sub:'high priority'},
     {emoji:'✅',num:closedThisMonth,label:'Closed This Month',bar:'var(--grad-green)',sub:'this month'}
   ];
@@ -1173,102 +1199,186 @@ function renderDashboard() {
   });
   document.getElementById('dash-kpi-container').innerHTML = kpiHtml;
 
-  // ROW 2 - Workload by Lawyer + Closing Timeline
+  // ── ROW 2: HORIZONTAL BAR CHART (Files per Lawyer) ──
   var lawyerCounts = {};
   appData.lawyers.forEach(function(l){ lawyerCounts[l] = 0; });
   files.forEach(function(f){ if(lawyerCounts[f.lawyer] !== undefined) lawyerCounts[f.lawyer]++; });
   var lawyerArr = appData.lawyers.slice().sort(function(a,b){ return lawyerCounts[b] - lawyerCounts[a]; });
   var maxL = Math.max.apply(null, lawyerArr.map(function(l){ return lawyerCounts[l]; })) || 1;
 
-  var lhtml = '';
+  var barHtml = '';
   lawyerArr.forEach(function(l){
     var c = lawyerCounts[l];
     var pct = Math.round((c/maxL)*100);
-    lhtml += '<div style="margin-bottom:14px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:6px"><span style="flex:1;font-weight:600;font-size:13px;color:var(--text-dark)">'+escH(l)+'</span><span style="background:linear-gradient(135deg,#e6f4f4,#b2d8d8);color:#0b3d3f;border-radius:20px;padding:3px 12px;font-weight:700;font-size:12px">'+c+'</span></div><div style="width:100%;height:8px;background:#f1f5f9;border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--grad-teal);border-radius:6px;width:'+pct+'%;transition:width 0.8s ease"></div></div></div>';
+    var showInside = pct >= 15;
+    barHtml += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">';
+    barHtml += '<span style="width:200px;font:600 13px Inter;color:#1a3030;text-align:right;flex-shrink:0">'+escH(l)+'</span>';
+    barHtml += '<div style="flex:1;height:28px;background:#f1f5f9;border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center">';
+    barHtml += '<div class="dash-bar-fill" style="height:100%;border-radius:8px;background:var(--grad-teal);width:0%;transition:width 1s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:10px" data-target-width="'+pct+'%">';
+    if(showInside) barHtml += '<span style="font:700 12px Inter;color:#fff">'+c+'</span>';
+    barHtml += '</div>';
+    if(!showInside) barHtml += '<span style="font:700 12px Inter;color:#0d7377;margin-left:8px">'+c+'</span>';
+    barHtml += '</div></div>';
   });
 
-  // Closing Timeline (next 4 months)
-  var timelineHtml = '';
-  var upcomingFiles = files.filter(function(f){ return f.status !== 'col-closed' && f.closingDate; });
-  var totalUpcoming = upcomingFiles.length || 1;
-  for(var mi = 0; mi < 4; mi++) {
-    var tm = new Date(today.getFullYear(), today.getMonth() + mi, 1);
-    var tmMonth = tm.getMonth(); var tmYear = tm.getFullYear();
-    var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    var monthFiles = upcomingFiles.filter(function(f){
-      var d = new Date(f.closingDate+'T00:00:00');
-      return d.getMonth() === tmMonth && d.getFullYear() === tmYear;
+  document.getElementById('dash-row2-container').innerHTML =
+    '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);margin-bottom:22px;border-top:5px solid #0d7377">' +
+    '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 20px">⚖️ Files per Lawyer</h3>' +
+    barHtml + '</div>';
+
+  // Animate bars
+  setTimeout(function(){
+    document.querySelectorAll('.dash-bar-fill').forEach(function(bar){
+      bar.style.width = bar.getAttribute('data-target-width');
     });
-    var pct2 = Math.round((monthFiles.length / totalUpcoming) * 100);
-    var preview = monthFiles.slice(0,2).map(function(f){ return escH(f.clientName); }).join(', ');
-    if(monthFiles.length > 2) preview += ' +' + (monthFiles.length - 2) + ' more';
-    timelineHtml += '<div style="margin-bottom:16px"><div style="font-weight:700;font-size:13px;color:var(--teal-deep);margin-bottom:6px">'+monthNames[tmMonth]+' '+tmYear+' <span style="font-weight:500;font-size:12px;color:var(--text-light)">('+monthFiles.length+' files)</span></div><div style="width:100%;height:8px;background:#f1f5f9;border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--grad-coral);border-radius:6px;width:'+pct2+'%;transition:width 0.8s ease"></div></div><div style="font-size:10px;color:var(--text-light);margin-top:3px">'+preview+'</div></div>';
-  }
+  }, 100);
 
-  document.getElementById('dash-wide-container').innerHTML =
-    '<div class="dash-panel" style="border-top:5px solid #0d7377"><h3>⚖️ Workload by Lawyer</h3>'+lhtml+'</div>' +
-    '<div class="dash-panel" style="border-top:5px solid #e8705a"><h3>📅 Closing Timeline</h3>'+timelineHtml+'</div>';
-
-  // ROW 3 - By File Type, Pipeline Health, Overdue Summary
-  // Card C — By File Type
+  // ── ROW 3: DONUT CHART + KANBAN MINI ──
   var typeCounts = {Purchase:0,Sale:0,Refinance:0,Transfer:0};
   files.forEach(function(f){ if(typeCounts[f.type] !== undefined) typeCounts[f.type]++; });
   var typeTotal = total || 1;
-  var typeColors = {Purchase:'#0d7377',Sale:'#e8705a',Refinance:'#d97706',Transfer:'#0b3d3f'};
-  var typeHtml = '';
-  ['Purchase','Sale','Refinance','Transfer'].forEach(function(t){
-    var c = typeCounts[t]; var pct3 = Math.round((c/typeTotal)*100);
-    typeHtml += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="width:12px;height:12px;border-radius:50%;background:'+typeColors[t]+';flex-shrink:0"></span><span style="flex:1;font-weight:600;font-size:13px;color:var(--text-dark)">'+t+'</span><span style="background:linear-gradient(135deg,#e6f4f4,#b2d8d8);color:#0b3d3f;border-radius:20px;padding:3px 10px;font-weight:700;font-size:11px">'+c+'</span><span style="font-size:11px;color:var(--text-light)">'+pct3+'%</span></div>';
-  });
-  typeHtml += '<div style="display:flex;height:12px;border-radius:8px;overflow:hidden;margin-top:8px">';
-  ['Purchase','Sale','Refinance','Transfer'].forEach(function(t){
-    if(typeCounts[t] > 0) typeHtml += '<div style="flex:'+typeCounts[t]+';background:'+typeColors[t]+'"></div>';
-  });
-  typeHtml += '</div>';
+  var typeColors = {Purchase:'#0d7377',Sale:'#e8705a',Refinance:'#d97706',Transfer:'#14a09a'};
+  var typeArr = ['Purchase','Sale','Refinance','Transfer'];
 
-  // Card D — Pipeline Health
-  var statusCounts = {};
-  COLUMNS.forEach(function(col){ statusCounts[col.id] = 0; });
-  files.forEach(function(f){ if(statusCounts[f.status] !== undefined) statusCounts[f.status]++; });
-  var maxS = Math.max.apply(null, Object.values(statusCounts)) || 1;
-  var pipeHtml = '<div style="display:flex;align-items:flex-end;gap:12px;height:120px;margin-top:12px">';
+  // Build SVG donut
+  var r = 70, strokeW = 40, cx = 100, cy = 100;
+  var circumference = 2 * Math.PI * r;
+  var svgParts = '<svg width="200" height="200" viewBox="0 0 200 200" style="flex-shrink:0">';
+  // Background circle
+  svgParts += '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#f1f5f9" stroke-width="'+strokeW+'"/>';
+  var cumOffset = 0;
+  typeArr.forEach(function(t){
+    var count = typeCounts[t];
+    if(count === 0) return;
+    var fraction = count / typeTotal;
+    var segLen = fraction * circumference;
+    var dashArray = segLen + ' ' + circumference;
+    var dashOffset = -cumOffset;
+    svgParts += '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+typeColors[t]+'" stroke-width="'+strokeW+'" stroke-dasharray="'+dashArray+'" stroke-dashoffset="'+dashOffset+'" transform="rotate(-90 '+cx+' '+cy+')" style="transition:stroke-dasharray 0.8s ease"/>';
+    cumOffset += segLen;
+  });
+  svgParts += '<text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-family="Playfair Display,serif" font-size="28" font-weight="700" fill="#1a3030" dy="-4">'+total+'</text>';
+  svgParts += '<text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#7a9f9f" dy="18">Files</text>';
+  svgParts += '</svg>';
+
+  var legendHtml = '';
+  typeArr.forEach(function(t){
+    var c = typeCounts[t];
+    var pct = Math.round((c/typeTotal)*100);
+    legendHtml += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
+    legendHtml += '<span style="border-radius:50%;width:12px;height:12px;background:'+typeColors[t]+';flex-shrink:0"></span>';
+    legendHtml += '<span style="font:600 13px Inter;color:#1a3030;flex:1">'+t+'</span>';
+    legendHtml += '<span style="font:700 13px Inter;color:#0d7377">'+c+'</span>';
+    legendHtml += '<span style="font:500 11px Inter;color:#7a9f9f;margin-left:4px">'+pct+'%</span>';
+    legendHtml += '</div>';
+  });
+
+  var donutCard = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #e8705a">' +
+    '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 16px">🏷️ By File Type</h3>' +
+    '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' + svgParts +
+    '<div style="flex:1;min-width:140px">' + legendHtml + '</div></div></div>';
+
+  // Kanban Mini Pipeline
+  var kanbanMiniHtml = '<div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:6px">';
   var shortLabels = {'col-new':'New','col-req':'Req','col-closing':'Closing','col-reporting':'Report','col-closed':'Closed'};
   COLUMNS.forEach(function(col){
-    var c = statusCounts[col.id];
-    var h = Math.max(8, Math.round((c/maxS)*120));
-    pipeHtml += '<div style="flex:1;display:flex;flex-direction:column;align-items:center"><div style="font-weight:700;font-size:12px;color:var(--text-dark);margin-bottom:4px">'+c+'</div><div style="width:100%;height:'+h+'px;border-radius:8px 8px 0 0;background:'+col.grad+'"></div><div style="font-weight:700;font-size:10px;color:var(--text-mid);margin-top:6px;text-align:center">'+shortLabels[col.id]+'</div></div>';
+    var colFiles = files.filter(function(f){ return f.status === col.id; });
+    colFiles.sort(function(a,b){
+      if(!a.closingDate) return 1;
+      if(!b.closingDate) return -1;
+      return new Date(b.closingDate) - new Date(a.closingDate);
+    });
+    kanbanMiniHtml += '<div style="min-width:130px;border-radius:12px;overflow:hidden;flex-shrink:0;flex:1">';
+    kanbanMiniHtml += '<div style="padding:8px 12px;font:700 10px Inter;color:#fff;letter-spacing:1.5px;text-transform:uppercase;background:'+col.grad+';display:flex;align-items:center;justify-content:space-between">'+shortLabels[col.id]+'<span style="background:rgba(255,255,255,0.25);border-radius:10px;padding:1px 7px;font:700 10px Inter">'+colFiles.length+'</span></div>';
+    kanbanMiniHtml += '<div style="background:linear-gradient(180deg,#f8fdfd,#f0fafa);padding:8px;min-height:100px">';
+    colFiles.slice(0,3).forEach(function(f){
+      kanbanMiniHtml += '<div style="background:#fff;border-radius:7px;padding:7px 9px;margin-bottom:6px;border-left:3px solid '+col.accent+';box-shadow:0 1px 6px rgba(11,61,63,0.07)">';
+      kanbanMiniHtml += '<div style="font:700 9px Inter;color:#7a9f9f">'+escH(f.fileNumber)+'</div>';
+      kanbanMiniHtml += '<div style="font:600 11px Inter;color:#1a3030;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+escH(f.clientName)+'</div>';
+      kanbanMiniHtml += '<div style="font:500 9px Inter;color:#7a9f9f">'+formatDate(f.closingDate)+'</div>';
+      kanbanMiniHtml += '</div>';
+    });
+    if(colFiles.length > 3) {
+      kanbanMiniHtml += '<div style="background:#e6f4f4;color:#0d7377;border-radius:6px;font:600 9px Inter;padding:2px 7px;text-align:center">+'+(colFiles.length-3)+' more</div>';
+    }
+    kanbanMiniHtml += '</div></div>';
   });
-  pipeHtml += '</div>';
+  kanbanMiniHtml += '</div>';
 
-  // Card E — Overdue / Reporting Summary
+  var kanbanCard = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #14a09a">' +
+    '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 16px">📌 Pipeline Snapshot</h3>' +
+    kanbanMiniHtml + '</div>';
+
+  document.getElementById('dash-row3-container').innerHTML =
+    '<div class="dash-row3-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px">' + donutCard + kanbanCard + '</div>';
+
+  // ── ROW 4: MONTHLY VERTICAL BAR CHART + REPORTING FILES ──
+  // Monthly bar chart: last 6 months + next 4
+  var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var monthBuckets = [];
+  for(var mi = -6; mi < 4; mi++) {
+    var tm = new Date(today.getFullYear(), today.getMonth() + mi, 1);
+    var tmMonth = tm.getMonth(); var tmYear = tm.getFullYear();
+    var monthFiles = files.filter(function(f){
+      if(!f.closingDate) return false;
+      var d = new Date(f.closingDate+'T00:00:00');
+      return d.getMonth() === tmMonth && d.getFullYear() === tmYear;
+    });
+    monthBuckets.push({month:tmMonth, year:tmYear, count:monthFiles.length, isCurrent:(tmMonth===currentMonth && tmYear===currentYear)});
+  }
+  var maxMonthCount = Math.max.apply(null, monthBuckets.map(function(b){return b.count;})) || 1;
+
+  var vbarHtml = '<div style="display:flex;align-items:flex-end;gap:8px;height:160px;padding:0 4px">';
+  monthBuckets.forEach(function(b){
+    var h = Math.max(4, Math.round((b.count / maxMonthCount) * 140));
+    var bg = b.isCurrent ? 'var(--grad-coral)' : 'var(--grad-teal)';
+    vbarHtml += '<div style="flex:1;display:flex;flex-direction:column;align-items:center">';
+    vbarHtml += '<div style="font:700 11px Inter;color:#0d7377;margin-bottom:4px">'+b.count+'</div>';
+    vbarHtml += '<div style="width:100%;height:'+h+'px;border-radius:8px 8px 0 0;background:'+bg+';min-height:4px"></div>';
+    vbarHtml += '<div style="font:600 9px Inter;color:#7a9f9f;margin-top:6px;text-align:center;white-space:nowrap;line-height:1.3">'+monthNames[b.month]+'<br>\''+String(b.year).slice(2)+'</div>';
+    vbarHtml += '</div>';
+  });
+  vbarHtml += '</div>';
+
+  var timelineCard = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #d97706">' +
+    '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 20px">📅 Monthly Closing Timeline</h3>' +
+    vbarHtml + '</div>';
+
+  // Reporting & Overdue Files
   var reportingFiles = files.filter(function(f){ return f.status === 'col-reporting'; });
   reportingFiles.sort(function(a,b){ return daysUntil(a.closingDate) - daysUntil(b.closingDate); });
   var overdueHtml = '';
   if(reportingFiles.length === 0) {
     overdueHtml = '<div style="text-align:center;padding:24px;color:#16a34a;font-weight:600">✅ No files in Reporting</div>';
   } else {
-    reportingFiles.slice(0,5).forEach(function(f){
+    overdueHtml = '<div style="max-height:280px;overflow-y:auto">';
+    reportingFiles.forEach(function(f){
       var d = daysUntil(f.closingDate);
-      var badge = d < 0 ? '<span style="background:linear-gradient(135deg,#fef2f2,#fecaca);color:#dc2626;border-radius:20px;padding:2px 10px;font-weight:700;font-size:10px">'+Math.abs(d)+'d overdue</span>' : '<span style="background:linear-gradient(135deg,#fffbeb,#fef3c7);color:#b45309;border-radius:20px;padding:2px 10px;font-weight:700;font-size:10px">'+d+'d</span>';
-      overdueHtml += '<div style="background:linear-gradient(90deg,#fef2f2,#fff);border-radius:10px;padding:10px 14px;margin-bottom:8px;border-left:4px solid #dc2626;display:flex;align-items:center;gap:10px"><div style="flex:1"><span style="font-size:10px;color:#0d7377;font-weight:700">'+escH(f.fileNumber)+'</span><br><span style="font-size:13px;font-weight:700;color:var(--text-dark)">'+escH(f.clientName)+'</span></div>'+badge+'</div>';
+      var badgeText, badgeBg, badgeColor;
+      if(d < 0) { badgeText = Math.abs(d)+'d overdue'; badgeBg = '#fee2e2'; badgeColor = '#dc2626'; }
+      else if(d === 0) { badgeText = 'Today!'; badgeBg = '#fee2e2'; badgeColor = '#dc2626'; }
+      else { badgeText = d+'d left'; badgeBg = '#fef3c7'; badgeColor = '#b45309'; }
+      overdueHtml += '<div style="background:linear-gradient(90deg,#fef2f2,#fff9f9);border-radius:10px;padding:10px 14px;margin-bottom:8px;border-left:4px solid #dc2626">';
+      overdueHtml += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+      overdueHtml += '<span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">'+escH(f.fileNumber)+'</span>';
+      overdueHtml += '<span style="font:700 13px Inter;color:#1a3030;flex:1">'+escH(f.clientName)+'</span>';
+      overdueHtml += '<span style="background:'+badgeBg+';color:'+badgeColor+';border-radius:8px;padding:2px 8px;font:700 10px Inter">'+badgeText+'</span>';
+      overdueHtml += '</div>';
+      overdueHtml += '<div style="font:500 11px Inter;color:#7a9f9f;margin-top:4px">'+escH(f.type)+' • '+escH(f.lawyer)+'</div>';
+      overdueHtml += '</div>';
     });
+    overdueHtml += '</div>';
   }
 
-  // Card F — Recent Activity
-  var recentFiles = files.slice().reverse().slice(0,5);
-  var recentHtml = '';
-  recentFiles.forEach(function(f){
-    var col = getColMeta(f.status);
-    recentHtml += '<div style="background:linear-gradient(90deg,#f8fdfd,#fff);border-radius:10px;padding:10px 14px;margin-bottom:8px;border-left:4px solid '+col.accent+';display:flex;align-items:center;gap:10px"><div style="flex:1"><span style="font-size:10px;color:#0d7377;font-weight:700">'+escH(f.fileNumber)+'</span><br><span style="font-size:13px;font-weight:700;color:var(--text-dark)">'+escH(f.clientName)+'</span></div><span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;color:white;background:'+col.grad+'">'+col.label+'</span></div>';
-  });
+  var reportCard = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #dc2626">' +
+    '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 16px">⏰ Reporting & Overdue Files</h3>' +
+    overdueHtml + '</div>';
 
-  document.getElementById('dash-tri-container').innerHTML =
-    '<div class="dash-panel" style="border-top:5px solid #0d7377"><h3>🏷️ By File Type</h3>'+typeHtml+'</div>' +
-    '<div class="dash-panel" style="border-top:5px solid #dc2626"><h3>🚦 Pipeline Health</h3>'+pipeHtml+'</div>' +
-    '<div class="dash-panel" style="border-top:5px solid #e8705a"><h3>⏰ Reporting Summary</h3>'+overdueHtml+'<h3 style="margin-top:18px">📌 Recent Activity</h3>'+recentHtml+'</div>';
+  document.getElementById('dash-row4-container').innerHTML =
+    '<div class="dash-row4-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">' + timelineCard + reportCard + '</div>';
 }
 
-// ── CALENDAR (NEW) ──
+// ── CALENDAR (LIGHT) ──
 function renderCalendar() {
   var year = calYear, month = calMonth;
   var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1278,6 +1388,10 @@ function renderCalendar() {
   var daysInMonth = new Date(year, month + 1, 0).getDate();
   var prevDays = new Date(year, month, 0).getDate();
   var today = new Date(); today.setHours(0,0,0,0);
+
+  var statusBgMap = {
+    'col-new':'#14a09a','col-req':'#d97706','col-closing':'#16a34a','col-reporting':'#dc2626','col-closed':'#64748b'
+  };
 
   var fileMap = {};
   appData.files.forEach(function(f){
@@ -1309,7 +1423,11 @@ function renderCalendar() {
     var isToday = !isOther && (new Date(year, month, dayNum).getTime() === today.getTime());
     var filesOnDay = fileMap[dateStr] || [];
 
-    html += '<div class="cal-day-cell'+(isOther?' other-month':'')+'" data-date="'+dateStr+'">';
+    var cellClass = 'cal-day-cell';
+    if(isOther) cellClass += ' other-month';
+    if(isToday) cellClass += ' cal-today-cell';
+
+    html += '<div class="'+cellClass+'" data-date="'+dateStr+'">';
     if(isToday) {
       html += '<div class="cal-today-num">'+dayNum+'</div>';
     } else {
@@ -1318,12 +1436,12 @@ function renderCalendar() {
 
     var maxDots = 2;
     filesOnDay.slice(0, maxDots).forEach(function(f){
-      var col = getColMeta(f.status);
+      var bg = statusBgMap[f.status] || '#64748b';
       var suffix = f.fileNumber.split('-').pop();
-      html += '<span class="cal-event-pill" style="border-left:3px solid '+col.accent+'">'+escH(suffix)+' · '+escH(f.clientName.split(' ')[0])+'</span>';
+      html += '<span class="cal-event-pill" style="background:'+bg+'">'+escH(suffix)+' · '+escH(f.clientName.split(' ')[0])+'</span>';
     });
     if(filesOnDay.length > maxDots) {
-      html += '<span class="cal-event-pill" style="border-left:3px solid #e8705a;background:rgba(232,112,90,0.2)">+' + (filesOnDay.length - maxDots) + ' more</span>';
+      html += '<span class="cal-event-pill-more">+' + (filesOnDay.length - maxDots) + ' more</span>';
     }
     html += '</div>';
   }
@@ -1344,12 +1462,12 @@ function showDayPopup(event, dateStr, filesOnDay) {
   html += '<div class="popup-title">📅 ' + formatDate(dateStr) + '</div>';
   filesOnDay.forEach(function(f){
     var col = getColMeta(f.status);
-    html += '<div class="popup-file" style="border-left:4px solid '+col.accent+'"><div class="popup-fnum">'+escH(f.fileNumber)+'</div><div class="popup-client">'+escH(f.clientName)+'</div><div style="font-weight:500;font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px">'+escH(f.type)+' • '+escH(f.lawyer)+'</div></div>';
+    html += '<div class="popup-file" style="border-left:4px solid '+col.accent+'"><div class="popup-fnum">'+escH(f.fileNumber)+'</div><div class="popup-client">'+escH(f.clientName)+'</div><div style="font-weight:500;font-size:11px;color:#3d5c5c;margin-top:4px">'+escH(f.type)+' • '+escH(f.lawyer)+'</div></div>';
   });
   popup.innerHTML = html;
 
   var x = event.clientX, y = event.clientY;
-  var pw = 340, ph = 200;
+  var pw = 320, ph = 200;
   if(x + pw > window.innerWidth) x = window.innerWidth - pw - 20;
   if(y + ph > window.innerHeight) y = y - ph;
   if(x < 10) x = 10;
@@ -1374,6 +1492,7 @@ function showTabById(tab) {
   Object.keys(idMap).forEach(function(k){ document.getElementById(idMap[k]).style.display = 'none'; });
   document.getElementById(idMap[tab]).style.display = 'block';
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab')===tab); });
+  if(tab === 'dashboard') renderDashboard();
 }
 
 // ── FILTERS ──
@@ -1409,13 +1528,6 @@ renderBoard();
 renderDashboard();
 renderCalendar();
 showTabById('matters');
-
-// ── SPLASH ──
-setTimeout(function(){
-  var sp = document.getElementById('splash-screen-kss1');
-  sp.style.animation = 'fadeOut 0.7s ease forwards';
-  setTimeout(function(){ sp.style.display = 'none'; }, 700);
-}, 2500);
 
 // ── HAMBURGER ──
 document.getElementById('btn-hamburger-kss4').addEventListener('click', function(e){
