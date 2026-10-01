@@ -40,7 +40,45 @@
   --green: #16a34a;
   --blue: #1d4ed8;
   --gray-bg: #f8fafc;
+  /* Dark mode variables (overridden when active) */
+  --dm-bg-page: #e6f4f4;
+  --dm-bg-col: #e6f4f4;
+  --dm-bg-card: #ffffff;
+  --dm-bg-card-hover: #f8fdfd;
+  --dm-bg-input: #ffffff;
+  --dm-bg-modal: #ffffff;
+  --dm-bg-pill: #e6f4f4;
+  --dm-bg-subtle: #f1f5f9;
+  --dm-border: rgba(13,115,119,0.12);
+  --dm-border-light: #f1f5f9;
+  --dm-text-primary: #1a3030;
+  --dm-text-secondary: #3d5c5c;
+  --dm-text-muted: #7a9f9f;
+  --dm-text-heading: #0b3d3f;
+  --dm-scrollbar: #e6f4f4;
+  --dm-scrollbar-thumb: #0d7377;
 }
+
+[data-theme="dark"] {
+  --dm-bg-page:       #0f1e1e;
+  --dm-bg-col:        #162424;
+  --dm-bg-card:       #1c2e2e;
+  --dm-bg-card-hover: #213535;
+  --dm-bg-input:      #162424;
+  --dm-bg-modal:      #1c2e2e;
+  --dm-bg-pill:       #0f2828;
+  --dm-bg-subtle:     #192b2b;
+  --dm-border:        #2a4040;
+  --dm-border-light:  #213535;
+  --dm-text-primary:  #e0f0f0;
+  --dm-text-secondary:#8ab8b8;
+  --dm-text-muted:    #5a8080;
+  --dm-text-heading:  #c8e8e8;
+  --dm-scrollbar:     #2a4040;
+  --dm-scrollbar-thumb: #0d7377;
+  color-scheme: dark;
+}
+
 * { box-sizing: border-box; }
 body { background: var(--grad-page); font-family: 'Inter', sans-serif; margin: 0; min-height: 100vh; color: var(--text-dark); }
 button, input, select, textarea { font-family: 'Inter', sans-serif; touch-action: manipulation; }
@@ -533,35 +571,345 @@ header {
 .shortcut-key { display:inline-block; background:#f1f5f9; border:1.5px solid #e2e8f0; border-radius:7px; padding:4px 12px; font:700 13px 'Inter'; color:#0b3d3f; min-width:36px; text-align:center; }
 .shortcut-action { font:500 13px 'Inter'; color:#1a3030; }
 
-/* Dark Mode */
-[data-theme="dark"] { color-scheme: dark; }
-[data-theme="dark"] body { background: linear-gradient(160deg, #061818 0%, #0a2020 50%, #081818 100%) !important; color: #e0f0f0 !important; }
-[data-theme="dark"] .filter-bar { background: linear-gradient(90deg, rgba(10,30,30,0.97), rgba(6,20,20,0.97)) !important; }
-[data-theme="dark"] .card { background: linear-gradient(180deg, #112222 0%, #0d1e1e 100%) !important; }
-[data-theme="dark"] .card .client-name { color: #e6f4f4 !important; }
-[data-theme="dark"] .card .lawyer-line { color: #a0c4c4 !important; }
-[data-theme="dark"] .card .address-line { color: #5a8a8a !important; }
-[data-theme="dark"] .card .notes-text { color: #5a8a8a !important; }
-[data-theme="dark"] input, [data-theme="dark"] textarea, [data-theme="dark"] select { background: #0d2424 !important; color: #e0f0f0 !important; border-color: #1e3a3a !important; }
-[data-theme="dark"] .col-cards { background: linear-gradient(180deg,#0a1e1e,#061616) !important; }
-[data-theme="dark"] .dash-kpi-card { background: #112222 !important; }
-[data-theme="dark"] .dash-kpi-card .kpi-num { color: #e0f0f0 !important; }
-[data-theme="dark"] .modal-box, [data-theme="dark"] .briefing-box, [data-theme="dark"] .email-modal-box, [data-theme="dark"] .shortcuts-box { background: linear-gradient(160deg, #112222, #0d1e1e) !important; }
-[data-theme="dark"] .modal-box label { color: #a0c4c4 !important; }
-[data-theme="dark"] #day-popup-kss11 { background: #112222 !important; color: #e0f0f0 !important; }
-[data-theme="dark"] .cal-wrapper { background: #112222 !important; }
-[data-theme="dark"] .cal-day-cell { background: #0d1e1e !important; border-color: #1e3a3a !important; }
-[data-theme="dark"] .cal-day-num { color: #e0f0f0 !important; }
-[data-theme="dark"] .cal-day-grid { background: #0a1e1e !important; }
-[data-theme="dark"] .cal-weekday-row { background: linear-gradient(90deg, #0d1e1e, #0a1818) !important; }
-[data-theme="dark"] .checklist-item-text { color: #e0f0f0 !important; }
-[data-theme="dark"] .checklist-item-text.done { color: #5a8a8a !important; }
-[data-theme="dark"] .checklist-title, [data-theme="dark"] .activity-title { color: #e0f0f0 !important; }
-[data-theme="dark"] .shortcut-action { color: #e0f0f0 !important; }
-[data-theme="dark"] .shortcut-key { background: #1e3a3a !important; border-color: #2a4a4c !important; color: #e0f0f0 !important; }
-[data-theme="dark"] .email-pill-btn { background: #1e3a3a !important; color: #a0c4c4 !important; }
+/* ══════════════════════════════════════════════════════
+   DARK MODE — COMPREHENSIVE STYLES
+   ══════════════════════════════════════════════════════ */
+
+/* ── Page background ── */
+[data-theme="dark"] body {
+  background: var(--dm-bg-page) !important;
+  color: var(--dm-text-primary) !important;
+}
+
+/* ── Scrollbars ── */
+[data-theme="dark"] ::-webkit-scrollbar-track { background: var(--dm-bg-col) !important; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--dm-scrollbar-thumb) !important; }
+
+/* ── Splash screen ── */
+[data-theme="dark"] #splash-screen-kss1 {
+  background: linear-gradient(135deg, #061212 0%, #0b2020 60%, #0d2828 100%) !important;
+}
+
+/* ── Tab bar ── */
+[data-theme="dark"] #tab-bar-kss7 {
+  background: linear-gradient(90deg, #0a1616, #0d1e1e) !important;
+  border-bottom-color: rgba(232,112,90,0.2) !important;
+}
+[data-theme="dark"] .tab-btn { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .tab-btn.active { color: #e8705a !important; background: rgba(232,112,90,0.1) !important; }
+[data-theme="dark"] .tab-btn:hover { color: var(--dm-text-primary) !important; }
+
+/* ── Filter / search bar ── */
+[data-theme="dark"] .filter-bar {
+  background: linear-gradient(90deg, rgba(22,36,36,0.97), rgba(15,30,30,0.97)) !important;
+  border-color: var(--dm-border) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3) !important;
+}
+
+/* ── All inputs, selects, textareas ── */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: var(--dm-bg-input) !important;
+  color: var(--dm-text-primary) !important;
+  border-color: var(--dm-border) !important;
+}
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: #0d7377 !important;
+  box-shadow: 0 0 0 3px rgba(13,115,119,0.25) !important;
+}
+[data-theme="dark"] option { background: var(--dm-bg-input) !important; color: var(--dm-text-primary) !important; }
+
+/* ── Kanban columns ── */
+[data-theme="dark"] .kanban-col {
+  box-shadow: 0 6px 28px rgba(0,0,0,0.35) !important;
+}
+[data-theme="dark"] .col-cards {
+  background: linear-gradient(180deg, var(--dm-bg-col), #0f1e1e) !important;
+}
+[data-theme="dark"] .col-cards.drag-over {
+  background: rgba(13,115,119,0.15) !important;
+  outline-color: #14a09a !important;
+}
+
+/* ── File cards ── */
+[data-theme="dark"] .card {
+  background: linear-gradient(180deg, var(--dm-bg-card), #192b2b) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35) !important;
+}
+[data-theme="dark"] .card:hover {
+  background: linear-gradient(180deg, var(--dm-bg-card-hover), #1c2e2e) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45) !important;
+}
+[data-theme="dark"] .card .client-name { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .card .lawyer-line { color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .card .address-line { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .card .notes-text { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .card .row-e { border-top-color: var(--dm-border) !important; }
+
+/* ── Checklist dark mode ── */
+[data-theme="dark"] .checklist-section { border-top-color: var(--dm-border) !important; }
+[data-theme="dark"] .checklist-title { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .checklist-progress-pill { background: var(--dm-bg-pill) !important; color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .checklist-bar-track { background: var(--dm-border) !important; }
+[data-theme="dark"] .checklist-item { border-bottom-color: var(--dm-border-light) !important; }
+[data-theme="dark"] .checklist-item-text { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .checklist-item-text.done { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .checklist-checkbox { background: var(--dm-bg-input) !important; border-color: var(--dm-border) !important; }
+[data-theme="dark"] .checklist-checkbox.done { background: var(--grad-teal) !important; border-color: #0d7377 !important; color: #fff !important; }
+[data-theme="dark"] .checklist-add-input { background: var(--dm-bg-input) !important; border-color: var(--dm-border) !important; color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .checklist-item-del { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .checklist-item-del:hover { color: #ef4444 !important; }
+
+/* ── Activity log dark mode ── */
+[data-theme="dark"] .activity-section { border-top-color: var(--dm-border) !important; }
+[data-theme="dark"] .activity-title { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .activity-entry { border-bottom-color: var(--dm-border-light) !important; }
+[data-theme="dark"] .activity-msg { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .activity-time { color: var(--dm-text-muted) !important; }
+
+/* ── Card action buttons ── */
+[data-theme="dark"] .btn-toggle { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .btn-edit-card { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .btn-move-card { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .btn-assign-clerk { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .btn-email-card { background: rgba(29,78,216,0.15) !important; color: #60a5fa !important; }
+[data-theme="dark"] .btn-copy-card { background: rgba(217,119,6,0.15) !important; color: #fbbf24 !important; }
+[data-theme="dark"] .btn-delete-card { background: rgba(220,38,38,0.15) !important; color: #f87171 !important; }
+
+/* ── Date pills in cards ── */
+[data-theme="dark"] .date-pill { opacity: 0.9; }
+
+/* ── Priority badges (keep readable — slight darkening) ── */
+[data-theme="dark"] .priority-urgent { background: rgba(220,38,38,0.15) !important; color: #f87171 !important; }
+[data-theme="dark"] .priority-high { background: rgba(217,119,6,0.15) !important; color: #fbbf24 !important; }
+[data-theme="dark"] .priority-normal { background: rgba(22,163,74,0.15) !important; color: #4ade80 !important; }
+
+/* ── Countdown badge ── */
+[data-theme="dark"] .countdown-badge { opacity: 0.9; }
+
+/* ── Duplicate badge ── */
+[data-theme="dark"] .dup-badge { background: rgba(217,119,6,0.15) !important; color: #fbbf24 !important; }
+
+/* ── Fee pill ── */
+[data-theme="dark"] .fee-pill { background: rgba(22,163,74,0.15) !important; color: #4ade80 !important; }
+
+/* ── Clerk assigned badge ── */
+[data-theme="dark"] .clerk-assigned-badge { background: rgba(29,78,216,0.15) !important; color: #60a5fa !important; }
+[data-theme="dark"] .clerk-unassign-x { color: #60a5fa !important; }
+
+/* ── Modals ── */
+[data-theme="dark"] #file-modal-kss10,
+[data-theme="dark"] #briefing-modal-kss,
+[data-theme="dark"] #email-modal-kss,
+[data-theme="dark"] #shortcuts-modal-kss {
+  background: rgba(0,0,0,0.75) !important;
+}
+[data-theme="dark"] .modal-box {
+  background: linear-gradient(160deg, var(--dm-bg-modal), #162424) !important;
+  box-shadow: 0 28px 80px rgba(0,0,0,0.6) !important;
+}
+[data-theme="dark"] .modal-box label { color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .briefing-box {
+  background: var(--dm-bg-modal) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6) !important;
+}
+[data-theme="dark"] .briefing-close,
+[data-theme="dark"] .shortcuts-box .shortcuts-close,
+[data-theme="dark"] .email-modal-box .email-close,
+[data-theme="dark"] #day-popup-kss11 .popup-close {
+  background: var(--dm-bg-subtle) !important;
+  color: var(--dm-text-secondary) !important;
+}
+[data-theme="dark"] .email-modal-box {
+  background: var(--dm-bg-modal) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6) !important;
+}
+[data-theme="dark"] .shortcuts-box {
+  background: var(--dm-bg-modal) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6) !important;
+}
+[data-theme="dark"] .btn-cancel-modal {
+  background: var(--dm-bg-subtle) !important;
+  color: var(--dm-text-secondary) !important;
+}
+[data-theme="dark"] .briefing-section-title { color: var(--dm-text-muted) !important; }
+
+/* ── Email template pill buttons ── */
+[data-theme="dark"] .email-pill-btn { background: var(--dm-bg-subtle) !important; color: var(--dm-text-secondary) !important; }
 [data-theme="dark"] .email-pill-btn.active { background: var(--grad-teal) !important; color: #fff !important; }
-[data-theme="dark"] footer { background: linear-gradient(90deg, #0a1e1e, #061616) !important; color: #5a8a8a !important; }
+[data-theme="dark"] .email-pill-btn:hover:not(.active) { background: var(--dm-border) !important; color: var(--dm-text-primary) !important; }
+[data-theme="dark"] #email-body-textarea { border-color: var(--dm-border) !important; }
+
+/* ── Shortcuts modal ── */
+[data-theme="dark"] .shortcut-row { border-bottom-color: var(--dm-border-light) !important; }
+[data-theme="dark"] .shortcut-key { background: var(--dm-bg-subtle) !important; border-color: var(--dm-border) !important; color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .shortcut-action { color: var(--dm-text-primary) !important; }
+
+/* ── Day popup ── */
+[data-theme="dark"] #day-popup-kss11 {
+  background: var(--dm-bg-modal) !important;
+  color: var(--dm-text-primary) !important;
+  border-color: var(--dm-border) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+}
+[data-theme="dark"] #day-popup-kss11 .popup-title { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] #day-popup-kss11 .popup-file { background: var(--dm-bg-subtle) !important; }
+[data-theme="dark"] #day-popup-kss11 .popup-fnum { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] #day-popup-kss11 .popup-client { color: var(--dm-text-primary) !important; }
+
+/* ── Dashboard KPI cards ── */
+[data-theme="dark"] .dash-kpi-card {
+  background: var(--dm-bg-card) !important;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35) !important;
+}
+[data-theme="dark"] .dash-kpi-card:hover {
+  box-shadow: 0 12px 36px rgba(0,0,0,0.45) !important;
+}
+[data-theme="dark"] .dash-kpi-card .kpi-num { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .dash-kpi-card .kpi-label { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .dash-kpi-card .kpi-sub { color: var(--dm-text-muted) !important; }
+
+/* ── Calendar ── */
+[data-theme="dark"] .cal-wrapper {
+  background: var(--dm-bg-card) !important;
+  border-color: var(--dm-border) !important;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .cal-weekday-row {
+  background: linear-gradient(90deg, var(--dm-bg-col), #0f1e1e) !important;
+}
+[data-theme="dark"] .cal-weekday-row span { color: #14a09a !important; }
+[data-theme="dark"] .cal-day-grid { background: var(--dm-bg-col) !important; }
+[data-theme="dark"] .cal-day-cell {
+  background: var(--dm-bg-card) !important;
+  border-color: var(--dm-border) !important;
+}
+[data-theme="dark"] .cal-day-cell:hover {
+  background: var(--dm-bg-card-hover) !important;
+  border-color: #14a09a !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3) !important;
+}
+[data-theme="dark"] .cal-day-cell.other-month { background: var(--dm-bg-subtle) !important; opacity: 0.4 !important; }
+[data-theme="dark"] .cal-day-cell.cal-today-cell { background: rgba(13,115,119,0.2) !important; border-color: #0d7377 !important; }
+[data-theme="dark"] .cal-day-num { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .cal-event-pill-more { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .cal-legend-item { color: var(--dm-text-secondary) !important; }
+
+/* ── Footer ── */
+[data-theme="dark"] footer {
+  background: linear-gradient(90deg, #0a1616, #0d1e1e) !important;
+  color: var(--dm-text-muted) !important;
+}
+
+/* ── Dashboard inline-styled sections (use attribute selectors for inline bg) ── */
+[data-theme="dark"] [style*="background:#fff"],
+[data-theme="dark"] [style*="background: #fff"],
+[data-theme="dark"] [style*="background:white"],
+[data-theme="dark"] [style*="background:#ffffff"] {
+  background: var(--dm-bg-card) !important;
+}
+[data-theme="dark"] [style*="background:#f1f5f9"],
+[data-theme="dark"] [style*="background: #f1f5f9"] {
+  background: var(--dm-bg-subtle) !important;
+}
+[data-theme="dark"] [style*="background:#f8fdfd"],
+[data-theme="dark"] [style*="background: #f8fdfd"],
+[data-theme="dark"] [style*="background:#fafffe"],
+[data-theme="dark"] [style*="background:#f0fafa"] {
+  background: var(--dm-bg-subtle) !important;
+}
+
+/* ── Dark text → light ── */
+[data-theme="dark"] [style*="color:#1a3030"],
+[data-theme="dark"] [style*="color: #1a3030"] { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] [style*="color:#3d5c5c"],
+[data-theme="dark"] [style*="color: #3d5c5c"] { color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] [style*="color:#7a9f9f"],
+[data-theme="dark"] [style*="color: #7a9f9f"] { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] [style*="color:#0b3d3f"],
+[data-theme="dark"] [style*="color: #0b3d3f"] { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] [style*="color:#b45309"],
+[data-theme="dark"] [style*="color: #b45309"] { color: #fbbf24 !important; }
+
+/* ── Borders ── */
+[data-theme="dark"] [style*="border-bottom:1px solid #f1f5f9"],
+[data-theme="dark"] [style*="border-bottom: 1px solid #f1f5f9"],
+[data-theme="dark"] [style*="border-bottom:1px solid #f8fdfd"],
+[data-theme="dark"] [style*="border-bottom: 1px solid #f8fdfd"] {
+  border-color: var(--dm-border-light) !important;
+}
+
+/* ── Dashboard bar chart track ── */
+[data-theme="dark"] [style*="background:#f1f5f9"][style*="border-radius:8px"] {
+  background: var(--dm-border) !important;
+}
+
+/* ── Dashboard section cards with border-top ── */
+[data-theme="dark"] [style*="border-top:5px solid"] {
+  /* Keep colored top borders but darken card background */
+}
+
+/* ── Briefing file cards with gradient backgrounds ── */
+[data-theme="dark"] .briefing-file-card[style*="background:linear-gradient(90deg,#fee2e2"] {
+  background: rgba(220,38,38,0.1) !important;
+}
+[data-theme="dark"] .briefing-file-card[style*="background:linear-gradient(90deg,#fff7ed"] {
+  background: rgba(217,119,6,0.1) !important;
+}
+[data-theme="dark"] .briefing-file-card[style*="background:linear-gradient(90deg,#fef2f2"] {
+  background: rgba(220,38,38,0.1) !important;
+}
+
+/* ── Dashboard inline gradient backgrounds ── */
+[data-theme="dark"] [style*="background:linear-gradient(90deg,#f8fdfd"],
+[data-theme="dark"] [style*="background: linear-gradient(90deg,#f8fdfd"],
+[data-theme="dark"] [style*="background:linear-gradient(90deg, #f8fdfd"] {
+  background: var(--dm-bg-subtle) !important;
+}
+[data-theme="dark"] [style*="background:linear-gradient(180deg,#f8fdfd"],
+[data-theme="dark"] [style*="background:linear-gradient(180deg, #f8fdfd"] {
+  background: var(--dm-bg-subtle) !important;
+}
+[data-theme="dark"] [style*="background:linear-gradient(90deg,#fee2e2"],
+[data-theme="dark"] [style*="background:linear-gradient(90deg, #fee2e2"] {
+  background: rgba(220,38,38,0.1) !important;
+}
+[data-theme="dark"] [style*="background:linear-gradient(90deg,#fff7ed"],
+[data-theme="dark"] [style*="background:linear-gradient(90deg, #fff7ed"] {
+  background: rgba(217,119,6,0.1) !important;
+}
+[data-theme="dark"] [style*="background:linear-gradient(90deg,#fef2f2"],
+[data-theme="dark"] [style*="background:linear-gradient(90deg, #fef2f2"] {
+  background: rgba(220,38,38,0.1) !important;
+}
+[data-theme="dark"] [style*="background:linear-gradient(90deg,#f0fdf4"],
+[data-theme="dark"] [style*="background:linear-gradient(90deg, #f0fdf4"] {
+  background: rgba(22,163,74,0.1) !important;
+}
+
+/* ── Pipeline snapshot mini cards ── */
+[data-theme="dark"] [style*="background:linear-gradient(180deg,#f8fdfd,#f0fafa)"] {
+  background: var(--dm-bg-subtle) !important;
+}
+
+/* ── Type badges inside cards (keep colored) ── */
+/* Already have enough contrast */
+
+/* ── Smooth transitions for dark mode ── */
+body,
+.card, .dash-kpi-card, .cal-day-cell, .cal-wrapper,
+.filter-bar, .modal-box, .briefing-box, .email-modal-box, .shortcuts-box,
+.col-cards, #day-popup-kss11, footer,
+.checklist-item-text, .checklist-title, .activity-title, .activity-msg,
+.shortcut-key, .shortcut-action, .email-pill-btn,
+input, select, textarea {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
 @media print {
   #splash-screen-kss1, header, #tab-bar-kss7, #hamburger-menu-kss5, .filter-bar, button, #briefing-modal-kss, #email-modal-kss, #shortcuts-modal-kss { display: none !important; }
@@ -864,12 +1212,46 @@ function showToast(msg) {
   setTimeout(function(){ t.classList.remove('show'); }, 3000);
 }
 
-// ── DARK MODE — init immediately ──
+// ── DARK MODE — NEW IMPLEMENTATION ──
+function applyDarkMode(dark) {
+  if (dark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.body.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    document.body.removeAttribute('data-theme');
+  }
+  var btn = document.getElementById('btn-dark-mode-kss');
+  if (btn) btn.textContent = dark ? '☀️' : '🌙';
+  // Re-render components to pick up dark mode
+  if (typeof renderBoard === 'function') {
+    try { renderBoard(); } catch(e) {}
+  }
+  if (typeof renderDashboard === 'function') {
+    try {
+      var dashTab = document.getElementById('tab-dashboard-kss13');
+      if (dashTab && dashTab.style.display !== 'none') renderDashboard();
+    } catch(e) {}
+  }
+  if (typeof renderCalendar === 'function') {
+    try {
+      var calTab = document.getElementById('tab-calendar-kss14');
+      if (calTab && calTab.style.display !== 'none') renderCalendar();
+    } catch(e) {}
+  }
+}
+
+function toggleDarkMode() {
+  var isDark = document.body.getAttribute('data-theme') === 'dark';
+  var newDark = !isDark;
+  localStorage.setItem('kss_dark_mode', newDark ? '1' : '0');
+  applyDarkMode(newDark);
+}
+
+// Init dark mode immediately (before first render)
 (function() {
   if (localStorage.getItem('kss_dark_mode') === '1') {
-    document.body.setAttribute('data-theme', 'dark');
-    var btn = document.getElementById('btn-dark-mode-kss');
-    if (btn) btn.textContent = '☀️';
+    applyDarkMode(true);
   }
 })();
 
@@ -928,48 +1310,47 @@ function getDefaultChecklist(type) {
 
 var SEED = [
   {"id":"c6c29736-d966-45c8-8b1b-b60f86a89d6c","fileNumber":"KSS-01001","clientName":"Divyendu Asthana","address":"11 Bertram Gate, Whitby, Ontario L1P 0M5","type":"Purchase","price":"$930,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-03","closingDate":"2026-07-29","status":"col-closed","priority":"High","notes":"Register transfer and charge on Tuesday morning and send copy of transfer to client.","expanded":false},
-  {"id":"a58d88fe-5c92-4798-ad5d-e020b4c05ff7","fileNumber":"KSS-01002","clientName":"Kaveh Zahedi","address":"169 Willowbrook Road, Markham, Ontario L3T 5L5","type":"Sale","price":"$1,290,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-28","closingDate":"2026-08-10","status":"col-reporting","priority":"Normal","notes":"Send SOA and response to requisition to buyer lawyer, Sending closing package to vendors for e-signing. Complete accounting and add tax bill payment receipt to invoice","expanded":false},
-  {"id":"318ae614-c689-4ef5-a86d-cff01cd415a4","fileNumber":"KSS-01003","clientName":"Shanta Bishwokarma","address":"105 Rollingwood Drive, Brampton, Ontario, L2P 3T2","type":"Refinance","price":"$1,000,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-27","closingDate":"2026-08-04","status":"col-reporting","priority":"High","notes":"Transfer of Title and Mortgage Registration Pending. Complete bank and client reporting. Sending balance to client","expanded":false},
+  {"id":"a58d88fe-5c92-4798-ad5d-e020b4c05ff7","fileNumber":"KSS-01002","clientName":"Kaveh Zahedi","address":"169 Willowbrook Road, Markham, Ontario L3T 5L5","type":"Sale","price":"$1,290,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-28","closingDate":"2026-08-10","status":"col-closed","priority":"Normal","notes":"Send SOA and response to requisition to buyer lawyer, Sending closing package to vendors for e-signing. Complete accounting and add tax bill payment receipt to invoice","expanded":false},
+  {"id":"318ae614-c689-4ef5-a86d-cff01cd415a4","fileNumber":"KSS-01003","clientName":"Shanta Bishwokarma","address":"105 Rollingwood Drive, Brampton, Ontario, L2P 3T2","type":"Refinance","price":"$1,000,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-27","closingDate":"2026-08-04","status":"col-closed","priority":"High","notes":"Transfer of Title and Mortgage Registration Pending. Complete bank and client reporting. Sending balance to client","expanded":false},
   {"id":"dcc8d41b-bc46-4c12-87e4-eeb70d76873b","fileNumber":"KSS-01005","clientName":"1001673211 ONTARIO INC","address":"105-15 Skyridge Dr, Brampton, Ontario L6P 4S3","type":"Purchase","price":"$1,825,000","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-07-15","closingDate":"2026-08-13","status":"col-closed","priority":"High","notes":"Extension is requested and wire transfer for additional deposit pending.","expanded":false},
-  {"id":"45a2136d-19e6-42d6-ab7d-64b09b410cb3","fileNumber":"KSS-01009","clientName":"Pankaj Salve","address":"1522 Zilio Terrace, Milton, Ontario L9E 2H8","type":"Purchase","price":"$1,139,990","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-22","closingDate":"2026-07-29","status":"col-reporting","priority":"Normal","notes":"Complete Bank and Client Reporting","expanded":false},
-  {"id":"6bb5a7be-f274-418d-bb5e-f416c8ea5a14","fileNumber":"KSS-01010","clientName":"Jasvinder Kochhar","address":"11 Natural Terrace, Brampton, Ontario L6Y 6A5","type":"Purchase","price":"$1,800,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-20","closingDate":"2026-08-10","status":"col-reporting","priority":"High","notes":"Follow up SOA, Complete Request for Funds, Follow up client for IDV completion. Complete closing documents and send package for signing.","expanded":false},
+  {"id":"45a2136d-19e6-42d6-ab7d-64b09b410cb3","fileNumber":"KSS-01009","clientName":"Pankaj Salve","address":"1522 Zilio Terrace, Milton, Ontario L9E 2H8","type":"Purchase","price":"$1,139,990","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-22","closingDate":"2026-07-29","status":"col-closed","priority":"Normal","notes":"Complete Bank and Client Reporting","expanded":false},
+  {"id":"6bb5a7be-f274-418d-bb5e-f416c8ea5a14","fileNumber":"KSS-01010","clientName":"Jasvinder Kochhar","address":"11 Natural Terrace, Brampton, Ontario L6Y 6A5","type":"Purchase","price":"$1,800,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-20","closingDate":"2026-08-10","status":"col-closed","priority":"High","notes":"Follow up SOA, Complete Request for Funds, Follow up client for IDV completion. Complete closing documents and send package for signing.","expanded":false},
   {"id":"907aefdb-d5bd-4ef4-8ec8-71147d81c6e2","fileNumber":"KSS-01013","clientName":"Kajenthini Mayuran","address":"25 Valley Centre Drive, Scarborough, ON M1X 1K9","type":"Sale","price":"$1,150,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-14","closingDate":"2026-08-28","status":"col-closed","priority":"Normal","notes":"Follow up on client information, send treefort IDV, request payout statement, prepare SOA and transfer","expanded":false},
-  {"id":"77b8c0b1-1ad5-4d34-905f-3174e18d9dc4","fileNumber":"KSS-01014","clientName":"Mehrdokht Vahedi","address":"Suite 1906, 29 Green Trail Court, Toronto, Ontario M2K 0J9","type":"Purchase","price":"$932,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-07","closingDate":"2026-09-15","status":"col-new","priority":"Normal","notes":"Follow up Vahedi for mortgage instructions, prepare closing documents","expanded":false},
-  {"id":"78cd3d66-3f33-4883-99df-8da9f3d99dd8","fileNumber":"KSS-01015","clientName":"1828788 Ontario Inc.","address":"7368 Yonge Street, Unit 6-13, Thornhill, Ontario, L4H 8H9","type":"Sale","price":"$1,565,000","fee":"","lawyer":"Saloumeh Baghbani","clerk":"","reqDate":"2026-08-14","closingDate":"2026-09-08","status":"col-closed","priority":"Normal","notes":"Request advance fee, open new matter, prepare new SOA, prepare new transfer, prepare new closing documents.","expanded":false},
-  {"id":"57a9674d-2418-485b-8cf8-212fa41e957e","fileNumber":"KSS-01017","clientName":"Kamalpreet Mann","address":"22 Donomore Drive, Brampton, Ontario L7A 0S7","type":"Purchase","price":"$757,500","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-13","closingDate":"2026-07-29","status":"col-reporting","priority":"Normal","notes":"Complete Bank and Client Reporting.","expanded":false},
+  {"id":"77b8c0b1-1ad5-4d34-905f-3174e18d9dc4","fileNumber":"KSS-01014","clientName":"Mehrdokht Vahedi","address":"Suite 1906, 29 Green Trail Court, Toronto, Ontario M2K 0J9","type":"Purchase","price":"$932,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-07","closingDate":"2026-10-09","status":"col-req","priority":"Normal","notes":"Follow up Vahedi for mortgage instructions, prepare closing documents","expanded":false},
+  {"id":"78cd3d66-3f33-4883-99df-8da9f3d99dd8","fileNumber":"KSS-01015","clientName":"1828788 Ontario Inc.","address":"7368 Yonge Street, Unit 6-13, Thornhill, Ontario, L4H 8H9","type":"Sale","price":"$1,565,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-08-14","closingDate":"2026-09-08","status":"col-closed","priority":"Normal","notes":"Request advance fee, open new matter, prepare new SOA, prepare new transfer, prepare new closing documents.","expanded":false},
+  {"id":"57a9674d-2418-485b-8cf8-212fa41e957e","fileNumber":"KSS-01017","clientName":"Kamalpreet Mann","address":"22 Donomore Drive, Brampton, Ontario L7A 0S7","type":"Purchase","price":"$757,500","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-13","closingDate":"2026-07-29","status":"col-closed","priority":"Normal","notes":"Complete Bank and Client Reporting.","expanded":false},
   {"id":"eae277b0-eaea-4706-8608-9cdbde84b68c","fileNumber":"KSS-01018","clientName":"Sunilkumar Patel","address":"109 WOODSEND RUN, BRAMPTON, ON, L6Y 4H7","type":"Purchase","price":"$765,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-13","closingDate":"2026-08-27","status":"col-reporting","priority":"Normal","notes":"Send email to client, send requisition, send RFF, complete closing documents","expanded":false},
-  {"id":"9635f432-67d9-436b-a411-a35abdea92fc","fileNumber":"KSS-01019","clientName":"Wagma Miral","address":"5727 Keldrew Avenue, Mississauga, Ontario, L5M 7B9","type":"Purchase","price":"$920,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-13","closingDate":"2026-08-28","status":"col-reporting","priority":"Normal","notes":"Send client email, send requisition, follow up mortgage instructions, send RFF, complete signing package","expanded":false},
-  {"id":"b41b39ba-fe65-44db-bd2f-df5a12a190ce","fileNumber":"KSS-01020","clientName":"Ashini Sooryakumar","address":"25-3175 Denison St, Markham, ON L3S 0E3","type":"Purchase","price":"$759,990","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-03","closingDate":"2026-08-27","status":"col-reporting","priority":"High","notes":"Mortgage instructions and revised SOA follow up","expanded":false},
-  {"id":"314ffff2-527b-4df0-bc37-03f461949aed","fileNumber":"KSS-01021","clientName":"Arpit Saharan","address":"10 Pine Warbler Street, Kitchener, Ontario, N2P 0L6","type":"Purchase","price":"$814,900","fee":"","lawyer":"Saloumeh Baghbani","clerk":"","reqDate":"2026-09-01","closingDate":"2026-09-18","status":"col-new","priority":"Normal","notes":"Send email to client","expanded":false},
-  {"id":"e74dd0c3-b9a1-499c-935f-4fb125d296de","fileNumber":"KSS-01022","clientName":"Rahul Badansinh Sharma","address":"132 Madison d'Andrea Avenue, Sarnia, Ontario N7S 6L9","type":"Refinance","price":"$504,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-07","closingDate":"2026-08-12","status":"col-reporting","priority":"High","notes":"Send client email for fire insurance, prepare and send signing package, complete request for funds","expanded":false},
-  {"id":"d13ffeaa-5f33-4057-8b9f-e64d56839d9d","fileNumber":"KSS-01023","clientName":"Anushooya Gunasaleen","address":"56 Stockell Crescent, Ajax, Ontario, L1T 0M4","type":"Sale","price":"$1,118,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-09-18","closingDate":"2026-10-07","status":"col-new","priority":"Normal","notes":"Treefort IDV, Letter to Vendor, Preparing response, SOA and Transfer","expanded":false},
+  {"id":"9635f432-67d9-436b-a411-a35abdea92fc","fileNumber":"KSS-01019","clientName":"Wagma Miral","address":"5727 Keldrew Avenue, Mississauga, Ontario, L5M 7B9","type":"Purchase","price":"$920,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-13","closingDate":"2026-08-28","status":"col-closed","priority":"Normal","notes":"Send client email, send requisition, follow up mortgage instructions, send RFF, complete signing package","expanded":false},
+  {"id":"b41b39ba-fe65-44db-bd2f-df5a12a190ce","fileNumber":"KSS-01020","clientName":"Ashini Sooryakumar","address":"25-3175 Denison St, Markham, ON L3S 0E3","type":"Purchase","price":"$759,990","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-03","closingDate":"2026-08-27","status":"col-closed","priority":"High","notes":"Mortgage instructions and revised SOA follow up","expanded":false},
+  {"id":"314ffff2-527b-4df0-bc37-03f461949aed","fileNumber":"KSS-01021","clientName":"Arpit Saharan","address":"10 Pine Warbler Street, Kitchener, Ontario, N2P 0L6","type":"Purchase","price":"$814,900","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-01","closingDate":"2026-10-08","status":"col-closing","priority":"Normal","notes":"Send email to client","expanded":false},
+  {"id":"e74dd0c3-b9a1-499c-935f-4fb125d296de","fileNumber":"KSS-01022","clientName":"Rahul Badansinh Sharma","address":"132 Madison d'Andrea Avenue, Sarnia, Ontario N7S 6L9","type":"Refinance","price":"$504,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-07","closingDate":"2026-08-12","status":"col-closed","priority":"High","notes":"Send client email for fire insurance, prepare and send signing package, complete request for funds","expanded":false},
+  {"id":"d13ffeaa-5f33-4057-8b9f-e64d56839d9d","fileNumber":"KSS-01023","clientName":"Anushooya Gunasaleen","address":"56 Stockell Crescent, Ajax, Ontario, L1T 0M4","type":"Sale","price":"$1,118,000","fee":"","lawyer":"Neethan Selvan","clerk":"Nilufa","reqDate":"2026-09-18","closingDate":"2026-10-07","status":"col-closing","priority":"Normal","notes":"Treefort IDV, Letter to Vendor, Preparing response, SOA and Transfer","expanded":false},
   {"id":"6b170954-3aef-487a-98fe-999deb024ad4","fileNumber":"KSS-01024","clientName":"Dhan Raj Gurung","address":"87 Woodsend Run, Brampton, Ontario L6Y 4H7","type":"Purchase","price":"$799,800","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-18","closingDate":"2026-08-27","status":"col-reporting","priority":"Normal","notes":"Complete file. Send documents for e-signing. Send intro email to client.","expanded":false},
   {"id":"fad86673-6d50-4887-b586-cfd475da6f1f","fileNumber":"KSS-01025","clientName":"Susan Hamzavi","address":"27 Benson Ave, Richmond Hill","type":"Purchase","price":"$715,000","fee":"","lawyer":"Daniel Larijani","clerk":"","reqDate":"2026-08-04","closingDate":"2026-08-25","status":"col-closed","priority":"Normal","notes":"email to client, requisition to top law firm and final closing documents for e-sign.","expanded":false},
-  {"id":"e41df7e4-f081-4067-9aa7-ea0e2c0d2247","fileNumber":"KSS-01026","clientName":"Mayuran Manokara","address":"Suite 901B, 7437 Kingston Road, Scarborough","type":"Purchase","price":"$804,900","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-20","closingDate":"2026-09-18","status":"col-new","priority":"Normal","notes":"","expanded":false},
-  {"id":"4001a8f3-266c-4535-8666-78d6e5a74023","fileNumber":"KSS-01027","clientName":"Kiranbir Kaur","address":"21 Sunnyview Road, Brampton, Ontario, L7A 3E4","type":"Purchase","price":"$830,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-30","closingDate":"2026-09-14","status":"col-new","priority":"Normal","notes":"Assigned to Nilufa (Clerk- Floater)","expanded":false},
-  {"id":"149f0f9d-7833-4fd3-9838-0a86a6898dac","fileNumber":"KSS-01028","clientName":"Seyed Hesam Emam","address":"485C County Rd, Trent Mills, Ontario K0L 1Z0","type":"Purchase","price":"$860,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-02","closingDate":"2026-09-17","status":"col-req","priority":"Normal","notes":"Assigned to Nilufa (Clerk-Floater)","expanded":false},
+  {"id":"4001a8f3-266c-4535-8666-78d6e5a74023","fileNumber":"KSS-01027","clientName":"Kiranbir Kaur","address":"21 Sunnyview Road, Brampton, Ontario, L7A 3E4","type":"Purchase","price":"$830,000","fee":"","lawyer":"Sassan Emam","clerk":"Nilufa","reqDate":"2026-08-30","closingDate":"2026-09-14","status":"col-reporting","priority":"Normal","notes":"Assigned to Nilufa (Clerk- Floater)","expanded":false},
+  {"id":"149f0f9d-7833-4fd3-9838-0a86a6898dac","fileNumber":"KSS-01028","clientName":"Seyed Hesam Emam","address":"485C County Rd, Trent Mills, Ontario K0L 1Z0","type":"Purchase","price":"$860,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-02","closingDate":"2026-09-17","status":"col-reporting","priority":"Normal","notes":"Assigned to Nilufa (Clerk-Floater)","expanded":false},
   {"id":"9835fcdf-90d5-490a-80aa-48893afb5f93","fileNumber":"KSS-01029","clientName":"Anand Kumar and Ravisha","address":"55 Fisher Street, Brantford, Ontario, N3T 0G4","type":"Purchase","price":"$750,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-08-21","closingDate":"2026-08-31","status":"col-reporting","priority":"High","notes":"Send information to Maryam\nFill up the statement of Account\nSOA done","expanded":false},
   {"id":"eae456c8-fdb8-4c28-8e03-55fb2bc61999","fileNumber":"KSS-01030","clientName":"Raju Arenja and Tina Kripalani","address":"89 Stewart Boulevard Brockville","type":"Purchase","price":"$549,900","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-08-25","closingDate":"2026-09-01","status":"col-reporting","priority":"High","notes":"647-308-4068 - Tina Kripalani.\nCall Client for Initial questions. Call for Vendor Lawyer Info. Conduct Searches. Prepare and Send Requisition.","expanded":false},
   {"id":"a34510ff-dbbe-483d-89be-f767eb2ee608","fileNumber":"KSS-01007","clientName":"Nanthagopu Sangamoorthy","address":"3135 Concession Rd 10, Clarington, ON L1C 3K6","type":"Sale","price":"$950,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-13","closingDate":"2026-08-31","status":"col-closed","priority":"High","notes":"Sending Reporting Packages, get letter and accounting approved by lawyer before sending.","expanded":false},
   {"id":"c564354a-91f5-4bcf-b877-532e68f4afa0","fileNumber":"KSS-01008","clientName":"Nanthiny Nanthagopu","address":"16 McQueen Cres, Ajax, ON L1T 4Y8","type":"Refinance","price":"$110,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-27","closingDate":"2026-07-31","status":"col-closed","priority":"High","notes":"Sending Reporting with Sangamoorthy's sale reporting package","expanded":false},
-  {"id":"9d52ac7d-8e2a-4fa6-bb1d-29a671ad579e","fileNumber":"KSS-01011","clientName":"Ramandeep Nannan","address":"1 Flavian Cres, Brampton, Ontario L6T 3P2","type":"Purchase","price":"$724,000","fee":"","lawyer":"Saloumeh Baghbani","clerk":"","reqDate":"2026-07-27","closingDate":"2026-07-31","status":"col-closed","priority":"Normal","notes":"Complete bank and client reporting.","expanded":false},
+  {"id":"9d52ac7d-8e2a-4fa6-bb1d-29a671ad579e","fileNumber":"KSS-01011","clientName":"Ramandeep Nannan","address":"1 Flavian Cres, Brampton, Ontario L6T 3P2","type":"Purchase","price":"$724,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-07-27","closingDate":"2026-07-31","status":"col-closed","priority":"Normal","notes":"Complete bank and client reporting.","expanded":false},
   {"id":"ea679fa3-6fbe-4114-8d80-1faa22ecd47c","fileNumber":"KSS-01012","clientName":"Vimalendran Thievendam","address":"1 Deborah Dr, Scarborough, ON M1H 2H5","type":"Purchase","price":"$820,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-05","closingDate":"2026-08-19","status":"col-closed","priority":"Normal","notes":"Complete requisition, closing documents and accounting.","expanded":false},
   {"id":"414fd2de-11a5-4972-964e-f35e1178c3ac","fileNumber":"KSS-01016","clientName":"Pathmini Wignarajan","address":"46 Melchior Drive, Scarborough, ON M1E 3W5","type":"Purchase","price":"$805,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-13","closingDate":"2026-07-30","status":"col-closed","priority":"Normal","notes":"Client Reporting Package","expanded":false},
-  {"id":"4e046a2a-72be-4fcb-9949-4eec123a83a7","fileNumber":"KSS-01022","clientName":"Pejman Parsi-Mood","address":"1811-7165 Yonge Street Thornhill","type":"Refinance","price":"$600,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-01-05","closingDate":"2026-01-15","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"211b75dd-8c66-4e42-bfef-3c725cf3ce7e","fileNumber":"KSS-01023","clientName":"Murli / Manju Raheja","address":"153 Hickstead Way Ottawa","type":"Refinance","price":"$696,640","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-02-09","closingDate":"2026-02-09","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"d7c8b8f9-03a8-457e-b264-2db13231acab","fileNumber":"KSS-01024","clientName":"Hamid, Masih, Aamir","address":"212 Glenayr Rd Toronto","type":"Purchase","price":"$3,110,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-02-27","closingDate":"2026-03-17","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"9b76f201-d0d1-4623-b316-6749e5d3e689","fileNumber":"KSS-01025","clientName":"Randa Mahfouz","address":"76 Matteo Trail Hamilton","type":"Sale","price":"$1,050,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-01","closingDate":"2026-04-15","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"4e046a2a-72be-4fcb-9949-4eec123a83a7","fileNumber":"KSS-01022B","clientName":"Pejman Parsi-Mood","address":"1811-7165 Yonge Street Thornhill","type":"Refinance","price":"$600,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-01-05","closingDate":"2026-01-15","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"211b75dd-8c66-4e42-bfef-3c725cf3ce7e","fileNumber":"KSS-01023B","clientName":"Murli / Manju Raheja","address":"153 Hickstead Way Ottawa","type":"Refinance","price":"$696,640","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-02-09","closingDate":"2026-02-09","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"d7c8b8f9-03a8-457e-b264-2db13231acab","fileNumber":"KSS-01024B","clientName":"Hamid, Masih, Aamir","address":"212 Glenayr Rd Toronto","type":"Purchase","price":"$3,110,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-02-27","closingDate":"2026-03-17","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"9b76f201-d0d1-4623-b316-6749e5d3e689","fileNumber":"KSS-01025B","clientName":"Randa Mahfouz","address":"76 Matteo Trail Hamilton","type":"Sale","price":"$1,050,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-01","closingDate":"2026-04-15","status":"col-closed","priority":"Normal","notes":"","expanded":false},
   {"id":"5c1c6085-8278-4397-ace8-0bd218edd3d2","fileNumber":"KSS-01026","clientName":"Saenarine Deonarine","address":"2603 - 300 Front Street, Toronto","type":"Sale","price":"$650,000","fee":"","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-21","closingDate":"2026-02-10","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"d19f3617-d379-40f2-a7e7-35d80415fda7","fileNumber":"KSS-01027","clientName":"Kevin Parker","address":"44 Madelaine Crescent, Brampton","type":"Sale","price":"$1,200,000","fee":"","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-15","closingDate":"2026-01-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"cf12ffd1-8cc2-4050-a44d-d1699c5d35e0","fileNumber":"KSS-01028","clientName":"Narinderpal Dayal","address":"44 Valleyway Drive, Brampton","type":"Purchase","price":"$250,000","fee":"","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-07","closingDate":"2026-01-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"983c496b-ddc1-471f-8cf9-aa5d58bb28d2","fileNumber":"KSS-01029","clientName":"Naresh Jain / Pushpinder Josan","address":"13 - 30 Dean Park Road, Toronto","type":"Purchase","price":"$1,363,200","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-05","closingDate":"2026-04-01","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"715dbd2e-8168-4193-816d-3709a3c17057","fileNumber":"KSS-01030","clientName":"Naresh Jain / Pushpinder Josan","address":"200 Montclair Drive, Unit - 4, Woodstock","type":"Purchase","price":"$1,677,000","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"150fa8f0-d0c2-49e0-bf70-1e4bd74f3ba5","fileNumber":"KSS-01031","clientName":"Hamid, Masih, Aamir","address":"30 Hillhurst Boulevard, Toronto","type":"Sale","price":"$700,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-03-03","closingDate":"2026-03-23","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"c75d26af-4d21-4ceb-b242-5c788d481280","fileNumber":"KSS-01032","clientName":"Abbas Pirayesh Akbari","address":"3002-85 Queens Wharf Rd Toronto","type":"Sale","price":"$1,050,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-01","closingDate":"2026-04-16","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"55a38d2e-1d59-4128-905a-115bc93a6c1a","fileNumber":"KSS-01033","clientName":"Komal and Jagtar Dosanjh","address":"3353 Beau Rivage Crescent, Mississauga","type":"Refinance","price":"$1,087,400","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"d19f3617-d379-40f2-a7e7-35d80415fda7","fileNumber":"KSS-01027B","clientName":"Kevin Parker","address":"44 Madelaine Crescent, Brampton","type":"Sale","price":"$1,200,000","fee":"","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-15","closingDate":"2026-01-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"cf12ffd1-8cc2-4050-a44d-d1699c5d35e0","fileNumber":"KSS-01028B","clientName":"Narinderpal Dayal","address":"44 Valleyway Drive, Brampton","type":"Purchase","price":"$250,000","fee":"","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-07","closingDate":"2026-01-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"983c496b-ddc1-471f-8cf9-aa5d58bb28d2","fileNumber":"KSS-01029B","clientName":"Naresh Jain / Pushpinder Josan","address":"13 - 30 Dean Park Road, Toronto","type":"Purchase","price":"$1,363,200","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-05","closingDate":"2026-04-01","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"715dbd2e-8168-4193-816d-3709a3c17057","fileNumber":"KSS-01030B","clientName":"Naresh Jain / Pushpinder Josan","address":"200 Montclair Drive, Unit - 4, Woodstock","type":"Purchase","price":"$1,677,000","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"150fa8f0-d0c2-49e0-bf70-1e4bd74f3ba5","fileNumber":"KSS-01031B","clientName":"Hamid, Masih, Aamir","address":"30 Hillhurst Boulevard, Toronto","type":"Sale","price":"$700,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-03-03","closingDate":"2026-03-23","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"c75d26af-4d21-4ceb-b242-5c788d481280","fileNumber":"KSS-01032B","clientName":"Abbas Pirayesh Akbari","address":"3002-85 Queens Wharf Rd Toronto","type":"Sale","price":"$1,050,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-01","closingDate":"2026-04-16","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"55a38d2e-1d59-4128-905a-115bc93a6c1a","fileNumber":"KSS-01033B","clientName":"Komal and Jagtar Dosanjh","address":"3353 Beau Rivage Crescent, Mississauga","type":"Refinance","price":"$1,087,400","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
   {"id":"2dae5f58-16d8-4d59-961d-19294a431fef","fileNumber":"KSS-01034","clientName":"Komal and Jagtar Dosanjh","address":"1104-425 Front Street East, Toronto","type":"Refinance","price":"$444,350","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
   {"id":"e3eb48d7-b571-4e18-917b-48be7d9bfdb5","fileNumber":"KSS-01035","clientName":"Afzal Yusuf Patel","address":"7765 Anaka Drive, Mississauga","type":"Refinance","price":"$702,100","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-07","closingDate":"2026-04-07","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"5389235b-c4c7-4f3a-8409-e5bd6f686c94","fileNumber":"KSS-01036","clientName":"Ben Azizi","address":"120 Sheppard Avenue West, Toronto","type":"Purchase","price":"$2,650,000","fee":"","lawyer":"Sally Baghbani","clerk":"","reqDate":"2026-09-14","closingDate":"2026-09-15","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"5389235b-c4c7-4f3a-8409-e5bd6f686c94","fileNumber":"KSS-01036","clientName":"Ben Azizi","address":"120 Sheppard Avenue West, Toronto","type":"Sale","price":"$2,650,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"Asees","reqDate":"2026-09-15","closingDate":"2026-09-30","status":"col-closing","priority":"High","notes":"","expanded":false},
   {"id":"2168298c-d5f4-4555-a3dc-5c1ba4c202ca","fileNumber":"KSS-01037","clientName":"Alap and Payalben Shah","address":"894 West Village Square London","type":"Refinance","price":"$480,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-05-22","closingDate":"2026-05-22","status":"col-closed","priority":"Normal","notes":"","expanded":false},
   {"id":"e963bddf-a3b4-4f08-8c30-03c6eef6ff16","fileNumber":"KSS-01038","clientName":"Shanta & Netra Bandhu Kafle","address":"7 Tarlton Court Thornhill","type":"Refinance","price":"$780,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-02","closingDate":"2026-04-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
   {"id":"df63f088-da24-481e-a4a5-4859da42b5cb","fileNumber":"KSS-01039","clientName":"Arun Darra and Amit Darira","address":"4508 Donegal Drive, Mississauga","type":"Purchase","price":"$1,250,000","fee":"","lawyer":"Navneet Garcha","clerk":"","reqDate":"2026-05-15","closingDate":"2026-05-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
@@ -981,14 +1362,26 @@ var SEED = [
   {"id":"f8b7f432-0abd-454e-af53-c6639103fa37","fileNumber":"KSS-01045","clientName":"Kishor Pun and Tulasi Pun","address":"214 Borrows St Thornhill","type":"Purchase","price":"$1,065,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-06-12","closingDate":"2026-06-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
   {"id":"f9828bc0-e012-497b-90ca-aa87c296b830","fileNumber":"KSS-01046","clientName":"Nageswar Rao Tamada and Jayashalini Puttachary","address":"115-2170 Bromsgrove Rd Mississauga","type":"Refinance","price":"$800,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-06-19","closingDate":"2026-06-19","status":"col-closed","priority":"Normal","notes":"","expanded":false},
   {"id":"a56f8515-eb6c-4e6b-a69b-b105081c1ba9","fileNumber":"KSS-01047","clientName":"Karmjit, Rajveer, Satveer Singh Bath","address":"38 Peacekeeping Crt, Brampton","type":"Refinance","price":"$1,300,000","fee":"","lawyer":"Navneet Garcha","clerk":"","reqDate":"2026-07-06","closingDate":"2026-07-05","status":"col-closed","priority":"Normal","notes":"","expanded":false},
-  {"id":"2c07c7eb-5501-4ae1-9116-004536ab8a54","fileNumber":"KSS-01031","clientName":"Wail Goryal and Maryam Mikho","address":"5600 Ethan Drive, Mississauga","type":"Refinance","price":"$990,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-03","closingDate":"2026-09-04","status":"col-closing","priority":"High","notes":"","expanded":false},
-  {"id":"b3f54791-b50c-48b4-85cb-302fa0ae6ac6","fileNumber":"KSS-01032","clientName":"Thirivarul Amirthalingam","address":"106 King St, Tiverton, Ontario N0G 2T0","type":"Sale","price":"$305,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-09-09","closingDate":"2026-09-23","status":"col-new","priority":"Normal","notes":"","expanded":false},
-  {"id":"4983ff14-8e1c-418c-9038-dae79d0e66c6","fileNumber":"KSS-01033","clientName":"Vamanan Thanabalasundram","address":"969 Applegrove Ave Oshawa Ontario L1H 1S5","type":"Purchase","price":"$670,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-14","closingDate":"2026-09-21","status":"col-new","priority":"Normal","notes":"","expanded":false}
+  {"id":"2c07c7eb-5501-4ae1-9116-004536ab8a54","fileNumber":"KSS-01031","clientName":"Wail Goryal and Maryam Mikho","address":"5600 Ethan Drive, Mississauga","type":"Refinance","price":"$990,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-03","closingDate":"2026-09-04","status":"col-reporting","priority":"High","notes":"","expanded":false},
+  {"id":"b3f54791-b50c-48b4-85cb-302fa0ae6ac6","fileNumber":"KSS-01032","clientName":"Thirivarul Amirthalingam","address":"106 King St, Tiverton, Ontario N0G 2T0","type":"Sale","price":"$305,000","fee":"","lawyer":"Neethan Selvan","clerk":"Asees","reqDate":"2026-09-09","closingDate":"2026-09-23","status":"col-reporting","priority":"Normal","notes":"","expanded":false},
+  {"id":"4983ff14-8e1c-418c-9038-dae79d0e66c6","fileNumber":"KSS-01033","clientName":"Vamanan Thanabalasundram","address":"969 Applegrove Ave Oshawa Ontario L1H 1S5","type":"Sale","price":"$670,000","fee":"","lawyer":"Sassan Emam","clerk":"Huma","reqDate":"2026-09-14","closingDate":"2026-11-02","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1788559375436","fileNumber":"KSS-00058","clientName":"Vamanan Thanabalasundram","address":"969 Applegrove Drive, Oshawa","type":"Purchase","price":"$650,000","fee":"","lawyer":"Sassan Emam","clerk":"Jasneet","reqDate":"2026-06-24","closingDate":"2026-07-10","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"1788995305154","fileNumber":"KSS-00058B","clientName":"Mayuran Manokararasa","address":"Suite 901B, 7437 Kingston Road Scarborough, Ontario M1B 0E9","type":"Purchase","price":"$804,900","fee":"","lawyer":"Neethan Selvan","clerk":"Asees","reqDate":"2026-09-01","closingDate":"2026-09-15","status":"col-reporting","priority":"Normal","notes":"Waiting for mortgage instructions. Prepare package for electronic signing.","expanded":false},
+  {"id":"1789675705163","fileNumber":"KSS-00059","clientName":"Jayson Vergara","address":"85 Warnford Cir Ajax, ON L1T 0J3","type":"Refinance","price":"$800,000","fee":"","lawyer":"Neethan Selvan","clerk":"Asees","reqDate":"2026-09-18","closingDate":"2026-09-24","status":"col-reporting","priority":"Normal","notes":"Signed electronically by Vendor in the City of Markham in the Province of Ontario.","expanded":false},
+  {"id":"1789675887842","fileNumber":"KSS-00060","clientName":"Harleen Dhot","address":"Suite 4909 at 38 Annie Craig Drive, Etobicoke, ON M8V 0G9","type":"Purchase","price":"$600,000","fee":"","lawyer":"Sassan Emam","clerk":"Kimberly","reqDate":"2026-09-30","closingDate":"2026-10-30","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1789676250861","fileNumber":"KSS-00061","clientName":"Ashley and Dunkley","address":"","type":"Purchase","price":"","fee":"","lawyer":"Sassan Emam","clerk":"Jasneet","reqDate":"","closingDate":"2026-12-03","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790201697511","fileNumber":"KSS-00062","clientName":"Sonam Lama","address":"6519 Song Bird Crescent, Mississauga, Ontario, L5W 1E1","type":"Refinance","price":"$800,000","fee":"","lawyer":"Sassan Emam","clerk":"Nilufa","reqDate":"2026-09-22","closingDate":"2026-09-29","status":"col-reporting","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790270381500","fileNumber":"KSS-00063","clientName":"Golden Route Canada Inc.","address":"1610-7181 Yonge St Thornhill, ON L3T 0C7","type":"Purchase","price":"$267,000","fee":"","lawyer":"Sassan Emam","clerk":"Kimberly","reqDate":"2026-11-04","closingDate":"2026-11-18","status":"col-new","priority":"Normal","notes":"Commercial transaction. Searches required. Fee $650.00 plus HST","expanded":false},
+  {"id":"1790436310037","fileNumber":"KSS-00064","clientName":"Gunaseelan Sundaram","address":"PH01-3650 Kingston Rd Scarborough, ON M1M 3X9","type":"Purchase","price":"$475,000","fee":"","lawyer":"Neethan Selvan","clerk":"Nilufa","reqDate":"2026-09-25","closingDate":"2026-10-07","status":"col-closing","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790438103662","fileNumber":"KSS-00065","clientName":"Nguyen and Vu Than","address":"216-100 Eagle Rock Way Maple, ON L6A 5B9","type":"Purchase","price":"$670,000","fee":"","lawyer":"Neethan Selvan","clerk":"Jasneet","reqDate":"2026-10-21","closingDate":"2026-10-30","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790786954074","fileNumber":"KSS-00066","clientName":"Vaintharasa Subaratnam","address":"1524 Amberlea Rd Pickering, ON L1V 4T7","type":"Purchase","price":"$810,000","fee":"","lawyer":"Neethan Selvan","clerk":"Nilufa","reqDate":"2026-10-20","closingDate":"2026-10-28","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790787324222","fileNumber":"KSS-00067","clientName":"Vanathy Navratnarajah","address":"607 Via Campaline Drive, Vaughan","type":"Transfer","price":"$2","fee":"","lawyer":"Neethan Selvan","clerk":"Nilufa","reqDate":"2026-10-02","closingDate":"2026-10-05","status":"col-req","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790869799541","fileNumber":"KSS-00068","clientName":"Anmolak and Pushwinder Kaloty","address":"15-55 ROMILLY AVE, BRAMPTON, ON, L5A 5L8","type":"Purchase","price":"$1,000,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"Nilufa","reqDate":"","closingDate":"2026-10-13","status":"col-new","priority":"Normal","notes":"","expanded":false}
 ];
 
 var appData = {
   files:[],
-  lawyers:["Arunjit Qaumi","Daniel Larijani","Gagan Lamba","Navneet Garcha","Neethan Selvan","Sally Baghbani","Saloumeh Baghbani","Saloumeh Baghbani Najafabad","Sassan Emam"],
+  lawyers:["Arunjit Qaumi","Daniel Larijani","Gagan Lamba","Navneet Garcha","Neethan Selvan","Saloumeh Baghbani Najafabad","Sassan Emam","Sally Baghbani","Saloumeh Baghbani"],
   clerks:['Nilufa','Huma','Maria','Asees','Jasneet','Kimberly','Dave']
 };
 var editingId = null;
@@ -997,7 +1390,7 @@ var dragFileId = null;
 var emailFileId = null;
 
 var KSS_VERSION_KEY = 'kss_version';
-var KSS_CURRENT_VERSION = '7';
+var KSS_CURRENT_VERSION = '8';
 if (localStorage.getItem(KSS_VERSION_KEY) !== KSS_CURRENT_VERSION) {
   localStorage.removeItem('kss_matters_v1');
   localStorage.setItem(KSS_VERSION_KEY, KSS_CURRENT_VERSION);
@@ -1006,7 +1399,13 @@ if (localStorage.getItem(KSS_VERSION_KEY) !== KSS_CURRENT_VERSION) {
 function loadData() {
   try {
     var d = JSON.parse(localStorage.getItem('kss_matters_v1'));
-    if (d && d.files && d.lawyers && d.clerks) { appData = d; }
+    if (d && d.files && d.lawyers && d.clerks) {
+      if (d.files.length < 65) {
+        localStorage.removeItem('kss_matters_v1');
+        return;
+      }
+      appData = d;
+    }
   } catch(e) {}
 }
 function saveData() { localStorage.setItem('kss_matters_v1', JSON.stringify(appData)); }
@@ -1065,6 +1464,16 @@ function getTypeColor(type) {
   return map[type] || '#0d7377';
 }
 function getTypeBg(type) {
+  var isDark = document.body.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    var darkMap = {
+      Purchase:{from:'rgba(13,115,119,0.15)',to:'rgba(20,160,154,0.1)',text:'#5eead4'},
+      Sale:{from:'rgba(22,163,74,0.15)',to:'rgba(34,197,94,0.1)',text:'#4ade80'},
+      Refinance:{from:'rgba(217,119,6,0.15)',to:'rgba(245,158,11,0.1)',text:'#fbbf24'},
+      Transfer:{from:'rgba(220,38,38,0.15)',to:'rgba(239,68,68,0.1)',text:'#f87171'}
+    };
+    return darkMap[type] || darkMap.Purchase;
+  }
   var map = {
     Purchase:{from:'#e6f4f4',to:'#b2d8d8',text:'#0b3d3f'},
     Sale:{from:'#f0fdf4',to:'#bbf7d0',text:'#15803d'},
@@ -1086,17 +1495,22 @@ function formatFeeNumber(val) {
   return '$' + num.toLocaleString('en-US');
 }
 
+// ── Helper: dark-mode-aware colors for inline styles ──
+function isDarkMode() { return document.body.getAttribute('data-theme') === 'dark'; }
+function dmColor(light, dark) { return isDarkMode() ? dark : light; }
+
 // ── COUNTDOWN BADGE BUILDER ──
 function buildCountdownBadge(file) {
   if (file.status === 'col-closed') return '';
   if (!file.closingDate) return '';
   var d = daysUntil(file.closingDate);
   var text, bg, color, border;
-  if (d <= 0) { text = '🔴 Closing TODAY'; bg = '#fee2e2'; color = '#dc2626'; border = '#dc2626'; }
-  else if (d === 1) { text = '🟠 Closing TOMORROW'; bg = '#fff7ed'; color = '#ea580c'; border = '#ea580c'; }
-  else if (d <= 3) { text = '⚡ Closes in ' + d + ' days'; bg = '#fff7ed'; color = '#d97706'; border = '#d97706'; }
-  else if (d <= 7) { text = '🟡 Closes in ' + d + ' days'; bg = '#fefce8'; color = '#ca8a04'; border = '#ca8a04'; }
-  else if (d <= 14) { text = '🟢 Closes in ' + d + ' days'; bg = '#f0fdf4'; color = '#16a34a'; border = '#16a34a'; }
+  var dark = isDarkMode();
+  if (d <= 0) { text = '🔴 Closing TODAY'; bg = dark ? 'rgba(220,38,38,0.15)' : '#fee2e2'; color = dark ? '#f87171' : '#dc2626'; border = dark ? 'rgba(220,38,38,0.3)' : '#dc2626'; }
+  else if (d === 1) { text = '🟠 Closing TOMORROW'; bg = dark ? 'rgba(234,88,12,0.15)' : '#fff7ed'; color = dark ? '#fb923c' : '#ea580c'; border = dark ? 'rgba(234,88,12,0.3)' : '#ea580c'; }
+  else if (d <= 3) { text = '⚡ Closes in ' + d + ' days'; bg = dark ? 'rgba(217,119,6,0.15)' : '#fff7ed'; color = dark ? '#fbbf24' : '#d97706'; border = dark ? 'rgba(217,119,6,0.3)' : '#d97706'; }
+  else if (d <= 7) { text = '🟡 Closes in ' + d + ' days'; bg = dark ? 'rgba(202,138,4,0.15)' : '#fefce8'; color = dark ? '#facc15' : '#ca8a04'; border = dark ? 'rgba(202,138,4,0.3)' : '#ca8a04'; }
+  else if (d <= 14) { text = '🟢 Closes in ' + d + ' days'; bg = dark ? 'rgba(22,163,74,0.15)' : '#f0fdf4'; color = dark ? '#4ade80' : '#16a34a'; border = dark ? 'rgba(22,163,74,0.3)' : '#16a34a'; }
   else { return ''; }
   return '<div class="countdown-badge" style="background:'+bg+';color:'+color+';border:1.5px solid '+border+'">'+text+'</div>';
 }
@@ -1145,7 +1559,7 @@ function renderActivitySection(file) {
   if (file._activityOpen) {
     html += '<div class="activity-list">';
     if (file.activity.length === 0) {
-      html += '<div style="font:500 11px Inter;color:#7a9f9f;padding:8px 0;font-style:italic">No activity yet</div>';
+      html += '<div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';padding:8px 0;font-style:italic">No activity yet</div>';
     } else {
       file.activity.forEach(function(entry) {
         html += '<div class="activity-entry">';
@@ -1166,15 +1580,16 @@ function renderCard(file, colId, isDuplicate) {
   var col = getColMeta(colId);
   var tb = getTypeBg(file.type);
   var d = daysUntil(file.closingDate);
+  var dark = isDarkMode();
   var urgFrom, urgTo, urgText;
-  if(d<=7){urgFrom='#fef2f2';urgTo='#fee2e2';urgText='#dc2626';}
-  else if(d<=14){urgFrom='#fffbeb';urgTo='#fef3c7';urgText='#b45309';}
-  else{urgFrom='#f0fdf4';urgTo='#bbf7d0';urgText='#15803d';}
+  if(d<=7){urgFrom=dark?'rgba(220,38,38,0.12)':'#fef2f2';urgTo=dark?'rgba(220,38,38,0.08)':'#fee2e2';urgText=dark?'#f87171':'#dc2626';}
+  else if(d<=14){urgFrom=dark?'rgba(217,119,6,0.12)':'#fffbeb';urgTo=dark?'rgba(217,119,6,0.08)':'#fef3c7';urgText=dark?'#fbbf24':'#b45309';}
+  else{urgFrom=dark?'rgba(22,163,74,0.12)':'#f0fdf4';urgTo=dark?'rgba(22,163,74,0.08)':'#bbf7d0';urgText=dark?'#4ade80':'#15803d';}
 
   var daysBadge = '';
   if(file.closingDate){
-    if(d<0) daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,#fef2f2,#fee2e2);color:#dc2626">'+Math.abs(d)+'d overdue</span>';
-    else if(d===0) daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,#fef2f2,#fee2e2);color:#dc2626">Today!</span>';
+    if(d<0) daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">'+Math.abs(d)+'d overdue</span>';
+    else if(d===0) daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">Today!</span>';
     else daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">'+d+'d left</span>';
   }
 
@@ -1201,6 +1616,9 @@ function renderCard(file, colId, isDuplicate) {
     feeHtml = '<span class="fee-pill">Fee: ' + formatFeeNumber(file.fee) + '</span>';
   }
 
+  var reqDatePillBg = dark ? 'rgba(13,115,119,0.15)' : 'linear-gradient(135deg,#e6f4f4,#b2d8d8)';
+  var reqDatePillColor = dark ? '#5eead4' : '#0b3d3f';
+
   var expanded = file.expanded;
   var expandedHtml = '';
   if(expanded) {
@@ -1219,7 +1637,7 @@ function renderCard(file, colId, isDuplicate) {
     + countdownHtml
     + '<div class="row-c"><span class="lawyer-line">👤 '+escH(file.lawyer)+'</span><span class="address-line">📍 '+escH(file.address)+'</span><span class="price-line">'+escH(file.price)+feeHtml+'</span></div>'
     + clerkRowHtml
-    + '<div class="row-d"><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="date-pill" style="background:linear-gradient(135deg,#e6f4f4,#b2d8d8);color:#0b3d3f">REQ '+formatDate(file.reqDate)+'</span><span class="date-pill" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">CLOSE '+formatDate(file.closingDate)+'</span>'+daysBadge+'</div><button class="btn-toggle" data-action="toggle" data-id="'+file.id+'">'+(expanded?'▲ Less':'▼ More')+'</button></div>'
+    + '<div class="row-d"><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="date-pill" style="background:'+reqDatePillBg+';color:'+reqDatePillColor+'">REQ '+formatDate(file.reqDate)+'</span><span class="date-pill" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">CLOSE '+formatDate(file.closingDate)+'</span>'+daysBadge+'</div><button class="btn-toggle" data-action="toggle" data-id="'+file.id+'">'+(expanded?'▲ Less':'▼ More')+'</button></div>'
     + expandedHtml
     + '</div>';
 }
@@ -1336,7 +1754,6 @@ function bindCardEvents() {
       if(file) { file.clerk = ''; logActivity(fid, '👤 Clerk unassigned'); saveData(); renderBoard(); }
     });
   });
-  // Checklist events
   document.querySelectorAll('[data-action="check-item"]').forEach(function(el){
     el.addEventListener('click', function(e){
       e.stopPropagation();
@@ -1378,7 +1795,6 @@ function bindCardEvents() {
     });
     inp.addEventListener('click', function(e){ e.stopPropagation(); });
   });
-  // Activity toggle
   document.querySelectorAll('[data-action="toggle-activity"]').forEach(function(el){
     el.addEventListener('click', function(e){
       e.stopPropagation();
@@ -1657,11 +2073,9 @@ function openEmailModal(fileId) {
   if (!file) return;
   document.getElementById('email-modal-title').textContent = '📧 Email Template';
   document.getElementById('email-modal-subtitle').textContent = file.fileNumber + ' — ' + file.clientName;
-  // Reset all pills
   document.querySelectorAll('.email-pill-btn').forEach(function(btn){ btn.classList.remove('active'); });
   document.getElementById('email-body-textarea').value = '';
   document.getElementById('email-modal-kss').style.display = 'flex';
-  // Auto-select Welcome pill
   var welcomePill = document.querySelector('.email-pill-btn[data-tpl="welcome"]');
   if (welcomePill) {
     welcomePill.classList.add('active');
@@ -1698,7 +2112,6 @@ function generateEmailTemplate(templateKey, file) {
   }
 }
 
-// Pill button click handlers
 document.querySelectorAll('.email-pill-btn').forEach(function(pill) {
   pill.addEventListener('click', function() {
     if (!emailFileId) return;
@@ -1734,6 +2147,7 @@ function formatFullDate(d) {
 
 function buildBriefingContent() {
   var now = new Date();
+  var dark = isDarkMode();
   var closingToday = appData.files.filter(function(f){ return f.closingDate && daysUntil(f.closingDate) === 0 && f.status !== 'col-closed'; });
   var closingWeek = appData.files.filter(function(f){
     if (!f.closingDate || f.status === 'col-closed') return false;
@@ -1744,18 +2158,18 @@ function buildBriefingContent() {
   var greeting = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening';
   var html = '<div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;margin-top:8px">';
   html += '<span style="font-size:48px">☀️</span>';
-  html += '<div><div style="font-family:Playfair Display,serif;font-weight:700;font-size:22px;color:#0b3d3f">' + greeting + ', KSS Matterkey!</div>';
-  html += '<div style="font:500 13px Inter;color:#7a9f9f">' + formatFullDate(now) + '</div></div></div>';
+  html += '<div><div style="font-family:Playfair Display,serif;font-weight:700;font-size:22px;color:'+dmColor('#0b3d3f','#c8e8e8')+'">' + greeting + ', KSS Matterkey!</div>';
+  html += '<div style="font:500 13px Inter;color:'+dmColor('#7a9f9f','#5a8080')+'">' + formatFullDate(now) + '</div></div></div>';
   html += '<div class="briefing-section-title">📌 Closing Today</div>';
   if (closingToday.length === 0) { html += '<div style="font:600 12px Inter;color:#16a34a;padding:8px 0">✅ No closings today — enjoy your day!</div>'; }
-  else { closingToday.forEach(function(f){ var tb = getTypeBg(f.type); html += '<div class="briefing-file-card" style="background:linear-gradient(90deg,#fee2e2,#fff5f5);border-left:4px solid #dc2626"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:#1a3030">' + escH(f.clientName) + '</span><span style="background:linear-gradient(135deg,'+tb.from+','+tb.to+');color:'+tb.text+';border-radius:6px;padding:2px 8px;font:600 10px Inter">' + escH(f.type) + '</span></div><div style="font:500 11px Inter;color:#7a9f9f;margin-top:4px">' + escH(f.lawyer) + ' • ' + formatDate(f.closingDate) + '</div></div>'; }); }
+  else { closingToday.forEach(function(f){ var tb = getTypeBg(f.type); html += '<div class="briefing-file-card" style="background:'+(dark?'rgba(220,38,38,0.1)':'linear-gradient(90deg,#fee2e2,#fff5f5)')+';border-left:4px solid #dc2626"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:'+dmColor('#1a3030','#e0f0f0')+'">' + escH(f.clientName) + '</span><span style="background:linear-gradient(135deg,'+tb.from+','+tb.to+');color:'+tb.text+';border-radius:6px;padding:2px 8px;font:600 10px Inter">' + escH(f.type) + '</span></div><div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';margin-top:4px">' + escH(f.lawyer) + ' • ' + formatDate(f.closingDate) + '</div></div>'; }); }
   html += '<div class="briefing-section-title">⚡ Closing This Week (next 7 days)</div>';
   if (closingWeek.length === 0) { html += '<div style="font:600 12px Inter;color:#16a34a;padding:8px 0">✅ No urgent closings this week</div>'; }
-  else { closingWeek.forEach(function(f){ var d = daysUntil(f.closingDate); html += '<div class="briefing-file-card" style="background:linear-gradient(90deg,#fff7ed,#fffbf0);border-left:4px solid #d97706"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:#1a3030;flex:1">' + escH(f.clientName) + '</span><span style="background:#fef3c7;color:#b45309;border-radius:8px;padding:2px 8px;font:700 10px Inter">in ' + d + ' day' + (d>1?'s':'') + '</span></div><div style="font:500 11px Inter;color:#7a9f9f;margin-top:4px">' + escH(f.type) + ' • ' + escH(f.lawyer) + '</div></div>'; }); }
+  else { closingWeek.forEach(function(f){ var d = daysUntil(f.closingDate); html += '<div class="briefing-file-card" style="background:'+(dark?'rgba(217,119,6,0.1)':'linear-gradient(90deg,#fff7ed,#fffbf0)')+';border-left:4px solid #d97706"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:'+dmColor('#1a3030','#e0f0f0')+';flex:1">' + escH(f.clientName) + '</span><span style="background:'+(dark?'rgba(217,119,6,0.2)':'#fef3c7')+';color:'+(dark?'#fbbf24':'#b45309')+';border-radius:8px;padding:2px 8px;font:700 10px Inter">in ' + d + ' day' + (d>1?'s':'') + '</span></div><div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';margin-top:4px">' + escH(f.type) + ' • ' + escH(f.lawyer) + '</div></div>'; }); }
   html += '<div class="briefing-section-title">📋 Reporting Files Needing Attention</div>';
   if (reportingFiles.length === 0) { html += '<div style="font:600 12px Inter;color:#16a34a;padding:8px 0">✅ All clear!</div>'; }
-  else { reportingFiles.forEach(function(f){ html += '<div class="briefing-file-card" style="background:linear-gradient(90deg,#fef2f2,#fff9f9);border-left:4px solid #dc2626"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:#1a3030">' + escH(f.clientName) + '</span></div><div style="font:500 11px Inter;color:#7a9f9f;margin-top:4px">' + escH(f.type) + ' • ' + escH(f.lawyer) + '</div></div>'; }); }
-  html += '<div style="text-align:center;font:600 13px Inter;color:#7a9f9f;margin-top:20px">Have a productive day! 💪</div>';
+  else { reportingFiles.forEach(function(f){ html += '<div class="briefing-file-card" style="background:'+(dark?'rgba(220,38,38,0.1)':'linear-gradient(90deg,#fef2f2,#fff9f9)')+';border-left:4px solid #dc2626"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:'+dmColor('#1a3030','#e0f0f0')+'">' + escH(f.clientName) + '</span></div><div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';margin-top:4px">' + escH(f.type) + ' • ' + escH(f.lawyer) + '</div></div>'; }); }
+  html += '<div style="text-align:center;font:600 13px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';margin-top:20px">Have a productive day! 💪</div>';
   html += '<button class="briefing-dismiss-btn" id="briefing-dismiss-btn">Got it — Let\'s go!</button>';
   return html;
 }
@@ -1796,14 +2210,6 @@ function requestNotificationPermission() {
   closeHamburger();
 }
 
-// ── DARK MODE TOGGLE ──
-function toggleDarkMode() {
-  var isDark = document.body.getAttribute('data-theme') === 'dark';
-  var darkBtn = document.getElementById('btn-dark-mode-kss');
-  if (isDark) { document.body.removeAttribute('data-theme'); localStorage.setItem('kss_dark_mode','0'); darkBtn.textContent = '🌙'; }
-  else { document.body.setAttribute('data-theme','dark'); localStorage.setItem('kss_dark_mode','1'); darkBtn.textContent = '☀️'; }
-}
-
 // ── SHORTCUTS MODAL ──
 function showShortcutsModal() { document.getElementById('shortcuts-modal-kss').style.display = 'flex'; closeHamburger(); }
 function closeShortcutsModal() { document.getElementById('shortcuts-modal-kss').style.display = 'none'; }
@@ -1818,6 +2224,7 @@ function closeAllModals() {
 function renderDashboard() {
   var files = appData.files;
   var total = files.length;
+  var dark = isDarkMode();
   var today = new Date(); today.setHours(0,0,0,0);
   var weekEnd = new Date(today); weekEnd.setDate(weekEnd.getDate() + 7);
   var closingWeek = files.filter(function(f){ if(!f.closingDate || f.status==='col-closed') return false; var d = new Date(f.closingDate+'T00:00:00'); return d >= today && d <= weekEnd; }).length;
@@ -1825,6 +2232,13 @@ function renderDashboard() {
   var urgent = files.filter(function(f){ return f.priority==='Urgent' && f.status!=='col-closed'; }).length;
   var currentMonth = today.getMonth(); var currentYear = today.getFullYear();
   var closedThisMonth = files.filter(function(f){ if(f.status !== 'col-closed' || !f.closingDate) return false; var d = new Date(f.closingDate+'T00:00:00'); return d.getMonth() === currentMonth && d.getFullYear() === currentYear; }).length;
+
+  var cardBg = dark ? '#1c2e2e' : '#fff';
+  var textPrimary = dmColor('#1a3030','#e0f0f0');
+  var textMuted = dmColor('#7a9f9f','#5a8080');
+  var textHeading = dmColor('#0b3d3f','#c8e8e8');
+  var barTrackBg = dark ? '#2a4040' : '#f1f5f9';
+  var subtleBg = dark ? '#192b2b' : '#f8fdfd';
 
   var kpis = [
     {emoji:'📁',num:total,label:'Total Files',bar:'var(--grad-teal)',sub:'all matters'},
@@ -1834,10 +2248,10 @@ function renderDashboard() {
     {emoji:'✅',num:closedThisMonth,label:'Closed This Month',bar:'var(--grad-green)',sub:'this month'}
   ];
   var kpiHtml = '';
-  kpis.forEach(function(k){ kpiHtml += '<div class="dash-kpi-card"><div class="top-bar" style="background:'+k.bar+'"></div><span class="kpi-emoji">'+k.emoji+'</span><div class="kpi-num">'+k.num+'</div><div class="kpi-label">'+k.label+'</div><div class="kpi-sub">'+k.sub+'</div></div>'; });
+  kpis.forEach(function(k){ kpiHtml += '<div class="dash-kpi-card" style="background:'+cardBg+'"><div class="top-bar" style="background:'+k.bar+'"></div><span class="kpi-emoji">'+k.emoji+'</span><div class="kpi-num" style="color:'+textPrimary+'">'+k.num+'</div><div class="kpi-label" style="color:'+textMuted+'">'+k.label+'</div><div class="kpi-sub" style="color:'+textMuted+'">'+k.sub+'</div></div>'; });
   document.getElementById('dash-kpi-container').innerHTML = kpiHtml;
 
-  // ── REVENUE TRACKER SECTION ──
+  // ── REVENUE TRACKER ──
   var totalRevenue = 0, monthRevenue = 0, feeCount = 0;
   var lawyerRevenue = {};
   appData.lawyers.forEach(function(l){ lawyerRevenue[l] = 0; });
@@ -1851,12 +2265,12 @@ function renderDashboard() {
   });
   var avgFee = feeCount > 0 ? Math.round(totalRevenue / feeCount) : 0;
 
-  var revHtml = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #16a34a;margin-bottom:22px">';
-  revHtml += '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 20px">💰 Revenue Overview</h3>';
+  var revHtml = '<div style="background:'+cardBg+';border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba('+(dark?'0,0,0,0.35':'11,61,63,0.09')+');border-top:5px solid #16a34a;margin-bottom:22px">';
+  revHtml += '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:'+textHeading+';margin:0 0 20px">💰 Revenue Overview</h3>';
   revHtml += '<div class="dash-revenue-cols" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:24px">';
-  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:#0b3d3f">$' + totalRevenue.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:#7a9f9f;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Total Fees Tracked</div></div>';
-  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:#e8705a">$' + monthRevenue.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:#7a9f9f;text-transform:uppercase;letter-spacing:1px;margin-top:4px">This Month</div></div>';
-  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:#0d7377">$' + avgFee.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:#7a9f9f;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Average Per File</div></div>';
+  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:'+textPrimary+'">$' + totalRevenue.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:'+textMuted+';text-transform:uppercase;letter-spacing:1px;margin-top:4px">Total Fees Tracked</div></div>';
+  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:#e8705a">$' + monthRevenue.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:'+textMuted+';text-transform:uppercase;letter-spacing:1px;margin-top:4px">This Month</div></div>';
+  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:#0d7377">$' + avgFee.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:'+textMuted+';text-transform:uppercase;letter-spacing:1px;margin-top:4px">Average Per File</div></div>';
   revHtml += '</div>';
 
   var revLawyerArr = appData.lawyers.slice().sort(function(a,b){ return lawyerRevenue[b] - lawyerRevenue[a]; });
@@ -1865,8 +2279,8 @@ function renderDashboard() {
     var rev = lawyerRevenue[l]; var pct = Math.round((rev/maxRevL)*100); var showInside = pct >= 20;
     var label = '$' + rev.toLocaleString('en-US');
     revHtml += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">';
-    revHtml += '<span class="revenue-bar-label" style="width:200px;font:600 13px Inter;color:#1a3030;text-align:right;flex-shrink:0">'+escH(l)+'</span>';
-    revHtml += '<div style="flex:1;height:28px;background:#f1f5f9;border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center">';
+    revHtml += '<span class="revenue-bar-label" style="width:200px;font:600 13px Inter;color:'+textPrimary+';text-align:right;flex-shrink:0">'+escH(l)+'</span>';
+    revHtml += '<div style="flex:1;height:28px;background:'+barTrackBg+';border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center">';
     revHtml += '<div class="dash-rev-bar-fill" style="height:100%;border-radius:8px;background:var(--grad-green);width:0%;transition:width 1s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:10px" data-target-width="'+pct+'%">';
     if(showInside) revHtml += '<span style="font:700 12px Inter;color:#fff">'+label+'</span>';
     revHtml += '</div>';
@@ -1876,7 +2290,7 @@ function renderDashboard() {
   revHtml += '</div>';
   document.getElementById('dash-revenue-container').innerHTML = revHtml;
 
-  // Files per Lawyer bar chart
+  // Files per Lawyer
   var lawyerCounts = {};
   appData.lawyers.forEach(function(l){ lawyerCounts[l] = 0; });
   files.forEach(function(f){ if(lawyerCounts[f.lawyer] !== undefined) lawyerCounts[f.lawyer]++; });
@@ -1887,8 +2301,8 @@ function renderDashboard() {
   lawyerArr.forEach(function(l){
     var c = lawyerCounts[l]; var pct = Math.round((c/maxL)*100); var showInside = pct >= 15;
     barHtml += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">';
-    barHtml += '<span style="width:200px;font:600 13px Inter;color:#1a3030;text-align:right;flex-shrink:0">'+escH(l)+'</span>';
-    barHtml += '<div style="flex:1;height:28px;background:#f1f5f9;border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center">';
+    barHtml += '<span style="width:200px;font:600 13px Inter;color:'+textPrimary+';text-align:right;flex-shrink:0">'+escH(l)+'</span>';
+    barHtml += '<div style="flex:1;height:28px;background:'+barTrackBg+';border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center">';
     barHtml += '<div class="dash-bar-fill" style="height:100%;border-radius:8px;background:var(--grad-teal);width:0%;transition:width 1s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:10px" data-target-width="'+pct+'%">';
     if(showInside) barHtml += '<span style="font:700 12px Inter;color:#fff">'+c+'</span>';
     barHtml += '</div>';
@@ -1897,8 +2311,8 @@ function renderDashboard() {
   });
 
   document.getElementById('dash-row2-container').innerHTML =
-    '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);margin-bottom:22px;border-top:5px solid #0d7377">' +
-    '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 20px">⚖️ Files per Lawyer</h3>' + barHtml + '</div>';
+    '<div style="background:'+cardBg+';border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba('+(dark?'0,0,0,0.35':'11,61,63,0.09')+');margin-bottom:22px;border-top:5px solid #0d7377">' +
+    '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:'+textHeading+';margin:0 0 20px">⚖️ Files per Lawyer</h3>' + barHtml + '</div>';
 
   setTimeout(function(){
     document.querySelectorAll('.dash-bar-fill, .dash-rev-bar-fill').forEach(function(bar){ bar.style.width = bar.getAttribute('data-target-width'); });
@@ -1913,14 +2327,14 @@ function renderDashboard() {
   var r = 70, strokeW = 40, cx = 100, cy = 100;
   var circumference = 2 * Math.PI * r;
   var svgParts = '<svg width="200" height="200" viewBox="0 0 200 200" style="flex-shrink:0">';
-  svgParts += '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#f1f5f9" stroke-width="'+strokeW+'"/>';
+  svgParts += '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+barTrackBg+'" stroke-width="'+strokeW+'"/>';
   var cumOffset = 0;
   typeArr.forEach(function(t){ var count = typeCounts[t]; if(count === 0) return; var fraction = count / typeTotal; var segLen = fraction * circumference; svgParts += '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+typeColors[t]+'" stroke-width="'+strokeW+'" stroke-dasharray="'+segLen+' '+circumference+'" stroke-dashoffset="'+ (-cumOffset) +'" transform="rotate(-90 '+cx+' '+cy+')" style="transition:stroke-dasharray 0.8s ease"/>'; cumOffset += segLen; });
-  svgParts += '<text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-family="Playfair Display,serif" font-size="28" font-weight="700" fill="#1a3030" dy="-4">'+total+'</text>';
-  svgParts += '<text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#7a9f9f" dy="18">Files</text></svg>';
+  svgParts += '<text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-family="Playfair Display,serif" font-size="28" font-weight="700" fill="'+textPrimary+'" dy="-4">'+total+'</text>';
+  svgParts += '<text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="'+textMuted+'" dy="18">Files</text></svg>';
   var legendHtml = '';
-  typeArr.forEach(function(t){ var c = typeCounts[t]; var pct = Math.round((c/typeTotal)*100); legendHtml += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="border-radius:50%;width:12px;height:12px;background:'+typeColors[t]+';flex-shrink:0"></span><span style="font:600 13px Inter;color:#1a3030;flex:1">'+t+'</span><span style="font:700 13px Inter;color:#0d7377">'+c+'</span><span style="font:500 11px Inter;color:#7a9f9f;margin-left:4px">'+pct+'%</span></div>'; });
-  var donutCard = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #e8705a"><h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 16px">🏷️ By File Type</h3><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' + svgParts + '<div style="flex:1;min-width:140px">' + legendHtml + '</div></div></div>';
+  typeArr.forEach(function(t){ var c = typeCounts[t]; var pct = Math.round((c/typeTotal)*100); legendHtml += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="border-radius:50%;width:12px;height:12px;background:'+typeColors[t]+';flex-shrink:0"></span><span style="font:600 13px Inter;color:'+textPrimary+';flex:1">'+t+'</span><span style="font:700 13px Inter;color:#0d7377">'+c+'</span><span style="font:500 11px Inter;color:'+textMuted+';margin-left:4px">'+pct+'%</span></div>'; });
+  var donutCard = '<div style="background:'+cardBg+';border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba('+(dark?'0,0,0,0.35':'11,61,63,0.09')+');border-top:5px solid #e8705a"><h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:'+textHeading+';margin:0 0 16px">🏷️ By File Type</h3><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' + svgParts + '<div style="flex:1;min-width:140px">' + legendHtml + '</div></div></div>';
 
   // Pipeline snapshot
   var kanbanMiniHtml = '<div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch">';
@@ -1930,225 +2344,5 @@ function renderDashboard() {
     colFiles.sort(function(a,b){ if(!a.closingDate) return 1; if(!b.closingDate) return -1; return new Date(b.closingDate) - new Date(a.closingDate); });
     kanbanMiniHtml += '<div style="min-width:130px;border-radius:12px;overflow:hidden;flex-shrink:0;flex:1">';
     kanbanMiniHtml += '<div style="padding:8px 12px;font:700 10px Inter;color:#fff;letter-spacing:1.5px;text-transform:uppercase;background:'+col.grad+';display:flex;align-items:center;justify-content:space-between">'+shortLabels[col.id]+'<span style="background:rgba(255,255,255,0.25);border-radius:10px;padding:1px 7px;font:700 10px Inter">'+colFiles.length+'</span></div>';
-    kanbanMiniHtml += '<div style="background:linear-gradient(180deg,#f8fdfd,#f0fafa);padding:8px;min-height:100px">';
-    colFiles.slice(0,3).forEach(function(f){ kanbanMiniHtml += '<div style="background:#fff;border-radius:7px;padding:7px 9px;margin-bottom:6px;border-left:3px solid '+col.accent+';box-shadow:0 1px 6px rgba(11,61,63,0.07)"><div style="font:700 9px Inter;color:#7a9f9f">'+escH(f.fileNumber)+'</div><div style="font:600 11px Inter;color:#1a3030;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+escH(f.clientName)+'</div><div style="font:500 9px Inter;color:#7a9f9f">'+formatDate(f.closingDate)+'</div></div>'; });
-    if(colFiles.length > 3) kanbanMiniHtml += '<div style="background:#e6f4f4;color:#0d7377;border-radius:6px;font:600 9px Inter;padding:2px 7px;text-align:center">+'+(colFiles.length-3)+' more</div>';
-    kanbanMiniHtml += '</div></div>';
-  });
-  kanbanMiniHtml += '</div>';
-  var kanbanCard = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #14a09a"><h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 16px">📌 Pipeline Snapshot</h3>' + kanbanMiniHtml + '</div>';
-
-  document.getElementById('dash-row3-container').innerHTML = '<div class="dash-row3-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px">' + donutCard + kanbanCard + '</div>';
-
-  // Timeline
-  var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var monthBuckets = [];
-  for(var mi = -6; mi < 4; mi++) {
-    var tm = new Date(today.getFullYear(), today.getMonth() + mi, 1);
-    var tmMonth = tm.getMonth(); var tmYear = tm.getFullYear();
-    var monthFiles = files.filter(function(f){ if(!f.closingDate) return false; var d = new Date(f.closingDate+'T00:00:00'); return d.getMonth() === tmMonth && d.getFullYear() === tmYear; });
-    monthBuckets.push({month:tmMonth, year:tmYear, count:monthFiles.length, isCurrent:(tmMonth===currentMonth && tmYear===currentYear)});
-  }
-  var maxMonthCount = Math.max.apply(null, monthBuckets.map(function(b){return b.count;})) || 1;
-  var vbarHtml = '<div style="display:flex;align-items:flex-end;gap:8px;height:160px;padding:0 4px">';
-  monthBuckets.forEach(function(b){ var h = Math.max(4, Math.round((b.count / maxMonthCount) * 140)); var bg = b.isCurrent ? 'var(--grad-coral)' : 'var(--grad-teal)'; vbarHtml += '<div style="flex:1;display:flex;flex-direction:column;align-items:center"><div style="font:700 11px Inter;color:#0d7377;margin-bottom:4px">'+b.count+'</div><div style="width:100%;height:'+h+'px;border-radius:8px 8px 0 0;background:'+bg+';min-height:4px"></div><div style="font:600 9px Inter;color:#7a9f9f;margin-top:6px;text-align:center;white-space:nowrap;line-height:1.3">'+monthNames[b.month]+'<br>\''+String(b.year).slice(2)+'</div></div>'; });
-  vbarHtml += '</div>';
-  var timelineCard = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #d97706"><h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 20px">📅 Monthly Closing Timeline</h3>' + vbarHtml + '</div>';
-
-  // Reporting files
-  var reportingFiles = files.filter(function(f){ return f.status === 'col-reporting'; });
-  reportingFiles.sort(function(a,b){ return daysUntil(a.closingDate) - daysUntil(b.closingDate); });
-  var overdueHtml = '';
-  if(reportingFiles.length === 0) { overdueHtml = '<div style="text-align:center;padding:24px;color:#16a34a;font-weight:600">✅ No files in Reporting</div>'; }
-  else {
-    overdueHtml = '<div style="max-height:280px;overflow-y:auto">';
-    reportingFiles.forEach(function(f){ var d = daysUntil(f.closingDate); var badgeText, badgeBg, badgeColor; if(d < 0) { badgeText = Math.abs(d)+'d overdue'; badgeBg = '#fee2e2'; badgeColor = '#dc2626'; } else if(d === 0) { badgeText = 'Today!'; badgeBg = '#fee2e2'; badgeColor = '#dc2626'; } else { badgeText = d+'d left'; badgeBg = '#fef3c7'; badgeColor = '#b45309'; } overdueHtml += '<div style="background:linear-gradient(90deg,#fef2f2,#fff9f9);border-radius:10px;padding:10px 14px;margin-bottom:8px;border-left:4px solid #dc2626"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">'+escH(f.fileNumber)+'</span><span style="font:700 13px Inter;color:#1a3030;flex:1">'+escH(f.clientName)+'</span><span style="background:'+badgeBg+';color:'+badgeColor+';border-radius:8px;padding:2px 8px;font:700 10px Inter">'+badgeText+'</span></div><div style="font:500 11px Inter;color:#7a9f9f;margin-top:4px">'+escH(f.type)+' • '+escH(f.lawyer)+'</div></div>'; });
-    overdueHtml += '</div>';
-  }
-  var reportCard = '<div style="background:#fff;border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(11,61,63,0.09);border-top:5px solid #dc2626"><h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:#0b3d3f;margin:0 0 16px">⏰ Reporting & Overdue Files</h3>' + overdueHtml + '</div>';
-
-  document.getElementById('dash-row4-container').innerHTML = '<div class="dash-row4-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">' + timelineCard + reportCard + '</div>';
-}
-
-// ── CALENDAR ──
-function renderCalendar() {
-  var year = calYear, month = calMonth;
-  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('cal-month-label-kss31').textContent = months[month] + ' ' + year;
-  var firstDay = new Date(year, month, 1).getDay();
-  var daysInMonth = new Date(year, month + 1, 0).getDate();
-  var prevDays = new Date(year, month, 0).getDate();
-  var today = new Date(); today.setHours(0,0,0,0);
-  var statusBgMap = {'col-new':'#14a09a','col-req':'#d97706','col-closing':'#16a34a','col-reporting':'#dc2626','col-closed':'#64748b'};
-  var fileMap = {};
-  appData.files.forEach(function(f){ if(!f.closingDate) return; if(!fileMap[f.closingDate]) fileMap[f.closingDate] = []; fileMap[f.closingDate].push(f); });
-  var html = '';
-  var totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
-  for(var i = 0; i < totalCells; i++) {
-    var dayNum, dateStr, isOther = false;
-    if(i < firstDay) { dayNum = prevDays - firstDay + i + 1; isOther = true; var pm = month === 0 ? 11 : month - 1; var py = month === 0 ? year - 1 : year; dateStr = py + '-' + String(pm+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0'); }
-    else if(i - firstDay >= daysInMonth) { dayNum = i - firstDay - daysInMonth + 1; isOther = true; var nm = month === 11 ? 0 : month + 1; var ny = month === 11 ? year + 1 : year; dateStr = ny + '-' + String(nm+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0'); }
-    else { dayNum = i - firstDay + 1; dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0'); }
-    var isToday = !isOther && (new Date(year, month, dayNum).getTime() === today.getTime());
-    var filesOnDay = fileMap[dateStr] || [];
-    var cellClass = 'cal-day-cell'; if(isOther) cellClass += ' other-month'; if(isToday) cellClass += ' cal-today-cell';
-    html += '<div class="'+cellClass+'" data-date="'+dateStr+'">';
-    if(isToday) html += '<div class="cal-today-num">'+dayNum+'</div>'; else html += '<div class="cal-day-num">'+dayNum+'</div>';
-    var maxDots = 2;
-    filesOnDay.slice(0, maxDots).forEach(function(f){ var bg = statusBgMap[f.status] || '#64748b'; var suffix = f.fileNumber.split('-').pop(); html += '<span class="cal-event-pill" style="background:'+bg+'">'+escH(suffix)+' · '+escH(f.clientName.split(' ')[0])+'</span>'; });
-    if(filesOnDay.length > maxDots) html += '<span class="cal-event-pill-more">+' + (filesOnDay.length - maxDots) + ' more</span>';
-    html += '</div>';
-  }
-  document.getElementById('cal-grid-kss33').innerHTML = html;
-  document.querySelectorAll('.cal-day-cell:not(.other-month)').forEach(function(cell){
-    cell.addEventListener('click', function(e){ var date = this.getAttribute('data-date'); var filesOnDay = fileMap[date] || []; if(filesOnDay.length) showDayPopup(e, date, filesOnDay); });
-  });
-}
-
-function showDayPopup(event, dateStr, filesOnDay) {
-  var popup = document.getElementById('day-popup-kss11');
-  var html = '<button class="popup-close" id="popup-close-btn">✕</button>';
-  html += '<div class="popup-title">📅 ' + formatDate(dateStr) + '</div>';
-  filesOnDay.forEach(function(f){ var col = getColMeta(f.status); html += '<div class="popup-file" style="border-left:4px solid '+col.accent+'"><div class="popup-fnum">'+escH(f.fileNumber)+'</div><div class="popup-client">'+escH(f.clientName)+'</div><div style="font-weight:500;font-size:11px;color:#3d5c5c;margin-top:4px">'+escH(f.type)+' • '+escH(f.lawyer)+'</div></div>'; });
-  popup.innerHTML = html;
-  var x = event.clientX, y = event.clientY;
-  if(x + 320 > window.innerWidth) x = window.innerWidth - 340;
-  if(y + 200 > window.innerHeight) y = y - 200;
-  if(x < 10) x = 10; if(y < 10) y = 10;
-  popup.style.left = x + 'px'; popup.style.top = y + 'px'; popup.style.display = 'block';
-  document.getElementById('popup-close-btn').addEventListener('click', function(e){ e.stopPropagation(); popup.style.display = 'none'; });
-}
-
-function prevMonth() { calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); }
-function nextMonth() { calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendar(); }
-
-// ── TABS ──
-function showTabById(tab) {
-  var idMap = {dashboard:'tab-dashboard-kss13', matters:'tab-matters-kss12', calendar:'tab-calendar-kss14'};
-  Object.keys(idMap).forEach(function(k){ document.getElementById(idMap[k]).style.display = 'none'; });
-  document.getElementById(idMap[tab]).style.display = 'block';
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab')===tab); });
-  if(tab === 'dashboard') renderDashboard();
-}
-
-// ── FILTERS ──
-function renderFilters() {
-  var ls = document.getElementById('filter-lawyer-kss27');
-  ls.innerHTML = '<option value="">All Lawyers</option>';
-  appData.lawyers.forEach(function(l){ ls.innerHTML += '<option>'+escH(l)+'</option>'; });
-  var cs = document.getElementById('filter-clerk-kss50');
-  cs.innerHTML = '<option value="">All Clerks</option><option value="__unassigned__">Unassigned</option>';
-  appData.clerks.forEach(function(c){ cs.innerHTML += '<option>'+escH(c)+'</option>'; });
-  var ml = document.getElementById('m-lawyer-kss39');
-  ml.innerHTML = '';
-  appData.lawyers.forEach(function(l){ ml.innerHTML += '<option>'+escH(l)+'</option>'; });
-  var mc = document.getElementById('m-clerk-kss40');
-  mc.innerHTML = '<option value="">Unassigned</option>';
-  appData.clerks.forEach(function(c){ mc.innerHTML += '<option>'+escH(c)+'</option>'; });
-}
-
-function closeHamburger() { document.getElementById('hamburger-menu-kss5').style.display = 'none'; }
-function renderAll() { renderBoard(); renderDashboard(); renderCalendar(); }
-
-// ── INIT ──
-loadData();
-if(!appData.files || !appData.files.length) seedData();
-appData.files.forEach(function(f) {
-  if (!f.checklist || !f.checklist.length) f.checklist = getDefaultChecklist(f.type);
-  if (!f.activity) f.activity = [];
-  if (f.fee === undefined) f.fee = '';
-});
-saveData();
-
-calYear = new Date().getFullYear();
-calMonth = new Date().getMonth();
-renderFilters();
-renderBoard();
-renderDashboard();
-renderCalendar();
-showTabById('matters');
-
-// ── HAMBURGER ──
-document.getElementById('btn-hamburger-kss4').addEventListener('click', function(e){
-  e.stopPropagation();
-  var m = document.getElementById('hamburger-menu-kss5');
-  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-});
-document.addEventListener('click', function(e){
-  var popup = document.getElementById('day-popup-kss11');
-  if(popup.style.display === 'block' && !popup.contains(e.target)) popup.style.display = 'none';
-  document.getElementById('hamburger-menu-kss5').style.display = 'none';
-  if(activeMoveDropdown && !activeMoveDropdown.contains(e.target)) closeMoveDropdown();
-  if(activeClerkDropdown && !activeClerkDropdown.contains(e.target)) closeClerkDropdown();
-});
-document.getElementById('hamburger-menu-kss5').addEventListener('click', function(e){ e.stopPropagation(); });
-
-document.getElementById('hm-add-kss15').addEventListener('click', function(){ openAddModal(); });
-document.getElementById('hm-alerts-kss16').addEventListener('click', function(){ showAlerts(); });
-document.getElementById('hm-backup-kss17').addEventListener('click', function(){ backupData(); });
-document.getElementById('hm-restore-kss18').addEventListener('click', function(){ restoreData(); });
-document.getElementById('hm-print-kss19').addEventListener('click', function(){ closeHamburger(); window.print(); });
-document.getElementById('hm-briefing-kss').addEventListener('click', function(){ closeHamburger(); showBriefingModal(); });
-document.getElementById('hm-notif-kss').addEventListener('click', function(){ requestNotificationPermission(); });
-document.getElementById('hm-export-csv-kss').addEventListener('click', function(){ exportCSV(); });
-document.getElementById('hm-export-ics-kss').addEventListener('click', function(){ exportICS(); });
-document.getElementById('hm-shortcuts-kss').addEventListener('click', function(){ showShortcutsModal(); });
-document.getElementById('btn-dark-mode-kss').addEventListener('click', function(){ toggleDarkMode(); });
-
-document.getElementById('briefing-close-btn').addEventListener('click', function(){ localStorage.setItem('kss_briefing_date', getTodayStr()); closeBriefingModal(); });
-document.getElementById('briefing-modal-kss').addEventListener('click', function(e){ if(e.target === this) { localStorage.setItem('kss_briefing_date', getTodayStr()); closeBriefingModal(); } });
-
-document.getElementById('shortcuts-close-btn').addEventListener('click', closeShortcutsModal);
-document.getElementById('shortcuts-dismiss-btn').addEventListener('click', closeShortcutsModal);
-document.getElementById('shortcuts-modal-kss').addEventListener('click', function(e){ if(e.target === this) closeShortcutsModal(); });
-
-document.querySelectorAll('.tab-btn').forEach(function(b){
-  b.addEventListener('click', function(){ showTabById(this.getAttribute('data-tab')); });
-});
-
-['filter-search-kss26','filter-lawyer-kss27','filter-type-kss28','filter-priority-kss29','filter-clerk-kss50'].forEach(function(id){
-  document.getElementById(id).addEventListener('input', renderBoard);
-  document.getElementById(id).addEventListener('change', renderBoard);
-});
-
-document.getElementById('btn-expand-all-kss24').addEventListener('click', expandAll);
-document.getElementById('btn-collapse-all-kss25').addEventListener('click', collapseAll);
-document.getElementById('btn-prev-month-kss30').addEventListener('click', prevMonth);
-document.getElementById('btn-next-month-kss32').addEventListener('click', nextMonth);
-document.getElementById('btn-modal-cancel-kss47').addEventListener('click', closeModal);
-document.getElementById('btn-modal-save-kss48').addEventListener('click', saveFile);
-document.getElementById('file-modal-kss10').addEventListener('click', function(e){ if(e.target === this) closeModal(); });
-
-document.addEventListener('copy', function(e) { if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) e.stopPropagation(); }, true);
-document.addEventListener('paste', function(e) { if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) e.stopPropagation(); }, true);
-document.addEventListener('cut', function(e) { if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) e.stopPropagation(); }, true);
-
-// ── KEYBOARD SHORTCUTS ──
-document.addEventListener('keydown', function(e) {
-  var tag = document.activeElement ? document.activeElement.tagName.toUpperCase() : '';
-  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
-    if (e.key === 'Escape') { document.activeElement.blur(); closeAllModals(); }
-    return;
-  }
-  if (e.metaKey || e.ctrlKey || e.altKey) return;
-  switch(e.key) {
-    case 'n': case 'N': e.preventDefault(); openAddModal(); break;
-    case 'f': case 'F': e.preventDefault(); showTabById('matters'); var si = document.getElementById('filter-search-kss26'); if(si) si.focus(); break;
-    case 'd': case 'D': e.preventDefault(); showTabById('dashboard'); break;
-    case 'm': case 'M': e.preventDefault(); showTabById('matters'); break;
-    case 'c': case 'C': e.preventDefault(); showTabById('calendar'); break;
-    case 'Escape': e.preventDefault(); closeAllModals(); break;
-    case '?': e.preventDefault(); showShortcutsModal(); break;
-  }
-});
-
-// Auto-show briefing after splash
-setTimeout(function() { checkAutoBriefing(); }, 2500);
-
-// Auto-schedule notifications on load
-if (localStorage.getItem('kss_notif_permission') === 'granted' && 'Notification' in window && Notification.permission === 'granted') {
-  scheduleNotifications();
-}
-</script>
-</body>
-</html>
+    kanbanMiniHtml += '<div style="background:'+subtleBg+';padding:8px;min-height:100px">';
+    colFiles.slice(0,3).forEach(function(f){ kanbanMiniHtml += '<div style="background:'+cardBg+';border-radius:7px;padding:7px 9px;margin-bottom:6px;border-left:3px solid '+col.accent+';box-shadow:0 1px 6px rgba('+(dark?'0,0,0,0.2':'11,61,63,0.07')+')"><div style="font:700 9px Inter;color:'+textMuted+'">'+escH(f.fileNumber)+'</div><div style="font:
