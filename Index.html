@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KSS Matterkey Legal Closing Tracker</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b3d3f'/%3E%3Crect x='14' y='10' width='36' height='44' rx='4' fill='white'/%3E%3Crect x='14' y='10' width='36' height='8' rx='4' fill='%230d7377'/%3E%3Cline x1='20' y1='28' x2='44' y2='28' stroke='%23e6f4f4' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='20' y1='35' x2='44' y2='35' stroke='%23e6f4f4' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='20' y1='42' x2='36' y2='42' stroke='%23e6f4f4' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='48' cy='46' r='10' fill='%23e8705a'/%3E%3Cpath d='M43 46 L46.5 49.5 L53 43' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal-deep: #0b3d3f;
+  --teal-mid: #0d7377;
+  --teal-bright: #14a09a;
+  --teal-pale: #e6f4f4;
+  --coral: #e8705a;
+  --coral-dark: #cf5e4a;
+  --coral-light: #f4a08e;
+  --coral-pale: #fdf0ed;
+  --white: #ffffff;
+  --text-dark: #1a3030;
+  --text-mid: #3d5c5c;
+  --text-light: #7a9f9f;
+  --shadow: 0 4px 24px rgba(11,61,63,0.13);
+  --grad-header: linear-gradient(135deg, #0b3d3f 0%, #0d7377 60%, #14a09a 100%);
+  --grad-teal: linear-gradient(135deg, #0d7377 0%, #14a09a 100%);
+  --grad-coral: linear-gradient(135deg, #e8705a 0%, #f4a08e 100%);
+  --grad-page: linear-gradient(160deg, #e6f4f4 0%, #f0fafa 50%, #fdf5f3 100%);
+  --grad-card: linear-gradient(180deg, #ffffff 0%, #f8fdfd 100%);
+  --grad-green: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  --grad-red: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  --grad-amber: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+  --grad-blue: linear-gradient(135deg, #0d7377 0%, #14a09a 100%);
+  --grad-purple: linear-gradient(135deg, #0b3d3f 0%, #0d7377 100%);
+  --teal: #0d9488;
+  --teal-light: #5eead4;
+  --red: #dc2626;
+  --amber: #d97706;
+  --green: #16a34a;
+  --blue: #1d4ed8;
+  --gray-bg: #f8fafc;
+  --dm-bg-page: #e6f4f4;
+  --dm-bg-col: #e6f4f4;
+  --dm-bg-card: #ffffff;
+  --dm-bg-card-hover: #f8fdfd;
+  --dm-bg-input: #ffffff;
+  --dm-bg-modal: #ffffff;
+  --dm-bg-pill: #e6f4f4;
+  --dm-bg-subtle: #f1f5f9;
+  --dm-border: rgba(13,115,119,0.12);
+  --dm-border-light: #f1f5f9;
+  --dm-text-primary: #1a3030;
+  --dm-text-secondary: #3d5c5c;
+  --dm-text-muted: #7a9f9f;
+  --dm-text-heading: #0b3d3f;
+  --dm-scrollbar: #e6f4f4;
+  --dm-scrollbar-thumb: #0d7377;
+}
+
+[data-theme="dark"] {
+  --dm-bg-page:       #0f1e1e;
+  --dm-bg-col:        #162424;
+  --dm-bg-card:       #1c2e2e;
+  --dm-bg-card-hover: #213535;
+  --dm-bg-input:      #162424;
+  --dm-bg-modal:      #1c2e2e;
+  --dm-bg-pill:       #0f2828;
+  --dm-bg-subtle:     #192b2b;
+  --dm-border:        #2a4040;
+  --dm-border-light:  #213535;
+  --dm-text-primary:  #e0f0f0;
+  --dm-text-secondary:#8ab8b8;
+  --dm-text-muted:    #5a8080;
+  --dm-text-heading:  #c8e8e8;
+  --dm-scrollbar:     #2a4040;
+  --dm-scrollbar-thumb: #0d7377;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--grad-page); font-family: 'Inter', sans-serif; margin: 0; min-height: 100vh; color: var(--text-dark); }
+button, input, select, textarea { font-family: 'Inter', sans-serif; touch-action: manipulation; }
+button, .card { touch-action: manipulation; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: linear-gradient(180deg, #e6f4f4, #b2d8d8); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #0d7377, #14a09a); border-radius: 3px; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.3; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+#splash-screen-kss1 {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--grad-header);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  transition: opacity 0.7s ease;
+}
+#splash-screen-kss1 .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #e8705a, #f4a08e); border-radius: 2px; }
+#splash-screen-kss1 .splash-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 44px; color: #e8705a; letter-spacing: 1px; text-shadow: 0 2px 20px rgba(232,112,90,0.4); text-align: center; }
+#splash-screen-kss1 .splash-sub { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px; color: #b2d8d8; letter-spacing: 4px; text-transform: uppercase; }
+#splash-screen-kss1 .dots { display: flex; gap: 10px; }
+#splash-screen-kss1 .dot { width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, #e8705a, #f4a08e); animation: pulse-dot 1s ease-in-out infinite; }
+#splash-screen-kss1 .dot:nth-child(2) { animation-delay: 0.3s; }
+#splash-screen-kss1 .dot:nth-child(3) { animation-delay: 0.6s; }
+
+header {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--grad-header);
+  padding: 14px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(11,61,63,0.4);
+}
+.header-logo-area { display: flex; align-items: center; gap: 12px; }
+.header-title-kss2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; color: #e8705a; letter-spacing: 1px; }
+.header-sub-kss3 { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px; color: #b2d8d8; letter-spacing: 3px; text-transform: uppercase; padding-left: 0; }
+.header-right-controls { display: flex; align-items: center; gap: 10px; }
+#btn-dark-mode-kss {
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 50%;
+  width: 38px; height: 38px; color: #fff; font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink:0;
+}
+#btn-dark-mode-kss:hover { background: rgba(255,255,255,0.25); transform: scale(1.1); }
+#btn-hamburger-kss4 {
+  background: var(--grad-coral); color: #fff; border: none; border-radius: 10px;
+  padding: 10px 18px; font-size: 18px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 2px 12px rgba(232,112,90,0.4); transition: all 0.2s;
+}
+#btn-hamburger-kss4:hover { transform: translateY(-2px); box-shadow: 0 5px 18px rgba(232,112,90,0.5); }
+
+#hamburger-menu-kss5 {
+  position: fixed; top: 66px; right: 24px; z-index: 500;
+  display: none; flex-direction: column; gap: 8px;
+  background: linear-gradient(160deg, #0b3d3f, #0d7377);
+  border-radius: 14px; padding: 12px; min-width: 210px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
+}
+.hmenu-btn-kss6 {
+  width: 100%; background: rgba(255,255,255,0.07); color: #b2d8d8;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 9px;
+  padding: 11px 16px; text-align: left; font-weight: 600; font-size: 13px;
+  cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.18s;
+}
+.hmenu-btn-kss6:hover {
+  background: linear-gradient(135deg, rgba(232,112,90,0.25), rgba(232,112,90,0.08));
+  border-color: rgba(232,112,90,0.5); transform: translateX(3px); color: #fff;
+}
+
+#tab-bar-kss7 {
+  background: linear-gradient(90deg, #0b3d3f, #0d7377);
+  padding: 0 28px; display: flex; gap: 4px;
+  border-bottom: 3px solid rgba(232,112,90,0.3);
+}
+.tab-btn {
+  background: transparent; color: #7fbfbf; border: none;
+  border-bottom: 3px solid transparent; margin-bottom: -3px;
+  padding: 13px 24px; font-weight: 600; font-size: 13px;
+  cursor: pointer; letter-spacing: 0.5px; transition: all 0.2s; white-space: nowrap;
+}
+.tab-btn.active { color: #e8705a; border-bottom-color: #e8705a; background: rgba(232,112,90,0.08); }
+.tab-btn:hover { color: #e6f4f4; }
+
+.filter-bar {
+  background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(230,244,244,0.95));
+  border-radius: 12px; padding: 14px 20px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  box-shadow: var(--shadow); border: 1px solid rgba(13,115,119,0.12); backdrop-filter: blur(8px);
+}
+.filter-bar input, .filter-bar select {
+  border: 1.5px solid rgba(13,115,119,0.2); border-radius: 8px; padding: 8px 14px;
+  background: #fff; font-size: 13px; color: var(--text-dark); outline: none;
+}
+.filter-bar input:focus, .filter-bar select:focus {
+  border-color: #0d7377; box-shadow: 0 0 0 3px rgba(13,115,119,0.15);
+}
+
+.btn-expand-filter {
+  border: none; border-radius: 9px; padding: 9px 18px; font-weight: 700; font-size: 12px;
+  cursor: pointer; white-space: nowrap; color: #fff; transition: all 0.2s;
+}
+.btn-expand-filter:hover { transform: translateY(-2px); }
+
+#board-kss9 { display: flex; gap: 18px; overflow-x: auto; align-items: flex-start; padding-bottom: 24px; -webkit-overflow-scrolling: touch; }
+.kanban-col { width: 290px; flex-shrink: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 28px rgba(13,115,119,0.12); }
+.col-header { padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; }
+.col-header .col-label { font-size: 11px; font-weight: 700; color: white; letter-spacing: 2px; text-transform: uppercase; }
+.col-header .col-count { background: rgba(255,255,255,0.25); color: white; border-radius: 20px; padding: 2px 10px; font-weight: 700; font-size: 12px; }
+.col-cards {
+  background: linear-gradient(180deg, #e6f4f4, #d4ecec);
+  min-height: 320px; padding: 12px;
+  transition: background 0.2s, border 0.2s;
+  overflow-y: auto;
+  max-height: calc(100vh - 260px);
+  scroll-behavior: smooth;
+}
+.col-cards.drag-over { background: linear-gradient(180deg, #d4ecec, #b2d8d8); outline: 2px dashed #0d7377; outline-offset: -4px; }
+
+.card {
+  background: var(--grad-card); border-radius: 12px; margin-bottom: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08); cursor: grab; transition: all 0.2s;
+  overflow: hidden; position: relative;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(13,115,119,0.16); }
+.card.dragging { opacity: 0.5; }
+
+.card .row-a { padding: 12px 14px 6px; display: flex; justify-content: space-between; align-items: center; }
+.card .file-num { font-size: 10px; font-weight: 700; color: white; background: linear-gradient(135deg, #0d7377, #14a09a); border-radius: 6px; padding: 3px 8px; letter-spacing: 0.5px; }
+.card .priority-badge { border-radius: 8px; padding: 2px 8px; font-weight: 700; font-size: 10px; }
+.priority-urgent { background: linear-gradient(135deg, #fef2f2, #fee2e2); color: #dc2626; }
+.priority-high { background: linear-gradient(135deg, #fff7ed, #fed7aa); color: #c2410c; }
+.priority-normal { background: linear-gradient(135deg, #f0fdf4, #bbf7d0); color: #15803d; }
+
+.card .row-b { padding: 4px 14px; display: flex; align-items: center; gap: 8px; }
+.type-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.type-badge { border-radius: 8px; padding: 3px 10px; font-weight: 600; font-size: 11px; }
+.card .client-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: var(--text-dark); flex: 1; }
+
+.card .row-c { padding: 4px 14px 6px; display: flex; flex-direction: column; gap: 3px; }
+.card .lawyer-line { font-size: 12px; color: var(--text-mid); }
+.card .address-line { font-size: 11px; color: var(--text-light); font-style: italic; }
+.card .price-line { font-weight: 700; font-size: 15px; color: #16a34a; }
+.fee-pill { background:linear-gradient(135deg,#f0fdf4,#dcfce7); color:#16a34a; border-radius:12px; padding:2px 10px; font:700 10px 'Inter'; margin-left:8px; }
+
+.card .row-clerk { padding: 2px 14px 6px; position: relative; }
+.btn-assign-clerk { background: linear-gradient(135deg,#e6f4f4,#b2d8d8); color:#0b3d3f; border:none; border-radius:8px; padding:4px 12px; font-weight:600; font-size:11px; cursor:pointer; transition: all 0.15s; }
+.btn-assign-clerk:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(13,115,119,0.2); }
+.clerk-assigned-badge { background: linear-gradient(135deg,#dbeafe,#bfdbfe); color:#1d4ed8; border-radius:20px; padding:4px 12px; font-weight:700; font-size:11px; display:inline-flex; align-items:center; gap:6px; }
+.clerk-unassign-x { color:#1d4ed8; background:none; border:none; cursor:pointer; font-size:13px; padding:0; line-height:1; }
+.clerk-dropdown { position:absolute; top:100%; left:14px; z-index:400; background: linear-gradient(160deg,#0b3d3f,#0d7377); border-radius:10px; padding:6px; min-width:150px; box-shadow:0 8px 30px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); }
+.clerk-dropdown-item { color:#e6f4f4; padding:8px 14px; font-weight:600; font-size:12px; cursor:pointer; border-radius:7px; border:none; background:none; display:block; width:100%; text-align:left; transition: all 0.15s; }
+.clerk-dropdown-item:hover { background:rgba(232,112,90,0.25); color:#fff; }
+
+.card .row-d { padding: 6px 14px 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+.date-pill { border-radius: 8px; padding: 3px 9px; font-weight: 600; font-size: 10px; }
+.days-badge { font-weight: 700; font-size: 10px; border-radius: 8px; padding: 2px 8px; }
+.btn-toggle { background: linear-gradient(135deg, #e6f4f4, #b2d8d8); color: #0d7377; border: none; border-radius: 8px; padding: 5px 12px; font-weight: 700; font-size: 11px; cursor: pointer; }
+
+.card .row-e { padding: 8px 14px; border-top: 1px dashed rgba(13,115,119,0.15); }
+.clerk-badge { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #0d7377; border-radius: 8px; padding: 4px 12px; font-weight: 600; font-size: 11px; display: inline-block; }
+.card .notes-text { font-size: 11px; color: var(--text-light); font-style: italic; margin-top: 6px; }
+
+.card .row-f { padding: 6px 14px 12px; display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; position: relative; }
+.btn-edit-card { background: linear-gradient(135deg, #e6f4f4, #b2d8d8); color: #0d7377; border: none; border-radius: 8px; padding: 6px 14px; font-weight: 600; font-size: 12px; cursor: pointer; }
+.btn-copy-card { background: linear-gradient(135deg, #fff7ed, #fed7aa); color: #c2410c; border: none; border-radius: 8px; padding: 6px 14px; font-weight: 600; font-size: 12px; cursor: pointer; }
+.btn-delete-card { background: linear-gradient(135deg, #fef2f2, #fecaca); color: #dc2626; border: none; border-radius: 8px; padding: 6px 14px; font-weight: 600; font-size: 12px; cursor: pointer; }
+.btn-move-card { background: linear-gradient(135deg, #e6f4f4, #b2d8d8); color: #0b3d3f; border: none; border-radius: 8px; padding: 6px 14px; font-weight: 600; font-size: 12px; cursor: pointer; }
+.btn-email-card { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1d4ed8; border: none; border-radius: 8px; padding: 6px 14px; font-weight: 600; font-size: 12px; cursor: pointer; }
+
+.move-dropdown { position: absolute; bottom: 100%; right: 0; z-index: 300; background: linear-gradient(160deg, #0b3d3f, #0d7377); border-radius: 10px; padding: 6px; min-width: 180px; box-shadow: 0 8px 30px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.1); }
+.move-dropdown-item { width: 100%; background: rgba(255,255,255,0.07); color: #b2d8d8; border: 1px solid rgba(255,255,255,0.08); border-radius: 7px; padding: 8px 12px; text-align: left; font-weight: 600; font-size: 12px; cursor: pointer; margin-bottom: 4px; transition: all 0.15s; }
+.move-dropdown-item:last-child { margin-bottom: 0; }
+.move-dropdown-item:hover { background: linear-gradient(135deg, rgba(232,112,90,0.25), rgba(232,112,90,0.08)); border-color: rgba(232,112,90,0.5); color: #fff; }
+
+.dup-badge { background: linear-gradient(135deg, #fff7ed, #fed7aa); color: #c2410c; border-radius: 8px; padding: 3px 10px; font-weight: 700; font-size: 10px; margin: 8px 14px 0; display: inline-block; }
+
+#file-modal-kss10 { display: none; position: fixed; inset: 0; z-index: 700; background: rgba(11,61,63,0.7); align-items: center; justify-content: center; backdrop-filter: blur(6px); }
+.modal-box { background: linear-gradient(160deg, #fff, #e6f4f4); border-radius: 20px; padding: 32px; width: 560px; max-width: 95vw; max-height: 90vh; overflow-y: auto; border-top: 5px solid #e8705a; box-shadow: 0 28px 80px rgba(0,0,0,0.35); }
+.modal-box label { font-weight: 600; font-size: 11px; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px; }
+.modal-box input, .modal-box select, .modal-box textarea { width: 100%; border: 1.5px solid rgba(13,115,119,0.2); border-radius: 10px; padding: 10px 14px; font-size: 13px; color: var(--text-dark); background: #fff; outline: none; box-sizing: border-box; }
+.modal-box input:focus, .modal-box select:focus, .modal-box textarea:focus { border-color: #0d7377; box-shadow: 0 0 0 3px rgba(13,115,119,0.15); }
+.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.modal-full { grid-column: 1 / -1; }
+.modal-footer { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
+.btn-cancel-modal { background: linear-gradient(135deg, #f1f5f9, #e2e8f0); color: var(--text-mid); border: none; border-radius: 10px; padding: 12px 24px; font-weight: 600; font-size: 13px; cursor: pointer; }
+.btn-save-modal { background: var(--grad-coral); color: #fff; border: none; border-radius: 10px; padding: 12px 28px; font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 0 4px 16px rgba(232,112,90,0.4); transition: all 0.2s; }
+.btn-save-modal:hover { transform: translateY(-1px); box-shadow: 0 7px 22px rgba(232,112,90,0.5); }
+
+.dash-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 22px; }
+.dash-kpi-card { background: #fff; border-radius: 16px; padding: 20px 18px 16px; position: relative; overflow: hidden; box-shadow: 0 4px 18px rgba(11,61,63,0.09); transition: all 0.2s; }
+.dash-kpi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(11,61,63,0.16); }
+.dash-kpi-card .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 5px; }
+.dash-kpi-card .kpi-emoji { font-size: 26px; margin-bottom: 8px; display: block; }
+.dash-kpi-card .kpi-num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: #1a3030; line-height: 1; }
+.dash-kpi-card .kpi-label { font-weight: 600; font-size: 11px; color: #7a9f9f; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.dash-kpi-card .kpi-sub { font-weight: 500; font-size: 10px; color: #7a9f9f; margin-top: 2px; }
+
+.cal-wrapper { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 12px 48px rgba(11,61,63,0.15); border: 1px solid rgba(13,115,119,0.12); max-width: 1000px; margin: 0 auto; }
+.cal-nav-new { background: var(--grad-header); padding: 22px 32px; display: flex; align-items: center; justify-content: space-between; }
+.cal-nav-new .cal-month-label-new { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #fff; }
+.cal-nav-btn-new { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff; border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; transition: all .2s; display: flex; align-items: center; justify-content: center; }
+.cal-nav-btn-new:hover { background: var(--grad-coral); border-color: transparent; transform: scale(1.1); }
+.cal-weekday-row { display: grid; grid-template-columns: repeat(7, 1fr); background: linear-gradient(90deg, #e6f4f4, #f0fafa); padding: 10px 16px; }
+.cal-weekday-row span { color: #0d7377; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+.cal-day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 14px; background: #fafffe; }
+.cal-day-cell { min-height: 88px; border-radius: 12px; padding: 9px; cursor: pointer; transition: all .2s; background: #fff; border: 1.5px solid #e6f4f4; }
+.cal-day-cell:hover { background: linear-gradient(145deg, #e6f4f4, #f0fafa); border-color: #14a09a; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,115,119,0.12); }
+.cal-day-cell.other-month { background: #f8f9fa; opacity: 0.5; pointer-events: none; }
+.cal-day-cell.cal-today-cell { background: linear-gradient(145deg, #e6f4f4, #d4ecec); border-color: #0d7377; border-width: 2px; }
+.cal-day-num { color: #1a3030; font-weight: 700; font-size: 14px; margin-bottom: 5px; }
+.cal-today-num { background: var(--grad-coral); color: #fff; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; box-shadow: 0 2px 10px rgba(232,112,90,0.4); }
+.cal-event-pill { border-radius: 5px; font-weight: 600; font-size: 9px; padding: 2px 6px; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block; color: #fff; }
+.cal-event-pill-more { background: #e6f4f4; color: #0d7377; border-radius: 5px; font-weight: 600; font-size: 9px; padding: 2px 6px; margin-top: 3px; display: block; text-align: center; }
+.cal-legend { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; justify-content: center; padding: 8px 0; }
+.cal-legend-item { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 11px; color: #3d5c5c; }
+.cal-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+#day-popup-kss11 { position: fixed; z-index: 600; display: none; background: #fff; border-radius: 18px; padding: 22px; min-width: 270px; max-width: 320px; box-shadow: 0 20px 60px rgba(11,61,63,0.25); border: 1.5px solid rgba(13,115,119,0.15); color: #1a3030; }
+#day-popup-kss11 .popup-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 17px; color: #0b3d3f; margin-bottom: 12px; }
+#day-popup-kss11 .popup-file { background: linear-gradient(90deg, #f8fdfd, #fff); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+#day-popup-kss11 .popup-fnum { font-weight: 700; font-size: 10px; color: #7a9f9f; letter-spacing: 1px; margin-bottom: 3px; }
+#day-popup-kss11 .popup-client { font-weight: 700; font-size: 13px; color: #1a3030; }
+#day-popup-kss11 .popup-close { position: absolute; top: 14px; right: 14px; background: #f1f5f9; border: none; color: #3d5c5c; border-radius: 50%; width: 26px; height: 26px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+
+.checklist-section { padding: 8px 14px; border-top: 1px dashed rgba(13,115,119,0.15); }
+.checklist-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
+.checklist-title { font:700 12px 'Inter'; color:#0b3d3f; }
+.checklist-progress-pill { background:linear-gradient(135deg,#e6f4f4,#b2d8d8); color:#0b3d3f; border-radius:20px; padding:2px 10px; font:700 10px 'Inter'; }
+.checklist-complete-badge { background:var(--grad-green); color:#fff; border-radius:20px; padding:2px 10px; font:700 10px 'Inter'; }
+.checklist-bar-track { width:100%; height:6px; background:#f1f5f9; border-radius:4px; overflow:hidden; margin-bottom:6px; }
+.checklist-bar-fill { height:6px; border-radius:4px; background:var(--grad-teal); transition:width 0.4s; }
+.checklist-bar-fill.complete { background:var(--grad-green); }
+.checklist-item { display:flex; align-items:center; gap:10px; padding:6px 4px; border-bottom:1px solid #f1f5f9; cursor:pointer; }
+.checklist-checkbox { width:18px; height:18px; border-radius:5px; border:2px solid #b2d8d8; background:#fff; flex-shrink:0; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s; font-size:11px; color:transparent; }
+.checklist-checkbox.done { background:var(--grad-teal); border-color:#0d7377; color:#fff; }
+.checklist-item-text { font:500 12px 'Inter'; color:#1a3030; flex:1; }
+.checklist-item-text.done { text-decoration:line-through; color:#7a9f9f; }
+.checklist-item-del { color:#ccc; background:none; border:none; cursor:pointer; font-size:12px; padding:0; line-height:1; transition:color .15s; }
+.checklist-item-del:hover { color:#dc2626; }
+.checklist-add-row { display:flex; gap:8px; margin-top:6px; }
+.checklist-add-input { flex:1; border:1.5px solid #e6f4f4; border-radius:8px; padding:6px 10px; font:500 12px 'Inter'; outline:none; }
+.checklist-add-input:focus { border-color:#0d7377; }
+.checklist-add-btn { background:var(--grad-teal); color:#fff; border:none; border-radius:8px; padding:6px 14px; font:700 12px 'Inter'; cursor:pointer; }
+
+.activity-section { padding: 8px 14px; border-top: 1px dashed rgba(13,115,119,0.15); }
+.activity-header { display:flex; align-items:center; gap:8px; cursor:pointer; margin-bottom:4px; }
+.activity-title { font:700 12px 'Inter'; color:#0b3d3f; }
+.activity-toggle { font:600 11px 'Inter'; color:#0d7377; background:none; border:none; cursor:pointer; }
+.activity-list { max-height:180px; overflow-y:auto; margin-top:8px; }
+.activity-entry { display:flex; align-items:flex-start; gap:10px; padding:5px 0; border-bottom:1px solid #f8fdfd; }
+.activity-dot { width:8px; height:8px; background:var(--grad-teal); border-radius:50%; margin-top:5px; flex-shrink:0; }
+.activity-msg { font:500 11px 'Inter'; color:#1a3030; flex:1; }
+.activity-time { font:400 10px 'Inter'; color:#7a9f9f; white-space:nowrap; margin-left:6px; }
+
+.countdown-badge { display:inline-flex; align-items:center; border-radius:20px; padding:3px 12px; font:700 10px 'Inter'; margin:2px 14px 5px; letter-spacing:0.5px; }
+
+#briefing-modal-kss { position:fixed; inset:0; z-index:800; background:rgba(11,61,63,0.7); backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center; }
+.briefing-box { background:#fff; border-radius:24px; padding:36px; max-width:560px; width:90%; box-shadow:0 30px 80px rgba(11,61,63,0.35); position:relative; max-height:85vh; overflow-y:auto; }
+.briefing-accent { position:absolute; top:0; left:0; right:0; height:6px; background:var(--grad-header); border-radius:24px 24px 0 0; }
+.briefing-close { position:absolute; top:20px; right:20px; background:#f1f5f9; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; font-size:16px; color:#3d5c5c; display:flex; align-items:center; justify-content:center; }
+.briefing-section-title { font:700 11px 'Inter'; text-transform:uppercase; letter-spacing:1.5px; color:#7a9f9f; margin:20px 0 10px; }
+.briefing-file-card { border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.briefing-dismiss-btn { background:var(--grad-header); color:#fff; border:none; border-radius:12px; padding:12px 32px; font:700 13px 'Inter'; cursor:pointer; display:block; margin:16px auto 0; transition:all 0.2s; }
+.briefing-dismiss-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(11,61,63,0.3); }
+
+.kss-toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%); z-index:900; background:var(--grad-header); color:#fff; border-radius:12px; padding:12px 28px; font:600 13px 'Inter'; box-shadow:0 8px 30px rgba(11,61,63,0.4); opacity:0; transition:opacity 0.3s; pointer-events:none; }
+.kss-toast.show { opacity:1; }
+
+#email-modal-kss { position:fixed; inset:0; z-index:800; background:rgba(11,61,63,0.7); backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center; }
+.email-modal-box { background:#fff; border-radius:24px; padding:36px; max-width:580px; width:95%; box-shadow:0 30px 80px rgba(11,61,63,0.35); position:relative; max-height:90vh; overflow-y:auto; }
+.email-modal-box .email-accent { position:absolute; top:0; left:0; right:0; height:6px; background:var(--grad-teal); border-radius:24px 24px 0 0; }
+.email-modal-box .email-close { position:absolute; top:20px; right:20px; background:#f1f5f9; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; font-size:16px; color:#3d5c5c; display:flex; align-items:center; justify-content:center; }
+.email-pill-row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.email-pill-btn { background:#f1f5f9; color:#3d5c5c; border:none; border-radius:20px; padding:6px 14px; font:600 11px 'Inter'; cursor:pointer; transition:all 0.15s; }
+.email-pill-btn.active { background:var(--grad-teal); color:#fff; }
+.email-pill-btn:hover:not(.active) { background:#e2e8f0; }
+#email-body-textarea { width:100%; min-height:240px; border:1.5px solid #e6f4f4; border-radius:12px; padding:14px; font:500 13px/1.6 'Inter'; color:#1a3030; resize:vertical; outline:none; }
+#email-body-textarea:focus { border-color:#0d7377; }
+
+#shortcuts-modal-kss { position:fixed; inset:0; z-index:800; background:rgba(11,61,63,0.7); backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center; }
+.shortcuts-box { background:#fff; border-radius:24px; padding:36px; max-width:400px; width:90%; box-shadow:0 30px 80px rgba(11,61,63,0.35); position:relative; }
+.shortcuts-box .shortcuts-accent { position:absolute; top:0; left:0; right:0; height:6px; background:var(--grad-header); border-radius:24px 24px 0 0; }
+.shortcuts-box .shortcuts-close { position:absolute; top:20px; right:20px; background:#f1f5f9; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; font-size:16px; color:#3d5c5c; display:flex; align-items:center; justify-content:center; }
+.shortcut-row { display:flex; align-items:center; gap:16px; padding:10px 0; border-bottom:1px solid #f1f5f9; }
+.shortcut-key { display:inline-block; background:#f1f5f9; border:1.5px solid #e2e8f0; border-radius:7px; padding:4px 12px; font:700 13px 'Inter'; color:#0b3d3f; min-width:36px; text-align:center; }
+.shortcut-action { font:500 13px 'Inter'; color:#1a3030; }
+
+/* Dark mode styles */
+[data-theme="dark"] body { background: var(--dm-bg-page) !important; color: var(--dm-text-primary) !important; }
+[data-theme="dark"] ::-webkit-scrollbar-track { background: var(--dm-bg-col) !important; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--dm-scrollbar-thumb) !important; }
+[data-theme="dark"] #splash-screen-kss1 { background: linear-gradient(135deg, #061212 0%, #0b2020 60%, #0d2828 100%) !important; }
+[data-theme="dark"] #tab-bar-kss7 { background: linear-gradient(90deg, #0a1616, #0d1e1e) !important; border-bottom-color: rgba(232,112,90,0.2) !important; }
+[data-theme="dark"] .tab-btn { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .tab-btn.active { color: #e8705a !important; background: rgba(232,112,90,0.1) !important; }
+[data-theme="dark"] .tab-btn:hover { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .filter-bar { background: linear-gradient(90deg, rgba(22,36,36,0.97), rgba(15,30,30,0.97)) !important; border-color: var(--dm-border) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.3) !important; }
+[data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea { background: var(--dm-bg-input) !important; color: var(--dm-text-primary) !important; border-color: var(--dm-border) !important; }
+[data-theme="dark"] input::placeholder, [data-theme="dark"] textarea::placeholder { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] input:focus, [data-theme="dark"] select:focus, [data-theme="dark"] textarea:focus { border-color: #0d7377 !important; box-shadow: 0 0 0 3px rgba(13,115,119,0.25) !important; }
+[data-theme="dark"] option { background: var(--dm-bg-input) !important; color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .kanban-col { box-shadow: 0 6px 28px rgba(0,0,0,0.35) !important; }
+[data-theme="dark"] .col-cards { background: linear-gradient(180deg, var(--dm-bg-col), #0f1e1e) !important; }
+[data-theme="dark"] .col-cards.drag-over { background: rgba(13,115,119,0.15) !important; outline-color: #14a09a !important; }
+[data-theme="dark"] .card { background: linear-gradient(180deg, var(--dm-bg-card), #192b2b) !important; box-shadow: 0 2px 12px rgba(0,0,0,0.35) !important; }
+[data-theme="dark"] .card:hover { background: linear-gradient(180deg, var(--dm-bg-card-hover), #1c2e2e) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.45) !important; }
+[data-theme="dark"] .card .client-name { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .card .lawyer-line { color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .card .address-line { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .card .notes-text { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .card .row-e { border-top-color: var(--dm-border) !important; }
+[data-theme="dark"] .checklist-section { border-top-color: var(--dm-border) !important; }
+[data-theme="dark"] .checklist-title { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .checklist-progress-pill { background: var(--dm-bg-pill) !important; color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .checklist-bar-track { background: var(--dm-border) !important; }
+[data-theme="dark"] .checklist-item { border-bottom-color: var(--dm-border-light) !important; }
+[data-theme="dark"] .checklist-item-text { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .checklist-item-text.done { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .checklist-checkbox { background: var(--dm-bg-input) !important; border-color: var(--dm-border) !important; }
+[data-theme="dark"] .checklist-checkbox.done { background: var(--grad-teal) !important; border-color: #0d7377 !important; color: #fff !important; }
+[data-theme="dark"] .checklist-add-input { background: var(--dm-bg-input) !important; border-color: var(--dm-border) !important; color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .checklist-item-del { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .checklist-item-del:hover { color: #ef4444 !important; }
+[data-theme="dark"] .activity-section { border-top-color: var(--dm-border) !important; }
+[data-theme="dark"] .activity-title { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .activity-entry { border-bottom-color: var(--dm-border-light) !important; }
+[data-theme="dark"] .activity-msg { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .activity-time { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .btn-toggle { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .btn-edit-card { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .btn-move-card { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .btn-assign-clerk { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .btn-email-card { background: rgba(29,78,216,0.15) !important; color: #60a5fa !important; }
+[data-theme="dark"] .btn-copy-card { background: rgba(217,119,6,0.15) !important; color: #fbbf24 !important; }
+[data-theme="dark"] .btn-delete-card { background: rgba(220,38,38,0.15) !important; color: #f87171 !important; }
+[data-theme="dark"] .priority-urgent { background: rgba(220,38,38,0.15) !important; color: #f87171 !important; }
+[data-theme="dark"] .priority-high { background: rgba(217,119,6,0.15) !important; color: #fbbf24 !important; }
+[data-theme="dark"] .priority-normal { background: rgba(22,163,74,0.15) !important; color: #4ade80 !important; }
+[data-theme="dark"] .dup-badge { background: rgba(217,119,6,0.15) !important; color: #fbbf24 !important; }
+[data-theme="dark"] .fee-pill { background: rgba(22,163,74,0.15) !important; color: #4ade80 !important; }
+[data-theme="dark"] .clerk-assigned-badge { background: rgba(29,78,216,0.15) !important; color: #60a5fa !important; }
+[data-theme="dark"] .clerk-unassign-x { color: #60a5fa !important; }
+[data-theme="dark"] #file-modal-kss10, [data-theme="dark"] #briefing-modal-kss, [data-theme="dark"] #email-modal-kss, [data-theme="dark"] #shortcuts-modal-kss { background: rgba(0,0,0,0.75) !important; }
+[data-theme="dark"] .modal-box { background: linear-gradient(160deg, var(--dm-bg-modal), #162424) !important; box-shadow: 0 28px 80px rgba(0,0,0,0.6) !important; }
+[data-theme="dark"] .modal-box label { color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .briefing-box { background: var(--dm-bg-modal) !important; box-shadow: 0 30px 80px rgba(0,0,0,0.6) !important; }
+[data-theme="dark"] .briefing-close, [data-theme="dark"] .shortcuts-box .shortcuts-close, [data-theme="dark"] .email-modal-box .email-close, [data-theme="dark"] #day-popup-kss11 .popup-close { background: var(--dm-bg-subtle) !important; color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .email-modal-box { background: var(--dm-bg-modal) !important; box-shadow: 0 30px 80px rgba(0,0,0,0.6) !important; }
+[data-theme="dark"] .shortcuts-box { background: var(--dm-bg-modal) !important; box-shadow: 0 30px 80px rgba(0,0,0,0.6) !important; }
+[data-theme="dark"] .btn-cancel-modal { background: var(--dm-bg-subtle) !important; color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .briefing-section-title { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .email-pill-btn { background: var(--dm-bg-subtle) !important; color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] .email-pill-btn.active { background: var(--grad-teal) !important; color: #fff !important; }
+[data-theme="dark"] .email-pill-btn:hover:not(.active) { background: var(--dm-border) !important; color: var(--dm-text-primary) !important; }
+[data-theme="dark"] #email-body-textarea { border-color: var(--dm-border) !important; }
+[data-theme="dark"] .shortcut-row { border-bottom-color: var(--dm-border-light) !important; }
+[data-theme="dark"] .shortcut-key { background: var(--dm-bg-subtle) !important; border-color: var(--dm-border) !important; color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .shortcut-action { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] #day-popup-kss11 { background: var(--dm-bg-modal) !important; color: var(--dm-text-primary) !important; border-color: var(--dm-border) !important; box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important; }
+[data-theme="dark"] #day-popup-kss11 .popup-title { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] #day-popup-kss11 .popup-file { background: var(--dm-bg-subtle) !important; }
+[data-theme="dark"] #day-popup-kss11 .popup-fnum { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] #day-popup-kss11 .popup-client { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .dash-kpi-card { background: var(--dm-bg-card) !important; box-shadow: 0 4px 18px rgba(0,0,0,0.35) !important; }
+[data-theme="dark"] .dash-kpi-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.45) !important; }
+[data-theme="dark"] .dash-kpi-card .kpi-num { color: var(--dm-text-heading) !important; }
+[data-theme="dark"] .dash-kpi-card .kpi-label { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .dash-kpi-card .kpi-sub { color: var(--dm-text-muted) !important; }
+[data-theme="dark"] .cal-wrapper { background: var(--dm-bg-card) !important; border-color: var(--dm-border) !important; box-shadow: 0 12px 48px rgba(0,0,0,0.4) !important; }
+[data-theme="dark"] .cal-weekday-row { background: linear-gradient(90deg, var(--dm-bg-col), #0f1e1e) !important; }
+[data-theme="dark"] .cal-weekday-row span { color: #14a09a !important; }
+[data-theme="dark"] .cal-day-grid { background: var(--dm-bg-col) !important; }
+[data-theme="dark"] .cal-day-cell { background: var(--dm-bg-card) !important; border-color: var(--dm-border) !important; }
+[data-theme="dark"] .cal-day-cell:hover { background: var(--dm-bg-card-hover) !important; border-color: #14a09a !important; box-shadow: 0 6px 18px rgba(0,0,0,0.3) !important; }
+[data-theme="dark"] .cal-day-cell.other-month { background: var(--dm-bg-subtle) !important; opacity: 0.4 !important; }
+[data-theme="dark"] .cal-day-cell.cal-today-cell { background: rgba(13,115,119,0.2) !important; border-color: #0d7377 !important; }
+[data-theme="dark"] .cal-day-num { color: var(--dm-text-primary) !important; }
+[data-theme="dark"] .cal-event-pill-more { background: var(--dm-bg-pill) !important; color: #14a09a !important; }
+[data-theme="dark"] .cal-legend-item { color: var(--dm-text-secondary) !important; }
+[data-theme="dark"] footer { background: linear-gradient(90deg, #0a1616, #0d1e1e) !important; color: var(--dm-text-muted) !important; }
+
+body, .card, .dash-kpi-card, .cal-day-cell, .cal-wrapper, .filter-bar, .modal-box, .briefing-box, .email-modal-box, .shortcuts-box, .col-cards, #day-popup-kss11, footer, .checklist-item-text, .checklist-title, .activity-title, .activity-msg, .shortcut-key, .shortcut-action, .email-pill-btn, input, select, textarea {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media print {
+  #splash-screen-kss1, header, #tab-bar-kss7, #hamburger-menu-kss5, .filter-bar, button, #briefing-modal-kss, #email-modal-kss, #shortcuts-modal-kss { display: none !important; }
+  body { background: #fff !important; }
+  #tab-matters-kss12 { display: block !important; }
+  #board-kss9 { flex-wrap: wrap !important; overflow: visible !important; }
+  .kanban-col { width: 48% !important; break-inside: avoid; }
+  .card { break-inside: avoid; box-shadow: none !important; }
+}
+
+@media (max-width: 768px) {
+  header { padding: 12px 16px; }
+  .header-title-kss2 { font-size: 18px !important; }
+  .header-sub-kss3 { font-size: 9px; letter-spacing: 2px; }
+  #tab-bar-kss7 { padding: 0 12px; overflow-x: auto; flex-wrap: nowrap !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  #tab-bar-kss7::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 10px 14px !important; font-size: 11px !important; white-space: nowrap; }
+  #tab-matters-kss12, #tab-dashboard-kss13, #tab-calendar-kss14 { padding: 16px !important; }
+  .filter-bar { flex-direction: column !important; align-items: stretch !important; gap: 8px !important; }
+  .filter-bar input, .filter-bar select { width: 100% !important; }
+  .filter-bar button, .btn-expand-filter { width: 100% !important; }
+  #board-kss9 { gap: 14px; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; padding-bottom: 12px !important; scrollbar-width: none; }
+  #board-kss9::-webkit-scrollbar { display: none; }
+  .kanban-col { min-width: 270px !important; max-width: 270px !important; flex-shrink: 0 !important; }
+  .card { font-size: 12px !important; }
+  .modal-box, .briefing-box, .email-modal-box, .shortcuts-box { width: 95vw !important; max-width: 95vw !important; padding: 18px 14px !important; border-radius: 14px !important; max-height: 88vh !important; overflow-y: auto !important; }
+  .modal-grid { grid-template-columns: 1fr !important; }
+  .dash-kpi-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .dash-wide-grid { grid-template-columns: 1fr !important; }
+  .dash-row3-grid { grid-template-columns: 1fr !important; }
+  .dash-row4-grid { grid-template-columns: 1fr !important; }
+  .dash-revenue-cols { grid-template-columns: 1fr !important; }
+  .cal-wrapper { margin: 0 !important; border-radius: 12px !important; }
+  .cal-day-cell { min-height: 56px !important; padding: 4px !important; }
+  .cal-day-num { font-size: 11px !important; }
+  .cal-event-pill { font-size: 7px !important; padding: 1px 3px !important; }
+  .cal-nav-new { padding: 18px 16px; }
+  .cal-nav-new .cal-month-label-new { font-size: 22px; }
+  #splash-screen-kss1 .splash-title { font-size: 28px; }
+  .header-logo-area .header-logo-svg { width: 28px; height: 28px; }
+  .revenue-bar-label { font-size: 10px !important; width: 120px !important; }
+  .email-pill-row { gap: 4px; }
+  .email-pill-btn { padding: 5px 10px !important; font-size: 10px !important; }
+}
+
+@media (max-width: 480px) {
+  .dash-kpi-grid { grid-template-columns: 1fr !important; }
+  #splash-screen-kss1 .splash-title { font-size: 22px !important; }
+  .header-title-kss2 { font-size: 16px !important; }
+}
+</style>
+</head>
+<body data-id="0">
+<app-icon data-id="1" hidden data-icon="folder-kanban" data-palette="Dark"></app-icon>
+<app-disclaimer data-id="2" intent="legal"></app-disclaimer>
+
+<!-- SPLASH -->
+<div data-id="3" id="splash-screen-kss1">
+  <div data-id="4" class="accent-line"></div>
+  <svg data-id="5" width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;opacity:0.9">
+    <rect data-id="6" x="10" y="6" width="38" height="50" rx="5" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+    <rect data-id="7" x="10" y="6" width="38" height="10" rx="5" fill="rgba(232,112,90,0.7)"/>
+    <circle data-id="8" cx="18" cy="26" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+    <path data-id="9" d="M15.5 26 L17.2 27.7 L20.5 24.3" stroke="#e8705a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect data-id="10" x="25" y="24.5" width="16" height="2.5" rx="1.2" fill="rgba(255,255,255,0.5)"/>
+    <circle data-id="11" cx="18" cy="35" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+    <path data-id="12" d="M15.5 35 L17.2 36.7 L20.5 33.3" stroke="#e8705a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect data-id="13" x="25" y="33.5" width="14" height="2.5" rx="1.2" fill="rgba(255,255,255,0.5)"/>
+    <circle data-id="14" cx="18" cy="44" r="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <rect data-id="15" x="25" y="42.5" width="10" height="2.5" rx="1.2" fill="rgba(255,255,255,0.3)"/>
+  </svg>
+  <div data-id="16" class="splash-title">KSS Matterkey Inc.</div>
+  <div data-id="17" class="splash-sub">Real Estate Closing Tracker</div>
+  <div data-id="18" class="accent-line"></div>
+  <div data-id="19" class="dots"><div data-id="20" class="dot"></div><div data-id="21" class="dot"></div><div data-id="22" class="dot"></div></div>
+</div>
+
+<!-- HEADER -->
+<header data-id="23">
+  <div data-id="24" class="header-logo-area">
+    <svg data-id="25" class="header-logo-svg" width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+      <rect data-id="26" x="10" y="6" width="38" height="50" rx="5" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+      <rect data-id="27" x="10" y="6" width="38" height="10" rx="5" fill="rgba(232,112,90,0.7)"/>
+      <circle data-id="28" cx="18" cy="26" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+      <path data-id="29" d="M15.5 26 L17.2 27.7 L20.5 24.3" stroke="#e8705a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect data-id="30" x="25" y="24.5" width="16" height="2.5" rx="1.2" fill="rgba(255,255,255,0.5)"/>
+      <circle data-id="31" cx="18" cy="35" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+      <path data-id="32" d="M15.5 35 L17.2 36.7 L20.5 33.3" stroke="#e8705a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect data-id="33" x="25" y="33.5" width="14" height="2.5" rx="1.2" fill="rgba(255,255,255,0.5)"/>
+      <circle data-id="34" cx="18" cy="44" r="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+      <rect data-id="35" x="25" y="42.5" width="10" height="2.5" rx="1.2" fill="rgba(255,255,255,0.3)"/>
+    </svg>
+    <div data-id="36">
+      <div data-id="37" class="header-title-kss2">KSS Matterkey Inc.</div>
+      <div data-id="38" class="header-sub-kss3">Real Estate Closing Tracker</div>
+    </div>
+  </div>
+  <div data-id="39" class="header-right-controls">
+    <button data-id="40" id="btn-dark-mode-kss">🌙</button>
+    <button data-id="41" id="btn-hamburger-kss4">☰</button>
+  </div>
+</header>
+
+<!-- HAMBURGER MENU -->
+<div data-id="42" id="hamburger-menu-kss5">
+  <button data-id="43" class="hmenu-btn-kss6" id="hm-add-kss15">＋ Add New File</button>
+  <button data-id="44" class="hmenu-btn-kss6" id="hm-briefing-kss">📋 Daily Briefing</button>
+  <button data-id="45" class="hmenu-btn-kss6" id="hm-alerts-kss16">🔔 Alerts</button>
+  <button data-id="46" class="hmenu-btn-kss6" id="hm-notif-kss">🔔 Enable Notifications</button>
+  <button data-id="47" class="hmenu-btn-kss6" id="hm-export-csv-kss">📥 Export CSV</button>
+  <button data-id="48" class="hmenu-btn-kss6" id="hm-export-ics-kss">📅 Export to Calendar (.ics)</button>
+  <button data-id="49" class="hmenu-btn-kss6" id="hm-backup-kss17">💾 Backup Data</button>
+  <button data-id="50" class="hmenu-btn-kss6" id="hm-restore-kss18">📂 Restore Data</button>
+  <button data-id="51" class="hmenu-btn-kss6" id="hm-print-kss19">🖨 Save as PDF</button>
+  <button data-id="52" class="hmenu-btn-kss6" id="hm-shortcuts-kss">⌨️ Shortcuts</button>
+</div>
+
+<!-- TAB BAR -->
+<div data-id="53" id="tab-bar-kss7">
+  <button data-id="54" class="tab-btn" data-tab="dashboard">📊 Dashboard</button>
+  <button data-id="55" class="tab-btn active" data-tab="matters">📁 Matters</button>
+  <button data-id="56" class="tab-btn" data-tab="calendar">📅 Calendar</button>
+</div>
+
+<!-- TAB: DASHBOARD -->
+<div data-id="57" id="tab-dashboard-kss13" style="padding:28px;display:none">
+  <div data-id="58" style="font-family:'Playfair Display',serif;font-weight:700;font-size:30px;color:#0b3d3f;margin-bottom:4px">📊 Analytics Dashboard</div>
+  <div data-id="59" style="font-size:13px;color:#7a9f9f;margin-bottom:24px">KSS Matterkey Inc. — Live Closing Intelligence</div>
+  <div data-id="60" id="dash-kpi-container" class="dash-kpi-grid"></div>
+  <div data-id="61" id="dash-revenue-container"></div>
+  <div data-id="62" id="dash-row2-container"></div>
+  <div data-id="63" id="dash-row3-container"></div>
+  <div data-id="64" id="dash-row4-container"></div>
+</div>
+
+<!-- TAB: MATTERS -->
+<div data-id="65" id="tab-matters-kss12" style="padding:24px 28px;display:block">
+  <div data-id="66" class="filter-bar">
+    <span data-id="67" style="font-size:16px">🔍</span>
+    <input data-id="68" type="text" id="filter-search-kss26" placeholder="Search file # or client name..." style="flex:1;min-width:180px" autocomplete="off" spellcheck="false">
+    <select data-id="69" id="filter-lawyer-kss27"><option data-id="70" value="">All Lawyers</option></select>
+    <select data-id="71" id="filter-type-kss28"><option data-id="72" value="">All Types</option><option data-id="73">Purchase</option><option data-id="74">Sale</option><option data-id="75">Refinance</option><option data-id="76">Transfer</option></select>
+    <select data-id="77" id="filter-priority-kss29"><option data-id="78" value="">All Priorities</option><option data-id="79">Urgent</option><option data-id="80">High</option><option data-id="81">Normal</option></select>
+    <select data-id="82" id="filter-clerk-kss50"><option data-id="83" value="">All Clerks</option></select>
+    <div data-id="84" style="flex:1;min-width:8px"></div>
+    <button data-id="85" class="btn-expand-filter" id="btn-expand-all-kss24" style="background:var(--grad-teal);box-shadow:0 3px 12px rgba(13,115,119,0.3)">⊞ Expand All</button>
+    <button data-id="86" class="btn-expand-filter" id="btn-collapse-all-kss25" style="background:var(--grad-coral);box-shadow:0 3px 12px rgba(232,112,90,0.3)">⊟ Collapse All</button>
+  </div>
+  <div data-id="87" id="board-kss9"></div>
+</div>
+
+<!-- TAB: CALENDAR -->
+<div data-id="88" id="tab-calendar-kss14" style="padding:28px;display:none">
+  <div data-id="89" style="font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--teal-deep);margin-bottom:4px">📅 Closing Calendar</div>
+  <div data-id="90" style="font-size:13px;color:var(--text-light);margin-bottom:24px">All upcoming closing dates</div>
+  <div data-id="91" class="cal-wrapper">
+    <div data-id="92" class="cal-nav-new">
+      <button data-id="93" class="cal-nav-btn-new" id="btn-prev-month-kss30">‹</button>
+      <span data-id="94" class="cal-month-label-new" id="cal-month-label-kss31"></span>
+      <button data-id="95" class="cal-nav-btn-new" id="btn-next-month-kss32">›</button>
+    </div>
+    <div data-id="96" class="cal-weekday-row"><span data-id="97">Sun</span><span data-id="98">Mon</span><span data-id="99">Tue</span><span data-id="100">Wed</span><span data-id="101">Thu</span><span data-id="102">Fri</span><span data-id="103">Sat</span></div>
+    <div data-id="104" class="cal-day-grid" id="cal-grid-kss33"></div>
+  </div>
+  <div data-id="105" class="cal-legend" id="cal-legend-bar">
+    <div data-id="106" class="cal-legend-item"><span data-id="107" class="cal-legend-dot" style="background:#14a09a"></span>New/Open</div>
+    <div data-id="108" class="cal-legend-item"><span data-id="109" class="cal-legend-dot" style="background:#d97706"></span>Requisition</div>
+    <div data-id="110" class="cal-legend-item"><span data-id="111" class="cal-legend-dot" style="background:#16a34a"></span>Closing Soon</div>
+    <div data-id="112" class="cal-legend-item"><span data-id="113" class="cal-legend-dot" style="background:#dc2626"></span>Reporting</div>
+    <div data-id="114" class="cal-legend-item"><span data-id="115" class="cal-legend-dot" style="background:#64748b"></span>Closed</div>
+  </div>
+</div>
+
+<!-- DAY POPUP -->
+<div data-id="116" id="day-popup-kss11"></div>
+
+<!-- FILE MODAL -->
+<div data-id="117" id="file-modal-kss10">
+  <div data-id="118" class="modal-box">
+    <div data-id="119" id="modal-title-kss34" style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--teal-deep);margin-bottom:24px">Add New File</div>
+    <div data-id="120" class="modal-grid">
+      <div data-id="121"><label data-id="122">File #</label><input data-id="123" type="text" id="m-filenum-kss35" autocomplete="off" spellcheck="false"></div>
+      <div data-id="124"><label data-id="125">Client Name</label><input data-id="126" type="text" id="m-client-kss36" autocomplete="off" spellcheck="false"></div>
+      <div data-id="127" class="modal-full"><label data-id="128">Address</label><input data-id="129" type="text" id="m-address-kss37" autocomplete="off" spellcheck="false"></div>
+      <div data-id="130"><label data-id="131">Type</label><select data-id="132" id="m-type-kss38"><option data-id="133">Purchase</option><option data-id="134">Sale</option><option data-id="135">Refinance</option><option data-id="136">Transfer</option></select></div>
+      <div data-id="137"><label data-id="138">Lawyer</label><select data-id="139" id="m-lawyer-kss39"></select></div>
+      <div data-id="140"><label data-id="141">Clerk</label><select data-id="142" id="m-clerk-kss40"></select></div>
+      <div data-id="143"><label data-id="144">Price</label><input data-id="145" type="text" id="m-price-kss41" autocomplete="off" spellcheck="false"></div>
+      <div data-id="146"><label data-id="147">Legal Fee ($)</label><input data-id="148" type="number" id="m-fee-kss" min="0" step="100" placeholder="e.g. 1500"></div>
+      <div data-id="149"><label data-id="150">Req Date</label><input data-id="151" type="date" id="m-reqdate-kss42"></div>
+      <div data-id="152"><label data-id="153">Closing Date</label><input data-id="154" type="date" id="m-closedate-kss43"></div>
+      <div data-id="155"><label data-id="156">Status</label><select data-id="157" id="m-status-kss44"><option data-id="158" value="col-new">NEW / OPEN</option><option data-id="159" value="col-req">REQUISITION</option><option data-id="160" value="col-closing">CLOSING SOON</option><option data-id="161" value="col-reporting">REPORTING</option><option data-id="162" value="col-closed">CLOSED</option></select></div>
+      <div data-id="163"><label data-id="164">Priority</label><select data-id="165" id="m-priority-kss45"><option data-id="166">Normal</option><option data-id="167">High</option><option data-id="168">Urgent</option></select></div>
+      <div data-id="169" class="modal-full"><label data-id="170">Notes</label><textarea data-id="171" id="m-notes-kss46" rows="3" autocomplete="off" spellcheck="false"></textarea></div>
+    </div>
+    <div data-id="172" class="modal-footer">
+      <button data-id="173" class="btn-cancel-modal" id="btn-modal-cancel-kss47">Cancel</button>
+      <button data-id="174" class="btn-save-modal" id="btn-modal-save-kss48">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- BRIEFING MODAL -->
+<div data-id="175" id="briefing-modal-kss">
+  <div data-id="176" class="briefing-box">
+    <div data-id="177" class="briefing-accent"></div>
+    <button data-id="178" class="briefing-close" id="briefing-close-btn">✕</button>
+    <div data-id="179" id="briefing-content"></div>
+  </div>
+</div>
+
+<!-- EMAIL TEMPLATE MODAL -->
+<div data-id="180" id="email-modal-kss">
+  <div data-id="181" class="email-modal-box">
+    <div data-id="182" class="email-accent"></div>
+    <button data-id="183" class="email-close" id="email-close-btn">✕</button>
+    <div data-id="184" id="email-modal-title" style="font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:#0b3d3f;margin-bottom:4px;margin-top:8px">📧 Email Template</div>
+    <div data-id="185" id="email-modal-subtitle" style="font:500 12px Inter;color:#7a9f9f;margin-bottom:16px"></div>
+    <div data-id="186" class="email-pill-row" id="email-pill-row">
+      <button data-id="187" class="email-pill-btn" data-tpl="requisition">Requisition</button>
+      <button data-id="188" class="email-pill-btn" data-tpl="soa">SOA</button>
+      <button data-id="189" class="email-pill-btn" data-tpl="rff">Req for Funds</button>
+      <button data-id="190" class="email-pill-btn" data-tpl="signing">Signing Pkg</button>
+      <button data-id="191" class="email-pill-btn" data-tpl="reporting">Reporting</button>
+      <button data-id="192" class="email-pill-btn" data-tpl="welcome">Welcome</button>
+    </div>
+    <textarea data-id="193" id="email-body-textarea"></textarea>
+    <div data-id="194" style="display:flex;gap:12px;justify-content:flex-end;margin-top:16px">
+      <button data-id="195" id="email-copy-btn" style="background:var(--grad-teal);color:#fff;border:none;border-radius:10px;padding:10px 24px;font:700 13px Inter;cursor:pointer">📋 Copy to Clipboard</button>
+      <button data-id="196" id="email-close-btn2" style="background:#f1f5f9;color:#3d5c5c;border:none;border-radius:10px;padding:10px 24px;font:600 13px Inter;cursor:pointer">✕ Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHORTCUTS MODAL -->
+<div data-id="197" id="shortcuts-modal-kss">
+  <div data-id="198" class="shortcuts-box">
+    <div data-id="199" class="shortcuts-accent"></div>
+    <button data-id="200" class="shortcuts-close" id="shortcuts-close-btn">✕</button>
+    <div data-id="201" style="font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:#0b3d3f;margin-bottom:20px;margin-top:8px">⌨️ Keyboard Shortcuts</div>
+    <div data-id="202">
+      <div data-id="203" class="shortcut-row"><span data-id="204" class="shortcut-key">N</span><span data-id="205" class="shortcut-action">New File</span></div>
+      <div data-id="206" class="shortcut-row"><span data-id="207" class="shortcut-key">F</span><span data-id="208" class="shortcut-action">Focus Search</span></div>
+      <div data-id="209" class="shortcut-row"><span data-id="210" class="shortcut-key">D</span><span data-id="211" class="shortcut-action">Dashboard tab</span></div>
+      <div data-id="212" class="shortcut-row"><span data-id="213" class="shortcut-key">M</span><span data-id="214" class="shortcut-action">Matters tab</span></div>
+      <div data-id="215" class="shortcut-row"><span data-id="216" class="shortcut-key">C</span><span data-id="217" class="shortcut-action">Calendar tab</span></div>
+      <div data-id="218" class="shortcut-row"><span data-id="219" class="shortcut-key">Esc</span><span data-id="220" class="shortcut-action">Close modal</span></div>
+      <div data-id="221" class="shortcut-row" style="border-bottom:none"><span data-id="222" class="shortcut-key">?</span><span data-id="223" class="shortcut-action">This help screen</span></div>
+    </div>
+    <div data-id="224" style="text-align:center;margin-top:20px">
+      <button data-id="225" id="shortcuts-dismiss-btn" style="background:var(--grad-header);color:#fff;border:none;border-radius:10px;padding:10px 28px;font:700 13px Inter;cursor:pointer">Got it!</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div data-id="226" id="kss-toast" class="kss-toast"></div>
+
+<footer data-id="227" style="text-align:center;padding:24px;font-size:12px;color:var(--text-light);background:linear-gradient(90deg,#e6f4f4,#f0fafa)">
+  Made by Copilot
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   SPLASH SCREEN DISMISS
+   ═══════════════════════════════════════════════════════ */
+(function() {
+  function dismissSplash() {
+    var splash = document.getElementById('splash-screen-kss1');
+    if (!splash) return;
+    splash.style.transition = 'opacity 0.7s ease';
+    splash.style.opacity = '0';
+    splash.style.pointerEvents = 'none';
+    setTimeout(function() { splash.style.display = 'none'; }, 750);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(dismissSplash, 1800); });
+  } else {
+    setTimeout(dismissSplash, 1800);
+  }
+  document.addEventListener('click', function(e) {
+    var splash = document.getElementById('splash-screen-kss1');
+    if (splash && splash.style.display !== 'none' && splash.contains(e.target)) dismissSplash();
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════
+   LUCIDE ICONS (progressive enhancement)
+   ═══════════════════════════════════════════════════════ */
+if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
+  lucide.createIcons();
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOAST HELPER
+   ═══════════════════════════════════════════════════════ */
+function showToast(msg) {
+  var t = document.getElementById('kss-toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BUG FIX 2: DARK MODE — Safe init that does NOT call
+   renderBoard/renderDashboard/renderCalendar.
+   Those are called later by the normal init flow.
+   ═══════════════════════════════════════════════════════ */
+function applyDarkMode(dark) {
+  if (dark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (document.body) document.body.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    if (document.body) document.body.removeAttribute('data-theme');
+  }
+  var btn = document.getElementById('btn-dark-mode-kss');
+  if (btn) btn.textContent = dark ? '☀️' : '🌙';
+}
+
+function toggleDarkMode() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var newDark = !isDark;
+  localStorage.setItem('kss_dark_mode', newDark ? '1' : '0');
+  applyDarkMode(newDark);
+  // Safe re-render after toggle (functions are defined by then)
+  if (typeof renderBoard === 'function') { try { renderBoard(); } catch(e) {} }
+  if (typeof renderDashboard === 'function') {
+    try { var dt = document.getElementById('tab-dashboard-kss13'); if (dt && dt.style.display !== 'none') renderDashboard(); } catch(e) {}
+  }
+  if (typeof renderCalendar === 'function') {
+    try { var ct = document.getElementById('tab-calendar-kss14'); if (ct && ct.style.display !== 'none') renderCalendar(); } catch(e) {}
+  }
+}
+
+// Apply dark mode IMMEDIATELY (before first render) — NO render calls here
+(function() {
+  if (localStorage.getItem('kss_dark_mode') === '1') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (document.body) document.body.setAttribute('data-theme', 'dark');
+  }
+})();
+
+/* ═══════════════════════════════════════════════════════
+   AUTO-SCROLL DURING DRAG
+   ═══════════════════════════════════════════════════════ */
+(function() {
+  var scrollInterval = null;
+  var EDGE = 120, SPEED = 10;
+  function startAutoScroll(direction) {
+    if (scrollInterval) return;
+    scrollInterval = setInterval(function() {
+      window.scrollBy(0, direction * SPEED);
+      var board = document.getElementById('board-kss9');
+      if (board) board.scrollTop += direction * SPEED;
+      document.querySelectorAll('.col-cards').forEach(function(col) { col.scrollTop += direction * SPEED; });
+    }, 16);
+  }
+  function stopAutoScroll() { if (scrollInterval) { clearInterval(scrollInterval); scrollInterval = null; } }
+  document.addEventListener('dragover', function(e) { var y = e.clientY; var h = window.innerHeight; if (y < EDGE) startAutoScroll(-1); else if (y > h - EDGE) startAutoScroll(1); else stopAutoScroll(); });
+  document.addEventListener('dragend', stopAutoScroll);
+  document.addEventListener('drop', stopAutoScroll);
+  document.addEventListener('dragleave', function(e) { if (!e.relatedTarget) stopAutoScroll(); });
+})();
+
+/* ═══════════════════════════════════════════════════════
+   DATA
+   ═══════════════════════════════════════════════════════ */
+var COLUMNS = [
+  {id:'col-new', label:'NEW / OPEN', grad:'linear-gradient(135deg,#0d7377,#14a09a)', accent:'#14a09a'},
+  {id:'col-req', label:'REQUISITION', grad:'linear-gradient(135deg,#d97706,#f59e0b)', accent:'#f59e0b'},
+  {id:'col-closing', label:'CLOSING SOON', grad:'linear-gradient(135deg,#16a34a,#22c55e)', accent:'#22c55e'},
+  {id:'col-reporting', label:'REPORTING', grad:'linear-gradient(135deg,#dc2626,#ef4444)', accent:'#ef4444'},
+  {id:'col-closed', label:'CLOSED', grad:'linear-gradient(135deg,#475569,#64748b)', accent:'#64748b'}
+];
+
+var CHECKLIST_TEMPLATES = {
+  Purchase: ['Client ID Verification (Treefort)', 'Title Search & Requisition', 'Request for Funds sent to lender', 'Mortgage instructions received', 'Closing documents prepared & signed', 'Funds received & disbursed', 'Registration of Transfer & Charge', 'Bank reporting package sent', 'Client reporting package sent'],
+  Sale: ['Client ID Verification (Treefort)', 'Response to Requisition prepared', 'Statement of Account sent to buyer lawyer', 'Closing package sent for e-signing', 'Discharge of existing mortgage arranged', 'Transfer executed & delivered', 'Funds received & accounted', 'Tax bill payment confirmed', 'Client reporting package sent'],
+  Refinance: ['Client ID Verification (Treefort)', 'Fire insurance confirmation received', 'Mortgage instructions received', 'Signing package prepared & sent', 'Request for Funds sent', 'Payout of existing mortgage arranged', 'New mortgage registered', 'Bank reporting complete', 'Client reporting & balance sent'],
+  Transfer: ['Client ID Verification', 'Documents prepared', 'Signing package sent', 'Funds received', 'Registration complete', 'Reporting sent']
+};
+
+function getDefaultChecklist(type) {
+  var items = CHECKLIST_TEMPLATES[type] || CHECKLIST_TEMPLATES.Transfer;
+  return items.map(function(text) {
+    return { id: String(Date.now()) + '-' + Math.random().toString(36).substr(2,9), text: text, done: false };
+  });
+}
+
+var SEED = [
+  {"id":"c6c29736-d966-45c8-8b1b-b60f86a89d6c","fileNumber":"KSS-01001","clientName":"Divyendu Asthana","address":"11 Bertram Gate, Whitby, Ontario L1P 0M5","type":"Purchase","price":"$930,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-03","closingDate":"2026-07-29","status":"col-closed","priority":"High","notes":"Register transfer and charge on Tuesday morning and send copy of transfer to client.","expanded":false},
+  {"id":"a58d88fe-5c92-4798-ad5d-e020b4c05ff7","fileNumber":"KSS-01002","clientName":"Kaveh Zahedi","address":"169 Willowbrook Road, Markham, Ontario L3T 5L5","type":"Sale","price":"$1,290,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-28","closingDate":"2026-08-10","status":"col-closed","priority":"Normal","notes":"Send SOA and response to requisition to buyer lawyer, Sending closing package to vendors for e-signing. Complete accounting and add tax bill payment receipt to invoice","expanded":false},
+  {"id":"318ae614-c689-4ef5-a86d-cff01cd415a4","fileNumber":"KSS-01003","clientName":"Shanta Bishwokarma","address":"105 Rollingwood Drive, Brampton, Ontario, L2P 3T2","type":"Refinance","price":"$1,000,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-27","closingDate":"2026-08-04","status":"col-closed","priority":"High","notes":"Transfer of Title and Mortgage Registration Pending. Complete bank and client reporting. Sending balance to client","expanded":false},
+  {"id":"dcc8d41b-bc46-4c12-87e4-eeb70d76873b","fileNumber":"KSS-01005","clientName":"1001673211 ONTARIO INC","address":"105-15 Skyridge Dr, Brampton, Ontario L6P 4S3","type":"Purchase","price":"$1,825,000","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-07-15","closingDate":"2026-08-13","status":"col-closed","priority":"High","notes":"Extension is requested and wire transfer for additional deposit pending.","expanded":false},
+  {"id":"45a2136d-19e6-42d6-ab7d-64b09b410cb3","fileNumber":"KSS-01009","clientName":"Pankaj Salve","address":"1522 Zilio Terrace, Milton, Ontario L9E 2H8","type":"Purchase","price":"$1,139,990","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-22","closingDate":"2026-07-29","status":"col-closed","priority":"Normal","notes":"Complete Bank and Client Reporting","expanded":false},
+  {"id":"6bb5a7be-f274-418d-bb5e-f416c8ea5a14","fileNumber":"KSS-01010","clientName":"Jasvinder Kochhar","address":"11 Natural Terrace, Brampton, Ontario L6Y 6A5","type":"Purchase","price":"$1,800,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-20","closingDate":"2026-08-10","status":"col-closed","priority":"High","notes":"Follow up SOA, Complete Request for Funds, Follow up client for IDV completion. Complete closing documents and send package for signing.","expanded":false},
+  {"id":"907aefdb-d5bd-4ef4-8ec8-71147d81c6e2","fileNumber":"KSS-01013","clientName":"Kajenthini Mayuran","address":"25 Valley Centre Drive, Scarborough, ON M1X 1K9","type":"Sale","price":"$1,150,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-14","closingDate":"2026-08-28","status":"col-closed","priority":"Normal","notes":"Follow up on client information, send treefort IDV, request payout statement, prepare SOA and transfer","expanded":false},
+  {"id":"77b8c0b1-1ad5-4d34-905f-3174e18d9dc4","fileNumber":"KSS-01014","clientName":"Mehrdokht Vahedi","address":"Suite 1906, 29 Green Trail Court, Toronto, Ontario M2K 0J9","type":"Purchase","price":"$932,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-07","closingDate":"2026-10-09","status":"col-req","priority":"Normal","notes":"Follow up Vahedi for mortgage instructions, prepare closing documents","expanded":false},
+  {"id":"78cd3d66-3f33-4883-99df-8da9f3d99dd8","fileNumber":"KSS-01015","clientName":"1828788 Ontario Inc.","address":"7368 Yonge Street, Unit 6-13, Thornhill, Ontario, L4H 8H9","type":"Sale","price":"$1,565,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-08-14","closingDate":"2026-09-08","status":"col-closed","priority":"Normal","notes":"Request advance fee, open new matter, prepare new SOA, prepare new transfer, prepare new closing documents.","expanded":false},
+  {"id":"57a9674d-2418-485b-8cf8-212fa41e957e","fileNumber":"KSS-01017","clientName":"Kamalpreet Mann","address":"22 Donomore Drive, Brampton, Ontario L7A 0S7","type":"Purchase","price":"$757,500","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-07-13","closingDate":"2026-07-29","status":"col-closed","priority":"Normal","notes":"Complete Bank and Client Reporting.","expanded":false},
+  {"id":"eae277b0-eaea-4706-8608-9cdbde84b68c","fileNumber":"KSS-01018","clientName":"Sunilkumar Patel","address":"109 WOODSEND RUN, BRAMPTON, ON, L6Y 4H7","type":"Purchase","price":"$765,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-13","closingDate":"2026-08-27","status":"col-reporting","priority":"Normal","notes":"Send email to client, send requisition, send RFF, complete closing documents","expanded":false},
+  {"id":"9635f432-67d9-436b-a411-a35abdea92fc","fileNumber":"KSS-01019","clientName":"Wagma Miral","address":"5727 Keldrew Avenue, Mississauga, Ontario, L5M 7B9","type":"Purchase","price":"$920,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-13","closingDate":"2026-08-28","status":"col-closed","priority":"Normal","notes":"Send client email, send requisition, follow up mortgage instructions, send RFF, complete signing package","expanded":false},
+  {"id":"b41b39ba-fe65-44db-bd2f-df5a12a190ce","fileNumber":"KSS-01020","clientName":"Ashini Sooryakumar","address":"25-3175 Denison St, Markham, ON L3S 0E3","type":"Purchase","price":"$759,990","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-03","closingDate":"2026-08-27","status":"col-closed","priority":"High","notes":"Mortgage instructions and revised SOA follow up","expanded":false},
+  {"id":"314ffff2-527b-4df0-bc37-03f461949aed","fileNumber":"KSS-01021","clientName":"Arpit Saharan","address":"10 Pine Warbler Street, Kitchener, Ontario, N2P 0L6","type":"Purchase","price":"$814,900","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-01","closingDate":"2026-10-08","status":"col-closing","priority":"Normal","notes":"Send email to client","expanded":false},
+  {"id":"e74dd0c3-b9a1-499c-935f-4fb125d296de","fileNumber":"KSS-01022","clientName":"Rahul Badansinh Sharma","address":"132 Madison d'Andrea Avenue, Sarnia, Ontario N7S 6L9","type":"Refinance","price":"$504,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-07","closingDate":"2026-08-12","status":"col-closed","priority":"High","notes":"Send client email for fire insurance, prepare and send signing package, complete request for funds","expanded":false},
+  {"id":"d13ffeaa-5f33-4057-8b9f-e64d56839d9d","fileNumber":"KSS-01023","clientName":"Anushooya Gunasaleen","address":"56 Stockell Crescent, Ajax, Ontario, L1T 0M4","type":"Sale","price":"$1,118,000","fee":"","lawyer":"Neethan Selvan","clerk":"Nilufa","reqDate":"2026-09-18","closingDate":"2026-10-07","status":"col-closing","priority":"Normal","notes":"Treefort IDV, Letter to Vendor, Preparing response, SOA and Transfer","expanded":false},
+  {"id":"6b170954-3aef-487a-98fe-999deb024ad4","fileNumber":"KSS-01024","clientName":"Dhan Raj Gurung","address":"87 Woodsend Run, Brampton, Ontario L6Y 4H7","type":"Purchase","price":"$799,800","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-08-18","closingDate":"2026-08-27","status":"col-reporting","priority":"Normal","notes":"Complete file. Send documents for e-signing. Send intro email to client.","expanded":false},
+  {"id":"fad86673-6d50-4887-b586-cfd475da6f1f","fileNumber":"KSS-01025","clientName":"Susan Hamzavi","address":"27 Benson Ave, Richmond Hill","type":"Purchase","price":"$715,000","fee":"","lawyer":"Daniel Larijani","clerk":"","reqDate":"2026-08-04","closingDate":"2026-08-25","status":"col-closed","priority":"Normal","notes":"email to client, requisition to top law firm and final closing documents for e-sign.","expanded":false},
+  {"id":"4001a8f3-266c-4535-8666-78d6e5a74023","fileNumber":"KSS-01027","clientName":"Kiranbir Kaur","address":"21 Sunnyview Road, Brampton, Ontario, L7A 3E4","type":"Purchase","price":"$830,000","fee":"","lawyer":"Sassan Emam","clerk":"Nilufa","reqDate":"2026-08-30","closingDate":"2026-09-14","status":"col-reporting","priority":"Normal","notes":"Assigned to Nilufa (Clerk- Floater)","expanded":false},
+  {"id":"149f0f9d-7833-4fd3-9838-0a86a6898dac","fileNumber":"KSS-01028","clientName":"Seyed Hesam Emam","address":"485C County Rd, Trent Mills, Ontario K0L 1Z0","type":"Purchase","price":"$860,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-02","closingDate":"2026-09-17","status":"col-reporting","priority":"Normal","notes":"Assigned to Nilufa (Clerk-Floater)","expanded":false},
+  {"id":"9835fcdf-90d5-490a-80aa-48893afb5f93","fileNumber":"KSS-01029","clientName":"Anand Kumar and Ravisha","address":"55 Fisher Street, Brantford, Ontario, N3T 0G4","type":"Purchase","price":"$750,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-08-21","closingDate":"2026-08-31","status":"col-reporting","priority":"High","notes":"Send information to Maryam\nFill up the statement of Account\nSOA done","expanded":false},
+  {"id":"eae456c8-fdb8-4c28-8e03-55fb2bc61999","fileNumber":"KSS-01030","clientName":"Raju Arenja and Tina Kripalani","address":"89 Stewart Boulevard Brockville","type":"Purchase","price":"$549,900","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-08-25","closingDate":"2026-09-01","status":"col-reporting","priority":"High","notes":"647-308-4068 - Tina Kripalani.\nCall Client for Initial questions. Call for Vendor Lawyer Info. Conduct Searches. Prepare and Send Requisition.","expanded":false},
+  {"id":"a34510ff-dbbe-483d-89be-f767eb2ee608","fileNumber":"KSS-01007","clientName":"Nanthagopu Sangamoorthy","address":"3135 Concession Rd 10, Clarington, ON L1C 3K6","type":"Sale","price":"$950,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-13","closingDate":"2026-08-31","status":"col-closed","priority":"High","notes":"Sending Reporting Packages, get letter and accounting approved by lawyer before sending.","expanded":false},
+  {"id":"c564354a-91f5-4bcf-b877-532e68f4afa0","fileNumber":"KSS-01008","clientName":"Nanthiny Nanthagopu","address":"16 McQueen Cres, Ajax, ON L1T 4Y8","type":"Refinance","price":"$110,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-27","closingDate":"2026-07-31","status":"col-closed","priority":"High","notes":"Sending Reporting with Sangamoorthy's sale reporting package","expanded":false},
+  {"id":"9d52ac7d-8e2a-4fa6-bb1d-29a671ad579e","fileNumber":"KSS-01011","clientName":"Ramandeep Nannan","address":"1 Flavian Cres, Brampton, Ontario L6T 3P2","type":"Purchase","price":"$724,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"","reqDate":"2026-07-27","closingDate":"2026-07-31","status":"col-closed","priority":"Normal","notes":"Complete bank and client reporting.","expanded":false},
+  {"id":"ea679fa3-6fbe-4114-8d80-1faa22ecd47c","fileNumber":"KSS-01012","clientName":"Vimalendran Thievendam","address":"1 Deborah Dr, Scarborough, ON M1H 2H5","type":"Purchase","price":"$820,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-08-05","closingDate":"2026-08-19","status":"col-closed","priority":"Normal","notes":"Complete requisition, closing documents and accounting.","expanded":false},
+  {"id":"414fd2de-11a5-4972-964e-f35e1178c3ac","fileNumber":"KSS-01016","clientName":"Pathmini Wignarajan","address":"46 Melchior Drive, Scarborough, ON M1E 3W5","type":"Purchase","price":"$805,000","fee":"","lawyer":"Neethan Selvan","clerk":"","reqDate":"2026-07-13","closingDate":"2026-07-30","status":"col-closed","priority":"Normal","notes":"Client Reporting Package","expanded":false},
+  {"id":"4e046a2a-72be-4fcb-9949-4eec123a83a7","fileNumber":"KSS-01022B","clientName":"Pejman Parsi-Mood","address":"1811-7165 Yonge Street Thornhill","type":"Refinance","price":"$600,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-01-05","closingDate":"2026-01-15","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"211b75dd-8c66-4e42-bfef-3c725cf3ce7e","fileNumber":"KSS-01023B","clientName":"Murli / Manju Raheja","address":"153 Hickstead Way Ottawa","type":"Refinance","price":"$696,640","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-02-09","closingDate":"2026-02-09","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"d7c8b8f9-03a8-457e-b264-2db13231acab","fileNumber":"KSS-01024B","clientName":"Hamid, Masih, Aamir","address":"212 Glenayr Rd Toronto","type":"Purchase","price":"$3,110,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-02-27","closingDate":"2026-03-17","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"9b76f201-d0d1-4623-b316-6749e5d3e689","fileNumber":"KSS-01025B","clientName":"Randa Mahfouz","address":"76 Matteo Trail Hamilton","type":"Sale","price":"$1,050,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-01","closingDate":"2026-04-15","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"5c1c6085-8278-4397-ace8-0bd218edd3d2","fileNumber":"KSS-01026","clientName":"Saenarine Deonarine","address":"2603 - 300 Front Street, Toronto","type":"Sale","price":"$650,000","fee":"","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-21","closingDate":"2026-02-10","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"d19f3617-d379-40f2-a7e7-35d80415fda7","fileNumber":"KSS-01027B","clientName":"Kevin Parker","address":"44 Madelaine Crescent, Brampton","type":"Sale","price":"$1,200,000","fee":"","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-15","closingDate":"2026-01-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"cf12ffd1-8cc2-4050-a44d-d1699c5d35e0","fileNumber":"KSS-01028B","clientName":"Narinderpal Dayal","address":"44 Valleyway Drive, Brampton","type":"Purchase","price":"$250,000","fee":"","lawyer":"Arunjit Qaumi","clerk":"","reqDate":"2026-01-07","closingDate":"2026-01-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"983c496b-ddc1-471f-8cf9-aa5d58bb28d2","fileNumber":"KSS-01029B","clientName":"Naresh Jain / Pushpinder Josan","address":"13 - 30 Dean Park Road, Toronto","type":"Purchase","price":"$1,363,200","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-05","closingDate":"2026-04-01","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"715dbd2e-8168-4193-816d-3709a3c17057","fileNumber":"KSS-01030B","clientName":"Naresh Jain / Pushpinder Josan","address":"200 Montclair Drive, Unit - 4, Woodstock","type":"Purchase","price":"$1,677,000","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"150fa8f0-d0c2-49e0-bf70-1e4bd74f3ba5","fileNumber":"KSS-01031B","clientName":"Hamid, Masih, Aamir","address":"30 Hillhurst Boulevard, Toronto","type":"Sale","price":"$700,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-03-03","closingDate":"2026-03-23","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"c75d26af-4d21-4ceb-b242-5c788d481280","fileNumber":"KSS-01032B","clientName":"Abbas Pirayesh Akbari","address":"3002-85 Queens Wharf Rd Toronto","type":"Sale","price":"$1,050,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-01","closingDate":"2026-04-16","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"55a38d2e-1d59-4128-905a-115bc93a6c1a","fileNumber":"KSS-01033B","clientName":"Komal and Jagtar Dosanjh","address":"3353 Beau Rivage Crescent, Mississauga","type":"Refinance","price":"$1,087,400","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"2dae5f58-16d8-4d59-961d-19294a431fef","fileNumber":"KSS-01034","clientName":"Komal and Jagtar Dosanjh","address":"1104-425 Front Street East, Toronto","type":"Refinance","price":"$444,350","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-03-10","closingDate":"2026-03-31","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"e3eb48d7-b571-4e18-917b-48be7d9bfdb5","fileNumber":"KSS-01035","clientName":"Afzal Yusuf Patel","address":"7765 Anaka Drive, Mississauga","type":"Refinance","price":"$702,100","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-07","closingDate":"2026-04-07","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"5389235b-c4c7-4f3a-8409-e5bd6f686c94","fileNumber":"KSS-01036","clientName":"Ben Azizi","address":"120 Sheppard Avenue West, Toronto","type":"Sale","price":"$2,650,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"Asees","reqDate":"2026-09-15","closingDate":"2026-09-30","status":"col-closing","priority":"High","notes":"","expanded":false},
+  {"id":"2168298c-d5f4-4555-a3dc-5c1ba4c202ca","fileNumber":"KSS-01037","clientName":"Alap and Payalben Shah","address":"894 West Village Square London","type":"Refinance","price":"$480,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-05-22","closingDate":"2026-05-22","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"e963bddf-a3b4-4f08-8c30-03c6eef6ff16","fileNumber":"KSS-01038","clientName":"Shanta & Netra Bandhu Kafle","address":"7 Tarlton Court Thornhill","type":"Refinance","price":"$780,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-04-02","closingDate":"2026-04-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"df63f088-da24-481e-a4a5-4859da42b5cb","fileNumber":"KSS-01039","clientName":"Arun Darra and Amit Darira","address":"4508 Donegal Drive, Mississauga","type":"Purchase","price":"$1,250,000","fee":"","lawyer":"Navneet Garcha","clerk":"","reqDate":"2026-05-15","closingDate":"2026-05-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"25b440d8-75dd-4b17-8c3d-f782e2a0018b","fileNumber":"KSS-01040","clientName":"Naresh and Anamika Jain","address":"415 Main Street West, Hamilton","type":"Purchase","price":"$296,500","fee":"","lawyer":"Gagan Lamba","clerk":"","reqDate":"2026-05-29","closingDate":"2026-06-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"69c229c0-b03c-4f40-a06c-3c4fadf66b21","fileNumber":"KSS-01041","clientName":"Alap and Payalben Shah","address":"85-409 Joseph Street, Port Elgin","type":"Refinance","price":"$360,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-06-23","closingDate":"2026-06-23","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"d5ff4e8a-cea4-411c-a7b3-c8518a559830","fileNumber":"KSS-01042","clientName":"Vaibhav Nagpal and Navdeep Kaur","address":"33 Greig Street, Brantford","type":"Purchase","price":"$501,761","fee":"","lawyer":"Navneet Garcha","clerk":"","reqDate":"2026-06-17","closingDate":"2026-06-25","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"2f6e500e-3731-44e2-b04b-ef0751d19e27","fileNumber":"KSS-01043","clientName":"Benjamin Ghotbi","address":"Suite 823, 858 Dupont Street, Toronto","type":"Purchase","price":"$800,000","fee":"","lawyer":"Daniel Larijani","clerk":"","reqDate":"2026-06-02","closingDate":"2026-06-19","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"6ae77c9d-e44c-4f10-8172-7fb9340c46c3","fileNumber":"KSS-01044","clientName":"Benjamin Ghotbi","address":"Suite 1510 - 25 Cordova Avenue, Toronto","type":"Purchase","price":"$613,865","fee":"","lawyer":"Daniel Larijani","clerk":"","reqDate":"2026-06-24","closingDate":"2026-06-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"f8b7f432-0abd-454e-af53-c6639103fa37","fileNumber":"KSS-01045","clientName":"Kishor Pun and Tulasi Pun","address":"214 Borrows St Thornhill","type":"Purchase","price":"$1,065,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-06-12","closingDate":"2026-06-30","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"f9828bc0-e012-497b-90ca-aa87c296b830","fileNumber":"KSS-01046","clientName":"Nageswar Rao Tamada and Jayashalini Puttachary","address":"115-2170 Bromsgrove Rd Mississauga","type":"Refinance","price":"$800,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-06-19","closingDate":"2026-06-19","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"a56f8515-eb6c-4e6b-a69b-b105081c1ba9","fileNumber":"KSS-01047","clientName":"Karmjit, Rajveer, Satveer Singh Bath","address":"38 Peacekeeping Crt, Brampton","type":"Refinance","price":"$1,300,000","fee":"","lawyer":"Navneet Garcha","clerk":"","reqDate":"2026-07-06","closingDate":"2026-07-05","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"2c07c7eb-5501-4ae1-9116-004536ab8a54","fileNumber":"KSS-01031","clientName":"Wail Goryal and Maryam Mikho","address":"5600 Ethan Drive, Mississauga","type":"Refinance","price":"$990,000","fee":"","lawyer":"Sassan Emam","clerk":"","reqDate":"2026-09-03","closingDate":"2026-09-04","status":"col-reporting","priority":"High","notes":"","expanded":false},
+  {"id":"b3f54791-b50c-48b4-85cb-302fa0ae6ac6","fileNumber":"KSS-01032","clientName":"Thirivarul Amirthalingam","address":"106 King St, Tiverton, Ontario N0G 2T0","type":"Sale","price":"$305,000","fee":"","lawyer":"Neethan Selvan","clerk":"Asees","reqDate":"2026-09-09","closingDate":"2026-09-23","status":"col-reporting","priority":"Normal","notes":"","expanded":false},
+  {"id":"4983ff14-8e1c-418c-9038-dae79d0e66c6","fileNumber":"KSS-01033","clientName":"Vamanan Thanabalasundram","address":"969 Applegrove Ave Oshawa Ontario L1H 1S5","type":"Sale","price":"$670,000","fee":"","lawyer":"Sassan Emam","clerk":"Huma","reqDate":"2026-09-14","closingDate":"2026-11-02","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1788559375436","fileNumber":"KSS-00058","clientName":"Vamanan Thanabalasundram","address":"969 Applegrove Drive, Oshawa","type":"Purchase","price":"$650,000","fee":"","lawyer":"Sassan Emam","clerk":"Jasneet","reqDate":"2026-06-24","closingDate":"2026-07-10","status":"col-closed","priority":"Normal","notes":"","expanded":false},
+  {"id":"1788995305154","fileNumber":"KSS-00058B","clientName":"Mayuran Manokararasa","address":"Suite 901B, 7437 Kingston Road Scarborough, Ontario M1B 0E9","type":"Purchase","price":"$804,900","fee":"","lawyer":"Neethan Selvan","clerk":"Asees","reqDate":"2026-09-01","closingDate":"2026-09-15","status":"col-reporting","priority":"Normal","notes":"Waiting for mortgage instructions. Prepare package for electronic signing.","expanded":false},
+  {"id":"1789675705163","fileNumber":"KSS-00059","clientName":"Jayson Vergara","address":"85 Warnford Cir Ajax, ON L1T 0J3","type":"Refinance","price":"$800,000","fee":"","lawyer":"Neethan Selvan","clerk":"Asees","reqDate":"2026-09-18","closingDate":"2026-09-24","status":"col-reporting","priority":"Normal","notes":"Signed electronically by Vendor in the City of Markham in the Province of Ontario.","expanded":false},
+  {"id":"1789675887842","fileNumber":"KSS-00060","clientName":"Harleen Dhot","address":"Suite 4909 at 38 Annie Craig Drive, Etobicoke, ON M8V 0G9","type":"Purchase","price":"$600,000","fee":"","lawyer":"Sassan Emam","clerk":"Kimberly","reqDate":"2026-09-30","closingDate":"2026-10-30","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1789676250861","fileNumber":"KSS-00061","clientName":"Ashley and Dunkley","address":"","type":"Purchase","price":"","fee":"","lawyer":"Sassan Emam","clerk":"Jasneet","reqDate":"","closingDate":"2026-12-03","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790201697511","fileNumber":"KSS-00062","clientName":"Sonam Lama","address":"6519 Song Bird Crescent, Mississauga, Ontario, L5W 1E1","type":"Refinance","price":"$800,000","fee":"","lawyer":"Sassan Emam","clerk":"Nilufa","reqDate":"2026-09-22","closingDate":"2026-09-29","status":"col-reporting","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790270381500","fileNumber":"KSS-00063","clientName":"Golden Route Canada Inc.","address":"1610-7181 Yonge St Thornhill, ON L3T 0C7","type":"Purchase","price":"$267,000","fee":"","lawyer":"Sassan Emam","clerk":"Kimberly","reqDate":"2026-11-04","closingDate":"2026-11-18","status":"col-new","priority":"Normal","notes":"Commercial transaction. Searches required. Fee $650.00 plus HST","expanded":false},
+  {"id":"1790436310037","fileNumber":"KSS-00064","clientName":"Gunaseelan Sundaram","address":"PH01-3650 Kingston Rd Scarborough, ON M1M 3X9","type":"Purchase","price":"$475,000","fee":"","lawyer":"Neethan Selvan","clerk":"Nilufa","reqDate":"2026-09-25","closingDate":"2026-10-07","status":"col-closing","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790438103662","fileNumber":"KSS-00065","clientName":"Nguyen and Vu Than","address":"216-100 Eagle Rock Way Maple, ON L6A 5B9","type":"Purchase","price":"$670,000","fee":"","lawyer":"Neethan Selvan","clerk":"Jasneet","reqDate":"2026-10-21","closingDate":"2026-10-30","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790786954074","fileNumber":"KSS-00066","clientName":"Vaintharasa Subaratnam","address":"1524 Amberlea Rd Pickering, ON L1V 4T7","type":"Purchase","price":"$810,000","fee":"","lawyer":"Neethan Selvan","clerk":"Nilufa","reqDate":"2026-10-20","closingDate":"2026-10-28","status":"col-new","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790787324222","fileNumber":"KSS-00067","clientName":"Vanathy Navratnarajah","address":"607 Via Campaline Drive, Vaughan","type":"Transfer","price":"$2","fee":"","lawyer":"Neethan Selvan","clerk":"Nilufa","reqDate":"2026-10-02","closingDate":"2026-10-05","status":"col-req","priority":"Normal","notes":"","expanded":false},
+  {"id":"1790869799541","fileNumber":"KSS-00068","clientName":"Anmolak and Pushwinder Kaloty","address":"15-55 ROMILLY AVE, BRAMPTON, ON, L5A 5L8","type":"Purchase","price":"$1,000,000","fee":"","lawyer":"Saloumeh Baghbani Najafabad","clerk":"Nilufa","reqDate":"","closingDate":"2026-10-13","status":"col-new","priority":"Normal","notes":"","expanded":false}
+];
+
+var appData = {
+  files:[],
+  lawyers:["Arunjit Qaumi","Daniel Larijani","Gagan Lamba","Navneet Garcha","Neethan Selvan","Saloumeh Baghbani Najafabad","Sassan Emam","Sally Baghbani","Saloumeh Baghbani"],
+  clerks:['Nilufa','Huma','Maria','Asees','Jasneet','Kimberly','Dave']
+};
+var editingId = null;
+var calYear, calMonth;
+var dragFileId = null;
+var emailFileId = null;
+
+var KSS_VERSION_KEY = 'kss_version';
+var KSS_CURRENT_VERSION = '8';
+if (localStorage.getItem(KSS_VERSION_KEY) !== KSS_CURRENT_VERSION) {
+  localStorage.removeItem('kss_matters_v1');
+  localStorage.setItem(KSS_VERSION_KEY, KSS_CURRENT_VERSION);
+}
+
+function loadData() {
+  try {
+    var d = JSON.parse(localStorage.getItem('kss_matters_v1'));
+    if (d && d.files && d.lawyers && d.clerks) {
+      if (d.files.length < 65) { localStorage.removeItem('kss_matters_v1'); return; }
+      appData = d;
+    }
+  } catch(e) {}
+}
+function saveData() { localStorage.setItem('kss_matters_v1', JSON.stringify(appData)); }
+function seedData() {
+  appData.files = JSON.parse(JSON.stringify(SEED));
+  appData.files.forEach(function(f) {
+    if (!f.checklist || !f.checklist.length) f.checklist = getDefaultChecklist(f.type);
+    if (!f.activity) f.activity = [{ ts: new Date().toISOString(), msg: '📁 File created' }];
+    if (f.fee === undefined) f.fee = '';
+  });
+  saveData();
+}
+
+function logActivity(fileId, msg) {
+  var file = appData.files.find(function(f){ return f.id === fileId; });
+  if (!file) return;
+  if (!file.activity) file.activity = [];
+  file.activity.unshift({ ts: new Date().toISOString(), msg: msg });
+  if (file.activity.length > 50) file.activity = file.activity.slice(0, 50);
+  saveData();
+}
+
+function formatActivityTime(isoStr) {
+  var d = new Date(isoStr); var now = new Date();
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var h = d.getHours(); var m = d.getMinutes();
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12; if (h === 0) h = 12;
+  var timeStr = h + ':' + String(m).padStart(2,'0') + ' ' + ampm;
+  if (d.toDateString() === now.toDateString()) return 'Today ' + timeStr;
+  return months[d.getMonth()] + ' ' + d.getDate() + ', ' + timeStr;
+}
+
+function daysUntil(dateStr) {
+  if (!dateStr) return 9999;
+  var today = new Date(); today.setHours(0,0,0,0);
+  var d = new Date(dateStr + 'T00:00:00'); d.setHours(0,0,0,0);
+  return Math.round((d - today) / 86400000);
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  var d = new Date(dateStr + 'T00:00:00');
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+
+function getColMeta(colId) { return COLUMNS.find(function(c){ return c.id === colId; }) || COLUMNS[0]; }
+
+function getTypeColor(type) {
+  var map = {Purchase:'#0d7377', Sale:'#16a34a', Refinance:'#d97706', Transfer:'#dc2626'};
+  return map[type] || '#0d7377';
+}
+function getTypeBg(type) {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    var darkMap = { Purchase:{from:'rgba(13,115,119,0.15)',to:'rgba(20,160,154,0.1)',text:'#5eead4'}, Sale:{from:'rgba(22,163,74,0.15)',to:'rgba(34,197,94,0.1)',text:'#4ade80'}, Refinance:{from:'rgba(217,119,6,0.15)',to:'rgba(245,158,11,0.1)',text:'#fbbf24'}, Transfer:{from:'rgba(220,38,38,0.15)',to:'rgba(239,68,68,0.1)',text:'#f87171'} };
+    return darkMap[type] || darkMap.Purchase;
+  }
+  var map = { Purchase:{from:'#e6f4f4',to:'#b2d8d8',text:'#0b3d3f'}, Sale:{from:'#f0fdf4',to:'#bbf7d0',text:'#15803d'}, Refinance:{from:'#fffbeb',to:'#fef3c7',text:'#b45309'}, Transfer:{from:'#fef2f2',to:'#fee2e2',text:'#b91c1c'} };
+  return map[type] || map.Purchase;
+}
+
+function priorityClass(p) { if(p==='Urgent') return 'priority-urgent'; if(p==='High') return 'priority-high'; return 'priority-normal'; }
+
+function formatFeeNumber(val) { var num = parseFloat(val); if (isNaN(num) || num <= 0) return ''; return '$' + num.toLocaleString('en-US'); }
+
+function isDarkMode() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
+function dmColor(light, dark) { return isDarkMode() ? dark : light; }
+
+function escH(s) { if(!s) return ''; var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function buildCountdownBadge(file) {
+  if (file.status === 'col-closed') return '';
+  if (!file.closingDate) return '';
+  var d = daysUntil(file.closingDate);
+  var text, bg, color, border;
+  var dark = isDarkMode();
+  if (d <= 0) { text = '🔴 Closing TODAY'; bg = dark ? 'rgba(220,38,38,0.15)' : '#fee2e2'; color = dark ? '#f87171' : '#dc2626'; border = dark ? 'rgba(220,38,38,0.3)' : '#dc2626'; }
+  else if (d === 1) { text = '🟠 Closing TOMORROW'; bg = dark ? 'rgba(234,88,12,0.15)' : '#fff7ed'; color = dark ? '#fb923c' : '#ea580c'; border = dark ? 'rgba(234,88,12,0.3)' : '#ea580c'; }
+  else if (d <= 3) { text = '⚡ Closes in ' + d + ' days'; bg = dark ? 'rgba(217,119,6,0.15)' : '#fff7ed'; color = dark ? '#fbbf24' : '#d97706'; border = dark ? 'rgba(217,119,6,0.3)' : '#d97706'; }
+  else if (d <= 7) { text = '🟡 Closes in ' + d + ' days'; bg = dark ? 'rgba(202,138,4,0.15)' : '#fefce8'; color = dark ? '#facc15' : '#ca8a04'; border = dark ? 'rgba(202,138,4,0.3)' : '#ca8a04'; }
+  else if (d <= 14) { text = '🟢 Closes in ' + d + ' days'; bg = dark ? 'rgba(22,163,74,0.15)' : '#f0fdf4'; color = dark ? '#4ade80' : '#16a34a'; border = dark ? 'rgba(22,163,74,0.3)' : '#16a34a'; }
+  else { return ''; }
+  return '<div class="countdown-badge" style="background:'+bg+';color:'+color+';border:1.5px solid '+border+'">'+text+'</div>';
+}
+
+function renderChecklistSection(file) {
+  if (!file.checklist) file.checklist = getDefaultChecklist(file.type);
+  var cl = file.checklist;
+  var done = cl.filter(function(c){ return c.done; }).length;
+  var total = cl.length;
+  var pct = total > 0 ? Math.round((done/total)*100) : 0;
+  var isComplete = total > 0 && done === total;
+  var html = '<div class="checklist-section">';
+  html += '<div class="checklist-header"><span class="checklist-title">✅ Closing Checklist</span><span class="checklist-progress-pill">' + done + '/' + total + '</span>';
+  if (isComplete) html += '<span class="checklist-complete-badge">🎉 Complete!</span>';
+  html += '</div>';
+  html += '<div class="checklist-bar-track"><div class="checklist-bar-fill' + (isComplete ? ' complete' : '') + '" style="width:' + pct + '%"></div></div>';
+  cl.forEach(function(item) {
+    html += '<div class="checklist-item"><div class="checklist-checkbox' + (item.done ? ' done' : '') + '" data-action="check-item" data-file-id="' + file.id + '" data-item-id="' + item.id + '">' + (item.done ? '✓' : '') + '</div><span class="checklist-item-text' + (item.done ? ' done' : '') + '">' + escH(item.text) + '</span><button class="checklist-item-del" data-action="del-check-item" data-file-id="' + file.id + '" data-item-id="' + item.id + '">✕</button></div>';
+  });
+  html += '<div class="checklist-add-row"><input class="checklist-add-input" placeholder="Add checklist item..." data-file-id="' + file.id + '"><button class="checklist-add-btn" data-action="add-check-item" data-file-id="' + file.id + '">+</button></div></div>';
+  return html;
+}
+
+function renderActivitySection(file) {
+  if (!file.activity) file.activity = [];
+  var html = '<div class="activity-section"><div class="activity-header" data-action="toggle-activity" data-file-id="' + file.id + '"><span class="activity-title">🕐 Activity Log</span><button class="activity-toggle" data-action="toggle-activity" data-file-id="' + file.id + '">' + (file._activityOpen ? '▲' : '▼') + '</button></div>';
+  if (file._activityOpen) {
+    html += '<div class="activity-list">';
+    if (file.activity.length === 0) { html += '<div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';padding:8px 0;font-style:italic">No activity yet</div>'; }
+    else { file.activity.forEach(function(entry) { html += '<div class="activity-entry"><div class="activity-dot"></div><span class="activity-msg">' + escH(entry.msg) + '</span><span class="activity-time">' + formatActivityTime(entry.ts) + '</span></div>'; }); }
+    html += '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function renderCard(file, colId, isDuplicate) {
+  var col = getColMeta(colId);
+  var tb = getTypeBg(file.type);
+  var d = daysUntil(file.closingDate);
+  var dark = isDarkMode();
+  var urgFrom, urgTo, urgText;
+  if(d<=7){urgFrom=dark?'rgba(220,38,38,0.12)':'#fef2f2';urgTo=dark?'rgba(220,38,38,0.08)':'#fee2e2';urgText=dark?'#f87171':'#dc2626';}
+  else if(d<=14){urgFrom=dark?'rgba(217,119,6,0.12)':'#fffbeb';urgTo=dark?'rgba(217,119,6,0.08)':'#fef3c7';urgText=dark?'#fbbf24':'#b45309';}
+  else{urgFrom=dark?'rgba(22,163,74,0.12)':'#f0fdf4';urgTo=dark?'rgba(22,163,74,0.08)':'#bbf7d0';urgText=dark?'#4ade80':'#15803d';}
+
+  var daysBadge = '';
+  if(file.closingDate){
+    if(d<0) daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">'+Math.abs(d)+'d overdue</span>';
+    else if(d===0) daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">Today!</span>';
+    else daysBadge='<span class="days-badge" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">'+d+'d left</span>';
+  }
+
+  var dupHtml = '';
+  if(isDuplicate) { var origCol = getColMeta(file.status); dupHtml = '<div class="dup-badge">⚡ Duplicate — also in '+origCol.label+'</div>'; }
+  else if(file.status==='col-req' && d<=7) { dupHtml = '<div class="dup-badge">⚡ Also in Closing Soon</div>'; }
+
+  var clerkRowHtml = '<div class="row-clerk">';
+  if(file.clerk && file.clerk.trim()) { clerkRowHtml += '<span class="clerk-assigned-badge">🗂 '+escH(file.clerk)+'<button class="clerk-unassign-x" data-action="unassign-clerk" data-id="'+file.id+'">✕</button></span>'; }
+  else { clerkRowHtml += '<button class="btn-assign-clerk" data-action="assign-clerk" data-id="'+file.id+'">👤 Assign Clerk ▾</button>'; }
+  clerkRowHtml += '</div>';
+
+  var countdownHtml = buildCountdownBadge(file);
+  var feeHtml = '';
+  if (file.fee && parseFloat(file.fee) > 0) { feeHtml = '<span class="fee-pill">Fee: ' + formatFeeNumber(file.fee) + '</span>'; }
+
+  var reqDatePillBg = dark ? 'rgba(13,115,119,0.15)' : 'linear-gradient(135deg,#e6f4f4,#b2d8d8)';
+  var reqDatePillColor = dark ? '#5eead4' : '#0b3d3f';
+
+  var expanded = file.expanded;
+  var expandedHtml = '';
+  if(expanded) {
+    expandedHtml = '<div class="row-e"><div class="notes-text">'+escH(file.notes)+'</div></div>';
+    if(!isDuplicate) expandedHtml += renderChecklistSection(file);
+    if(!isDuplicate) expandedHtml += renderActivitySection(file);
+    if(!isDuplicate) {
+      expandedHtml += '<div class="row-f"><button class="btn-move-card" data-action="move" data-id="'+file.id+'" data-status="'+file.status+'">📦 Move to…</button><button class="btn-email-card" data-action="email" data-id="'+file.id+'">📧 Draft Email</button><button class="btn-edit-card" data-action="edit" data-id="'+file.id+'">✏ Edit</button><button class="btn-copy-card" data-action="copy" data-id="'+file.id+'">📋 Copy</button><button class="btn-delete-card" data-action="delete" data-id="'+file.id+'">🗑 Delete</button></div>';
+    }
+  }
+
+  return '<div class="card" draggable="'+(isDuplicate?'false':'true')+'" data-file-id="'+file.id+'" data-dup="'+(isDuplicate?'1':'0')+'" style="border-left:5px solid '+col.accent+'">'
+    + dupHtml
+    + '<div class="row-a"><span class="file-num">'+escH(file.fileNumber)+'</span><span class="priority-badge '+priorityClass(file.priority)+'">'+escH(file.priority)+'</span></div>'
+    + '<div class="row-b"><span class="type-dot" style="background:'+getTypeColor(file.type)+'"></span><span class="type-badge" style="background:linear-gradient(135deg,'+tb.from+','+tb.to+');color:'+tb.text+'">'+escH(file.type)+'</span><span class="client-name">'+escH(file.clientName)+'</span></div>'
+    + countdownHtml
+    + '<div class="row-c"><span class="lawyer-line">👤 '+escH(file.lawyer)+'</span><span class="address-line">📍 '+escH(file.address)+'</span><span class="price-line">'+escH(file.price)+feeHtml+'</span></div>'
+    + clerkRowHtml
+    + '<div class="row-d"><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="date-pill" style="background:'+reqDatePillBg+';color:'+reqDatePillColor+'">REQ '+formatDate(file.reqDate)+'</span><span class="date-pill" style="background:linear-gradient(135deg,'+urgFrom+','+urgTo+');color:'+urgText+'">CLOSE '+formatDate(file.closingDate)+'</span>'+daysBadge+'</div><button class="btn-toggle" data-action="toggle" data-id="'+file.id+'">'+(expanded?'▲ Less':'▼ More')+'</button></div>'
+    + expandedHtml
+    + '</div>';
+}
+
+function renderBoard() {
+  var searchEl = document.getElementById('filter-search-kss26');
+  var lawyerEl = document.getElementById('filter-lawyer-kss27');
+  var typeEl = document.getElementById('filter-type-kss28');
+  var priorityEl = document.getElementById('filter-priority-kss29');
+  var clerkEl = document.getElementById('filter-clerk-kss50');
+  var search = searchEl ? searchEl.value.toLowerCase() : '';
+  var lawyer = lawyerEl ? lawyerEl.value : '';
+  var type = typeEl ? typeEl.value : '';
+  var priority = priorityEl ? priorityEl.value : '';
+  var clerkFilter = clerkEl ? clerkEl.value : '';
+
+  var filtered = appData.files.filter(function(f){
+    if(search && f.fileNumber.toLowerCase().indexOf(search)===-1 && f.clientName.toLowerCase().indexOf(search)===-1) return false;
+    if(lawyer && f.lawyer !== lawyer) return false;
+    if(type && f.type !== type) return false;
+    if(priority && f.priority !== priority) return false;
+    if(clerkFilter) { if(clerkFilter === '__unassigned__') { if(f.clerk && f.clerk.trim()) return false; } else { if(f.clerk !== clerkFilter) return false; } }
+    return true;
+  });
+
+  var boardEl = document.getElementById('board-kss9');
+  if (!boardEl) return;
+  var html = '';
+  COLUMNS.forEach(function(col){
+    var colFiles = filtered.filter(function(f){ return f.status === col.id; });
+    var dupFiles = [];
+    if(col.id === 'col-closing') { filtered.forEach(function(f){ if(f.status === 'col-req' && daysUntil(f.closingDate) <= 7) dupFiles.push(f); }); }
+    colFiles.sort(function(a,b){ if(!a.closingDate) return 1; if(!b.closingDate) return -1; return new Date(b.closingDate) - new Date(a.closingDate); });
+    dupFiles.sort(function(a,b){ if(!a.closingDate) return 1; if(!b.closingDate) return -1; return new Date(b.closingDate) - new Date(a.closingDate); });
+    var totalCount = colFiles.length + dupFiles.length;
+    html += '<div class="kanban-col"><div class="col-header" style="background:'+col.grad+'"><span class="col-label">'+col.label+'</span><span class="col-count">'+totalCount+'</span></div>';
+    html += '<div class="col-cards" data-col="'+col.id+'">';
+    colFiles.forEach(function(f){ html += renderCard(f, col.id, false); });
+    dupFiles.forEach(function(f){ html += renderCard(f, col.id, true); });
+    html += '</div></div>';
+  });
+  boardEl.innerHTML = html;
+  bindCardEvents();
+  bindDragDrop();
+}
+
+var activeClerkDropdown = null;
+function closeClerkDropdown() { if(activeClerkDropdown && activeClerkDropdown.parentNode) activeClerkDropdown.parentNode.removeChild(activeClerkDropdown); activeClerkDropdown = null; }
+
+function showClerkDropdown(btnEl, fileId) {
+  closeClerkDropdown();
+  var dropdown = document.createElement('div'); dropdown.className = 'clerk-dropdown';
+  appData.clerks.forEach(function(clerk) {
+    var item = document.createElement('button'); item.className = 'clerk-dropdown-item'; item.textContent = clerk;
+    item.addEventListener('click', function(e) { e.stopPropagation(); var file = appData.files.find(function(f){ return f.id === fileId; }); if(file) { file.clerk = clerk; logActivity(fileId, '👤 Clerk assigned: ' + clerk); saveData(); renderBoard(); } closeClerkDropdown(); });
+    dropdown.appendChild(item);
+  });
+  var rowClerk = btnEl.closest('.row-clerk');
+  if(rowClerk) rowClerk.appendChild(dropdown);
+  activeClerkDropdown = dropdown;
+}
+
+function bindCardEvents() {
+  document.querySelectorAll('[data-action="toggle"]').forEach(function(btn){ btn.addEventListener('click', function(e){ e.stopPropagation(); toggleExpand(this.getAttribute('data-id')); }); });
+  document.querySelectorAll('[data-action="edit"]').forEach(function(btn){ btn.addEventListener('click', function(e){ e.stopPropagation(); openEditModal(this.getAttribute('data-id')); }); });
+  document.querySelectorAll('[data-action="copy"]').forEach(function(btn){ btn.addEventListener('click', function(e){ e.stopPropagation(); copyCard(this.getAttribute('data-id')); }); });
+  document.querySelectorAll('[data-action="delete"]').forEach(function(btn){ btn.addEventListener('click', function(e){ e.stopPropagation(); deleteFile(this.getAttribute('data-id')); }); });
+  document.querySelectorAll('[data-action="move"]').forEach(function(btn){ btn.addEventListener('click', function(e){ e.stopPropagation(); showMoveDropdown(this, this.getAttribute('data-id'), this.getAttribute('data-status')); }); });
+  document.querySelectorAll('[data-action="email"]').forEach(function(btn){ btn.addEventListener('click', function(e){ e.stopPropagation(); openEmailModal(this.getAttribute('data-id')); }); });
+  document.querySelectorAll('[data-action="assign-clerk"]').forEach(function(btn){ btn.addEventListener('click', function(e){ e.stopPropagation(); showClerkDropdown(this, this.getAttribute('data-id')); }); });
+  document.querySelectorAll('[data-action="unassign-clerk"]').forEach(function(btn){ btn.addEventListener('click', function(e){ e.stopPropagation(); var fid = btn.getAttribute('data-id'); var file = appData.files.find(function(f){ return f.id === fid; }); if(file) { file.clerk = ''; logActivity(fid, '👤 Clerk unassigned'); saveData(); renderBoard(); } }); });
+  document.querySelectorAll('[data-action="check-item"]').forEach(function(el){ el.addEventListener('click', function(e){ e.stopPropagation(); var fid = this.getAttribute('data-file-id'), iid = this.getAttribute('data-item-id'); var file = appData.files.find(function(f){ return f.id === fid; }); if(file && file.checklist) { var item = file.checklist.find(function(c){ return c.id === iid; }); if(item) { item.done = !item.done; logActivity(fid, item.done ? ('✅ Checked: ' + item.text) : ('↩️ Unchecked: ' + item.text)); saveData(); renderBoard(); } } }); });
+  document.querySelectorAll('[data-action="del-check-item"]').forEach(function(el){ el.addEventListener('click', function(e){ e.stopPropagation(); var fid = this.getAttribute('data-file-id'), iid = this.getAttribute('data-item-id'); var file = appData.files.find(function(f){ return f.id === fid; }); if(file && file.checklist) { file.checklist = file.checklist.filter(function(c){ return c.id !== iid; }); saveData(); renderBoard(); } }); });
+  document.querySelectorAll('[data-action="add-check-item"]').forEach(function(el){ el.addEventListener('click', function(e){ e.stopPropagation(); var fid = this.getAttribute('data-file-id'); var input = document.querySelector('.checklist-add-input[data-file-id="'+fid+'"]'); if(!input) return; var text = input.value.trim(); if(!text) return; var file = appData.files.find(function(f){ return f.id === fid; }); if(file) { if(!file.checklist) file.checklist = []; file.checklist.push({ id: String(Date.now()) + '-' + Math.random().toString(36).substr(2,9), text: text, done: false }); saveData(); renderBoard(); } }); });
+  document.querySelectorAll('.checklist-add-input').forEach(function(inp){ inp.addEventListener('keydown', function(e){ if(e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); var btn = document.querySelector('[data-action="add-check-item"][data-file-id="'+this.getAttribute('data-file-id')+'"]'); if(btn) btn.click(); } }); inp.addEventListener('click', function(e){ e.stopPropagation(); }); });
+  document.querySelectorAll('[data-action="toggle-activity"]').forEach(function(el){ el.addEventListener('click', function(e){ e.stopPropagation(); var fid = this.getAttribute('data-file-id'); var file = appData.files.find(function(f){ return f.id === fid; }); if(file) { file._activityOpen = !file._activityOpen; renderBoard(); } }); });
+}
+
+var activeMoveDropdown = null;
+function closeMoveDropdown() { if (activeMoveDropdown && activeMoveDropdown.parentNode) activeMoveDropdown.parentNode.removeChild(activeMoveDropdown); activeMoveDropdown = null; }
+
+function showMoveDropdown(btnEl, fileId, currentStatus) {
+  closeMoveDropdown();
+  var dropdown = document.createElement('div'); dropdown.className = 'move-dropdown';
+  COLUMNS.forEach(function(col) {
+    if (col.id === currentStatus) return;
+    var item = document.createElement('button'); item.className = 'move-dropdown-item'; item.textContent = col.label;
+    item.addEventListener('click', function(e) { e.stopPropagation(); var file = appData.files.find(function(f){ return f.id === fileId; }); if (file) { file.status = col.id; logActivity(fileId, '📦 Moved to ' + col.label); saveData(); renderAll(); } closeMoveDropdown(); });
+    dropdown.appendChild(item);
+  });
+  var rowF = btnEl.closest('.row-f');
+  if (rowF) rowF.appendChild(dropdown);
+  activeMoveDropdown = dropdown;
+}
+
+function bindDragDrop() {
+  document.querySelectorAll('.card[draggable="true"]').forEach(function(card){
+    card.addEventListener('dragstart', function(e){ dragFileId = this.getAttribute('data-file-id'); this.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', dragFileId); });
+    card.addEventListener('dragend', function(){ this.classList.remove('dragging'); dragFileId = null; });
+  });
+  document.querySelectorAll('.col-cards').forEach(function(col){
+    col.addEventListener('dragover', function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; this.classList.add('drag-over'); });
+    col.addEventListener('dragleave', function(){ this.classList.remove('drag-over'); });
+    col.addEventListener('drop', function(e){ e.preventDefault(); this.classList.remove('drag-over'); var fileId = e.dataTransfer.getData('text/plain') || dragFileId; var newStatus = this.getAttribute('data-col'); if(fileId && newStatus) { var file = appData.files.find(function(f){ return f.id === fileId; }); if(file && file.status !== newStatus) { var colMeta = getColMeta(newStatus); file.status = newStatus; logActivity(fileId, '📦 Moved to ' + colMeta.label); saveData(); renderAll(); } } });
+  });
+}
+
+function toggleExpand(id) { var f = appData.files.find(function(x){ return x.id === id; }); if(f) { f.expanded = !f.expanded; saveData(); renderBoard(); } }
+function expandAll() { appData.files.forEach(function(f){ f.expanded = true; }); saveData(); renderBoard(); }
+function collapseAll() { appData.files.forEach(function(f){ f.expanded = false; }); saveData(); renderBoard(); }
+
+/* ═══════════════════════════════════════════════════════
+   MODAL
+   ═══════════════════════════════════════════════════════ */
+function openAddModal() {
+  editingId = null;
+  var el = document.getElementById('modal-title-kss34'); if(el) el.textContent = 'Add New File';
+  var fn = document.getElementById('m-filenum-kss35'); if(fn) fn.value = 'KSS-' + String(appData.files.length + 1).padStart(5, '0');
+  var fields = ['m-client-kss36','m-address-kss37','m-price-kss41','m-fee-kss','m-reqdate-kss42','m-closedate-kss43','m-notes-kss46'];
+  fields.forEach(function(id){ var e = document.getElementById(id); if(e) e.value = ''; });
+  var ts = document.getElementById('m-type-kss38'); if(ts) ts.value = 'Purchase';
+  var ls = document.getElementById('m-lawyer-kss39'); if(ls) ls.value = appData.lawyers[0];
+  var cs = document.getElementById('m-clerk-kss40'); if(cs) cs.value = '';
+  var ss = document.getElementById('m-status-kss44'); if(ss) ss.value = 'col-new';
+  var ps = document.getElementById('m-priority-kss45'); if(ps) ps.value = 'Normal';
+  var modal = document.getElementById('file-modal-kss10'); if(modal) modal.style.display = 'flex';
+  closeHamburger();
+}
+
+function openEditModal(id) {
+  var f = appData.files.find(function(x){ return x.id === id; }); if(!f) return;
+  editingId = id;
+  var el = document.getElementById('modal-title-kss34'); if(el) el.textContent = 'Edit File';
+  var map = {'m-filenum-kss35':'fileNumber','m-client-kss36':'clientName','m-address-kss37':'address','m-type-kss38':'type','m-lawyer-kss39':'lawyer','m-price-kss41':'price','m-reqdate-kss42':'reqDate','m-closedate-kss43':'closingDate','m-status-kss44':'status','m-priority-kss45':'priority','m-notes-kss46':'notes'};
+  Object.keys(map).forEach(function(elId){ var e = document.getElementById(elId); if(e) e.value = f[map[elId]] || ''; });
+  var clerkEl = document.getElementById('m-clerk-kss40'); if(clerkEl) clerkEl.value = f.clerk || '';
+  var feeEl = document.getElementById('m-fee-kss'); if(feeEl) feeEl.value = f.fee || '';
+  var modal = document.getElementById('file-modal-kss10'); if(modal) modal.style.display = 'flex';
+}
+
+function closeModal() { var modal = document.getElementById('file-modal-kss10'); if(modal) modal.style.display = 'none'; editingId = null; }
+
+function saveFile() {
+  var clientEl = document.getElementById('m-client-kss36');
+  var client = clientEl ? clientEl.value.trim() : '';
+  if(!client) { alert('Client name is required.'); return; }
+  var typeEl = document.getElementById('m-type-kss38');
+  var newType = typeEl ? typeEl.value : 'Purchase';
+  var data = {
+    fileNumber: (document.getElementById('m-filenum-kss35') || {}).value || '',
+    clientName: client,
+    address: (document.getElementById('m-address-kss37') || {}).value || '',
+    type: newType,
+    lawyer: (document.getElementById('m-lawyer-kss39') || {}).value || '',
+    clerk: (document.getElementById('m-clerk-kss40') || {}).value || '',
+    price: (document.getElementById('m-price-kss41') || {}).value || '',
+    fee: (document.getElementById('m-fee-kss') || {}).value || '',
+    reqDate: (document.getElementById('m-reqdate-kss42') || {}).value || '',
+    closingDate: (document.getElementById('m-closedate-kss43') || {}).value || '',
+    status: (document.getElementById('m-status-kss44') || {}).value || 'col-new',
+    priority: (document.getElementById('m-priority-kss45') || {}).value || 'Normal',
+    notes: (document.getElementById('m-notes-kss46') || {}).value || '',
+    expanded: false
+  };
+  if(editingId) {
+    var f = appData.files.find(function(x){ return x.id === editingId; });
+    if(f) {
+      var oldType = f.type; var oldNotes = f.notes;
+      Object.assign(f, data);
+      if (!f.checklist) f.checklist = getDefaultChecklist(newType);
+      if (!f.activity) f.activity = [];
+      if (oldType !== newType) { if (confirm('File type changed from ' + oldType + ' to ' + newType + '. Reset checklist to new template?')) { f.checklist = getDefaultChecklist(newType); } }
+      logActivity(editingId, '✏️ File details updated');
+      if (oldNotes !== data.notes) logActivity(editingId, '📝 Note updated');
+    }
+  } else {
+    data.id = String(Date.now());
+    data.checklist = getDefaultChecklist(newType);
+    data.activity = [{ ts: new Date().toISOString(), msg: '📁 File created' }];
+    appData.files.push(data);
+  }
+  saveData(); renderAll(); closeModal();
+}
+
+function deleteFile(id) { if(!confirm('Delete this file?')) return; appData.files = appData.files.filter(function(f){ return f.id !== id; }); saveData(); renderAll(); }
+
+function copyCard(id) {
+  var f = appData.files.find(function(x){ return x.id === id; }); if(!f) return;
+  var c = JSON.parse(JSON.stringify(f));
+  c.id = String(Date.now()); c.fileNumber = f.fileNumber + ' (Copy)'; c.expanded = false;
+  c.activity = [{ ts: new Date().toISOString(), msg: '📁 File created (copied from ' + f.fileNumber + ')' }];
+  appData.files.push(c); saveData(); renderAll();
+}
+
+function showAlerts() {
+  var files = appData.files.filter(function(f){ return daysUntil(f.closingDate) <= 7 && f.status !== 'col-closed'; });
+  var msg;
+  if(files.length) { msg = '⚠️ URGENT — Closing within 7 days:\n\n'; files.forEach(function(f){ var d = daysUntil(f.closingDate); msg += f.fileNumber + ' | ' + f.clientName + ' | Closes: ' + formatDate(f.closingDate) + ' (' + (d<0 ? Math.abs(d)+'d overdue' : d+'d left') + ')\n'; }); }
+  else { msg = '✅ No urgent closings in the next 7 days.'; }
+  alert(msg); closeHamburger();
+}
+
+function backupData() {
+  var blob = new Blob([JSON.stringify(appData, null, 2)], {type: 'application/json'});
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'kss-backup-' + new Date().toISOString().slice(0,10) + '.json'; a.click();
+  closeHamburger();
+}
+
+function formatPriceToString(price) { if (typeof price === 'string' && price.indexOf('$') === 0) return price; if (typeof price === 'number') return '$' + price.toLocaleString('en-US'); if (typeof price === 'string') { var num = parseFloat(price.replace(/[^0-9.]/g, '')); if (!isNaN(num)) return '$' + num.toLocaleString('en-US'); return price; } return '$0'; }
+
+function normalizeFile(f) {
+  var isOldFormat = f.hasOwnProperty('fileNo') || f.hasOwnProperty('property') || f.hasOwnProperty('lawyerName') || f.hasOwnProperty('requisitionDate') || f.hasOwnProperty('statusOverride');
+  var result;
+  if (isOldFormat) { var closingDate = f.closingDate || ''; result = { id: f.id || String(Date.now() + Math.random()), fileNumber: f.fileNo || f.fileNumber || '', clientName: f.clientName || '', address: f.property || f.address || '', type: f.type || 'Purchase', price: formatPriceToString(f.price), fee: f.fee || '', lawyer: f.lawyerName || f.lawyer || '', clerk: f.clerk || '', reqDate: f.requisitionDate || f.reqDate || '', closingDate: closingDate, status: f.statusOverride ? mapOldStatusToNew(f.statusOverride, closingDate) : (f.status || 'col-new'), priority: f.priority || 'Normal', notes: f.notes || '', expanded: false }; }
+  else { result = { id: f.id || String(Date.now() + Math.random()), fileNumber: f.fileNumber || '', clientName: f.clientName || '', address: f.address || '', type: f.type || 'Purchase', price: f.price || '$0', fee: f.fee || '', lawyer: f.lawyer || '', clerk: f.clerk || '', reqDate: f.reqDate || '', closingDate: f.closingDate || '', status: f.status || 'col-new', priority: f.priority || 'Normal', notes: f.notes || '', expanded: false }; }
+  result.checklist = f.checklist || getDefaultChecklist(result.type);
+  result.activity = f.activity || [{ ts: new Date().toISOString(), msg: '📁 File created' }];
+  return result;
+}
+
+function mapOldStatusToNew(statusOverride, closingDate) {
+  if (!statusOverride || statusOverride === 'auto') { if (!closingDate) return 'col-new'; var d = daysUntil(closingDate); if (d < 0) return 'col-reporting'; if (d <= 7) return 'col-closing'; if (d <= 30) return 'col-req'; return 'col-new'; }
+  var map = {'closed':'col-closed','overdue':'col-reporting','req':'col-req','open':'col-new','closing':'col-closing'};
+  return map[statusOverride.toLowerCase()] || 'col-new';
+}
+
+function restoreData() {
+  var inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json';
+  inp.addEventListener('change', function(e){
+    var r = new FileReader();
+    r.addEventListener('load', function(ev){
+      try {
+        var d = JSON.parse(ev.target.result);
+        if(d.files && d.lawyers && d.clerks) { d.files = d.files.map(normalizeFile); appData = d; saveData(); renderAll(); alert('✅ Restored ' + d.files.length + ' files!'); }
+        else if (Array.isArray(d)) { var normalized = d.map(normalizeFile); appData.files = normalized; saveData(); renderAll(); alert('✅ Restored ' + normalized.length + ' files from legacy format!'); }
+        else if (d.matters && Array.isArray(d.matters)) { var normalized2 = d.matters.map(normalizeFile); appData.files = normalized2; saveData(); renderAll(); alert('✅ Restored ' + normalized2.length + ' files from legacy format!'); }
+        else { alert('Invalid file format.'); }
+      } catch(ex) { alert('Error reading file: ' + ex.message); }
+    });
+    r.readAsText(e.target.files[0]);
+  });
+  inp.click(); closeHamburger();
+}
+
+function exportCSV() {
+  var headers = ['File No','Client Name','Type','Address','Price','Legal Fee','Lawyer','Clerk','Req Date','Closing Date','Status','Priority','Notes'];
+  var statusMap = {'col-new':'New/Open','col-req':'Requisition','col-closing':'Closing Soon','col-reporting':'Reporting','col-closed':'Closed'};
+  var rows = appData.files.map(function(f) { return [f.fileNumber||'',f.clientName||'',f.type||'',f.address||'',f.price||'',f.fee ? '$'+Number(f.fee).toLocaleString('en-US') : '',f.lawyer||'',f.clerk||'',f.reqDate||'',f.closingDate||'',statusMap[f.status]||f.status,f.priority||'',(f.notes||'').replace(/\n/g,' ')]; });
+  var csv = [headers].concat(rows).map(function(r){ return r.map(function(c){ return '"'+(String(c).replace(/"/g,'""'))+'"'; }).join(','); }).join('\n');
+  var blob = new Blob([csv], {type:'text/csv'}); var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url; a.download = 'KSS-Matterkey-'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  showToast('📥 CSV exported!'); closeHamburger();
+}
+
+function exportICS() {
+  var lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//KSS Matterkey//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  appData.files.forEach(function(f) { if (!f.closingDate || f.status === 'col-closed') return; var d = f.closingDate.replace(/-/g,''); lines.push('BEGIN:VEVENT','UID:'+f.id+'@kss-matterkey','DTSTART;VALUE=DATE:'+d,'DTEND;VALUE=DATE:'+d,'SUMMARY:CLOSING: '+(f.clientName||'')+' ('+(f.fileNumber||'')+')','DESCRIPTION:Type: '+(f.type||'')+' | Lawyer: '+(f.lawyer||'')+' | Price: '+(f.price||''),'END:VEVENT'); });
+  lines.push('END:VCALENDAR');
+  var blob = new Blob([lines.join('\r\n')], {type:'text/calendar'}); var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url; a.download = 'KSS-Closings.ics';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  showToast('📅 Calendar file exported!'); closeHamburger();
+}
+
+/* ═══════════════════════════════════════════════════════
+   EMAIL TEMPLATES
+   ═══════════════════════════════════════════════════════ */
+function openEmailModal(fileId) {
+  emailFileId = fileId;
+  var file = appData.files.find(function(f){ return f.id === fileId; }); if (!file) return;
+  var titleEl = document.getElementById('email-modal-title'); if(titleEl) titleEl.textContent = '📧 Email Template';
+  var subEl = document.getElementById('email-modal-subtitle'); if(subEl) subEl.textContent = file.fileNumber + ' — ' + file.clientName;
+  document.querySelectorAll('.email-pill-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var ta = document.getElementById('email-body-textarea'); if(ta) ta.value = '';
+  var modal = document.getElementById('email-modal-kss'); if(modal) modal.style.display = 'flex';
+  var welcomePill = document.querySelector('.email-pill-btn[data-tpl="welcome"]');
+  if (welcomePill) { welcomePill.classList.add('active'); if(ta) ta.value = generateEmailTemplate('welcome', file); }
+}
+
+function closeEmailModal() { var modal = document.getElementById('email-modal-kss'); if(modal) modal.style.display = 'none'; emailFileId = null; }
+
+function generateEmailTemplate(templateKey, file) {
+  var cn = file.clientName || '[Client]'; var addr = file.address || '[Address]'; var fn = file.fileNumber || '[File #]';
+  var cd = file.closingDate ? formatDate(file.closingDate) : '[Closing Date]'; var tp = file.type || 'Purchase'; var lw = file.lawyer || '[Lawyer]'; var pr = file.price || '[Price]';
+  var fe = (file.fee && parseFloat(file.fee) > 0) ? formatFeeNumber(file.fee) : 'TBD';
+  switch(templateKey) {
+    case 'requisition': return 'Dear Counsel,\n\nRe: ' + cn + ' — ' + addr + '\nFile No: ' + fn + '\nClosing Date: ' + cd + '\n\nPlease accept this as our formal requisition on title. We request all outstanding matters be resolved prior to closing.\n\nKindly confirm receipt at your earliest convenience.\n\nYours truly,\n' + lw + '\nKSS Matterkey Inc.';
+    case 'soa': return 'Dear ' + cn + ',\n\nRe: ' + tp + ' of ' + addr + '\nFile No: ' + fn + '\nClosing Date: ' + cd + '\n\nPlease find attached your Statement of Account.\n\nTransaction Price: ' + pr + '\nLegal Fee: ' + fe + '\n\nPlease review and contact us with any questions.\n\nYours truly,\n' + lw + '\nKSS Matterkey Inc.';
+    case 'rff': return 'Dear ' + cn + ',\n\nRe: ' + tp + ' — ' + addr + '\nFile No: ' + fn + '\nClosing Date: ' + cd + '\n\nYour file is progressing well. Please arrange to have the balance of funds available by ' + cd + '. Contact our office to confirm wire transfer details.\n\nYours truly,\n' + lw + '\nKSS Matterkey Inc.';
+    case 'signing': return 'Dear ' + cn + ',\n\nRe: ' + tp + ' of ' + addr + '\nFile No: ' + fn + '\n\nPlease find enclosed your signing package. Review all documents carefully and sign where indicated. Return the signed package at your earliest convenience.\n\nYours truly,\n' + lw + '\nKSS Matterkey Inc.';
+    case 'reporting': return 'Dear ' + cn + ',\n\nRe: ' + tp + ' of ' + addr + '\nFile No: ' + fn + '\nClosing Date: ' + cd + '\n\nWe are pleased to confirm this transaction closed successfully on ' + cd + '. Enclosed is your reporting package with all registered documents and final Statement of Account.\n\nThank you for choosing KSS Matterkey Inc.\n\nYours truly,\n' + lw + '\nKSS Matterkey Inc.';
+    case 'welcome': return 'Dear ' + cn + ',\n\nThank you for choosing KSS Matterkey Inc.\n\nFile No: ' + fn + '\nMatter: ' + tp + '\nProperty: ' + addr + '\nClosing Date: ' + cd + '\nYour Lawyer: ' + lw + '\n\nWe will be in touch with next steps. Please feel free to contact us with any questions.\n\nYours truly,\n' + lw + '\nKSS Matterkey Inc.';
+    default: return '';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   DAILY BRIEFING
+   ═══════════════════════════════════════════════════════ */
+function getTodayStr() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+
+function formatFullDate(d) {
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+
+function buildBriefingContent() {
+  var now = new Date(); var dark = isDarkMode();
+  var closingToday = appData.files.filter(function(f){ return f.closingDate && daysUntil(f.closingDate) === 0 && f.status !== 'col-closed'; });
+  var closingWeek = appData.files.filter(function(f){ if (!f.closingDate || f.status === 'col-closed') return false; var d = daysUntil(f.closingDate); return d >= 1 && d <= 7; }).sort(function(a,b){ return daysUntil(a.closingDate) - daysUntil(b.closingDate); });
+  var reportingFiles = appData.files.filter(function(f){ return f.status==='col-reporting'; });
+  var hour = now.getHours(); var greeting = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening';
+  var html = '<div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;margin-top:8px"><span style="font-size:48px">☀️</span><div><div style="font-family:Playfair Display,serif;font-weight:700;font-size:22px;color:'+dmColor('#0b3d3f','#c8e8e8')+'">' + greeting + ', KSS Matterkey!</div><div style="font:500 13px Inter;color:'+dmColor('#7a9f9f','#5a8080')+'">' + formatFullDate(now) + '</div></div></div>';
+  html += '<div class="briefing-section-title">📌 Closing Today</div>';
+  if (closingToday.length === 0) { html += '<div style="font:600 12px Inter;color:#16a34a;padding:8px 0">✅ No closings today — enjoy your day!</div>'; }
+  else { closingToday.forEach(function(f){ var tb = getTypeBg(f.type); html += '<div class="briefing-file-card" style="background:'+(dark?'rgba(220,38,38,0.1)':'linear-gradient(90deg,#fee2e2,#fff5f5)')+';border-left:4px solid #dc2626"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:'+dmColor('#1a3030','#e0f0f0')+'">' + escH(f.clientName) + '</span></div><div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';margin-top:4px">' + escH(f.lawyer) + ' • ' + formatDate(f.closingDate) + '</div></div>'; }); }
+  html += '<div class="briefing-section-title">⚡ Closing This Week (next 7 days)</div>';
+  if (closingWeek.length === 0) { html += '<div style="font:600 12px Inter;color:#16a34a;padding:8px 0">✅ No urgent closings this week</div>'; }
+  else { closingWeek.forEach(function(f){ var d = daysUntil(f.closingDate); html += '<div class="briefing-file-card" style="background:'+(dark?'rgba(217,119,6,0.1)':'linear-gradient(90deg,#fff7ed,#fffbf0)')+';border-left:4px solid #d97706"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:'+dmColor('#1a3030','#e0f0f0')+';flex:1">' + escH(f.clientName) + '</span><span style="background:'+(dark?'rgba(217,119,6,0.2)':'#fef3c7')+';color:'+(dark?'#fbbf24':'#b45309')+';border-radius:8px;padding:2px 8px;font:700 10px Inter">in ' + d + ' day' + (d>1?'s':'') + '</span></div><div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';margin-top:4px">' + escH(f.type) + ' • ' + escH(f.lawyer) + '</div></div>'; }); }
+  html += '<div class="briefing-section-title">📋 Reporting Files Needing Attention</div>';
+  if (reportingFiles.length === 0) { html += '<div style="font:600 12px Inter;color:#16a34a;padding:8px 0">✅ All clear!</div>'; }
+  else { reportingFiles.forEach(function(f){ html += '<div class="briefing-file-card" style="background:'+(dark?'rgba(220,38,38,0.1)':'linear-gradient(90deg,#fef2f2,#fff9f9)')+';border-left:4px solid #dc2626"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border-radius:5px;padding:2px 6px;font:700 9px Inter">' + escH(f.fileNumber) + '</span><span style="font:700 13px Inter;color:'+dmColor('#1a3030','#e0f0f0')+'">' + escH(f.clientName) + '</span></div><div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';margin-top:4px">' + escH(f.type) + ' • ' + escH(f.lawyer) + '</div></div>'; }); }
+  html += '<div style="text-align:center;font:600 13px Inter;color:'+dmColor('#7a9f9f','#5a8080')+';margin-top:20px">Have a productive day! 💪</div>';
+  html += '<button class="briefing-dismiss-btn" id="briefing-dismiss-btn">Got it — Let\'s go!</button>';
+  return html;
+}
+
+function showBriefingModal() {
+  var modal = document.getElementById('briefing-modal-kss');
+  var content = document.getElementById('briefing-content');
+  if(content) content.innerHTML = buildBriefingContent();
+  if(modal) modal.style.display = 'flex';
+  var dismissBtn = document.getElementById('briefing-dismiss-btn');
+  if(dismissBtn) dismissBtn.addEventListener('click', function(){ localStorage.setItem('kss_briefing_date', getTodayStr()); if(modal) modal.style.display = 'none'; });
+}
+
+function closeBriefingModal() { var modal = document.getElementById('briefing-modal-kss'); if(modal) modal.style.display = 'none'; }
+
+function checkAutoBriefing() { var lastDate = localStorage.getItem('kss_briefing_date'); if (lastDate !== getTodayStr()) showBriefingModal(); }
+
+var APP_ICON_URI = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b3d3f'/%3E%3Crect x='14' y='10' width='36' height='44' rx='4' fill='white'/%3E%3Crect x='14' y='10' width='36' height='8' rx='4' fill='%230d7377'/%3E%3Ccircle cx='48' cy='46' r='10' fill='%23e8705a'/%3E%3Cpath d='M43 46 L46.5 49.5 L53 43' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E";
+
+function scheduleNotifications() {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  var closingToday = appData.files.filter(function(f){ return f.closingDate && daysUntil(f.closingDate) === 0 && f.status !== 'col-closed'; });
+  var closingTomorrow = appData.files.filter(function(f){ return f.closingDate && daysUntil(f.closingDate) === 1 && f.status !== 'col-closed'; });
+  var closingWeek = appData.files.filter(function(f){ if (!f.closingDate || f.status === 'col-closed') return false; var d = daysUntil(f.closingDate); return d >= 2 && d <= 7; });
+  if (closingToday.length > 0) { try { new Notification('🔴 KSS Matterkey — Closing TODAY', { body: closingToday.map(function(f){ return f.clientName; }).join(', '), icon: APP_ICON_URI }); } catch(e) {} }
+  if (closingTomorrow.length > 0) { try { new Notification('⚡ KSS Matterkey — Closing Tomorrow', { body: closingTomorrow.map(function(f){ return f.clientName; }).join(', '), icon: APP_ICON_URI }); } catch(e) {} }
+  if (closingWeek.length > 0) { try { new Notification('📋 ' + closingWeek.length + ' files closing this week', { body: 'Check your KSS Matterkey board', icon: APP_ICON_URI }); } catch(e) {} }
+}
+
+function requestNotificationPermission() {
+  if (!('Notification' in window)) { showToast('⚠️ Notifications not supported in this browser'); closeHamburger(); return; }
+  Notification.requestPermission().then(function(perm) { if (perm === 'granted') { localStorage.setItem('kss_notif_permission', 'granted'); showToast('🔔 Notifications enabled!'); scheduleNotifications(); } else { showToast('⚠️ Notification permission denied'); } });
+  closeHamburger();
+}
+
+function showShortcutsModal() { var modal = document.getElementById('shortcuts-modal-kss'); if(modal) modal.style.display = 'flex'; closeHamburger(); }
+function closeShortcutsModal() { var modal = document.getElementById('shortcuts-modal-kss'); if(modal) modal.style.display = 'none'; }
+
+function closeAllModals() {
+  closeModal(); closeBriefingModal(); closeEmailModal(); closeShortcutsModal(); closeClerkDropdown(); closeMoveDropdown();
+  var popup = document.getElementById('day-popup-kss11'); if (popup) popup.style.display = 'none';
+}
+
+/* ═══════════════════════════════════════════════════════
+   DASHBOARD
+   ═══════════════════════════════════════════════════════ */
+function renderDashboard() {
+  var files = appData.files; var total = files.length; var dark = isDarkMode();
+  var today = new Date(); today.setHours(0,0,0,0);
+  var weekEnd = new Date(today); weekEnd.setDate(weekEnd.getDate() + 7);
+  var closingWeek = files.filter(function(f){ if(!f.closingDate || f.status==='col-closed') return false; var d = new Date(f.closingDate+'T00:00:00'); return d >= today && d <= weekEnd; }).length;
+  var reporting = files.filter(function(f){ return f.status==='col-reporting'; }).length;
+  var urgent = files.filter(function(f){ return f.priority==='Urgent' && f.status!=='col-closed'; }).length;
+  var currentMonth = today.getMonth(); var currentYear = today.getFullYear();
+  var closedThisMonth = files.filter(function(f){ if(f.status !== 'col-closed' || !f.closingDate) return false; var d = new Date(f.closingDate+'T00:00:00'); return d.getMonth() === currentMonth && d.getFullYear() === currentYear; }).length;
+
+  var cardBg = dark ? '#1c2e2e' : '#fff';
+  var textPrimary = dmColor('#1a3030','#e0f0f0');
+  var textMuted = dmColor('#7a9f9f','#5a8080');
+  var textHeading = dmColor('#0b3d3f','#c8e8e8');
+  var barTrackBg = dark ? '#2a4040' : '#f1f5f9';
+  var subtleBg = dark ? '#192b2b' : '#f8fdfd';
+
+  var kpis = [
+    {emoji:'📁',num:total,label:'Total Files',bar:'var(--grad-teal)',sub:'all matters'},
+    {emoji:'⚡',num:closingWeek,label:'Closing ≤7 Days',bar:'var(--grad-coral)',sub:'urgent this week'},
+    {emoji:'📋',num:reporting,label:'In Reporting',bar:'var(--grad-red)',sub:'need attention'},
+    {emoji:'🔴',num:urgent,label:'Urgent Priority',bar:'var(--grad-amber)',sub:'high priority'},
+    {emoji:'✅',num:closedThisMonth,label:'Closed This Month',bar:'var(--grad-green)',sub:'this month'}
+  ];
+  var kpiHtml = '';
+  kpis.forEach(function(k){ kpiHtml += '<div class="dash-kpi-card" style="background:'+cardBg+'"><div class="top-bar" style="background:'+k.bar+'"></div><span class="kpi-emoji">'+k.emoji+'</span><div class="kpi-num" style="color:'+textPrimary+'">'+k.num+'</div><div class="kpi-label" style="color:'+textMuted+'">'+k.label+'</div><div class="kpi-sub" style="color:'+textMuted+'">'+k.sub+'</div></div>'; });
+  var kpiContainer = document.getElementById('dash-kpi-container');
+  if(kpiContainer) kpiContainer.innerHTML = kpiHtml;
+
+  // Revenue
+  var totalRevenue = 0, monthRevenue = 0, feeCount = 0;
+  var lawyerRevenue = {};
+  appData.lawyers.forEach(function(l){ lawyerRevenue[l] = 0; });
+  files.forEach(function(f){ var fee = parseFloat(f.fee); if (!isNaN(fee) && fee > 0) { totalRevenue += fee; feeCount++; if (lawyerRevenue[f.lawyer] !== undefined) lawyerRevenue[f.lawyer] += fee; if (f.closingDate) { var cd = new Date(f.closingDate + 'T00:00:00'); if (cd.getMonth() === currentMonth && cd.getFullYear() === currentYear) monthRevenue += fee; } } });
+  var avgFee = feeCount > 0 ? Math.round(totalRevenue / feeCount) : 0;
+  var revHtml = '<div style="background:'+cardBg+';border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba('+(dark?'0,0,0,0.35':'11,61,63,0.09')+');border-top:5px solid #16a34a;margin-bottom:22px">';
+  revHtml += '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:'+textHeading+';margin:0 0 20px">💰 Revenue Overview</h3>';
+  revHtml += '<div class="dash-revenue-cols" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:24px">';
+  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:'+textPrimary+'">$' + totalRevenue.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:'+textMuted+';text-transform:uppercase;letter-spacing:1px;margin-top:4px">Total Fees Tracked</div></div>';
+  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:#e8705a">$' + monthRevenue.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:'+textMuted+';text-transform:uppercase;letter-spacing:1px;margin-top:4px">This Month</div></div>';
+  revHtml += '<div style="text-align:center"><div style="font-family:Playfair Display,serif;font-weight:700;font-size:36px;color:#0d7377">$' + avgFee.toLocaleString('en-US') + '</div><div style="font:600 11px Inter;color:'+textMuted+';text-transform:uppercase;letter-spacing:1px;margin-top:4px">Average Per File</div></div>';
+  revHtml += '</div>';
+  var revLawyerArr = appData.lawyers.slice().sort(function(a,b){ return lawyerRevenue[b] - lawyerRevenue[a]; });
+  var maxRevL = Math.max.apply(null, revLawyerArr.map(function(l){ return lawyerRevenue[l]; })) || 1;
+  revLawyerArr.forEach(function(l){ var rev = lawyerRevenue[l]; var pct = Math.round((rev/maxRevL)*100); var showInside = pct >= 20; var label = '$' + rev.toLocaleString('en-US'); revHtml += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span class="revenue-bar-label" style="width:200px;font:600 13px Inter;color:'+textPrimary+';text-align:right;flex-shrink:0">'+escH(l)+'</span><div style="flex:1;height:28px;background:'+barTrackBg+';border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center"><div class="dash-rev-bar-fill" style="height:100%;border-radius:8px;background:var(--grad-green);width:0%;transition:width 1s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:10px" data-target-width="'+pct+'%">'+(showInside?'<span style="font:700 12px Inter;color:#fff">'+label+'</span>':'')+'</div>'+(!showInside?'<span style="font:700 12px Inter;color:#16a34a;margin-left:8px">'+label+'</span>':'')+'</div></div>'; });
+  revHtml += '</div>';
+  var revContainer = document.getElementById('dash-revenue-container');
+  if(revContainer) revContainer.innerHTML = revHtml;
+
+  // Lawyer bar chart
+  var lawyerCounts = {};
+  appData.lawyers.forEach(function(l){ lawyerCounts[l] = 0; });
+  files.forEach(function(f){ if(lawyerCounts[f.lawyer] !== undefined) lawyerCounts[f.lawyer]++; });
+  var lawyerArr = appData.lawyers.slice().sort(function(a,b){ return lawyerCounts[b] - lawyerCounts[a]; });
+  var maxL = Math.max.apply(null, lawyerArr.map(function(l){ return lawyerCounts[l]; })) || 1;
+  var barHtml = '';
+  lawyerArr.forEach(function(l){ var c = lawyerCounts[l]; var pct = Math.round((c/maxL)*100); var showInside = pct >= 15; barHtml += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="width:200px;font:600 13px Inter;color:'+textPrimary+';text-align:right;flex-shrink:0">'+escH(l)+'</span><div style="flex:1;height:28px;background:'+barTrackBg+';border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center"><div class="dash-bar-fill" style="height:100%;border-radius:8px;background:var(--grad-teal);width:0%;transition:width 1s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:10px" data-target-width="'+pct+'%">'+(showInside?'<span style="font:700 12px Inter;color:#fff">'+c+'</span>':'')+'</div>'+(!showInside?'<span style="font:700 12px Inter;color:#0d7377;margin-left:8px">'+c+'</span>':'')+'</div></div>'; });
+  var row2 = document.getElementById('dash-row2-container');
+  if(row2) row2.innerHTML = '<div style="background:'+cardBg+';border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba('+(dark?'0,0,0,0.35':'11,61,63,0.09')+');margin-bottom:22px;border-top:5px solid #0d7377"><h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:'+textHeading+';margin:0 0 20px">⚖️ Files per Lawyer</h3>' + barHtml + '</div>';
+
+  setTimeout(function(){ document.querySelectorAll('.dash-bar-fill, .dash-rev-bar-fill').forEach(function(bar){ bar.style.width = bar.getAttribute('data-target-width'); }); }, 100);
+
+  // Donut
+  var typeCounts = {Purchase:0,Sale:0,Refinance:0,Transfer:0};
+  files.forEach(function(f){ if(typeCounts[f.type] !== undefined) typeCounts[f.type]++; });
+  var typeTotal = total || 1;
+  var typeColors = {Purchase:'#0d7377',Sale:'#e8705a',Refinance:'#d97706',Transfer:'#14a09a'};
+  var typeArr = ['Purchase','Sale','Refinance','Transfer'];
+  var r = 70, strokeW = 40, cx = 100, cy = 100; var circumference = 2 * Math.PI * r;
+  var svgParts = '<svg width="200" height="200" viewBox="0 0 200 200" style="flex-shrink:0"><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+barTrackBg+'" stroke-width="'+strokeW+'"/>';
+  var cumOffset = 0;
+  typeArr.forEach(function(t){ var count = typeCounts[t]; if(count === 0) return; var fraction = count / typeTotal; var segLen = fraction * circumference; svgParts += '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+typeColors[t]+'" stroke-width="'+strokeW+'" stroke-dasharray="'+segLen+' '+circumference+'" stroke-dashoffset="'+ (-cumOffset) +'" transform="rotate(-90 '+cx+' '+cy+')" style="transition:stroke-dasharray 0.8s ease"/>'; cumOffset += segLen; });
+  svgParts += '<text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-family="Playfair Display,serif" font-size="28" font-weight="700" fill="'+textPrimary+'" dy="-4">'+total+'</text><text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="'+textMuted+'" dy="18">Files</text></svg>';
+  var legendHtml = '';
+  typeArr.forEach(function(t){ var c = typeCounts[t]; var pct = Math.round((c/typeTotal)*100); legendHtml += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="border-radius:50%;width:12px;height:12px;background:'+typeColors[t]+';flex-shrink:0"></span><span style="font:600 13px Inter;color:'+textPrimary+';flex:1">'+t+'</span><span style="font:700 13px Inter;color:#0d7377">'+c+'</span><span style="font:500 11px Inter;color:'+textMuted+';margin-left:4px">'+pct+'%</span></div>'; });
+
+  var row3 = document.getElementById('dash-row3-container');
+  if(row3) row3.innerHTML = '<div style="background:'+cardBg+';border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba('+(dark?'0,0,0,0.35':'11,61,63,0.09')+');border-top:5px solid #e8705a;margin-bottom:22px"><h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:'+textHeading+';margin:0 0 16px">🏷️ By File Type</h3><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' + svgParts + '<div style="flex:1;min-width:140px">' + legendHtml + '</div></div></div>';
+
+  // Pipeline snapshot
+  var shortLabels = {'col-new':'New','col-req':'Req','col-closing':'Closing','col-reporting':'Report','col-closed':'Closed'};
+  var kanbanMiniHtml = '<div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch">';
+  COLUMNS.forEach(function(col){
+    var colFiles = files.filter(function(f){ return f.status === col.id; });
+    colFiles.sort(function(a,b){ if(!a.closingDate) return 1; if(!b.closingDate) return -1; return new Date(b.closingDate) - new Date(a.closingDate); });
+    kanbanMiniHtml += '<div style="min-width:130px;border-radius:12px;overflow:hidden;flex-shrink:0;flex:1">';
+    kanbanMiniHtml += '<div style="padding:8px 12px;font:700 10px Inter;color:#fff;letter-spacing:1.5px;text-transform:uppercase;background:'+col.grad+';display:flex;align-items:center;justify-content:space-between">'+shortLabels[col.id]+'<span style="background:rgba(255,255,255,0.25);border-radius:10px;padding:1px 7px;font:700 10px Inter">'+colFiles.length+'</span></div>';
+    kanbanMiniHtml += '<div style="background:'+subtleBg+';padding:8px;min-height:100px">';
+    colFiles.slice(0,3).forEach(function(f){ kanbanMiniHtml += '<div style="background:'+cardBg+';border-radius:7px;padding:7px 9px;margin-bottom:6px;border-left:3px solid '+col.accent+';box-shadow:0 1px 6px rgba('+(dark?'0,0,0,0.2':'11,61,63,0.07')+')"><div style="font:700 9px Inter;color:'+textMuted+'">'+escH(f.fileNumber)+'</div><div style="font:600 11px Inter;color:'+textPrimary+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px">'+escH(f.clientName)+'</div></div>'; });
+    if(colFiles.length > 3) kanbanMiniHtml += '<div style="font:600 9px Inter;color:'+textMuted+';text-align:center;padding:4px">+' + (colFiles.length - 3) + ' more</div>';
+    kanbanMiniHtml += '</div></div>';
+  });
+  kanbanMiniHtml += '</div>';
+
+  var row4 = document.getElementById('dash-row4-container');
+  if(row4) row4.innerHTML = '<div style="background:'+cardBg+';border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba('+(dark?'0,0,0,0.35':'11,61,63,0.09')+');border-top:5px solid #475569"><h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:18px;color:'+textHeading+';margin:0 0 16px">📊 Pipeline Snapshot</h3>' + kanbanMiniHtml + '</div>';
+}
+
+/* ═══════════════════════════════════════════════════════
+   CALENDAR
+   ═══════════════════════════════════════════════════════ */
+function renderCalendar() {
+  var dark = isDarkMode();
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var labelEl = document.getElementById('cal-month-label-kss31');
+  if(labelEl) labelEl.textContent = months[calMonth] + ' ' + calYear;
+  var gridEl = document.getElementById('cal-grid-kss33');
+  if(!gridEl) return;
+
+  var firstDay = new Date(calYear, calMonth, 1).getDay();
+  var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  var daysInPrev = new Date(calYear, calMonth, 0).getDate();
+  var today = new Date(); today.setHours(0,0,0,0);
+  var todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+
+  var statusColors = {'col-new':'#14a09a','col-req':'#d97706','col-closing':'#16a34a','col-reporting':'#dc2626','col-closed':'#64748b'};
+
+  var filesByDate = {};
+  appData.files.forEach(function(f){
+    if(!f.closingDate) return;
+    if(!filesByDate[f.closingDate]) filesByDate[f.closingDate] = [];
+    filesByDate[f.closingDate].push(f);
+  });
+
+  var html = '';
+  // Previous month filler
+  for(var i = firstDay - 1; i >= 0; i--) {
+    html += '<div class="cal-day-cell other-month"><div class="cal-day-num">'+(daysInPrev-i)+'</div></div>';
+  }
+  // Current month
+  for(var day = 1; day <= daysInMonth; day++) {
+    var dateStr = calYear + '-' + String(calMonth+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+    var isToday = dateStr === todayStr;
+    var evts = filesByDate[dateStr] || [];
+    html += '<div class="cal-day-cell'+(isToday?' cal-today-cell':'')+'" data-date="'+dateStr+'">';
+    html += '<div class="cal-day-num">'+(isToday?'<span class="cal-today-num">'+day+'</span>':day)+'</div>';
+    evts.slice(0,2).forEach(function(f){ html += '<span class="cal-event-pill" style="background:'+statusColors[f.status]+'">'+escH(f.clientName)+'</span>'; });
+    if(evts.length > 2) html += '<span class="cal-event-pill-more">+' + (evts.length - 2) + ' more</span>';
+    html += '</div>';
+  }
+  // Next month filler
+  var totalCells = firstDay + daysInMonth;
+  var remaining = (7 - (totalCells % 7)) % 7;
+  for(var j = 1; j <= remaining; j++) { html += '<div class="cal-day-cell other-month"><div class="cal-day-num">'+j+'</div></div>'; }
+
+  gridEl.innerHTML = html;
+
+  // Day click popup
+  gridEl.querySelectorAll('.cal-day-cell:not(.other-month)').forEach(function(cell) {
+    cell.addEventListener('click', function(e) {
+      var dateStr = this.getAttribute('data-date');
+      var evts = filesByDate[dateStr] || [];
+      if(evts.length === 0) return;
+      var popup = document.getElementById('day-popup-kss11');
+      if(!popup) return;
+      var popHtml = '<button class="popup-close" id="popup-close-btn">✕</button>';
+      popHtml += '<div class="popup-title">' + formatDate(dateStr) + '</div>';
+      evts.forEach(function(f){ popHtml += '<div class="popup-file"><div class="popup-fnum">' + escH(f.fileNumber) + '</div><div class="popup-client">' + escH(f.clientName) + '</div><div style="font:500 11px Inter;color:'+dmColor('#7a9f9f','#5a8080')+'">' + escH(f.type) + ' • ' + escH(f.lawyer) + '</div></div>'; });
+      popup.innerHTML = popHtml;
+      popup.style.display = 'block';
+      popup.style.top = Math.min(e.clientY, window.innerHeight - 300) + 'px';
+      popup.style.left = Math.min(e.clientX, window.innerWidth - 340) + 'px';
+      var closeBtn = document.getElementById('popup-close-btn');
+      if(closeBtn) closeBtn.addEventListener('click', function(){ popup.style.display = 'none'; });
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   HAMBURGER MENU
+   ═══════════════════════════════════════════════════════ */
+var hamburgerOpen = false;
+function toggleHamburger() {
+  hamburgerOpen = !hamburgerOpen;
+  var menu = document.getElementById('hamburger-menu-kss5');
+  if(menu) menu.style.display = hamburgerOpen ? 'flex' : 'none';
+}
+function closeHamburger() {
+  hamburgerOpen = false;
+  var menu = document.getElementById('hamburger-menu-kss5');
+  if(menu) menu.style.display = 'none';
+}
+
+/* ═══════════════════════════════════════════════════════
+   TAB SWITCHING
+   ═══════════════════════════════════════════════════════ */
+function switchTab(tabName) {
+  var tabs = {'dashboard':'tab-dashboard-kss13', 'matters':'tab-matters-kss12', 'calendar':'tab-calendar-kss14'};
+  Object.keys(tabs).forEach(function(key) {
+    var el = document.getElementById(tabs[key]);
+    if(el) el.style.display = key === tabName ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    if(btn.getAttribute('data-tab') === tabName) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+  if(tabName === 'dashboard') renderDashboard();
+  if(tabName === 'calendar') renderCalendar();
+}
+
+/* ═══════════════════════════════════════════════════════
+   POPULATE SELECTS
+   ═══════════════════════════════════════════════════════ */
+function populateSelects() {
+  var lawyerFilter = document.getElementById('filter-lawyer-kss27');
+  var lawyerModal = document.getElementById('m-lawyer-kss39');
+  var clerkFilter = document.getElementById('filter-clerk-kss50');
+  var clerkModal = document.getElementById('m-clerk-kss40');
+
+  if(lawyerFilter) {
+    lawyerFilter.innerHTML = '<option value="">All Lawyers</option>';
+    appData.lawyers.forEach(function(l){ lawyerFilter.innerHTML += '<option>'+escH(l)+'</option>'; });
+  }
+  if(lawyerModal) {
+    lawyerModal.innerHTML = '';
+    appData.lawyers.forEach(function(l){ lawyerModal.innerHTML += '<option>'+escH(l)+'</option>'; });
+  }
+  if(clerkFilter) {
+    clerkFilter.innerHTML = '<option value="">All Clerks</option><option value="__unassigned__">Unassigned</option>';
+    appData.clerks.forEach(function(c){ clerkFilter.innerHTML += '<option>'+escH(c)+'</option>'; });
+  }
+  if(clerkModal) {
+    clerkModal.innerHTML = '<option value="">None</option>';
+    appData.clerks.forEach(function(c){ clerkModal.innerHTML += '<option>'+escH(c)+'</option><!--element content stripped-->
