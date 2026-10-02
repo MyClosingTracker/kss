@@ -49,6 +49,8 @@ h1,h2,h3,.font-display{font-family:'Playfair Display',serif}
 .countdown-green{background:#d1fae5;color:#059669;border:1px solid #6ee7b7;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
 .countdown-grey{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
 .countdown-closed{background:#e0e7ff;color:#4338ca;border:1px solid #a5b4fc;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
+[data-theme="dark"] #dark-toggle-x4r5{background:linear-gradient(135deg,#b45309,#d97706)!important;border-color:#f59e0b!important}
+[data-theme="dark"] #hamburger-btn-q7w8{background:linear-gradient(135deg,#cf5e4a,#b94a38)!important;border-color:#e8705a!important}
 [data-theme="dark"] .countdown-red{background:#450a0a;color:#f87171;border-color:#7f1d1d}
 [data-theme="dark"] .countdown-amber{background:#451a03;color:#fbbf24;border-color:#78350f}
 [data-theme="dark"] .countdown-green{background:#022c22;color:#34d399;border-color:#064e3b}
@@ -88,6 +90,13 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 .cal-day:hover{background:var(--bg-col)}
 .cal-day.today{border-color:#0d7377;border-width:2px}
 .cal-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+/* ---- Scroll Lock ---- */
+body.tab-matters-active{overflow:hidden}
+.kanban-scroll{overflow-x:auto;overflow-y:hidden;height:calc(100vh - 175px)}
+.kanban-col-body{overflow-y:auto;max-height:calc(100vh - 235px);scrollbar-width:thin;scrollbar-color:rgba(13,115,119,.3) transparent}
+.kanban-col-body::-webkit-scrollbar{width:4px}
+.kanban-col-body::-webkit-scrollbar-track{background:transparent}
+.kanban-col-body::-webkit-scrollbar-thumb{background:rgba(13,115,119,.3);border-radius:2px}
 @media print{.no-print{display:none!important}body{background:#fff!important;color:#000!important}}
 .checklist-item{display:flex;align-items:center;gap:.5rem;padding:.375rem 0;border-bottom:1px solid var(--border)}
 .checklist-item:last-child{border-bottom:none}
@@ -134,20 +143,17 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 </div>
 </div>
 <div data-id="30" class="flex items-center gap-2">
-<button data-id="31" id="dark-toggle-x4r5" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:38px;height:38px;color:#fff;font-size:18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;" title="Toggle dark mode" id="dm-btn-actual">🌙</button>
+<button data-id="31" id="dark-toggle-x4r5" style="background:linear-gradient(135deg,#d97706,#f59e0b);border:1px solid #fbbf24;border-radius:50%;width:38px;height:38px;color:#fff;font-size:18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(217,119,6,.4);" title="Toggle dark mode" id="dm-btn-actual">🌙</button>
 <div data-id="32" class="relative">
-<button data-id="33" id="hamburger-btn-q7w8" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:8px;width:38px;height:38px;color:#fff;font-size:20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;" title="Menu">☰</button>
+<button data-id="33" id="hamburger-btn-q7w8" style="background:linear-gradient(135deg,#e8705a,#cf5e4a);border:1px solid #e8705a;border-radius:8px;width:38px;height:38px;color:#fff;font-size:20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(232,112,90,.4);" title="Menu">☰</button>
 <div data-id="34" class="hamburger-menu" id="hamburger-menu-e9r0">
 <button data-id="35" id="hm-add-k1l2">&#xFE62; Add New File</button>
-<button data-id="36" id="hm-alerts-p3q4">🔔 Alerts</button>
 <button data-id="37" id="hm-briefing-s5t6">📋 Daily Briefing</button>
 <button data-id="38" id="hm-notif-u7v8">🔔 Enable Notifications</button>
-<button data-id="39" id="hm-csv-w9x0">📥 Export CSV</button>
 <button data-id="40" id="hm-ics-y1z2">📅 Export to Calendar (.ics)</button>
 <button data-id="41" id="hm-backup-a3b4">💾 Backup Data</button>
 <label data-id="42" id="hm-restore-c5d6">📂 Restore Data<input data-id="43" type="file" accept=".json" id="restore-input-e7f8" style="display:none"/></label>
 <button data-id="44" id="hm-print-g9h0">🖨 Save as PDF</button>
-<button data-id="45" id="hm-shortcuts-i1j2">⌨️ Shortcuts</button>
 </div>
 </div>
 </div>
@@ -177,25 +183,25 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 </div>
 <!-- Kanban columns -->
 <div data-id="64" class="kanban-scroll" id="kanban-board-g5h6">
-<div data-id="65" class="kanban-col" data-status="col-new"><div data-id="66" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 100%);color:#fff">New / Open <span data-id="67" class="font-normal text-xs" id="count-col-new"></span></div><div data-id="68" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2" id="body-col-new"></div></div>
-<div data-id="69" class="kanban-col" data-status="col-req"><div data-id="70" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0d7377 0%,#14a09a 100%);color:#fff">Requisition <span data-id="71" class="font-normal text-xs" id="count-col-req"></span></div><div data-id="72" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2" id="body-col-req"></div></div>
-<div data-id="73" class="kanban-col" data-status="col-closing"><div data-id="74" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#e8705a 0%,#cf5e4a 100%);color:#fff">Closing Soon <span data-id="75" class="font-normal text-xs" id="count-col-closing"></span></div><div data-id="76" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2" id="body-col-closing"></div></div>
-<div data-id="77" class="kanban-col" data-status="col-reporting"><div data-id="78" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 60%,#14a09a 100%);color:#fff">Reporting <span data-id="79" class="font-normal text-xs" id="count-col-reporting"></span></div><div data-id="80" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2" id="body-col-reporting"></div></div>
-<div data-id="81" class="kanban-col" data-status="col-closed"><div data-id="82" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#16a34a 0%,#22c55e 100%);color:#fff">Closed <span data-id="83" class="font-normal text-xs" id="count-col-closed"></span></div><div data-id="84" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2" id="body-col-closed"></div></div>
+<div data-id="65" class="kanban-col" data-status="col-new"><div data-id="66" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 100%);color:#fff">New / Open <span data-id="67" class="font-normal text-xs" id="count-col-new"></span></div><div data-id="68" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-new"></div></div>
+<div data-id="69" class="kanban-col" data-status="col-req"><div data-id="70" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0d7377 0%,#14a09a 100%);color:#fff">Requisition <span data-id="71" class="font-normal text-xs" id="count-col-req"></span></div><div data-id="72" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-req"></div></div>
+<div data-id="73" class="kanban-col" data-status="col-closing"><div data-id="74" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#e8705a 0%,#cf5e4a 100%);color:#fff">Closing Soon <span data-id="75" class="font-normal text-xs" id="count-col-closing"></span></div><div data-id="76" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-closing"></div></div>
+<div data-id="77" class="kanban-col" data-status="col-reporting"><div data-id="78" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 60%,#14a09a 100%);color:#fff">Reporting <span data-id="79" class="font-normal text-xs" id="count-col-reporting"></span></div><div data-id="80" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-reporting"></div></div>
+<div data-id="81" class="kanban-col" data-status="col-closed"><div data-id="82" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#16a34a 0%,#22c55e 100%);color:#fff">Closed <span data-id="83" class="font-normal text-xs" id="count-col-closed"></span></div><div data-id="84" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-closed"></div></div>
 </div>
 </main>
 
 <!-- TAB: DASHBOARD -->
 <div data-id="85" id="tab-content-dashboard" class="max-w-[1400px] mx-auto px-4 py-6" style="display:none">
-<h2 data-id="86" class="font-display text-2xl mb-4" style="color:var(--text-primary)">Dashboard</h2>
-<div data-id="87" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3 mb-6" id="kpi-row-i7j8"></div>
-<div data-id="88" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-<div data-id="89" class="card-bg rounded-xl p-4"><h3 data-id="90" class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Revenue by Lawyer</h3><div data-id="91" class="relative h-64"><canvas data-id="92" id="chart-revenue-k9l0"></canvas></div></div>
-<div data-id="93" class="card-bg rounded-xl p-4"><h3 data-id="94" class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Lawyer Workload (Active Files)</h3><div data-id="95" class="relative h-64"><canvas data-id="96" id="chart-workload-m1n2"></canvas></div></div>
+<h2 class="font-display text-2xl mb-4" style="color:var(--text-primary)">Analytics Dashboard</h2>
+<div data-id="87" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-4" id="kpi-row-i7j8"></div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+<div class="card-bg rounded-xl p-4 lg:col-span-2"><div class="flex items-center justify-between mb-2"><h3 class="font-bold text-sm" style="color:var(--text-secondary)">Revenue by Lawyer</h3><span class="text-xs" style="color:var(--text-muted)">based on recorded fees</span></div><div class="relative" style="height:200px"><canvas id="chart-revenue-k9l0"></canvas></div></div>
+<div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Files by Type</h3><div class="relative flex items-center justify-center" style="height:200px"><canvas id="chart-pipeline-o3p4"></canvas></div></div>
 </div>
-<div data-id="97" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-<div data-id="98" class="card-bg rounded-xl p-4"><h3 data-id="99" class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Pipeline by Status</h3><div data-id="100" class="relative h-64 flex items-center justify-center"><canvas data-id="101" id="chart-pipeline-o3p4"></canvas></div></div>
-<div data-id="102" class="card-bg rounded-xl p-4"><h3 data-id="103" class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Recent Activity</h3><div data-id="104" class="max-h-64 overflow-y-auto space-y-2" id="recent-activity-q5r6"></div></div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<div class="card-bg rounded-xl p-4 lg:col-span-2"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Lawyer Workload (Active Files)</h3><div class="relative" style="height:200px"><canvas id="chart-workload-m1n2"></canvas></div></div>
+<div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Recent Activity</h3><div class="overflow-y-auto" style="max-height:190px" id="recent-activity-q5r6"></div></div>
 </div>
 </div>
 
@@ -210,6 +216,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 <div data-id="111">Sun</div><div data-id="112">Mon</div><div data-id="113">Tue</div><div data-id="114">Wed</div><div data-id="115">Thu</div><div data-id="116">Fri</div><div data-id="117">Sat</div>
 </div>
 <div data-id="118" class="grid grid-cols-7 gap-1" id="cal-grid-y3z4"></div>
+<div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem;margin-top:.5rem;font-size:.75rem;font-weight:600"><span style="display:flex;align-items:center;gap:4px;color:#065f46"><span style="width:12px;height:12px;border-radius:3px;background:#d1fae5;border-left:3px solid #065f46;display:inline-block"></span>Purchase</span><span style="display:flex;align-items:center;gap:4px;color:#1e40af"><span style="width:12px;height:12px;border-radius:3px;background:#dbeafe;border-left:3px solid #1e40af;display:inline-block"></span>Sale</span><span style="display:flex;align-items:center;gap:4px;color:#92400e"><span style="width:12px;height:12px;border-radius:3px;background:#fde68a;border-left:3px solid #92400e;display:inline-block"></span>Refinance</span><span style="display:flex;align-items:center;gap:4px;color:#6b21a8"><span style="width:12px;height:12px;border-radius:3px;background:#e9d5ff;border-left:3px solid #6b21a8;display:inline-block"></span>Transfer</span></div>
 <div data-id="119" id="cal-day-detail-a5b6" class="card-bg rounded-xl p-4 mt-4" style="display:none">
 <h3 data-id="120" class="font-bold text-sm mb-2" id="cal-day-title-c7d8"></h3>
 <div data-id="121" id="cal-day-list-e9f0" class="space-y-2"></div>
@@ -317,7 +324,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='13';
+var KSS_VERSION='14';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -495,19 +502,30 @@ var f=getFile(fid);if(f){f.clerk=(cl==='_unassign'?'':cl);addActivity(f,'Clerk a
 })});
 // Drag
 document.querySelectorAll('.matter-card').forEach(function(c){
-c.addEventListener('dragstart',function(e){draggedId=this.dataset.id;this.classList.add('dragging');e.dataTransfer.effectAllowed='move'});
-c.addEventListener('dragend',function(){this.classList.remove('dragging');draggedId=null;document.querySelectorAll('.drop-target').forEach(function(d){d.classList.remove('drop-target')})});
+c.addEventListener('dragstart',function(e){draggedId=this.dataset.id;e.dataTransfer.setData('text/plain',this.dataset.id);this.classList.add('dragging');e.dataTransfer.effectAllowed='copy'});
+c.addEventListener('dragend',function(){this.classList.remove('dragging');document.querySelectorAll('.drop-target').forEach(function(d){d.classList.remove('drop-target')});setTimeout(function(){draggedId=null;},150);});
 });
 document.querySelectorAll('.kanban-col [id^="body-"]').forEach(function(col){
 col.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='move';this.classList.add('drop-target')});
-col.addEventListener('dragleave',function(){this.classList.remove('drop-target')});
+col.addEventListener('dragleave',function(e){if(this.contains(e.relatedTarget))return;this.classList.remove('drop-target')});
 col.addEventListener('drop',function(e){
 e.preventDefault();this.classList.remove('drop-target');
-if(!draggedId)return;
+var fid=e.dataTransfer.getData('text/plain')||draggedId;
+if(!fid)return;
 var newStatus=this.id.replace('body-','');
-var f=getFile(draggedId);
-if(f&&f.status!==newStatus){var copy=JSON.parse(JSON.stringify(f));copy.id=uuid();copy.fileNumber=f.fileNumber+'-COPY';copy.clientName=f.clientName+' (Copy)';copy.status=newStatus;copy.expanded=true;copy.activity=[{ts:nowTS(),msg:'Duplicated from '+f.fileNumber+' via drag & drop'}];copy.checklist=f.checklist.map(function(c){return{id:c.id,text:c.text,done:false}});appData.push(copy);saveData();renderKanban();showToast('Duplicated to '+newStatus.replace('col-',''))}
-});
+var f=getFile(fid);
+if(f){
+var copy=JSON.parse(JSON.stringify(f));
+copy.id=uuid();
+var n=appData.filter(function(x){return x.fileNumber&&x.fileNumber.indexOf(f.fileNumber)===0}).length;
+copy.fileNumber=f.fileNumber+'-D'+n;
+copy.status=newStatus;
+copy.expanded=true;
+copy.activity=[{ts:nowTS(),msg:'Duplicated from '+f.fileNumber+' into '+(newStatus.replace('col-',''))}];
+copy.checklist=f.checklist.map(function(c){return{id:uuid(),text:c.text,done:false}});
+appData.push(copy);saveData();renderKanban();
+showToast('Duplicated '+f.fileNumber+' into '+(newStatus.replace('col-','')));
+}
 });
 }
 
@@ -638,23 +656,7 @@ var closingWeek=appData.filter(function(f){return f.closingDate>=t&&f.closingDat
 var overdue=appData.filter(function(f){return f.closingDate&&f.closingDate<t&&f.status!=='col-closed'});
 var urgent=appData.filter(function(f){return f.priority==='Urgent'&&f.status!=='col-closed'});
 
-var html='<div class="font-bold" style="color:var(--text-primary)">📅 Thursday, October 1, 2026</div>';
-html+='<div><h4 class="font-bold text-coral mb-1">Closing Today ('+closingToday.length+')</h4>';
-if(closingToday.length===0)html+='<p style="color:var(--text-muted)">No files closing today.</p>';
-closingToday.forEach(function(f){html+='<div class="card-bg rounded p-2 mb-1"><strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+'</div>'});
-html+='</div>';
-html+='<div><h4 class="font-bold mb-1" style="color:#d97706">Closing This Week ('+closingWeek.length+')</h4>';
-closingWeek.forEach(function(f){html+='<div class="card-bg rounded p-2 mb-1"><strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+' — '+fmtDate(f.closingDate)+'</div>'});
-if(closingWeek.length===0)html+='<p style="color:var(--text-muted)">None.</p>';
-html+='</div>';
-html+='<div><h4 class="font-bold mb-1" style="color:#dc2626">Overdue ('+overdue.length+')</h4>';
-overdue.forEach(function(f){html+='<div class="card-bg rounded p-2 mb-1"><strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+' — '+fmtDate(f.closingDate)+'</div>'});
-if(overdue.length===0)html+='<p style="color:var(--text-muted)">None — great work!</p>';
-html+='</div>';
-if(urgent.length>0){html+='<div><h4 class="font-bold mb-1" style="color:#dc2626">⚠️ Urgent Files ('+urgent.length+')</h4>';
-urgent.forEach(function(f){html+='<div class="card-bg rounded p-2 mb-1"><strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+'</div>'});
-html+='</div>';}
-body.innerHTML=html;
+var bfDays=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];var bfMonths=['January','February','March','April','May','June','July','August','September','October','November','December'];var bfDate=new Date(2026,9,2);var html='<div style="background:linear-gradient(135deg,#0b3d3f,#0d7377);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1rem;color:#fff">';html+='<div style="font-size:.65rem;opacity:.7;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Daily Briefing</div>';html+='<div style="font-size:1.2rem;font-weight:700;font-family:Playfair Display,serif;margin-top:.15rem">'+bfDays[bfDate.getDay()]+', '+bfMonths[bfDate.getMonth()]+' '+bfDate.getDate()+', '+bfDate.getFullYear()+'</div>';html+='<div style="display:flex;gap:1.5rem;margin-top:.75rem;flex-wrap:wrap">';html+='<div><div style="font-size:1.5rem;font-weight:800">'+closingToday.length+'</div><div style="font-size:.68rem;opacity:.75">Closing Today</div></div>';html+='<div><div style="font-size:1.5rem;font-weight:800">'+closingWeek.length+'</div><div style="font-size:.68rem;opacity:.75">This Week</div></div>';html+='<div><div style="font-size:1.5rem;font-weight:800;color:'+(overdue.length>0?'#fca5a5':'#6ee7b7')+'">'+overdue.length+'</div><div style="font-size:.68rem;opacity:.75">Overdue</div></div>';html+='<div><div style="font-size:1.5rem;font-weight:800;color:'+(urgent.length>0?'#fde68a':'#6ee7b7')+'">'+urgent.length+'</div><div style="font-size:.68rem;opacity:.75">Urgent</div></div>';html+='</div></div>';function bfRow(f,accent,icon){return '<div style="display:flex;align-items:center;gap:.75rem;padding:.55rem .85rem;background:var(--bg-card);border-radius:.6rem;border-left:4px solid '+accent+';margin-bottom:.4rem;box-shadow:var(--shadow)">'+'<span style="font-size:1rem">'+icon+'</span>'+'<div style="flex:1;min-width:0"><div style="font-weight:700;font-size:.83rem;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(f.fileNumber)+' &mdash; '+esc(f.clientName)+'</div>'+'<div style="font-size:.7rem;color:var(--text-muted);margin-top:1px">'+esc(f.type)+' &bull; '+esc(f.lawyer)+'</div></div>'+'<div style="font-size:.72rem;font-weight:700;color:'+accent+';white-space:nowrap">'+fmtDate(f.closingDate)+'</div></div>';}html+='<div style="margin-bottom:.85rem">';html+='<div style="font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#e8705a;margin-bottom:.4rem">Closing Today ('+closingToday.length+')</div>';if(closingToday.length===0)html+='<div style="color:var(--text-muted);font-size:.8rem;padding:.5rem;text-align:center;background:var(--bg-col);border-radius:.5rem">No files closing today</div>';closingToday.forEach(function(f){html+=bfRow(f,'#e8705a','')});html+='</div>';html+='<div style="margin-bottom:.85rem">';html+='<div style="font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#d97706;margin-bottom:.4rem">Closing This Week ('+closingWeek.length+')</div>';if(closingWeek.length===0)html+='<div style="color:var(--text-muted);font-size:.8rem;padding:.5rem;text-align:center;background:var(--bg-col);border-radius:.5rem">None scheduled</div>';closingWeek.forEach(function(f){html+=bfRow(f,'#d97706','')});html+='</div>';html+='<div style="margin-bottom:.85rem">';html+='<div style="font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#dc2626;margin-bottom:.4rem">Overdue ('+overdue.length+')</div>';if(overdue.length===0)html+='<div style="color:#059669;font-size:.8rem;padding:.5rem;text-align:center;background:#d1fae5;border-radius:.5rem">None &mdash; great work!</div>';overdue.forEach(function(f){html+=bfRow(f,'#dc2626','')});html+='</div>';if(urgent.length>0){html+='<div style="margin-bottom:.85rem">';html+='<div style="font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin-bottom:.4rem">Urgent Files ('+urgent.length+')</div>';urgent.forEach(function(f){html+=bfRow(f,'#7c3aed','')});html+='</div>';}body.innerHTML=html;
 openModal('modal-briefing-o5p6q');
 localStorage.setItem(LS_BRIEFING,todayStr());
 }
@@ -690,16 +692,7 @@ var totalFees=0;var feeCount=0;
 appData.forEach(function(f){var v=parsePrice(f.fee);if(v>0){totalFees+=v;feeCount++}});
 var avgFee=feeCount?totalFees/feeCount:0;
 
-var kpi=$('kpi-row-i7j8');
-if(kpi){kpi.innerHTML=
-'<div class="card-bg rounded-xl p-4 text-center"><div class="text-2xl font-bold tabular-nums" style="color:#0b3d3f">'+appData.length+'</div><div class="text-xs font-medium mt-1" style="color:var(--text-muted)">Total Files</div></div>'+
-'<div class="card-bg rounded-xl p-4 text-center"><div class="text-2xl font-bold tabular-nums" style="color:#0d7377">'+active.length+'</div><div class="text-xs font-medium mt-1" style="color:var(--text-muted)">Active Files</div></div>'+
-'<div class="card-bg rounded-xl p-4 text-center"><div class="text-2xl font-bold tabular-nums" style="color:#d97706">'+closingWeek.length+'</div><div class="text-xs font-medium mt-1" style="color:var(--text-muted)">Closing This Week</div></div>'+
-'<div class="card-bg rounded-xl p-4 text-center"><div class="text-2xl font-bold tabular-nums" style="color:#e8705a">'+closingMonth.length+'</div><div class="text-xs font-medium mt-1" style="color:var(--text-muted)">Closing This Month</div></div>'+
-'<div class="card-bg rounded-xl p-4 text-center"><div class="text-2xl font-bold tabular-nums" style="color:#059669">'+closed.length+'</div><div class="text-xs font-medium mt-1" style="color:var(--text-muted)">Total Closed</div></div>'+
-'<div class="card-bg rounded-xl p-4 text-center"><div class="text-2xl font-bold tabular-nums" style="color:#0b3d3f">$'+totalFees.toLocaleString()+'</div><div class="text-xs font-medium mt-1" style="color:var(--text-muted)">Total Revenue</div></div>'+
-'<div class="card-bg rounded-xl p-4 text-center"><div class="text-2xl font-bold tabular-nums" style="color:#7c3aed">$'+Math.round(avgFee).toLocaleString()+'</div><div class="text-xs font-medium mt-1" style="color:var(--text-muted)">Average Fee</div></div>'
-;}
+var byType2={Purchase:0,Sale:0,Refinance:0,Transfer:0};appData.forEach(function(f){if(byType2[f.type]!==undefined)byType2[f.type]++});var overdueCount=appData.filter(function(f){return f.closingDate&&f.closingDate<t&&f.status!=='col-closed'}).length;function kpiCard(val,lbl,color,sub){return '<div class="card-bg rounded-xl p-3" style="border-top:3px solid '+color+'">'+'<div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:'+color+';margin-bottom:.2rem">'+lbl+'</div>'+'<div class="tabular-nums" style="font-size:1.5rem;font-weight:800;color:var(--text-primary);line-height:1">'+val+'</div>'+(sub?'<div style="font-size:.65rem;color:var(--text-muted);margin-top:.2rem">'+sub+'</div>':'')+'</div>';}var kpi=$('kpi-row-i7j8');if(kpi){kpi.innerHTML=kpiCard(appData.length,'Total Files','#0b3d3f',active.length+' active')+kpiCard(active.length,'Active','#0d7377',closed.length+' closed')+kpiCard(closingWeek.length,'Closing This Week','#d97706',closingMonth.length+' this month')+kpiCard(closingMonth.length,'Closing This Month','#e8705a','')+kpiCard(overdueCount>0?overdueCount:'0','Overdue',overdueCount>0?'#dc2626':'#059669',overdueCount>0?'need attention':'all on track')+kpiCard('$'+totalFees.toLocaleString(),'Revenue','#7c3aed',feeCount+' fees')+kpiCard(byType2.Purchase+'/'+byType2.Sale,'Purchase / Sale','#065f46','')+kpiCard(byType2.Refinance+'/'+byType2.Transfer,'Refi / Transfer','#92400e','');}
 
 // Revenue by lawyer
 var revenueByLawyer={};LAWYERS.forEach(function(l){revenueByLawyer[l]=0});
@@ -722,12 +715,12 @@ chartWorkload=new Chart(wCtx.getContext('2d'),{type:'bar',data:{labels:LAWYERS.m
 }
 
 // Pipeline
-var pipeline={};STATUSES.forEach(function(s){pipeline[s.id]=0});
-appData.forEach(function(f){if(pipeline[f.status]!==undefined)pipeline[f.status]++});
 var pCtx=$('chart-pipeline-o3p4');
 if(pCtx&&typeof Chart!=='undefined'){
 if(chartPipeline)chartPipeline.destroy();
-chartPipeline=new Chart(pCtx.getContext('2d'),{type:'doughnut',data:{labels:STATUSES.map(function(s){return s.label}),datasets:[{data:STATUSES.map(function(s){return pipeline[s.id]}),backgroundColor:['#0d7377','#1a7fa0','#d97706','#7c3aed','#059669']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:document.documentElement.getAttribute('data-theme')==='dark'?'#a0c4c4':'#3d5c5c',font:{size:11}}}}}}); 
+var typeLabels=['Purchase','Sale','Refinance','Transfer'];
+var typeCounts=typeLabels.map(function(tp){return appData.filter(function(f){return f.type===tp}).length});
+chartPipeline=new Chart(pCtx.getContext('2d'),{type:'doughnut',data:{labels:typeLabels,datasets:[{data:typeCounts,backgroundColor:['#d1fae5','#dbeafe','#fde68a','#e9d5ff'],borderColor:['#065f46','#1e40af','#92400e','#6b21a8'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:document.documentElement.getAttribute('data-theme')==='dark'?'#a0c4c4':'#3d5c5c',font:{size:10},padding:6}}}}}); 
 }
 
 // Recent activity
@@ -737,7 +730,7 @@ allActs.sort(function(a,b){return b.ts.localeCompare(a.ts)});
 var raBody=$('recent-activity-q5r6');
 if(raBody){raBody.innerHTML='';allActs.slice(0,20).forEach(function(a){
 var d=document.createElement('div');d.style.cssText='padding:4px 0;border-bottom:1px solid var(--border);font-size:.8rem';
-d.innerHTML='<span style="color:var(--text-muted)">'+esc(a.ts)+'</span> <strong>'+esc(a.file)+'</strong> — '+esc(a.msg);
+d.innerHTML='<span style="font-weight:700;font-size:.78rem;color:var(--text-primary)">'+esc(a.file)+'</span><span style="color:var(--text-muted);font-size:.75rem"> — '+esc(a.msg)+'</span><div style="font-size:.65rem;color:var(--text-muted);margin-top:1px">'+esc(a.ts)+'</div>';
 raBody.appendChild(d);
 });if(allActs.length===0)raBody.innerHTML='<p style="color:var(--text-muted)">No activity yet.</p>';}
 }
@@ -777,7 +770,7 @@ if(closings[d]){
 closings[d].slice(0,3).forEach(function(f){
 var dot=document.createElement('div');
 dot.className='text-xs truncate px-1 rounded mb-0.5';
-dot.style.cssText='font-size:.6rem;background:'+(f.status==='col-closed'?'#d1fae5':'#fef3c7')+';color:'+(f.status==='col-closed'?'#065f46':'#92400e');
+var tcMap={Purchase:{bg:'#d1fae5',fg:'#065f46'},Sale:{bg:'#dbeafe',fg:'#1e40af'},Refinance:{bg:'#fde68a',fg:'#92400e'},Transfer:{bg:'#e9d5ff',fg:'#6b21a8'}};var tc2=tcMap[f.type]||{bg:'#e5e7eb',fg:'#374151'};dot.style.cssText='font-size:.6rem;background:'+tc2.bg+';color:'+tc2.fg+';border-left:3px solid '+tc2.fg+';padding-left:3px;';
 dot.textContent=f.fileNumber;
 cell.appendChild(dot);
 });
@@ -801,7 +794,7 @@ list.innerHTML='';
 if(files.length===0){list.innerHTML='<p style="color:var(--text-muted)">No closings on this date.</p>'}
 else{files.forEach(function(f){
 var d=document.createElement('div');d.className='card-bg rounded-lg p-3 text-sm';
-d.innerHTML='<strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+'<br><span style="color:var(--text-muted)">'+esc(f.type)+' | '+esc(f.lawyer)+' | '+(f.status==='col-closed'?'Closed':'Active')+'</span>';
+var dtFg={Purchase:'#065f46',Sale:'#1e40af',Refinance:'#92400e',Transfer:'#6b21a8'};d.style.borderLeft='4px solid '+(dtFg[f.type]||'#0d7377');d.innerHTML='<div style="font-weight:700;font-size:.88rem;color:var(--text-primary)">'+esc(f.fileNumber)+' — '+esc(f.clientName)+'</div><div style="margin-top:4px;display:flex;gap:.4rem;align-items:center;flex-wrap:wrap"><span class="badge badge-'+f.type.toLowerCase()+'">'+esc(f.type)+'</span><span style="color:var(--text-muted);font-size:.73rem">'+esc(f.lawyer)+'</span><span style="margin-left:auto;font-size:.73rem;font-weight:600;color:'+(f.status==='col-closed'?'#059669':'#d97706')+'">'+(f.status==='col-closed'?'Closed':'Active')+'</span></div>';
 list.appendChild(d);
 })}
 detail.style.display='block';
@@ -852,6 +845,7 @@ var el=$('tab-content-'+t);if(el)el.style.display=(t===tabName?'':'none');
 });
 if(tabName==='dashboard')renderDashboard();
 if(tabName==='calendar')renderCalendar();
+document.body.classList.toggle('tab-matters-active',tabName==='matters');
 }
 
 // ============ NOTIFICATIONS ============
@@ -869,7 +863,7 @@ appData.forEach(function(f){
 if(f.status==='col-closed'||!f.closingDate)return;
 var days=daysBetween(t,f.closingDate);
 if(days>=0&&days<=7){
-setTimeout(function(){new Notification('KSS Matterkey — Closing Alert',{body:f.fileNumber+' — '+f.clientName+' closes in '+days+' day(s)',icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect width="36" height="36" rx="8" fill="%230d7377"/></svg>'})},days*1000);
+setTimeout(function(){new Notification('KSS — '+(days===0?'Closing TODAY!':days===1?'Closing Tomorrow':'Closing in '+days+' days'),{body:f.fileNumber+' — '+f.clientName+'\n'+f.type+' | '+f.lawyer,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%230b3d3f"/><rect x="14" y="10" width="36" height="44" rx="4" fill="white"/><rect x="14" y="10" width="36" height="8" rx="4" fill="%230d7377"/><circle cx="48" cy="46" r="10" fill="%23e8705a"/></svg>',tag:f.id,requireInteraction:days===0})},days*1000);
 }
 });
 }
@@ -892,6 +886,7 @@ var fc=$('filter-clerk-y7z8');
 if(fc){var ou=document.createElement('option');ou.value='Unassigned';ou.textContent='Unassigned';fc.appendChild(ou);CLERKS.forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=c;fc.appendChild(o)})}
 
 renderKanban();
+document.body.classList.add('tab-matters-active');
 
 // Event listeners — null-checked
 var darkBtn=$('dark-toggle-x4r5');if(darkBtn)darkBtn.addEventListener('click',toggleDark);
@@ -902,14 +897,11 @@ if(hambBtn&&hambMenu){hambBtn.addEventListener('click',function(e){e.stopPropaga
 document.addEventListener('click',function(e){if(!hambMenu.contains(e.target)&&e.target!==hambBtn)hambMenu.classList.remove('open')})}
 
 var hmAdd=$('hm-add-k1l2');if(hmAdd)hmAdd.addEventListener('click',function(){hambMenu.classList.remove('open');openEditModal(null)});
-var hmAlerts=$('hm-alerts-p3q4');if(hmAlerts)hmAlerts.addEventListener('click',function(){hambMenu.classList.remove('open');openAlerts()});
 var hmBrief=$('hm-briefing-s5t6');if(hmBrief)hmBrief.addEventListener('click',function(){hambMenu.classList.remove('open');openBriefing()});
 var hmNotif=$('hm-notif-u7v8');if(hmNotif)hmNotif.addEventListener('click',function(){hambMenu.classList.remove('open');enableNotifications()});
-var hmCSV=$('hm-csv-w9x0');if(hmCSV)hmCSV.addEventListener('click',function(){hambMenu.classList.remove('open');exportCSV()});
 var hmICS=$('hm-ics-y1z2');if(hmICS)hmICS.addEventListener('click',function(){hambMenu.classList.remove('open');exportICS()});
 var hmBack=$('hm-backup-a3b4');if(hmBack)hmBack.addEventListener('click',function(){hambMenu.classList.remove('open');backupData()});
 var hmPrint=$('hm-print-g9h0');if(hmPrint)hmPrint.addEventListener('click',function(){hambMenu.classList.remove('open');window.print()});
-var hmShort=$('hm-shortcuts-i1j2');if(hmShort)hmShort.addEventListener('click',function(){hambMenu.classList.remove('open');openModal('modal-shortcuts-g7h8i')});
 
 var restoreInput=$('restore-input-e7f8');
 if(restoreInput)restoreInput.addEventListener('change',function(e){
