@@ -512,7 +512,7 @@ if(f&&f.status!==newStatus){var old=f.status;f.status=newStatus;addActivity(f,'S
 }
 
 // ============ NEXT FILE NUMBER ============
-function nextFileNumber(){var yr=String(new Date().getFullYear()).slice(-2);var prefix="KS"+yr;var max=0;appData.forEach(function(f){var rex=/^KS\d{2}(\d{3})$/;var mm=f.fileNumber?f.fileNumber.match(rex):null;if(mm){var n=parseInt(mm[1],10);if(n>max)max=n;}});return prefix+String(max+1).padStart(3,"0");}
+function nextFileNumber(){var yr=String(new Date().getFullYear()).slice(-2);var max=0;appData.forEach(function(f){var mm=f.fileNumber?f.fileNumber.match(/^KS(\d{2})(\d{3})$/):null;if(mm&&mm[1]===yr){var n=parseInt(mm[2],10);if(n>max)max=n;}});return "KS"+yr+String(max+1).padStart(3,"0");}
 
 // ============ EDIT MODAL ============
 function openEditModal(fileId){
