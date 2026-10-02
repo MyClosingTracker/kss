@@ -49,8 +49,8 @@ h1,h2,h3,.font-display{font-family:'Playfair Display',serif}
 .countdown-green{background:#d1fae5;color:#059669;border:1px solid #6ee7b7;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
 .countdown-grey{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
 .countdown-closed{background:#e0e7ff;color:#4338ca;border:1px solid #a5b4fc;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
-[data-theme="dark"] #dark-toggle-x4r5{background:linear-gradient(135deg,#b45309,#d97706)!important;border-color:#f59e0b!important;box-shadow:0 2px 8px rgba(180,83,9,.5)!important}
-[data-theme="dark"] #hamburger-btn-q7w8{background:linear-gradient(135deg,#cf5e4a,#b94a38)!important;border-color:#e8705a!important;box-shadow:0 2px 8px rgba(207,94,74,.5)!important}
+[data-theme="dark"] #dark-toggle-x4r5{background:linear-gradient(135deg,#92400e,#d97706)!important;border-color:#fbbf24!important;box-shadow:0 2px 12px rgba(217,119,6,.7)!important}
+[data-theme="dark"] #hamburger-btn-q7w8{background:linear-gradient(135deg,#b94a38,#e8705a)!important;border-color:#f4a08e!important;box-shadow:0 2px 12px rgba(232,112,90,.7)!important}
 [data-theme="dark"] .countdown-red{background:#450a0a;color:#f87171;border-color:#7f1d1d}
 [data-theme="dark"] .countdown-amber{background:#451a03;color:#fbbf24;border-color:#78350f}
 [data-theme="dark"] .countdown-green{background:#022c22;color:#34d399;border-color:#064e3b}
@@ -58,7 +58,7 @@ h1,h2,h3,.font-display{font-family:'Playfair Display',serif}
 [data-theme="dark"] .countdown-closed{background:#1e1b4b;color:#818cf8;border-color:#312e81}
 .kanban-col{min-width:280px;max-width:320px;flex-shrink:0}
 @media(max-width:767px){.kanban-col{min-width:85vw;max-width:92vw}}
-.kanban-scroll{display:flex;gap:1rem;overflow-x:auto;padding-bottom:1rem;scroll-snap-type:x mandatory}
+.kanban-scroll{display:flex;gap:1rem;overflow-x:auto;overflow-y:visible;padding-bottom:1rem;scroll-snap-type:x mandatory}
 .kanban-col{scroll-snap-align:start}
 .matter-card{cursor:grab;transition:box-shadow .15s,transform .15s}
 .matter-card:active{cursor:grabbing}
@@ -92,8 +92,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 .cal-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
 /* Scroll Lock */
 body.tab-matters-active{overflow:hidden}
-.kanban-scroll{overflow-x:auto;overflow-y:hidden;height:calc(100vh - 175px)}
-.kanban-col-body{overflow-y:auto;max-height:calc(100vh - 235px);scrollbar-width:thin;scrollbar-color:rgba(13,115,119,.3) transparent}
+.kanban-col-body{overflow-y:auto;max-height:calc(100vh - 220px);scrollbar-width:thin;scrollbar-color:rgba(13,115,119,.3) transparent}
 .kanban-col-body::-webkit-scrollbar{width:4px}
 .kanban-col-body::-webkit-scrollbar-track{background:transparent}
 .kanban-col-body::-webkit-scrollbar-thumb{background:rgba(13,115,119,.3);border-radius:2px}
@@ -143,9 +142,9 @@ body.tab-matters-active{overflow:hidden}
 </div>
 </div>
 <div data-id="30" class="flex items-center gap-2">
-<button data-id="31" id="dark-toggle-x4r5" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:38px;height:38px;color:#fff;font-size:18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;" title="Toggle dark mode" id="dm-btn-actual">🌙</button>
+<button data-id="31" id="dark-toggle-x4r5" style="background:linear-gradient(135deg,#d97706,#f59e0b);border:2px solid #fbbf24;border-radius:50%;width:38px;height:38px;color:#fff;font-size:18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(217,119,6,.5);" title="Toggle dark mode">🌙</button>
 <div data-id="32" class="relative">
-<button data-id="33" id="hamburger-btn-q7w8" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:8px;width:38px;height:38px;color:#fff;font-size:20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;" title="Menu">☰</button>
+<button data-id="33" id="hamburger-btn-q7w8" style="background:linear-gradient(135deg,#e8705a,#cf5e4a);border:2px solid #f4a08e;border-radius:8px;width:38px;height:38px;color:#fff;font-size:20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(232,112,90,.5);" title="Menu">☰</button>
 <div data-id="34" class="hamburger-menu" id="hamburger-menu-e9r0">
 <button data-id="35" id="hm-add-k1l2">&#xFE62; Add New File</button>
 <button data-id="37" id="hm-briefing-s5t6">📋 Daily Briefing</button>
@@ -324,7 +323,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='15';
+var KSS_VERSION='16';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -506,7 +505,7 @@ c.addEventListener('dragstart',function(e){draggedId=this.dataset.id;e.dataTrans
 c.addEventListener('dragend',function(){this.classList.remove('dragging');document.querySelectorAll('.drop-target').forEach(function(d){d.classList.remove('drop-target')});setTimeout(function(){draggedId=null;},150);});
 });
 document.querySelectorAll('.kanban-col [id^="body-"]').forEach(function(col){
-col.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='move';this.classList.add('drop-target')});
+col.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='copy';this.classList.add('drop-target')});
 col.addEventListener('dragleave',function(e){if(this.contains(e.relatedTarget))return;this.classList.remove('drop-target')});
 col.addEventListener('drop',function(e){
 e.preventDefault();this.classList.remove('drop-target');
@@ -757,6 +756,60 @@ if(kpi){
   });
   kpi.innerHTML=kpiHtml;
 }
+
+// --- Charts ---
+var isDark=document.documentElement.getAttribute('data-theme')==='dark';
+var labelColor=isDark?'#a0c4c4':'#3d5c5c';
+
+// Revenue by Lawyer
+var rCtx=$('chart-revenue-k9l0');
+if(rCtx&&typeof Chart!=='undefined'){
+  if(chartRevenue)chartRevenue.destroy();
+  var lawyers={};
+  appData.forEach(function(f){var v=parsePrice(f.fee);if(v>0){if(!lawyers[f.lawyer||'Unknown'])lawyers[f.lawyer||'Unknown']=0;lawyers[f.lawyer||'Unknown']+=v;}});
+  var lNames=Object.keys(lawyers);
+  var lVals=lNames.map(function(n){return lawyers[n];});
+  chartRevenue=new Chart(rCtx.getContext('2d'),{type:'bar',data:{labels:lNames,datasets:[{label:'Revenue',data:lVals,backgroundColor:'rgba(13,115,119,.7)',borderColor:'#0d7377',borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:labelColor,font:{size:10}},grid:{display:false}},y:{ticks:{color:labelColor,font:{size:10},callback:function(v){return '$'+v.toLocaleString();}},grid:{color:isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}}}}});
+}
+
+// Lawyer Workload
+var wCtx=$('chart-workload-m1n2');
+if(wCtx&&typeof Chart!=='undefined'){
+  if(chartWorkload)chartWorkload.destroy();
+  var wLawyers={};
+  appData.filter(function(f){return f.status!=='col-closed';}).forEach(function(f){var n=f.lawyer||'Unknown';if(!wLawyers[n])wLawyers[n]=0;wLawyers[n]++;});
+  var wNames=Object.keys(wLawyers);
+  var wVals=wNames.map(function(n){return wLawyers[n];});
+  var barColors=['#0d7377','#14a09a','#e8705a','#d97706','#7c3aed','#059669','#1e40af','#92400e'];
+  chartWorkload=new Chart(wCtx.getContext('2d'),{type:'bar',data:{labels:wNames,datasets:[{label:'Active Files',data:wVals,backgroundColor:wNames.map(function(_,i){return barColors[i%barColors.length];}),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:labelColor,font:{size:10}},grid:{display:false}},y:{ticks:{color:labelColor,font:{size:10}},grid:{color:isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}}}}});
+}
+
+// Files by Type donut
+var pCtx=$('chart-pipeline-o3p4');
+if(pCtx&&typeof Chart!=='undefined'){
+  if(chartPipeline)chartPipeline.destroy();
+  var tLbls=['Purchase','Sale','Refinance','Transfer'];
+  var tCnts=tLbls.map(function(tp){return appData.filter(function(f){return f.type===tp;}).length;});
+  chartPipeline=new Chart(pCtx.getContext('2d'),{type:'doughnut',data:{labels:tLbls,datasets:[{data:tCnts,backgroundColor:['#d1fae5','#dbeafe','#fde68a','#e9d5ff'],borderColor:['#065f46','#1e40af','#92400e','#6b21a8'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:labelColor,font:{size:10},padding:5}}}}});
+}
+
+// Recent Activity
+var ra=$('recent-activity-q5r6');
+if(ra){
+  var acts=[];
+  appData.forEach(function(f){(f.activity||[]).forEach(function(a){acts.push({ts:a.ts,msg:a.msg,file:f.fileNumber});});});
+  acts.sort(function(a,b){return b.ts.localeCompare(a.ts);});
+  acts=acts.slice(0,15);
+  ra.innerHTML='';
+  if(acts.length===0){ra.innerHTML='<div style="color:var(--text-muted);font-size:.78rem;text-align:center;padding:1rem">No activity yet</div>';}
+  acts.forEach(function(a){
+    var d=document.createElement('div');
+    d.style.cssText='padding:.35rem 0;border-bottom:1px solid var(--border);';
+    d.innerHTML='<span style="font-weight:700;font-size:.78rem;color:var(--text-primary)">'+esc(a.file)+'</span><span style="color:var(--text-muted);font-size:.75rem"> — '+esc(a.msg)+'</span><div style="font-size:.63rem;color:var(--text-muted);margin-top:1px">'+esc(a.ts)+'</div>';
+    ra.appendChild(d);
+  });
+}
+
 }
 
 // ============ CALENDAR ============
@@ -853,7 +906,7 @@ var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=na
 }
 
 // ============ DARK MODE ============
-function toggleDark(){var dmb=document.getElementById('dm-btn-actual');
+function toggleDark(){var dmb=document.getElementById('dark-toggle-x4r5');
 var isDark=document.documentElement.getAttribute('data-theme')==='dark';
 if(isDark){document.documentElement.removeAttribute('data-theme');localStorage.setItem(LS_DARK,'false')}
 else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem(LS_DARK,'true')}
