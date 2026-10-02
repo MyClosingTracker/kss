@@ -511,13 +511,25 @@ if(f&&f.status!==newStatus){var old=f.status;f.status=newStatus;addActivity(f,'S
 });
 }
 
+// ============ NEXT FILE NUMBER ============
+function nextFileNumber(){
+  var max=0;
+  appData.forEach(function(f){
+    var m=f.fileNumber?f.fileNumber.match(/^KSS-(\d+)$/):null;
+    if(m){var n=parseInt(m[1],10);if(n>max)max=n;}
+  });
+  var next=max+1;
+  var padded=String(next).padStart(5,'0');
+  return 'KSS-'+padded;
+}
+
 // ============ EDIT MODAL ============
 function openEditModal(fileId){
 var f=fileId?getFile(fileId):null;
 var title=$('modal-edit-title-i3j4');
 if(title)title.textContent=f?'Edit File':'Add New File';
 var eid=$('ef-id-o9p0');if(eid)eid.value=f?f.id:'';
-var efn=$('ef-filenum-q1r2');if(efn)efn.value=f?f.fileNumber:'KSS-';
+var efn=$('ef-filenum-q1r2');if(efn)efn.value=f?f.fileNumber:nextFileNumber();
 var ecl=$('ef-client-s3t4');if(ecl)ecl.value=f?f.clientName:'';
 var ead=$('ef-address-u5v6');if(ead)ead.value=f?f.address:'';
 var ety=$('ef-type-w7x8');if(ety)ety.value=f?f.type:'Purchase';
