@@ -49,8 +49,8 @@ h1,h2,h3,.font-display{font-family:'Playfair Display',serif}
 .countdown-green{background:#d1fae5;color:#059669;border:1px solid #6ee7b7;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
 .countdown-grey{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
 .countdown-closed{background:#e0e7ff;color:#4338ca;border:1px solid #a5b4fc;font-size:.72rem!important;padding:3px 10px!important;font-weight:700!important;border-radius:9999px!important}
-[data-theme="dark"] #dark-toggle-x4r5{background:linear-gradient(135deg,#b45309,#d97706)!important;border-color:#f59e0b!important}
-[data-theme="dark"] #hamburger-btn-q7w8{background:linear-gradient(135deg,#cf5e4a,#b94a38)!important;border-color:#e8705a!important}
+[data-theme="dark"] #dark-toggle-x4r5{background:linear-gradient(135deg,#b45309,#d97706)!important;border-color:#f59e0b!important;box-shadow:0 2px 8px rgba(180,83,9,.5)!important}
+[data-theme="dark"] #hamburger-btn-q7w8{background:linear-gradient(135deg,#cf5e4a,#b94a38)!important;border-color:#e8705a!important;box-shadow:0 2px 8px rgba(207,94,74,.5)!important}
 [data-theme="dark"] .countdown-red{background:#450a0a;color:#f87171;border-color:#7f1d1d}
 [data-theme="dark"] .countdown-amber{background:#451a03;color:#fbbf24;border-color:#78350f}
 [data-theme="dark"] .countdown-green{background:#022c22;color:#34d399;border-color:#064e3b}
@@ -90,7 +90,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 .cal-day:hover{background:var(--bg-col)}
 .cal-day.today{border-color:#0d7377;border-width:2px}
 .cal-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-/* ---- Scroll Lock ---- */
+/* Scroll Lock */
 body.tab-matters-active{overflow:hidden}
 .kanban-scroll{overflow-x:auto;overflow-y:hidden;height:calc(100vh - 175px)}
 .kanban-col-body{overflow-y:auto;max-height:calc(100vh - 235px);scrollbar-width:thin;scrollbar-color:rgba(13,115,119,.3) transparent}
@@ -143,9 +143,9 @@ body.tab-matters-active{overflow:hidden}
 </div>
 </div>
 <div data-id="30" class="flex items-center gap-2">
-<button data-id="31" id="dark-toggle-x4r5" style="background:linear-gradient(135deg,#d97706,#f59e0b);border:1px solid #fbbf24;border-radius:50%;width:38px;height:38px;color:#fff;font-size:18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(217,119,6,.4);" title="Toggle dark mode" id="dm-btn-actual">🌙</button>
+<button data-id="31" id="dark-toggle-x4r5" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:38px;height:38px;color:#fff;font-size:18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;" title="Toggle dark mode" id="dm-btn-actual">🌙</button>
 <div data-id="32" class="relative">
-<button data-id="33" id="hamburger-btn-q7w8" style="background:linear-gradient(135deg,#e8705a,#cf5e4a);border:1px solid #e8705a;border-radius:8px;width:38px;height:38px;color:#fff;font-size:20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(232,112,90,.4);" title="Menu">☰</button>
+<button data-id="33" id="hamburger-btn-q7w8" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:8px;width:38px;height:38px;color:#fff;font-size:20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;" title="Menu">☰</button>
 <div data-id="34" class="hamburger-menu" id="hamburger-menu-e9r0">
 <button data-id="35" id="hm-add-k1l2">&#xFE62; Add New File</button>
 <button data-id="37" id="hm-briefing-s5t6">📋 Daily Briefing</button>
@@ -193,15 +193,15 @@ body.tab-matters-active{overflow:hidden}
 
 <!-- TAB: DASHBOARD -->
 <div data-id="85" id="tab-content-dashboard" class="max-w-[1400px] mx-auto px-4 py-6" style="display:none">
-<h2 class="font-display text-2xl mb-4" style="color:var(--text-primary)">Analytics Dashboard</h2>
+<h2 data-id="86" class="font-display text-2xl mb-4" style="color:var(--text-primary)">Dashboard</h2>
 <div data-id="87" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-4" id="kpi-row-i7j8"></div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
-<div class="card-bg rounded-xl p-4 lg:col-span-2"><div class="flex items-center justify-between mb-2"><h3 class="font-bold text-sm" style="color:var(--text-secondary)">Revenue by Lawyer</h3><span class="text-xs" style="color:var(--text-muted)">based on recorded fees</span></div><div class="relative" style="height:200px"><canvas id="chart-revenue-k9l0"></canvas></div></div>
-<div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Files by Type</h3><div class="relative flex items-center justify-center" style="height:200px"><canvas id="chart-pipeline-o3p4"></canvas></div></div>
+<div class="card-bg rounded-xl p-4 lg:col-span-2"><div class="flex items-center justify-between mb-2"><h3 class="font-bold text-sm" style="color:var(--text-secondary)">Revenue by Lawyer</h3></div><div style="height:200px;position:relative"><canvas id="chart-revenue-k9l0"></canvas></div></div>
+<div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Files by Type</h3><div style="height:200px;position:relative"><canvas id="chart-pipeline-o3p4"></canvas></div></div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-<div class="card-bg rounded-xl p-4 lg:col-span-2"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Lawyer Workload (Active Files)</h3><div class="relative" style="height:200px"><canvas id="chart-workload-m1n2"></canvas></div></div>
-<div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Recent Activity</h3><div class="overflow-y-auto" style="max-height:190px" id="recent-activity-q5r6"></div></div>
+<div class="card-bg rounded-xl p-4 lg:col-span-2"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Lawyer Workload (Active Files)</h3><div style="height:200px;position:relative"><canvas id="chart-workload-m1n2"></canvas></div></div>
+<div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Recent Activity</h3><div class="overflow-y-auto space-y-1" style="max-height:190px" id="recent-activity-q5r6"></div></div>
 </div>
 </div>
 
@@ -216,7 +216,7 @@ body.tab-matters-active{overflow:hidden}
 <div data-id="111">Sun</div><div data-id="112">Mon</div><div data-id="113">Tue</div><div data-id="114">Wed</div><div data-id="115">Thu</div><div data-id="116">Fri</div><div data-id="117">Sat</div>
 </div>
 <div data-id="118" class="grid grid-cols-7 gap-1" id="cal-grid-y3z4"></div>
-<div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem;margin-top:.5rem;font-size:.75rem;font-weight:600"><span style="display:flex;align-items:center;gap:4px;color:#065f46"><span style="width:12px;height:12px;border-radius:3px;background:#d1fae5;border-left:3px solid #065f46;display:inline-block"></span>Purchase</span><span style="display:flex;align-items:center;gap:4px;color:#1e40af"><span style="width:12px;height:12px;border-radius:3px;background:#dbeafe;border-left:3px solid #1e40af;display:inline-block"></span>Sale</span><span style="display:flex;align-items:center;gap:4px;color:#92400e"><span style="width:12px;height:12px;border-radius:3px;background:#fde68a;border-left:3px solid #92400e;display:inline-block"></span>Refinance</span><span style="display:flex;align-items:center;gap:4px;color:#6b21a8"><span style="width:12px;height:12px;border-radius:3px;background:#e9d5ff;border-left:3px solid #6b21a8;display:inline-block"></span>Transfer</span></div>
+<div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:.6rem;font-size:.74rem;font-weight:600"><span style="display:flex;align-items:center;gap:4px;color:#065f46"><span style="width:10px;height:10px;border-radius:2px;background:#d1fae5;border-left:3px solid #065f46;display:inline-block"></span>Purchase</span><span style="display:flex;align-items:center;gap:4px;color:#1e40af"><span style="width:10px;height:10px;border-radius:2px;background:#dbeafe;border-left:3px solid #1e40af;display:inline-block"></span>Sale</span><span style="display:flex;align-items:center;gap:4px;color:#92400e"><span style="width:10px;height:10px;border-radius:2px;background:#fde68a;border-left:3px solid #92400e;display:inline-block"></span>Refinance</span><span style="display:flex;align-items:center;gap:4px;color:#6b21a8"><span style="width:10px;height:10px;border-radius:2px;background:#e9d5ff;border-left:3px solid #6b21a8;display:inline-block"></span>Transfer</span></div>
 <div data-id="119" id="cal-day-detail-a5b6" class="card-bg rounded-xl p-4 mt-4" style="display:none">
 <h3 data-id="120" class="font-bold text-sm mb-2" id="cal-day-title-c7d8"></h3>
 <div data-id="121" id="cal-day-list-e9f0" class="space-y-2"></div>
@@ -324,7 +324,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='14';
+var KSS_VERSION='15';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -517,15 +517,16 @@ var f=getFile(fid);
 if(f){
 var copy=JSON.parse(JSON.stringify(f));
 copy.id=uuid();
-var n=appData.filter(function(x){return x.fileNumber&&x.fileNumber.indexOf(f.fileNumber)===0}).length;
-copy.fileNumber=f.fileNumber+'-D'+n;
+var dn=appData.filter(function(x){return x.fileNumber&&x.fileNumber.indexOf(f.fileNumber)===0;}).length;
+copy.fileNumber=f.fileNumber+'-D'+dn;
 copy.status=newStatus;
 copy.expanded=true;
 copy.activity=[{ts:nowTS(),msg:'Duplicated from '+f.fileNumber+' into '+(newStatus.replace('col-',''))}];
-copy.checklist=f.checklist.map(function(c){return{id:uuid(),text:c.text,done:false}});
+copy.checklist=f.checklist.map(function(c){return{id:uuid(),text:c.text,done:false};});
 appData.push(copy);saveData();renderKanban();
 showToast('Duplicated '+f.fileNumber+' into '+(newStatus.replace('col-','')));
 }
+});
 });
 }
 
@@ -656,7 +657,42 @@ var closingWeek=appData.filter(function(f){return f.closingDate>=t&&f.closingDat
 var overdue=appData.filter(function(f){return f.closingDate&&f.closingDate<t&&f.status!=='col-closed'});
 var urgent=appData.filter(function(f){return f.priority==='Urgent'&&f.status!=='col-closed'});
 
-var bfDays=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];var bfMonths=['January','February','March','April','May','June','July','August','September','October','November','December'];var bfDate=new Date(2026,9,2);var html='<div style="background:linear-gradient(135deg,#0b3d3f,#0d7377);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1rem;color:#fff">';html+='<div style="font-size:.65rem;opacity:.7;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Daily Briefing</div>';html+='<div style="font-size:1.2rem;font-weight:700;font-family:Playfair Display,serif;margin-top:.15rem">'+bfDays[bfDate.getDay()]+', '+bfMonths[bfDate.getMonth()]+' '+bfDate.getDate()+', '+bfDate.getFullYear()+'</div>';html+='<div style="display:flex;gap:1.5rem;margin-top:.75rem;flex-wrap:wrap">';html+='<div><div style="font-size:1.5rem;font-weight:800">'+closingToday.length+'</div><div style="font-size:.68rem;opacity:.75">Closing Today</div></div>';html+='<div><div style="font-size:1.5rem;font-weight:800">'+closingWeek.length+'</div><div style="font-size:.68rem;opacity:.75">This Week</div></div>';html+='<div><div style="font-size:1.5rem;font-weight:800;color:'+(overdue.length>0?'#fca5a5':'#6ee7b7')+'">'+overdue.length+'</div><div style="font-size:.68rem;opacity:.75">Overdue</div></div>';html+='<div><div style="font-size:1.5rem;font-weight:800;color:'+(urgent.length>0?'#fde68a':'#6ee7b7')+'">'+urgent.length+'</div><div style="font-size:.68rem;opacity:.75">Urgent</div></div>';html+='</div></div>';function bfRow(f,accent,icon){return '<div style="display:flex;align-items:center;gap:.75rem;padding:.55rem .85rem;background:var(--bg-card);border-radius:.6rem;border-left:4px solid '+accent+';margin-bottom:.4rem;box-shadow:var(--shadow)">'+'<span style="font-size:1rem">'+icon+'</span>'+'<div style="flex:1;min-width:0"><div style="font-weight:700;font-size:.83rem;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(f.fileNumber)+' &mdash; '+esc(f.clientName)+'</div>'+'<div style="font-size:.7rem;color:var(--text-muted);margin-top:1px">'+esc(f.type)+' &bull; '+esc(f.lawyer)+'</div></div>'+'<div style="font-size:.72rem;font-weight:700;color:'+accent+';white-space:nowrap">'+fmtDate(f.closingDate)+'</div></div>';}html+='<div style="margin-bottom:.85rem">';html+='<div style="font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#e8705a;margin-bottom:.4rem">Closing Today ('+closingToday.length+')</div>';if(closingToday.length===0)html+='<div style="color:var(--text-muted);font-size:.8rem;padding:.5rem;text-align:center;background:var(--bg-col);border-radius:.5rem">No files closing today</div>';closingToday.forEach(function(f){html+=bfRow(f,'#e8705a','')});html+='</div>';html+='<div style="margin-bottom:.85rem">';html+='<div style="font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#d97706;margin-bottom:.4rem">Closing This Week ('+closingWeek.length+')</div>';if(closingWeek.length===0)html+='<div style="color:var(--text-muted);font-size:.8rem;padding:.5rem;text-align:center;background:var(--bg-col);border-radius:.5rem">None scheduled</div>';closingWeek.forEach(function(f){html+=bfRow(f,'#d97706','')});html+='</div>';html+='<div style="margin-bottom:.85rem">';html+='<div style="font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#dc2626;margin-bottom:.4rem">Overdue ('+overdue.length+')</div>';if(overdue.length===0)html+='<div style="color:#059669;font-size:.8rem;padding:.5rem;text-align:center;background:#d1fae5;border-radius:.5rem">None &mdash; great work!</div>';overdue.forEach(function(f){html+=bfRow(f,'#dc2626','')});html+='</div>';if(urgent.length>0){html+='<div style="margin-bottom:.85rem">';html+='<div style="font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin-bottom:.4rem">Urgent Files ('+urgent.length+')</div>';urgent.forEach(function(f){html+=bfRow(f,'#7c3aed','')});html+='</div>';}body.innerHTML=html;
+var bfDays=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var bfMon=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var bfNow=new Date();
+var html='';
+html+='<div style="background:linear-gradient(135deg,#0b3d3f,#0d7377);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1rem;color:#fff">';
+html+='<div style="font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.7">Daily Briefing</div>';
+html+='<div style="font-size:1.15rem;font-weight:700;font-family:Playfair Display,serif;margin-top:.1rem">'+bfDays[bfNow.getDay()]+', '+bfMon[bfNow.getMonth()]+' '+bfNow.getDate()+', '+bfNow.getFullYear()+'</div>';
+html+='<div style="display:flex;gap:1.5rem;margin-top:.6rem;flex-wrap:wrap">';
+html+='<div><div style="font-size:1.4rem;font-weight:800">'+closingToday.length+'</div><div style="font-size:.65rem;opacity:.75">Today</div></div>';
+html+='<div><div style="font-size:1.4rem;font-weight:800">'+closingWeek.length+'</div><div style="font-size:.65rem;opacity:.75">This Week</div></div>';
+html+='<div><div style="font-size:1.4rem;font-weight:800;color:'+(overdue.length>0?'#fca5a5':'#6ee7b7')+'">'+overdue.length+'</div><div style="font-size:.65rem;opacity:.75">Overdue</div></div>';
+html+='<div><div style="font-size:1.4rem;font-weight:800;color:'+(urgent.length>0?'#fde68a':'#6ee7b7')+'">'+urgent.length+'</div><div style="font-size:.65rem;opacity:.75">Urgent</div></div>';
+html+='</div></div>';
+var bfSections=[
+  {title:'Closing Today',list:closingToday,color:'#e8705a'},
+  {title:'This Week',list:closingWeek,color:'#d97706'},
+  {title:'Overdue',list:overdue,color:'#dc2626'},
+  {title:'Urgent',list:urgent,color:'#7c3aed'}
+];
+bfSections.forEach(function(sec){
+  if(sec.list.length===0&&sec.title==='Urgent')return;
+  html+='<div style="margin-bottom:.75rem">';
+  html+='<div style="font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:'+sec.color+';margin-bottom:.35rem">'+sec.title+' ('+sec.list.length+')</div>';
+  if(sec.list.length===0){
+    html+='<div style="color:var(--text-muted);font-size:.77rem;padding:.4rem;text-align:center;background:var(--bg-col);border-radius:.4rem">'+(sec.title==='Overdue'?'None — great work!':'None scheduled')+'</div>';
+  } else {
+    sec.list.forEach(function(f){
+      html+='<div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:.5rem;border-left:4px solid '+sec.color+';margin-bottom:.35rem;box-shadow:var(--shadow)">';
+      html+='<div style="flex:1;min-width:0"><div style="font-weight:700;font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(f.fileNumber)+' — '+esc(f.clientName)+'</div>';
+      html+='<div style="font-size:.68rem;color:var(--text-muted);margin-top:1px">'+esc(f.type)+' &bull; '+esc(f.lawyer)+'</div></div>';
+      html+='<div style="font-size:.68rem;font-weight:700;color:'+sec.color+';white-space:nowrap">'+fmtDate(f.closingDate)+'</div></div>';
+    });
+  }
+  html+='</div>';
+});
+body.innerHTML=html;
 openModal('modal-briefing-o5p6q');
 localStorage.setItem(LS_BRIEFING,todayStr());
 }
@@ -692,47 +728,35 @@ var totalFees=0;var feeCount=0;
 appData.forEach(function(f){var v=parsePrice(f.fee);if(v>0){totalFees+=v;feeCount++}});
 var avgFee=feeCount?totalFees/feeCount:0;
 
-var byType2={Purchase:0,Sale:0,Refinance:0,Transfer:0};appData.forEach(function(f){if(byType2[f.type]!==undefined)byType2[f.type]++});var overdueCount=appData.filter(function(f){return f.closingDate&&f.closingDate<t&&f.status!=='col-closed'}).length;function kpiCard(val,lbl,color,sub){return '<div class="card-bg rounded-xl p-3" style="border-top:3px solid '+color+'">'+'<div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:'+color+';margin-bottom:.2rem">'+lbl+'</div>'+'<div class="tabular-nums" style="font-size:1.5rem;font-weight:800;color:var(--text-primary);line-height:1">'+val+'</div>'+(sub?'<div style="font-size:.65rem;color:var(--text-muted);margin-top:.2rem">'+sub+'</div>':'')+'</div>';}var kpi=$('kpi-row-i7j8');if(kpi){kpi.innerHTML=kpiCard(appData.length,'Total Files','#0b3d3f',active.length+' active')+kpiCard(active.length,'Active','#0d7377',closed.length+' closed')+kpiCard(closingWeek.length,'Closing This Week','#d97706',closingMonth.length+' this month')+kpiCard(closingMonth.length,'Closing This Month','#e8705a','')+kpiCard(overdueCount>0?overdueCount:'0','Overdue',overdueCount>0?'#dc2626':'#059669',overdueCount>0?'need attention':'all on track')+kpiCard('$'+totalFees.toLocaleString(),'Revenue','#7c3aed',feeCount+' fees')+kpiCard(byType2.Purchase+'/'+byType2.Sale,'Purchase / Sale','#065f46','')+kpiCard(byType2.Refinance+'/'+byType2.Transfer,'Refi / Transfer','#92400e','');}
-
-// Revenue by lawyer
-var revenueByLawyer={};LAWYERS.forEach(function(l){revenueByLawyer[l]=0});
-appData.forEach(function(f){var v=parsePrice(f.fee);if(v>0&&revenueByLawyer[f.lawyer]!==undefined)revenueByLawyer[f.lawyer]+=v});
-var revCtx=$('chart-revenue-k9l0');
-if(revCtx&&typeof Chart!=='undefined'){
-if(chartRevenue)chartRevenue.destroy();
-var isDark=document.documentElement.getAttribute('data-theme')==='dark';
-chartRevenue=new Chart(revCtx.getContext('2d'),{type:'bar',data:{labels:LAWYERS.map(function(l){return l.split(' ')[0]}),datasets:[{label:'Revenue ($)',data:LAWYERS.map(function(l){return revenueByLawyer[l]}),backgroundColor:['#0d7377','#14a09a','#e8705a','#7c3aed','#d97706','#059669','#1a7fa0']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return'$'+v.toLocaleString()},color:isDark?'#a0c4c4':'#3d5c5c'},grid:{color:isDark?'rgba(160,196,196,.1)':'rgba(11,61,63,.08)'}},x:{ticks:{color:isDark?'#a0c4c4':'#3d5c5c'},grid:{display:false}}}}});
+var byType2={Purchase:0,Sale:0,Refinance:0,Transfer:0};
+appData.forEach(function(f){
+  if(byType2[f.type]!==undefined){byType2[f.type]++;}
+});
+var overdueCount=appData.filter(function(f){
+  return f.closingDate&&f.closingDate<t&&f.status!=='col-closed';
+}).length;
+var kpi=$('kpi-row-i7j8');
+if(kpi){
+  var kpiHtml='';
+  var kpiData=[
+    {v:appData.length,l:'Total Files',c:'#0b3d3f',s:active.length+' active'},
+    {v:active.length,l:'Active',c:'#0d7377',s:closed.length+' closed'},
+    {v:closingWeek.length,l:'Closing This Week',c:'#d97706',s:closingMonth.length+' this month'},
+    {v:closingMonth.length,l:'Closing This Month',c:'#e8705a',s:''},
+    {v:overdueCount>0?overdueCount:0,l:'Overdue',c:overdueCount>0?'#dc2626':'#059669',s:overdueCount>0?'need attention':'all on track'},
+    {v:'$'+totalFees.toLocaleString(),l:'Revenue',c:'#7c3aed',s:feeCount+' fees'},
+    {v:byType2.Purchase+'/'+byType2.Sale,l:'Purchase / Sale',c:'#065f46',s:''},
+    {v:byType2.Refinance+'/'+byType2.Transfer,l:'Refi / Transfer',c:'#92400e',s:''}
+  ];
+  kpiData.forEach(function(k){
+    kpiHtml+='<div class="card-bg rounded-xl p-3" style="border-top:3px solid '+k.c+'">';
+    kpiHtml+='<div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:'+k.c+';margin-bottom:.15rem">'+k.l+'</div>';
+    kpiHtml+='<div class="tabular-nums" style="font-size:1.4rem;font-weight:800;color:var(--text-primary);line-height:1.1">'+k.v+'</div>';
+    if(k.s)kpiHtml+='<div style="font-size:.62rem;color:var(--text-muted);margin-top:.15rem">'+k.s+'</div>';
+    kpiHtml+='</div>';
+  });
+  kpi.innerHTML=kpiHtml;
 }
-
-// Workload
-var workByLawyer={};LAWYERS.forEach(function(l){workByLawyer[l]=0});
-active.forEach(function(f){if(workByLawyer[f.lawyer]!==undefined)workByLawyer[f.lawyer]++});
-var wCtx=$('chart-workload-m1n2');
-if(wCtx&&typeof Chart!=='undefined'){
-if(chartWorkload)chartWorkload.destroy();
-var isDk=document.documentElement.getAttribute('data-theme')==='dark';
-chartWorkload=new Chart(wCtx.getContext('2d'),{type:'bar',data:{labels:LAWYERS.map(function(l){return l.split(' ')[0]}),datasets:[{label:'Active Files',data:LAWYERS.map(function(l){return workByLawyer[l]}),backgroundColor:['#14a09a','#0d7377','#e8705a','#7c3aed','#d97706','#059669','#1a7fa0']}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{stepSize:1,color:isDk?'#a0c4c4':'#3d5c5c'},grid:{color:isDk?'rgba(160,196,196,.1)':'rgba(11,61,63,.08)'}},y:{ticks:{color:isDk?'#a0c4c4':'#3d5c5c'},grid:{display:false}}}}});
-}
-
-// Pipeline
-var pCtx=$('chart-pipeline-o3p4');
-if(pCtx&&typeof Chart!=='undefined'){
-if(chartPipeline)chartPipeline.destroy();
-var typeLabels=['Purchase','Sale','Refinance','Transfer'];
-var typeCounts=typeLabels.map(function(tp){return appData.filter(function(f){return f.type===tp}).length});
-chartPipeline=new Chart(pCtx.getContext('2d'),{type:'doughnut',data:{labels:typeLabels,datasets:[{data:typeCounts,backgroundColor:['#d1fae5','#dbeafe','#fde68a','#e9d5ff'],borderColor:['#065f46','#1e40af','#92400e','#6b21a8'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:document.documentElement.getAttribute('data-theme')==='dark'?'#a0c4c4':'#3d5c5c',font:{size:10},padding:6}}}}}); 
-}
-
-// Recent activity
-var allActs=[];
-appData.forEach(function(f){f.activity.forEach(function(a){allActs.push({ts:a.ts,msg:a.msg,file:f.fileNumber})})});
-allActs.sort(function(a,b){return b.ts.localeCompare(a.ts)});
-var raBody=$('recent-activity-q5r6');
-if(raBody){raBody.innerHTML='';allActs.slice(0,20).forEach(function(a){
-var d=document.createElement('div');d.style.cssText='padding:4px 0;border-bottom:1px solid var(--border);font-size:.8rem';
-d.innerHTML='<span style="font-weight:700;font-size:.78rem;color:var(--text-primary)">'+esc(a.file)+'</span><span style="color:var(--text-muted);font-size:.75rem"> — '+esc(a.msg)+'</span><div style="font-size:.65rem;color:var(--text-muted);margin-top:1px">'+esc(a.ts)+'</div>';
-raBody.appendChild(d);
-});if(allActs.length===0)raBody.innerHTML='<p style="color:var(--text-muted)">No activity yet.</p>';}
 }
 
 // ============ CALENDAR ============
@@ -794,7 +818,7 @@ list.innerHTML='';
 if(files.length===0){list.innerHTML='<p style="color:var(--text-muted)">No closings on this date.</p>'}
 else{files.forEach(function(f){
 var d=document.createElement('div');d.className='card-bg rounded-lg p-3 text-sm';
-var dtFg={Purchase:'#065f46',Sale:'#1e40af',Refinance:'#92400e',Transfer:'#6b21a8'};d.style.borderLeft='4px solid '+(dtFg[f.type]||'#0d7377');d.innerHTML='<div style="font-weight:700;font-size:.88rem;color:var(--text-primary)">'+esc(f.fileNumber)+' — '+esc(f.clientName)+'</div><div style="margin-top:4px;display:flex;gap:.4rem;align-items:center;flex-wrap:wrap"><span class="badge badge-'+f.type.toLowerCase()+'">'+esc(f.type)+'</span><span style="color:var(--text-muted);font-size:.73rem">'+esc(f.lawyer)+'</span><span style="margin-left:auto;font-size:.73rem;font-weight:600;color:'+(f.status==='col-closed'?'#059669':'#d97706')+'">'+(f.status==='col-closed'?'Closed':'Active')+'</span></div>';
+var dtFg={Purchase:'#065f46',Sale:'#1e40af',Refinance:'#92400e',Transfer:'#6b21a8'};d.style.borderLeft='4px solid '+(dtFg[f.type]||'#0d7377');d.innerHTML='<div style="font-weight:700;font-size:.85rem">'+esc(f.fileNumber)+' — '+esc(f.clientName)+'</div>'+'<div style="margin-top:3px;font-size:.72rem;color:var(--text-muted)">'+esc(f.type)+' &bull; '+esc(f.lawyer)+'</div>';
 list.appendChild(d);
 })}
 detail.style.display='block';
@@ -863,7 +887,7 @@ appData.forEach(function(f){
 if(f.status==='col-closed'||!f.closingDate)return;
 var days=daysBetween(t,f.closingDate);
 if(days>=0&&days<=7){
-setTimeout(function(){new Notification('KSS — '+(days===0?'Closing TODAY!':days===1?'Closing Tomorrow':'Closing in '+days+' days'),{body:f.fileNumber+' — '+f.clientName+'\n'+f.type+' | '+f.lawyer,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%230b3d3f"/><rect x="14" y="10" width="36" height="44" rx="4" fill="white"/><rect x="14" y="10" width="36" height="8" rx="4" fill="%230d7377"/><circle cx="48" cy="46" r="10" fill="%23e8705a"/></svg>',tag:f.id,requireInteraction:days===0})},days*1000);
+setTimeout(function(){new Notification('KSS — '+(days===0?'Closing TODAY!':days===1?'Closing Tomorrow':'Closing in '+days+' days'),{body:f.fileNumber+' — '+f.clientName+'\n'+f.type+' | '+f.lawyer,tag:f.id,requireInteraction:days===0,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%230b3d3f"/><rect x="14" y="10" width="36" height="44" rx="4" fill="white"/><rect x="14" y="10" width="36" height="8" rx="4" fill="%230d7377"/></svg>'})},days*1000);
 }
 });
 }
