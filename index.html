@@ -80,6 +80,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 .btn-coral:hover{filter:brightness(1.1)}
 .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-secondary);padding:.35rem .75rem;border-radius:.375rem;font-size:.75rem;cursor:pointer;font-weight:500;transition:all .15s}
 .btn-ghost:hover{background:var(--bg-col);border-color:#0d7377;color:#0d7377}
+.card-delete:hover{background:rgba(220,38,38,.1)!important;border-color:#dc2626!important;color:#dc2626!important}
 .splash-screen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 60%,#14a09a 100%);transition:opacity .5s}
 .splash-screen.fade{opacity:0;pointer-events:none}
 .hamburger-menu{position:absolute;top:100%;right:0;background:var(--bg-card);border:1px solid var(--border);border-radius:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.15);min-width:240px;z-index:90;display:none;overflow:hidden}
@@ -323,7 +324,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='16';
+var KSS_VERSION='17';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -465,7 +466,7 @@ html+='<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'
 }
 if(notesShort)html+='<div class="mb-1.5 italic" style="color:var(--text-muted)">'+esc(notesShort)+'</div>';
 html+='<div class="flex flex-wrap gap-1 mt-2 border-t pt-2" style="border-color:var(--border)">';
-html+='<button class="btn-ghost card-edit" data-id="'+f.id+'">✏️ Edit</button>';html+='<button class="btn-ghost card-duplicate" data-id="'+f.id+'">📋 Copy</button>';
+html+='<button class="btn-ghost card-edit" data-id="'+f.id+'">✏️ Edit</button>';html+='<button class="btn-ghost card-duplicate" data-id="'+f.id+'">📋 Copy</button>';html+='<button class="btn-ghost card-delete" data-id="'+f.id+'" title="Delete file" style="color:#dc2626;border-color:rgba(220,38,38,.3)">🗑️ Del</button>';
 html+='<button class="btn-ghost card-checklist" data-id="'+f.id+'">📋</button>';
 html+='<button class="btn-ghost card-log" data-id="'+f.id+'">📜</button>';
 html+='<button class="btn-ghost card-email" data-id="'+f.id+'">✉️</button>';
@@ -488,6 +489,7 @@ bindCardEvents();
 function bindCardEvents(){
 document.querySelectorAll('.card-edit').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();openEditModal(this.dataset.id)})});
 document.querySelectorAll('.card-duplicate').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var fid=this.dataset.id;var orig=getFile(fid);if(!orig)return;var copy=JSON.parse(JSON.stringify(orig));copy.id=uuid();copy.fileNumber=orig.fileNumber+'-COPY';copy.clientName=orig.clientName+' (Copy)';copy.expanded=true;copy.activity=[{ts:nowTS(),msg:'Duplicated from '+orig.fileNumber}];copy.checklist=orig.checklist.map(function(c){return{id:c.id,text:c.text,done:false}});appData.push(copy);saveData();renderKanban();showToast('File duplicated: '+copy.fileNumber)})});
+document.querySelectorAll('.card-delete').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var fid=this.dataset.id;var f=getFile(fid);if(!f)return;if(!confirm('Delete '+f.fileNumber+' — '+f.clientName+'?\nThis cannot be undone.'))return;appData=appData.filter(function(x){return x.id!==fid;});saveData();renderKanban();showToast('Deleted: '+f.fileNumber);});});
 document.querySelectorAll('.card-checklist').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();openChecklistModal(this.dataset.id)})});
 document.querySelectorAll('.card-log').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();openLogModal(this.dataset.id)})});
 document.querySelectorAll('.card-email').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();openEmailModal(this.dataset.id)})});
