@@ -444,7 +444,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.1';
+var KSS_VERSION='18.2';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -1502,7 +1502,7 @@ function updateBulkBar(){
   });
 
   var closeBtn = document.getElementById('report-close-v18');
-  if(closeBtn) closeBtn.addEventListener('click', function(){ closeModal('modal-report-v18'); });
+  if(closeBtn) closeBtn.addEventListener('click', function(){ closeAllModals(); });
 
   var previewBtn = document.getElementById('report-preview-btn-v18');
   if(previewBtn) previewBtn.addEventListener('click', function(){
@@ -1723,8 +1723,8 @@ function openPrintSummary(fid){
   var cancelBtn2 = document.getElementById('print-cancel-v18');
   var printBtn2  = document.getElementById('do-print-v18');
   // Clone nodes to wipe any stale listeners
-  if(closeBtn2)  { var c2=closeBtn2.cloneNode(true);  closeBtn2.parentNode.replaceChild(c2,closeBtn2);  c2.onclick=function(){ closeModal('modal-print-v18'); }; }
-  if(cancelBtn2) { var x2=cancelBtn2.cloneNode(true); cancelBtn2.parentNode.replaceChild(x2,cancelBtn2); x2.onclick=function(){ closeModal('modal-print-v18'); }; }
+  if(closeBtn2)  { var c2=closeBtn2.cloneNode(true);  closeBtn2.parentNode.replaceChild(c2,closeBtn2);  c2.onclick=function(){ closeAllModals(); }; }
+  if(cancelBtn2) { var x2=cancelBtn2.cloneNode(true); cancelBtn2.parentNode.replaceChild(x2,cancelBtn2); x2.onclick=function(){ closeAllModals(); }; }
   if(printBtn2)  { var p2=printBtn2.cloneNode(true);  printBtn2.parentNode.replaceChild(p2,printBtn2);
     p2.onclick=function(){
       var prev2 = document.getElementById('print-preview-v18');
