@@ -444,7 +444,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18';
+var KSS_VERSION='18.1';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -1717,27 +1717,31 @@ function openPrintSummary(fid){
 
   var preview = document.getElementById('print-preview-v18');
   if(preview) preview.innerHTML = h;
+
+  // Attach close/cancel/print listeners fresh each time modal opens
+  var closeBtn2  = document.getElementById('print-close-v18');
+  var cancelBtn2 = document.getElementById('print-cancel-v18');
+  var printBtn2  = document.getElementById('do-print-v18');
+  // Clone nodes to wipe any stale listeners
+  if(closeBtn2)  { var c2=closeBtn2.cloneNode(true);  closeBtn2.parentNode.replaceChild(c2,closeBtn2);  c2.onclick=function(){ closeModal('modal-print-v18'); }; }
+  if(cancelBtn2) { var x2=cancelBtn2.cloneNode(true); cancelBtn2.parentNode.replaceChild(x2,cancelBtn2); x2.onclick=function(){ closeModal('modal-print-v18'); }; }
+  if(printBtn2)  { var p2=printBtn2.cloneNode(true);  printBtn2.parentNode.replaceChild(p2,printBtn2);
+    p2.onclick=function(){
+      var prev2 = document.getElementById('print-preview-v18');
+      if(!prev2) return;
+      var w = window.open('','_blank');
+      if(!w){ showToast('Allow popups to print'); return; }
+      w.document.write('<!DOCTYPE html><html><head><title>KSS File Summary — ' + esc(f.fileNumber) + '</title>');
+      w.document.write('<style>body{margin:2cm;font-family:Georgia,serif;color:#1a3030;font-size:11pt;line-height:1.6}table{width:100%;border-collapse:collapse}th,td{padding:5px 8px;border:1px solid #e5e7eb;font-size:10pt}th{background:#0d7377;color:#fff}@media print{@page{margin:1.5cm}}</style>');
+      w.document.write('</head><body>' + prev2.innerHTML + '</body></html>');
+      w.document.close(); w.focus();
+      setTimeout(function(){ w.print(); }, 500);
+    };
+  }
+
   openModal('modal-print-v18');
 }
 
-(function(){
-  var closeBtn  = document.getElementById('print-close-v18');
-  var cancelBtn = document.getElementById('print-cancel-v18');
-  var printBtn  = document.getElementById('do-print-v18');
-  if(closeBtn)  closeBtn.addEventListener('click',  function(){ closeModal('modal-print-v18'); });
-  if(cancelBtn) cancelBtn.addEventListener('click', function(){ closeModal('modal-print-v18'); });
-  if(printBtn)  printBtn.addEventListener('click',  function(){
-    var prev = document.getElementById('print-preview-v18');
-    if(!prev) return;
-    var w = window.open('','_blank');
-    if(!w){ showToast('Allow popups to print'); return; }
-    w.document.write('<!DOCTYPE html><html><head><title>KSS File Summary</title>');
-    w.document.write('<style>body{margin:2cm;font-family:Georgia,serif;color:#1a3030}@media print{@page{margin:1.5cm}}</style>');
-    w.document.write('</head><body>' + prev.innerHTML + '</body></html>');
-    w.document.close(); w.focus();
-    setTimeout(function(){ w.print(); }, 500);
-  });
-})();
 
 // Initial render calls
 renderCountdownBanner();
