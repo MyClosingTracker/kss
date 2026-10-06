@@ -323,7 +323,8 @@ body.tab-matters-active{overflow:hidden}
 <div data-id="214" class="modal-overlay" id="modal-email-z5a6b">
 <div data-id="215" class="modal-box">
 <div data-id="216" class="flex items-center justify-between mb-4"><h3 data-id="217" class="font-display text-lg">Email Template</h3><button data-id="218" id="email-close-c7d8e" class="p-1 rounded hover:bg-gray-200" style="color:var(--text-muted)">✕</button></div>
-<div data-id="219" class="mb-3"><label data-id="220" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Template</label><select data-id="221" id="email-template-f9g0h" class="w-full"><option value="Intro Email">Intro Email</option>
+<div data-id="219" class="mb-3"><label data-id="220" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Template</label><select data-id="221" id="email-template-f9g0h" class="w-full">
+<option value="Intro Email">Intro Email</option>
 <option value="Requisition Letter">Requisition Letter</option>
 <option value="Closing Package">Closing Package</option>
 <option value="SOA Email">SOA Email</option>
@@ -334,7 +335,8 @@ body.tab-matters-active{overflow:hidden}
 <option value="Closing Confirmed">Closing Confirmed — Reporting Package</option>
 <option value="Outstanding Documents Required">Outstanding Documents Required</option>
 <option value="Post-Closing Thank You">Post-Closing Thank You</option>
-<option value="Cancellation Notice">Cancellation Notice</option><option data-id="223">Requisition Letter</option><option data-id="224">Closing Package</option><option data-id="225">SOA Email</option><option data-id="226">Reporting Letter</option><option data-id="227">Follow-up Email</option></select></div>
+<option value="Cancellation Notice">Cancellation Notice</option>
+</select></div>
 <textarea data-id="228" id="email-body-i1j2k" rows="12" class="w-full text-sm font-mono" readonly></textarea>
 <div data-id="229" class="flex justify-end mt-3"><button data-id="230" class="btn-primary" id="email-copy-l3m4n">Copy to Clipboard</button></div>
 </div>
@@ -455,7 +457,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.3';
+var KSS_VERSION='18.4';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -763,33 +765,36 @@ generateEmailTemplate();
 openModal('modal-email-z5a6b');
 }
 function generateEmailTemplate(){
-var f=getFile(currentEmailFileId);if(!f)return;
-var sel=$('email-template-f9g0h');var tmpl=sel?sel.value:'Intro Email';
-var body=$('email-body-i1j2k');if(!body)return;
-var cn=f.clientName,fn=f.fileNumber,addr=f.address||'[Address]',cd=fmtDate(f.closingDate);
-var templates={
-'Intro Email':'Subject: '+fn+' — Welcome & Next Steps\n\nDear '+cn+',\n\nThank you for retaining KSS Law Professional Corporation for your '+f.type.toLowerCase()+' transaction at '+addr+'.\n\nWe are writing to introduce ourselves and outline the next steps in the process. Your anticipated closing date is '+cd+'.\n\nPlease provide us with the following at your earliest convenience:\n1. Valid government-issued photo identification\n2. Mortgage commitment or pre-approval (if applicable)\n3. Fire insurance confirmation\n4. Void cheque for direct deposit\n\nPlease do not hesitate to contact us if you have any questions.\n\nBest regards,\nKSS Law Professional Corporation',
-'Requisition Letter':'Subject: '+fn+' — Requisition Letter\n\nDear Counsel,\n\nRE: '+cn+'\nProperty: '+addr+'\nClosing Date: '+cd+'\n\nPlease find enclosed our requisition letter in connection with the above-noted transaction.\n\nKindly provide responses to all requisitions at your earliest convenience.\n\nYours truly,\nKSS Law Professional Corporation',
-'Closing Package':'Subject: '+fn+' — Closing Documents for Signature\n\nDear '+cn+',\n\nPlease find attached the closing documents for your '+f.type.toLowerCase()+' transaction at '+addr+', scheduled to close on '+cd+'.\n\nKindly review, sign, and return all documents at your earliest convenience.\n\nIf you have any questions, please contact our office.\n\nBest regards,\nKSS Law Professional Corporation',
-'SOA Email':'Subject: '+fn+' — Statement of Adjustment\n\nDear '+cn+',\n\nPlease find enclosed the Statement of Adjustment for your '+f.type.toLowerCase()+' transaction at '+addr+'.\n\nClosing Date: '+cd+'\nPurchase Price: '+(f.price||'TBD')+'\n\nPlease review and advise if you have any questions or concerns.\n\nBest regards,\nKSS Law Professional Corporation',
-'Reporting Letter':'Subject: '+fn+' — Reporting Letter\n\nDear '+cn+',\n\nWe are pleased to confirm that your '+f.type.toLowerCase()+' transaction at '+addr+' has been completed.\n\nEnclosed please find your reporting package including:\n- Transfer/Deed\n- Title Insurance Policy\n- Statement of Account\n- Receipts\n\nPlease retain these documents for your records.\n\nBest regards,\nKSS Law Professional Corporation',
-'Follow-up Email':'Subject: '+fn+' — Follow-up: Outstanding Items\n\nDear '+cn+',\n\nWe are following up regarding your '+f.type.toLowerCase()+' transaction at '+addr+', closing '+cd+'.\n\nWe are still awaiting the following:\n- [Outstanding item 1]\n- [Outstanding item 2]\n\nYour prompt attention to these items will help ensure a smooth closing.\n\nBest regards,\nKSS Law Professional Corporation'
-};
-body.value=templates[tmpl]||'';
-// New v18 templates
+var f=getFile(currentEmailFileId);
+if(!f)return;
+var sel=$('email-template-f9g0h');
+var body=$('email-body-i1j2k');
+if(!body)return;
+var tmpl=sel?sel.value:'Intro Email';
+var cn=f.clientName||'[Client Name]';
+var fn2=f.fileNumber||'[File No.]';
+var addr=f.address||'[Property Address]';
+var cd=fmtDate(f.closingDate);
 var lw=f.lawyer||'KSS Law Professional Corporation';
-var tp=f.type;
-var sig='\n\nYours truly,\n'+lw+'\nKSS Matterkey Inc.';
-var hdr='Re: '+tp+' \u2014 '+(addr||'[Address]')+' (File No. '+fn+')';
-var newTemplates={
+var tp=f.type||'[File Type]';
+var pr=f.price||'TBD';
+var sig='\n\nYours truly,\n'+lw+'\nKSS Matterkey Inc.\nTel: (905) 000-0000';
+var hdr='Re: '+tp+' \u2014 '+addr+' (File No. '+fn2+')';
+var all={
+'Intro Email':'Subject: '+fn2+' \u2014 Welcome & Next Steps\n\nDear '+cn+',\n\nThank you for retaining KSS Law Professional Corporation for your '+tp.toLowerCase()+' transaction at '+addr+'.\n\nWe are writing to introduce ourselves and outline the next steps in the process. Your anticipated closing date is '+cd+'.\n\nPlease provide us with the following at your earliest convenience:\n1. Valid government-issued photo identification\n2. Mortgage commitment or pre-approval (if applicable)\n3. Fire insurance confirmation\n4. Void cheque for direct deposit\n\nPlease do not hesitate to contact us if you have any questions.'+sig,
+'Requisition Letter':'Subject: '+fn2+' \u2014 Requisition Letter\n\nDear Counsel,\n\nRE: '+cn+'\nProperty: '+addr+'\nClosing Date: '+cd+'\n\nPlease find enclosed our requisition letter in connection with the above-noted transaction.\n\nKindly provide responses to all requisitions at your earliest convenience.'+sig,
+'Closing Package':'Subject: '+fn2+' \u2014 Closing Documents for Signature\n\nDear '+cn+',\n\n'+hdr+'\n\nPlease find attached the closing documents for your '+tp.toLowerCase()+' transaction, scheduled to close on '+cd+'.\n\nKindly review, sign, and return all documents at your earliest convenience.\n\nIf you have any questions, please contact our office.'+sig,
+'SOA Email':'Subject: '+fn2+' \u2014 Statement of Adjustment\n\nDear '+cn+',\n\n'+hdr+'\n\nPlease find enclosed the Statement of Adjustment for your '+tp.toLowerCase()+' transaction.\n\nClosing Date: '+cd+'\nPurchase Price: '+pr+'\n\nPlease review and advise if you have any questions or concerns.'+sig,
+'Reporting Letter':'Subject: '+fn2+' \u2014 Reporting Letter\n\nDear '+cn+',\n\n'+hdr+'\n\nWe are pleased to confirm that your '+tp.toLowerCase()+' transaction has been completed.\n\nEnclosed please find your reporting package including:\n\u2022 Transfer/Deed\n\u2022 Title Insurance Policy\n\u2022 Statement of Account\n\u2022 Receipts\n\nPlease retain these documents for your records.'+sig,
+'Follow-up Email':'Subject: '+fn2+' \u2014 Follow-up: Outstanding Items\n\nDear '+cn+',\n\n'+hdr+'\n\nWe are following up regarding your '+tp.toLowerCase()+' transaction closing on '+cd+'.\n\nWe are still awaiting the following:\n\u2022 [Outstanding item 1]\n\u2022 [Outstanding item 2]\n\nYour prompt attention to these items will help ensure a smooth closing.'+sig,
 'Title Search Ready':'Dear '+cn+',\n\n'+hdr+'\n\nWe are pleased to advise that the title search has been completed on the above-referenced property and the results are satisfactory.\n\nWe will now proceed to prepare the closing documents and will be in touch shortly to arrange a signing appointment at a time convenient for you.\n\nShould you have any questions in the meantime, please do not hesitate to contact our office.'+sig,
-'Documents Ready for Signing':'Dear '+cn+',\n\n'+hdr+'\n\nPlease be advised that your closing documents are now ready for signing.\n\nClosing Date: '+cd+'\n\nWe have forwarded the signing package for your review. Kindly complete the signing at your earliest convenience to avoid any delays on closing day.'+sig,
+'Documents Ready for Signing':'Dear '+cn+',\n\n'+hdr+'\n\nPlease be advised that your closing documents are now ready for signing.\n\nClosing Date: '+cd+'\n\nWe have forwarded the signing package for your review. Kindly complete the signing at your earliest convenience to avoid any delays on closing day. If you have any questions regarding the documents, please contact our office.'+sig,
 'Closing Confirmed':'Dear '+cn+',\n\n'+hdr+'\n\nWe are pleased to confirm that your real estate transaction has been successfully closed on '+cd+'.\n\nAll documents have been registered and funds have been disbursed as directed. Please find enclosed your reporting package which contains copies of all registered documents and a final statement of adjustments for your records.\n\nThank you for choosing KSS Matterkey Inc. It has been our pleasure acting on your behalf.'+sig,
 'Outstanding Documents Required':'Dear '+cn+',\n\n'+hdr+'\n\nWe are writing to advise that the following documents are still outstanding and are required prior to the closing date of '+cd+':\n\n\t1. [Outstanding Item 1]\n\t2. [Outstanding Item 2]\n\t3. [Outstanding Item 3]\n\nKindly provide the above at your earliest convenience. Please note that if we do not receive the required items before closing, there may be delays.'+sig,
 'Post-Closing Thank You':'Dear '+cn+',\n\n'+hdr+'\n\nOn behalf of the team at KSS Matterkey Inc., we would like to extend our sincere congratulations on the successful closing of your real estate matter.\n\nYour file has been fully reported and all required documents have been forwarded to the appropriate parties. We hope the experience was seamless and stress-free.\n\nWe truly value your trust in our firm and hope to assist you again in the future. Please do not hesitate to refer family, friends, or colleagues who may require real estate legal services.'+sig,
-'Cancellation Notice':'Dear '+cn+',\n\n'+hdr+'\n\nThis letter serves to confirm that the above-referenced file (File No. '+fn+') has been marked as cancelled in our system as the transaction has not proceeded.\n\nIf you have any questions regarding outstanding amounts or the return of documents, please contact our office at your earliest convenience.'+sig
+'Cancellation Notice':'Dear '+cn+',\n\n'+hdr+'\n\nThis letter serves to confirm that the above-referenced file (File No. '+fn2+') has been marked as cancelled in our system as the transaction has not proceeded.\n\nIf you have any questions regarding outstanding amounts or the return of documents, please contact our office at your earliest convenience.'+sig
 };
-if(newTemplates[tmpl])body.value=newTemplates[tmpl];
+body.value=all[tmpl]||'';
 }
 
 // ============ BRIEFING ============
