@@ -323,7 +323,18 @@ body.tab-matters-active{overflow:hidden}
 <div data-id="214" class="modal-overlay" id="modal-email-z5a6b">
 <div data-id="215" class="modal-box">
 <div data-id="216" class="flex items-center justify-between mb-4"><h3 data-id="217" class="font-display text-lg">Email Template</h3><button data-id="218" id="email-close-c7d8e" class="p-1 rounded hover:bg-gray-200" style="color:var(--text-muted)">✕</button></div>
-<div data-id="219" class="mb-3"><label data-id="220" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Template</label><select data-id="221" id="email-template-f9g0h" class="w-full"><option data-id="222">Intro Email</option><option data-id="223">Requisition Letter</option><option data-id="224">Closing Package</option><option data-id="225">SOA Email</option><option data-id="226">Reporting Letter</option><option data-id="227">Follow-up Email</option></select></div>
+<div data-id="219" class="mb-3"><label data-id="220" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Template</label><select data-id="221" id="email-template-f9g0h" class="w-full"><option value="Intro Email">Intro Email</option>
+<option value="Requisition Letter">Requisition Letter</option>
+<option value="Closing Package">Closing Package</option>
+<option value="SOA Email">SOA Email</option>
+<option value="Reporting Letter">Reporting Letter</option>
+<option value="Follow-up Email">Follow-up Email</option>
+<option value="Title Search Ready">Title Search Ready</option>
+<option value="Documents Ready for Signing">Documents Ready for Signing</option>
+<option value="Closing Confirmed">Closing Confirmed — Reporting Package</option>
+<option value="Outstanding Documents Required">Outstanding Documents Required</option>
+<option value="Post-Closing Thank You">Post-Closing Thank You</option>
+<option value="Cancellation Notice">Cancellation Notice</option><option data-id="223">Requisition Letter</option><option data-id="224">Closing Package</option><option data-id="225">SOA Email</option><option data-id="226">Reporting Letter</option><option data-id="227">Follow-up Email</option></select></div>
 <textarea data-id="228" id="email-body-i1j2k" rows="12" class="w-full text-sm font-mono" readonly></textarea>
 <div data-id="229" class="flex justify-end mt-3"><button data-id="230" class="btn-primary" id="email-copy-l3m4n">Copy to Clipboard</button></div>
 </div>
@@ -444,7 +455,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.2';
+var KSS_VERSION='18.3';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -470,7 +481,7 @@ var draggedId=null;
 function $(id){return document.getElementById(id)}
 function uuid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,9)}
 function today(){return new Date(2026,9,1)} // Oct 1, 2026
-function todayStr(){return '2026-10-01'}
+function todayStr(){var n=new Date();var m=String(n.getMonth()+1).padStart(2,'0');var d=String(n.getDate()).padStart(2,'0');return n.getFullYear()+'-'+m+'-'+d;}
 function parsePrice(s){if(!s)return 0;return parseFloat(s.replace(/[^0-9.]/g,''))||0}
 function fmtDate(d){if(!d)return'—';var p=d.split('-');if(p.length!==3)return d;return p[1]+'/'+p[2]+'/'+p[0]}
 function daysBetween(d1,d2){var a=new Date(d1+'T00:00:00'),b=new Date(d2+'T00:00:00');return Math.round((b-a)/(864e5))}
@@ -765,6 +776,20 @@ var templates={
 'Follow-up Email':'Subject: '+fn+' — Follow-up: Outstanding Items\n\nDear '+cn+',\n\nWe are following up regarding your '+f.type.toLowerCase()+' transaction at '+addr+', closing '+cd+'.\n\nWe are still awaiting the following:\n- [Outstanding item 1]\n- [Outstanding item 2]\n\nYour prompt attention to these items will help ensure a smooth closing.\n\nBest regards,\nKSS Law Professional Corporation'
 };
 body.value=templates[tmpl]||'';
+// New v18 templates
+var lw=f.lawyer||'KSS Law Professional Corporation';
+var tp=f.type;
+var sig='\n\nYours truly,\n'+lw+'\nKSS Matterkey Inc.';
+var hdr='Re: '+tp+' \u2014 '+(addr||'[Address]')+' (File No. '+fn+')';
+var newTemplates={
+'Title Search Ready':'Dear '+cn+',\n\n'+hdr+'\n\nWe are pleased to advise that the title search has been completed on the above-referenced property and the results are satisfactory.\n\nWe will now proceed to prepare the closing documents and will be in touch shortly to arrange a signing appointment at a time convenient for you.\n\nShould you have any questions in the meantime, please do not hesitate to contact our office.'+sig,
+'Documents Ready for Signing':'Dear '+cn+',\n\n'+hdr+'\n\nPlease be advised that your closing documents are now ready for signing.\n\nClosing Date: '+cd+'\n\nWe have forwarded the signing package for your review. Kindly complete the signing at your earliest convenience to avoid any delays on closing day.'+sig,
+'Closing Confirmed':'Dear '+cn+',\n\n'+hdr+'\n\nWe are pleased to confirm that your real estate transaction has been successfully closed on '+cd+'.\n\nAll documents have been registered and funds have been disbursed as directed. Please find enclosed your reporting package which contains copies of all registered documents and a final statement of adjustments for your records.\n\nThank you for choosing KSS Matterkey Inc. It has been our pleasure acting on your behalf.'+sig,
+'Outstanding Documents Required':'Dear '+cn+',\n\n'+hdr+'\n\nWe are writing to advise that the following documents are still outstanding and are required prior to the closing date of '+cd+':\n\n\t1. [Outstanding Item 1]\n\t2. [Outstanding Item 2]\n\t3. [Outstanding Item 3]\n\nKindly provide the above at your earliest convenience. Please note that if we do not receive the required items before closing, there may be delays.'+sig,
+'Post-Closing Thank You':'Dear '+cn+',\n\n'+hdr+'\n\nOn behalf of the team at KSS Matterkey Inc., we would like to extend our sincere congratulations on the successful closing of your real estate matter.\n\nYour file has been fully reported and all required documents have been forwarded to the appropriate parties. We hope the experience was seamless and stress-free.\n\nWe truly value your trust in our firm and hope to assist you again in the future. Please do not hesitate to refer family, friends, or colleagues who may require real estate legal services.'+sig,
+'Cancellation Notice':'Dear '+cn+',\n\n'+hdr+'\n\nThis letter serves to confirm that the above-referenced file (File No. '+fn+') has been marked as cancelled in our system as the transaction has not proceeded.\n\nIf you have any questions regarding outstanding amounts or the return of documents, please contact our office at your earliest convenience.'+sig
+};
+if(newTemplates[tmpl])body.value=newTemplates[tmpl];
 }
 
 // ============ BRIEFING ============
@@ -1418,74 +1443,7 @@ function updateBulkBar(){
 })();
 
 // ── FEATURE 5: Enhanced Email Templates ──
-(function(){
-  var sel = document.getElementById('email-template-f9g0h');
-  if(sel){
-    var extras = [
-      'Title Search Ready',
-      'Documents Ready for Signing',
-      'Closing Confirmed — Reporting Package',
-      'Outstanding Documents Required',
-      'Post-Closing Thank You',
-      'Cancellation Notice'
-    ];
-    extras.forEach(function(t){
-      var o = document.createElement('option');
-      o.textContent = t;
-      sel.appendChild(o);
-    });
-  }
-})();
 
-(function(){
-  var _orig = generateEmailTemplate;
-  generateEmailTemplate = function(){
-    var sel  = document.getElementById('email-template-f9g0h');
-    var tmpl = sel ? sel.value : '';
-    var extraTmpls = [
-      'Title Search Ready',
-      'Documents Ready for Signing',
-      'Closing Confirmed — Reporting Package',
-      'Outstanding Documents Required',
-      'Post-Closing Thank You',
-      'Cancellation Notice'
-    ];
-    if(extraTmpls.indexOf(tmpl) === -1){ _orig(); return; }
-
-    var f   = currentEmailFileId ? getFile(currentEmailFileId) : null;
-    var fn  = f ? f.fileNumber      : '[File No.]';
-    var cn  = f ? f.clientName      : '[Client Name]';
-    var adr = f ? (f.address || '[Property Address]') : '[Property Address]';
-    var cd  = f ? fmtDate(f.closingDate) : '[Closing Date]';
-    var lw  = f ? (f.lawyer || 'KSS Matterkey Inc.') : 'KSS Matterkey Inc.';
-    var tp  = f ? f.type            : '[File Type]';
-    var hdr = 'Re: ' + tp + ' — ' + adr + ' (File No. ' + fn + ')';
-    var sig = '\n\nYours truly,\n' + lw + '\nKSS Matterkey Inc.\nTel: (905) 000-0000';
-
-    var texts = {
-      'Title Search Ready':
-        'Dear ' + cn + ',\n\n' + hdr + '\n\nWe are pleased to advise that the title search has been completed on the above-referenced property and the results are satisfactory.\n\nWe will now proceed to prepare the closing documents. We will be in touch shortly to arrange a signing appointment at a time convenient for you.\n\nShould you have any questions in the meantime, please do not hesitate to contact our office.' + sig,
-
-      'Documents Ready for Signing':
-        'Dear ' + cn + ',\n\n' + hdr + '\n\nPlease be advised that your closing documents are now ready for signing.\n\nClosing Date: ' + cd + '\n\nWe have forwarded the signing package for your review. Kindly complete the signing at your earliest convenience to avoid any delays on closing day. If you have any questions regarding the documents, please contact our office and we will be happy to assist.\n\nWe look forward to hearing from you.' + sig,
-
-      'Closing Confirmed — Reporting Package':
-        'Dear ' + cn + ',\n\n' + hdr + '\n\nWe are pleased to confirm that your real estate transaction has been successfully closed on ' + cd + '.\n\nAll documents have been registered and funds have been disbursed as directed. Please find enclosed your reporting package which contains copies of all registered documents and a final statement of adjustments for your records.\n\nThank you for choosing KSS Matterkey Inc. It has been our pleasure acting on your behalf. Should you require any legal assistance in the future, please do not hesitate to reach out.' + sig,
-
-      'Outstanding Documents Required':
-        'Dear ' + cn + ',\n\n' + hdr + '\n\nWe are writing to advise that the following documents are still outstanding and are required to complete your file prior to the closing date of ' + cd + ':\n\n\t1. [Outstanding Item 1]\n\t2. [Outstanding Item 2]\n\t3. [Outstanding Item 3]\n\nKindly provide the above at your earliest convenience. Please note that if we do not receive the required items before closing, there may be delays or additional costs involved.\n\nPlease contact our office if you have any questions or require assistance gathering the required documents.' + sig,
-
-      'Post-Closing Thank You':
-        'Dear ' + cn + ',\n\n' + hdr + '\n\nOn behalf of the team at KSS Matterkey Inc., we would like to extend our sincere congratulations on the successful closing of your real estate matter.\n\nYour file has been fully reported and all required documents have been forwarded to the appropriate parties. We hope the experience was seamless and stress-free.\n\nWe truly value your trust in our firm and hope to assist you again in the future. Please do not hesitate to refer family, friends, or colleagues who may require real estate legal services.\n\nWishing you all the very best!' + sig,
-
-      'Cancellation Notice':
-        'Dear ' + cn + ',\n\n' + hdr + '\n\nThis letter serves to confirm that the above-referenced file (File No. ' + fn + ') has been marked as cancelled in our system as the transaction has not proceeded.\n\nIf you have any questions regarding outstanding amounts, disbursements, or the return of documents, please contact our office at your earliest convenience.\n\nShould the transaction be revived or should you require our legal assistance in the future, we remain happy to assist.' + sig
-    };
-
-    var body = document.getElementById('email-body-i1j2k');
-    if(body && texts[tmpl]) body.value = texts[tmpl];
-  };
-})();
 
 // ── FEATURE 6: PDF Report Generator ──
 (function(){
@@ -1515,7 +1473,7 @@ function updateBulkBar(){
     var w = window.open('','_blank');
     if(!w){ showToast('Allow popups to print reports'); return; }
     w.document.write('<!DOCTYPE html><html><head><title>KSS Report</title>');
-    w.document.write('<style>body{font-family:Georgia,serif;margin:2cm;color:#1a3030}table{width:100%;border-collapse:collapse}th{background:#0d7377;color:#fff;padding:5px 8px;text-align:left;font-size:.78rem}td{padding:4px 8px;border-bottom:1px solid #e5e7eb;font-size:.75rem}tr:nth-child(even){background:#f7fdfd}@media print{@page{margin:1.5cm}}</style>');
+    w.document.write('<style>body{font-family:Georgia,serif;margin:1.5cm;color:#1a3030;-webkit-print-color-adjust:exact;print-color-adjust:exact}table{width:100%;border-collapse:collapse;margin-top:8px}th{background:#0d7377!important;color:#fff!important;padding:6px 9px;text-align:left;font-size:.78rem;font-weight:600;-webkit-print-color-adjust:exact;print-color-adjust:exact}td{padding:5px 9px;border-bottom:1px solid #e5e7eb;font-size:.75rem}tr:nth-child(even) td{background:#f7fdfd!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.kpi-box{display:inline-block;background:#e6f4f4!important;border-radius:8px;padding:8px 12px;text-align:center;min-width:90px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.kpi-val{font-size:1.1rem;font-weight:700}.kpi-lbl{font-size:.65rem;color:#3d5c5c;text-transform:uppercase;letter-spacing:.04em}h1{font-size:1.3rem;font-weight:700;color:#0b3d3f;margin:0}.sub{font-size:.8rem;color:#3d5c5c}.gen{font-size:.72rem;color:#6b7280}.hdr{text-align:center;border-bottom:3px solid #0d7377;padding-bottom:10px;margin-bottom:14px}.kpi-row{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}.footer{margin-top:12px;font-size:.68rem;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:8px}@media print{@page{margin:1.5cm}* {-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}</style>');
     w.document.write('</head><body>' + buildReportHTML() + '</body></html>');
     w.document.close(); w.focus();
     setTimeout(function(){ w.print(); }, 500);
@@ -1561,7 +1519,7 @@ function buildReportHTML(){
   h += '</div>';
 
   // KPI summary
-  h += '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">';
+  h += '<div class="kpi-row">';
   var kpis = [
     ['Total Files', data.length, '#0b3d3f'],
     ['Closed', closed, '#059669'],
