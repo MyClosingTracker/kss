@@ -98,6 +98,25 @@ body.tab-matters-active{overflow:hidden}
 .kanban-col-body::-webkit-scrollbar-track{background:transparent}
 .kanban-col-body::-webkit-scrollbar-thumb{background:rgba(13,115,119,.3);border-radius:2px}
 @media print{.no-print{display:none!important}body{background:#fff!important;color:#000!important}}
+/* ── V18 NEW STYLES ── */
+.cd-pill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:9999px;padding:3px 10px;font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;color:#fff}
+.cd-pill:hover{background:rgba(255,255,255,.3)}
+#countdown-banner-v18{display:none;margin-bottom:.75rem}
+.bulk-bar{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0b3d3f,#0d7377);color:#fff;border-radius:1rem;padding:.75rem 1.25rem;display:none;align-items:center;gap:.75rem;z-index:150;box-shadow:0 8px 30px rgba(0,0,0,.3);font-size:.85rem;font-weight:600;flex-wrap:wrap}
+.bulk-bar select{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:.375rem;padding:.3rem .6rem;font-size:.8rem;font-weight:600;cursor:pointer}
+.bulk-bar select option{background:#0d7377;color:#fff}
+.bulk-check{width:15px;height:15px;accent-color:#14a09a;cursor:pointer;flex-shrink:0;margin-right:4px}
+.reminder-badge{background:#fef3c7;color:#92400e;border:1px solid #fcd34d;border-radius:9999px;font-size:.65rem;font-weight:700;padding:2px 7px;display:inline-block;margin-top:3px}
+[data-theme="dark"] .reminder-badge{background:#78350f;color:#fde68a;border-color:#92400e}
+.v18-print-btn{font-size:.68rem;padding:3px 8px;border-radius:.375rem;border:1px solid #d0e8e8;background:transparent;color:#0d7377;cursor:pointer;font-weight:600}
+.v18-print-btn:hover{background:#e6f4f4}
+[data-theme="dark"] .v18-print-btn{border-color:#254040;color:#14a09a}
+[data-theme="dark"] .v18-print-btn:hover{background:#1a3535}
+#report-preview-v18 table{width:100%;border-collapse:collapse;font-size:.75rem}
+#report-preview-v18 th{background:#0d7377;color:#fff;padding:5px 8px;text-align:left}
+#report-preview-v18 td{padding:4px 8px;border-bottom:1px solid var(--border)}
+@media print{.no-print{display:none!important}.bulk-bar{display:none!important}.cd-pill{color:#000}}
+
 .checklist-item{display:flex;align-items:center;gap:.5rem;padding:.375rem 0;border-bottom:1px solid var(--border)}
 .checklist-item:last-child{border-bottom:none}
 .checklist-item input[type="checkbox"]{width:18px;height:18px;accent-color:#0d7377;cursor:pointer;flex-shrink:0}
@@ -154,6 +173,7 @@ body.tab-matters-active{overflow:hidden}
 <button data-id="41" id="hm-backup-a3b4">💾 Backup Data</button>
 <label data-id="42" id="hm-restore-c5d6">📂 Restore Data<input data-id="43" type="file" accept=".json" id="restore-input-e7f8" style="display:none"/></label>
 <button data-id="44" id="hm-print-g9h0">🖨 Save as PDF</button>
+<button id="hm-report-v18" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border:none;border-radius:.5rem;padding:.45rem .9rem;cursor:pointer;font-weight:600;font-size:.82rem;width:100%;text-align:left">&#128196; PDF Report Generator</button>
 </div>
 </div>
 </div>
@@ -181,6 +201,14 @@ body.tab-matters-active{overflow:hidden}
 <button data-id="62" class="btn-ghost" id="expand-all-a9b0">Expand All</button>
 <button data-id="63" class="btn-ghost" id="collapse-all-c1d2">Collapse All</button>
 </div>
+<!-- V18: Countdown Banner -->
+<div id="countdown-banner-v18" class="no-print">
+  <div style="background:linear-gradient(135deg,#7f1d1d,#b91c1c,#dc2626);border-radius:.75rem;padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+    <span style="font-size:.78rem;font-weight:800;letter-spacing:.05em;color:#fff;white-space:nowrap">&#128276; CLOSING ALERT</span>
+    <div id="countdown-items-v18" style="display:flex;gap:.4rem;flex-wrap:wrap"></div>
+  </div>
+</div>
+
 <!-- Kanban columns -->
 <div data-id="64" class="kanban-scroll" id="kanban-board-g5h6">
 <div data-id="65" class="kanban-col" data-status="col-new"><div data-id="66" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 100%);color:#fff">New / Open <span data-id="67" class="font-normal text-xs" id="count-col-new"></span></div><div data-id="68" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-new"></div></div>
@@ -199,7 +227,15 @@ body.tab-matters-active{overflow:hidden}
 <div class="card-bg rounded-xl p-4 lg:col-span-2"><div class="flex items-center justify-between mb-2"><h3 class="font-bold text-sm" style="color:var(--text-secondary)">Revenue by Lawyer</h3></div><div style="height:200px;position:relative"><canvas id="chart-revenue-k9l0"></canvas></div></div>
 <div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Files by Type</h3><div style="height:200px;position:relative"><canvas id="chart-pipeline-o3p4"></canvas></div></div>
 </div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<div class="card-bg rounded-xl p-4 mb-4">
+    <div class="flex items-center justify-between mb-2">
+      <h3 class="font-bold text-sm" style="color:var(--text-secondary)">&#128200; Closing Volume — Last 12 Weeks</h3>
+      <span class="text-xs" style="color:var(--text-muted)">closed files per week</span>
+    </div>
+    <div style="position:relative;height:160px"><canvas id="chart-volume-v18"></canvas></div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 <div class="card-bg rounded-xl p-4 lg:col-span-2"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Lawyer Workload (Active Files)</h3><div style="height:200px;position:relative"><canvas id="chart-workload-m1n2"></canvas></div></div>
 <div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Recent Activity</h3><div class="overflow-y-auto space-y-1" style="max-height:190px" id="recent-activity-q5r6"></div></div>
 </div>
@@ -251,7 +287,17 @@ body.tab-matters-active{overflow:hidden}
 <div data-id="185"><label data-id="186" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Status</label><select data-id="187" id="ef-status-p1q2r"><option data-id="188" value="col-new">New / Open</option><option data-id="189" value="col-req">Requisition</option><option data-id="190" value="col-closing">Closing Soon</option><option data-id="191" value="col-reporting">Reporting</option><option data-id="192" value="col-closed">Closed</option></select></div>
 </div>
 <div data-id="193"><label data-id="194" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Legal Fee</label><input data-id="195" id="ef-fee-s3t4u" placeholder="e.g. $1,500"/></div>
-<div data-id="196"><label data-id="197" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Notes</label><textarea data-id="198" id="ef-notes-v5w6x" rows="3"></textarea></div>
+<div class="grid grid-cols-2 gap-3">
+      <div>
+        <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Reminder Date</label>
+        <input type="date" id="ef-reminder-v18" class="w-full"/>
+      </div>
+      <div>
+        <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Reminder Note</label>
+        <input type="text" id="ef-reminder-note-v18" class="w-full" placeholder="e.g. Follow up with lender"/>
+      </div>
+    </div>
+    <div data-id="196"><label data-id="197" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Notes</label><textarea data-id="198" id="ef-notes-v5w6x" rows="3"></textarea></div>
 <div data-id="199" class="flex justify-end gap-2 pt-2"><button data-id="200" type="button" class="btn-ghost" id="ef-cancel-y7z8a">Cancel</button><button data-id="201" type="submit" class="btn-primary">Save File</button></div>
 </form>
 </div>
@@ -317,6 +363,80 @@ body.tab-matters-active{overflow:hidden}
 </div>
 
 <!-- TOAST -->
+
+<!-- ── V18 BULK ACTION BAR ── -->
+<div class="bulk-bar no-print" id="bulk-bar-v18">
+  <span id="bulk-count-v18">0 selected</span>
+  <select id="bulk-status-v18">
+    <option value="">&#8212; Move to&#8230;</option>
+    <option value="col-new">New / Open</option>
+    <option value="col-req">Requisition</option>
+    <option value="col-closing">Closing Soon</option>
+    <option value="col-reporting">Reporting</option>
+    <option value="col-closed">Closed</option>
+  </select>
+  <button class="btn-primary" id="bulk-apply-v18" style="font-size:.8rem;padding:.3rem .85rem">Apply</button>
+  <button class="btn-coral" id="bulk-cancel-v18" style="font-size:.8rem;padding:.3rem .85rem">&#10005; Cancel</button>
+</div>
+
+<!-- ── V18 MODAL: PDF Report Generator ── -->
+<div class="modal-overlay" id="modal-report-v18">
+  <div class="modal-box" style="max-width:700px">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-display text-lg">&#128196; PDF Report Generator</h3>
+      <button id="report-close-v18" style="background:none;border:none;cursor:pointer;font-size:1.2rem;color:var(--text-muted)">&#10005;</button>
+    </div>
+    <div class="grid grid-cols-2 gap-3 mb-3">
+      <div>
+        <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Report Type</label>
+        <select id="report-type-v18" class="w-full">
+          <option value="all">All Files</option>
+          <option value="monthly">Closing This Month</option>
+          <option value="active">Active Files Only</option>
+          <option value="closed">Closed Files</option>
+          <option value="overdue">Overdue Files</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Filter by Lawyer</label>
+        <select id="report-lawyer-v18" class="w-full">
+          <option value="">All Lawyers</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-3 mb-4">
+      <div>
+        <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">From Date</label>
+        <input type="date" id="report-from-v18" class="w-full"/>
+      </div>
+      <div>
+        <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">To Date</label>
+        <input type="date" id="report-to-v18" class="w-full"/>
+      </div>
+    </div>
+    <div id="report-preview-v18" style="display:none;max-height:340px;overflow-y:auto;background:var(--bg-col);border:1px solid var(--border);border-radius:.5rem;padding:1rem;margin-bottom:.75rem"></div>
+    <div class="flex justify-end gap-2">
+      <button class="btn-ghost" id="report-preview-btn-v18">&#128065; Preview</button>
+      <button class="btn-primary" id="report-print-v18">&#128424; Print / Save PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── V18 MODAL: Print File Summary ── -->
+<div class="modal-overlay" id="modal-print-v18">
+  <div class="modal-box" style="max-width:620px">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="font-display text-lg">&#128424; Print File Summary</h3>
+      <button id="print-close-v18" style="background:none;border:none;cursor:pointer;font-size:1.2rem;color:var(--text-muted)">&#10005;</button>
+    </div>
+    <div id="print-preview-v18" style="background:#fff;border:1px solid #d0e8e8;border-radius:.5rem;padding:1.5rem;font-family:serif;font-size:.8rem;line-height:1.7;color:#1a3030;max-height:440px;overflow-y:auto"></div>
+    <div class="flex justify-end gap-2 mt-3">
+      <button class="btn-ghost" id="print-cancel-v18">Cancel</button>
+      <button class="btn-primary" id="do-print-v18">&#128424; Print</button>
+    </div>
+  </div>
+</div>
+
 <div data-id="273" class="toast" id="toast-m1n2o"></div>
 
 <footer data-id="274" class="text-center py-6 text-xs no-print" style="color:var(--text-muted)">Made by Copilot</footer>
@@ -324,7 +444,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='17';
+var KSS_VERSION='18';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -1065,6 +1185,563 @@ function tryLucide(){if(typeof lucide!=='undefined'&&typeof lucide.createIcons==
 
 // ============ RUN ============
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}else{init()}
+
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║              KSS MATTERKEY  v18  —  NEW FEATURES        ║
+// ╚══════════════════════════════════════════════════════════╝
+
+// ── FEATURE 3: Extend ensureFields with reminder fields ──
+(function(){
+  var _orig = ensureFields;
+  ensureFields = function(f){
+    f = _orig(f);
+    if(!f.reminderDate) f.reminderDate = '';
+    if(!f.reminderNote) f.reminderNote = '';
+    return f;
+  };
+})();
+
+// ── FEATURE 3: Populate reminder fields when edit modal opens ──
+(function(){
+  var _orig = openEditModal;
+  openEditModal = function(fileId){
+    _orig(fileId);
+    var f = fileId ? getFile(fileId) : null;
+    var r = document.getElementById('ef-reminder-v18');
+    var rn = document.getElementById('ef-reminder-note-v18');
+    if(r)  r.value  = (f && f.reminderDate) ? f.reminderDate : '';
+    if(rn) rn.value = (f && f.reminderNote) ? f.reminderNote : '';
+  };
+})();
+
+// ── FEATURE 3: Save reminder fields when form is submitted ──
+(function(){
+  var saveBtn = document.getElementById('ef-save-p1q2');
+  if(saveBtn){
+    saveBtn.addEventListener('click', function(){
+      var fid = (document.getElementById('ef-id-o9p0')||{}).value;
+      var f = fid ? getFile(fid) : null;
+      if(f){
+        var r  = document.getElementById('ef-reminder-v18');
+        var rn = document.getElementById('ef-reminder-note-v18');
+        if(r)  f.reminderDate = r.value  || '';
+        if(rn) f.reminderNote = rn.value || '';
+      }
+    }, true); // capture phase — fires before existing save logic
+  }
+})();
+
+// ── FEATURE 1: Countdown Banner ──
+function renderCountdownBanner(){
+  var banner = document.getElementById('countdown-banner-v18');
+  var items  = document.getElementById('countdown-items-v18');
+  if(!banner || !items) return;
+
+  var t = todayStr();
+  function addDays(s, n){
+    var d = new Date(s + 'T00:00:00');
+    d.setDate(d.getDate() + n);
+    return d.toISOString().split('T')[0];
+  }
+  var d1 = addDays(t, 1), d2 = addDays(t, 2);
+
+  var urgent = appData.filter(function(f){
+    return f.status !== 'col-closed' && f.closingDate &&
+           (f.closingDate === t || f.closingDate === d1 || f.closingDate === d2);
+  });
+
+  banner.style.display = urgent.length ? 'block' : 'none';
+  items.innerHTML = '';
+
+  urgent.forEach(function(f){
+    var diff = daysBetween(t, f.closingDate);
+    var lbl  = diff === 0 ? '🔴 TODAY' : diff === 1 ? '🟠 TOMORROW' : '🟡 in 2 days';
+    var pill = document.createElement('span');
+    pill.className = 'cd-pill';
+    pill.textContent = f.fileNumber + ' — ' + f.clientName + ' (' + lbl + ')';
+    pill.title = 'Click to open file';
+    pill.onclick = function(){ openEditModal(f.id); };
+    items.appendChild(pill);
+  });
+}
+
+// Re-render banner whenever kanban is drawn
+(function(){
+  var _orig = renderKanban;
+  renderKanban = function(){
+    _orig();
+    renderCountdownBanner();
+    attachBulkCheckboxes();
+    attachPrintButtons();
+  };
+})();
+
+// Also re-render when switching to Matters tab
+(function(){
+  var _orig = switchTab;
+  switchTab = function(tabName){
+    _orig(tabName);
+    if(tabName === 'matters') { renderCountdownBanner(); }
+  };
+})();
+
+renderCountdownBanner();
+
+// ── FEATURE 2: Closing Volume Chart ──
+var chartVolume = null;
+(function(){
+  var _orig = renderDashboard;
+  renderDashboard = function(){
+    _orig();
+    buildVolumeChart();
+  };
+})();
+
+function buildVolumeChart(){
+  var ctx = document.getElementById('chart-volume-v18');
+  if(!ctx || typeof Chart === 'undefined') return;
+  if(chartVolume){ chartVolume.destroy(); chartVolume = null; }
+
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var labelClr = isDark ? '#a0c4c4' : '#3d5c5c';
+  var gridClr  = isDark ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.06)';
+
+  // Build 12 weekly buckets ending today
+  var buckets = [];
+  var today = new Date();
+  for(var w = 11; w >= 0; w--){
+    var ws = new Date(today); ws.setDate(today.getDate() - (w * 7) - today.getDay());
+    var we = new Date(ws);    we.setDate(ws.getDate() + 6);
+    var wsStr = ws.toISOString().split('T')[0];
+    var weStr = we.toISOString().split('T')[0];
+    var label = (ws.getMonth()+1) + '/' + ws.getDate();
+    var count = appData.filter(function(f){
+      return f.closingDate && f.status === 'col-closed' && f.closingDate >= wsStr && f.closingDate <= weStr;
+    }).length;
+    buckets.push({ label: label, count: count });
+  }
+
+  chartVolume = new Chart(ctx.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: buckets.map(function(b){ return b.label; }),
+      datasets: [{
+        label: 'Closed',
+        data:  buckets.map(function(b){ return b.count; }),
+        backgroundColor: buckets.map(function(b){ return b.count > 0 ? 'rgba(13,115,119,.8)' : 'rgba(13,115,119,.18)'; }),
+        borderColor: '#0d7377',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: labelClr, font: { size: 10 } }, grid: { display: false } },
+        y: { ticks: { color: labelClr, font: { size: 10 }, stepSize: 1 }, grid: { color: gridClr }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+// ── FEATURE 4: Bulk Status Move ──
+var bulkSelected = [];
+
+function attachBulkCheckboxes(){
+  document.querySelectorAll('.matter-card').forEach(function(card){
+    if(card.querySelector('.bulk-check')) return; // already has one
+    var fid = card.dataset.id;
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.className = 'bulk-check no-print';
+    cb.dataset.id = fid;
+    cb.title = 'Select for bulk action';
+    cb.style.cssText = 'position:absolute;top:6px;right:6px;z-index:5;';
+    cb.checked = bulkSelected.indexOf(fid) !== -1;
+    cb.addEventListener('change', function(e){
+      e.stopPropagation();
+      var id = this.dataset.id;
+      if(this.checked){ if(bulkSelected.indexOf(id) === -1) bulkSelected.push(id); }
+      else { bulkSelected = bulkSelected.filter(function(x){ return x !== id; }); }
+      updateBulkBar();
+    });
+    if(getComputedStyle(card).position === 'static') card.style.position = 'relative';
+    card.appendChild(cb);
+  });
+}
+
+function updateBulkBar(){
+  var bar = document.getElementById('bulk-bar-v18');
+  var cnt = document.getElementById('bulk-count-v18');
+  if(!bar) return;
+  if(bulkSelected.length > 0){
+    bar.style.display = 'flex';
+    cnt.textContent = bulkSelected.length + ' file' + (bulkSelected.length > 1 ? 's' : '') + ' selected';
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+(function(){
+  var applyBtn = document.getElementById('bulk-apply-v18');
+  if(applyBtn) applyBtn.addEventListener('click', function(){
+    var newStatus = (document.getElementById('bulk-status-v18')||{}).value;
+    if(!newStatus){ showToast('Select a target status first'); return; }
+    if(bulkSelected.length === 0){ showToast('No files selected'); return; }
+    var moved = 0;
+    bulkSelected.forEach(function(fid){
+      var f = getFile(fid);
+      if(f){
+        var lbl = STATUSES.find(function(s){ return s.id === newStatus; });
+        addActivity(f, 'Moved to ' + (lbl ? lbl.label : newStatus) + ' via bulk action');
+        f.status = newStatus;
+        moved++;
+      }
+    });
+    saveData();
+    bulkSelected = [];
+    updateBulkBar();
+    renderKanban();
+    showToast('Moved ' + moved + ' file' + (moved > 1 ? 's' : ''));
+  });
+
+  var cancelBtn = document.getElementById('bulk-cancel-v18');
+  if(cancelBtn) cancelBtn.addEventListener('click', function(){
+    bulkSelected = [];
+    updateBulkBar();
+    // uncheck all
+    document.querySelectorAll('.bulk-check').forEach(function(cb){ cb.checked = false; });
+  });
+})();
+
+// ── FEATURE 5: Enhanced Email Templates ──
+(function(){
+  var sel = document.getElementById('email-template-f9g0h');
+  if(sel){
+    var extras = [
+      'Title Search Ready',
+      'Documents Ready for Signing',
+      'Closing Confirmed — Reporting Package',
+      'Outstanding Documents Required',
+      'Post-Closing Thank You',
+      'Cancellation Notice'
+    ];
+    extras.forEach(function(t){
+      var o = document.createElement('option');
+      o.textContent = t;
+      sel.appendChild(o);
+    });
+  }
+})();
+
+(function(){
+  var _orig = generateEmailTemplate;
+  generateEmailTemplate = function(){
+    var sel  = document.getElementById('email-template-f9g0h');
+    var tmpl = sel ? sel.value : '';
+    var extraTmpls = [
+      'Title Search Ready',
+      'Documents Ready for Signing',
+      'Closing Confirmed — Reporting Package',
+      'Outstanding Documents Required',
+      'Post-Closing Thank You',
+      'Cancellation Notice'
+    ];
+    if(extraTmpls.indexOf(tmpl) === -1){ _orig(); return; }
+
+    var f   = currentEmailFileId ? getFile(currentEmailFileId) : null;
+    var fn  = f ? f.fileNumber      : '[File No.]';
+    var cn  = f ? f.clientName      : '[Client Name]';
+    var adr = f ? (f.address || '[Property Address]') : '[Property Address]';
+    var cd  = f ? fmtDate(f.closingDate) : '[Closing Date]';
+    var lw  = f ? (f.lawyer || 'KSS Matterkey Inc.') : 'KSS Matterkey Inc.';
+    var tp  = f ? f.type            : '[File Type]';
+    var hdr = 'Re: ' + tp + ' — ' + adr + ' (File No. ' + fn + ')';
+    var sig = '\n\nYours truly,\n' + lw + '\nKSS Matterkey Inc.\nTel: (905) 000-0000';
+
+    var texts = {
+      'Title Search Ready':
+        'Dear ' + cn + ',\n\n' + hdr + '\n\nWe are pleased to advise that the title search has been completed on the above-referenced property and the results are satisfactory.\n\nWe will now proceed to prepare the closing documents. We will be in touch shortly to arrange a signing appointment at a time convenient for you.\n\nShould you have any questions in the meantime, please do not hesitate to contact our office.' + sig,
+
+      'Documents Ready for Signing':
+        'Dear ' + cn + ',\n\n' + hdr + '\n\nPlease be advised that your closing documents are now ready for signing.\n\nClosing Date: ' + cd + '\n\nWe have forwarded the signing package for your review. Kindly complete the signing at your earliest convenience to avoid any delays on closing day. If you have any questions regarding the documents, please contact our office and we will be happy to assist.\n\nWe look forward to hearing from you.' + sig,
+
+      'Closing Confirmed — Reporting Package':
+        'Dear ' + cn + ',\n\n' + hdr + '\n\nWe are pleased to confirm that your real estate transaction has been successfully closed on ' + cd + '.\n\nAll documents have been registered and funds have been disbursed as directed. Please find enclosed your reporting package which contains copies of all registered documents and a final statement of adjustments for your records.\n\nThank you for choosing KSS Matterkey Inc. It has been our pleasure acting on your behalf. Should you require any legal assistance in the future, please do not hesitate to reach out.' + sig,
+
+      'Outstanding Documents Required':
+        'Dear ' + cn + ',\n\n' + hdr + '\n\nWe are writing to advise that the following documents are still outstanding and are required to complete your file prior to the closing date of ' + cd + ':\n\n\t1. [Outstanding Item 1]\n\t2. [Outstanding Item 2]\n\t3. [Outstanding Item 3]\n\nKindly provide the above at your earliest convenience. Please note that if we do not receive the required items before closing, there may be delays or additional costs involved.\n\nPlease contact our office if you have any questions or require assistance gathering the required documents.' + sig,
+
+      'Post-Closing Thank You':
+        'Dear ' + cn + ',\n\n' + hdr + '\n\nOn behalf of the team at KSS Matterkey Inc., we would like to extend our sincere congratulations on the successful closing of your real estate matter.\n\nYour file has been fully reported and all required documents have been forwarded to the appropriate parties. We hope the experience was seamless and stress-free.\n\nWe truly value your trust in our firm and hope to assist you again in the future. Please do not hesitate to refer family, friends, or colleagues who may require real estate legal services.\n\nWishing you all the very best!' + sig,
+
+      'Cancellation Notice':
+        'Dear ' + cn + ',\n\n' + hdr + '\n\nThis letter serves to confirm that the above-referenced file (File No. ' + fn + ') has been marked as cancelled in our system as the transaction has not proceeded.\n\nIf you have any questions regarding outstanding amounts, disbursements, or the return of documents, please contact our office at your earliest convenience.\n\nShould the transaction be revived or should you require our legal assistance in the future, we remain happy to assist.' + sig
+    };
+
+    var body = document.getElementById('email-body-i1j2k');
+    if(body && texts[tmpl]) body.value = texts[tmpl];
+  };
+})();
+
+// ── FEATURE 6: PDF Report Generator ──
+(function(){
+  var hmReport = document.getElementById('hm-report-v18');
+  if(hmReport) hmReport.addEventListener('click', function(){
+    var hambMenu = document.getElementById('hamburger-menu-e9r0');
+    if(hambMenu) hambMenu.classList.remove('open');
+    var sel = document.getElementById('report-lawyer-v18');
+    if(sel){
+      sel.innerHTML = '<option value="">All Lawyers</option>';
+      LAWYERS.forEach(function(l){ var o=document.createElement('option');o.value=l;o.textContent=l;sel.appendChild(o); });
+    }
+    openModal('modal-report-v18');
+  });
+
+  var closeBtn = document.getElementById('report-close-v18');
+  if(closeBtn) closeBtn.addEventListener('click', function(){ closeModal('modal-report-v18'); });
+
+  var previewBtn = document.getElementById('report-preview-btn-v18');
+  if(previewBtn) previewBtn.addEventListener('click', function(){
+    var prev = document.getElementById('report-preview-v18');
+    if(prev){ prev.style.display='block'; prev.innerHTML = buildReportHTML(); }
+  });
+
+  var printBtn = document.getElementById('report-print-v18');
+  if(printBtn) printBtn.addEventListener('click', function(){
+    var w = window.open('','_blank');
+    if(!w){ showToast('Allow popups to print reports'); return; }
+    w.document.write('<!DOCTYPE html><html><head><title>KSS Report</title>');
+    w.document.write('<style>body{font-family:Georgia,serif;margin:2cm;color:#1a3030}table{width:100%;border-collapse:collapse}th{background:#0d7377;color:#fff;padding:5px 8px;text-align:left;font-size:.78rem}td{padding:4px 8px;border-bottom:1px solid #e5e7eb;font-size:.75rem}tr:nth-child(even){background:#f7fdfd}@media print{@page{margin:1.5cm}}</style>');
+    w.document.write('</head><body>' + buildReportHTML() + '</body></html>');
+    w.document.close(); w.focus();
+    setTimeout(function(){ w.print(); }, 500);
+  });
+})();
+
+function buildReportHTML(){
+  var type   = (document.getElementById('report-type-v18')||{}).value || 'all';
+  var lawyer = (document.getElementById('report-lawyer-v18')||{}).value || '';
+  var from   = (document.getElementById('report-from-v18')||{}).value || '';
+  var to     = (document.getElementById('report-to-v18')||{}).value || '';
+
+  var data = appData.slice();
+  if(lawyer) data = data.filter(function(f){ return f.lawyer === lawyer; });
+  if(from)   data = data.filter(function(f){ return !f.closingDate || f.closingDate >= from; });
+  if(to)     data = data.filter(function(f){ return !f.closingDate || f.closingDate <= to; });
+
+  var t = todayStr();
+  if(type === 'active')  data = data.filter(function(f){ return f.status !== 'col-closed'; });
+  if(type === 'closed')  data = data.filter(function(f){ return f.status === 'col-closed'; });
+  if(type === 'overdue') data = data.filter(function(f){ return f.status !== 'col-closed' && f.closingDate && f.closingDate < t; });
+  if(type === 'monthly'){
+    var n=new Date(); var y=n.getFullYear(); var m=String(n.getMonth()+1).padStart(2,'0');
+    var mS=y+'-'+m+'-01'; var mE=new Date(y,n.getMonth()+1,0).toISOString().split('T')[0];
+    data = data.filter(function(f){ return f.closingDate && f.closingDate >= mS && f.closingDate <= mE; });
+  }
+
+  var totalFees=0, feeCount=0;
+  data.forEach(function(f){ var v=parsePrice(f.fee); if(v>0){totalFees+=v;feeCount++;} });
+  var closed = data.filter(function(f){return f.status==='col-closed';}).length;
+  var active = data.length - closed;
+  var now    = new Date();
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var typeLbl= {all:'All Files',monthly:'Closing This Month',active:'Active Files',closed:'Closed Files',overdue:'Overdue Files'};
+
+  var h = '';
+  h += '<div style="text-align:center;border-bottom:3px solid #0d7377;padding-bottom:12px;margin-bottom:16px">';
+  h += '<div style="font-size:1.4rem;font-weight:700;color:#0b3d3f;font-family:serif">KSS Matterkey Inc.</div>';
+  h += '<div style="font-size:.8rem;color:#3d5c5c">Real Estate Legal Closing Tracker</div>';
+  h += '<div style="font-size:1rem;font-weight:700;margin-top:6px">' + (typeLbl[type]||type) + ' Report</div>';
+  if(lawyer) h += '<div style="font-size:.78rem;color:#0d7377;margin-top:2px">Lawyer: ' + esc(lawyer) + '</div>';
+  h += '<div style="font-size:.72rem;color:#6b7280;margin-top:2px">Generated: ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear() + '</div>';
+  h += '</div>';
+
+  // KPI summary
+  h += '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">';
+  var kpis = [
+    ['Total Files', data.length, '#0b3d3f'],
+    ['Closed', closed, '#059669'],
+    ['Active', active, '#0d7377'],
+    ['Revenue', '$' + totalFees.toLocaleString() + (feeCount?' ('+feeCount+')':''), '#7c3aed']
+  ];
+  kpis.forEach(function(k){
+    h += '<div style="flex:1;min-width:90px;background:#e6f4f4;border-radius:8px;padding:8px 12px;text-align:center">';
+    h += '<div style="font-size:1.1rem;font-weight:700;color:'+k[2]+'">'+k[1]+'</div>';
+    h += '<div style="font-size:.65rem;color:#3d5c5c;text-transform:uppercase;letter-spacing:.04em">'+k[0]+'</div></div>';
+  });
+  h += '</div>';
+
+  // Table
+  h += '<table><thead><tr>';
+  ['File #','Client','Type','Lawyer','Address','Closing Date','Status','Fee'].forEach(function(col){
+    h += '<th>' + col + '</th>';
+  });
+  h += '</tr></thead><tbody>';
+  data.forEach(function(f, i){
+    var sLbl = STATUSES.find(function(s){return s.id===f.status;});
+    h += '<tr>';
+    h += '<td><strong>' + esc(f.fileNumber) + '</strong></td>';
+    h += '<td>' + esc(f.clientName) + '</td>';
+    h += '<td>' + esc(f.type) + '</td>';
+    h += '<td>' + esc(f.lawyer||'—') + '</td>';
+    h += '<td>' + esc(f.address||'—') + '</td>';
+    h += '<td>' + fmtDate(f.closingDate) + '</td>';
+    h += '<td>' + (sLbl ? sLbl.label : f.status) + '</td>';
+    h += '<td>' + esc(f.fee||'—') + '</td>';
+    h += '</tr>';
+  });
+  if(data.length === 0) h += '<tr><td colspan="8" style="text-align:center;color:#9ca3af;padding:12px">No files match the selected criteria</td></tr>';
+  h += '</tbody></table>';
+  h += '<div style="margin-top:12px;font-size:.68rem;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:8px">KSS Matterkey Inc. — Confidential — Do Not Distribute</div>';
+  return h;
+}
+
+// ── FEATURE 7: Print-Friendly File Summary ──
+function attachPrintButtons(){
+  document.querySelectorAll('.matter-card').forEach(function(card){
+    if(card.querySelector('.v18-print-btn')) return;
+    var fid = card.dataset.id;
+    var pb = document.createElement('button');
+    pb.className = 'v18-print-btn no-print';
+    pb.dataset.id = fid;
+    pb.title = 'Print file summary';
+    pb.textContent = '\uD83D\uDDA8 Print';
+    pb.addEventListener('click', function(e){
+      e.stopPropagation();
+      openPrintSummary(this.dataset.id);
+    });
+    // append to bottom of card
+    card.appendChild(pb);
+  });
+
+  // Also show reminder badge on card if reminder coming up
+  document.querySelectorAll('.matter-card').forEach(function(card){
+    if(card.querySelector('.reminder-badge')) return;
+    var fid = card.dataset.id;
+    var f = getFile(fid);
+    if(!f || !f.reminderDate) return;
+    var t = todayStr();
+    var diff = daysBetween(t, f.reminderDate);
+    if(diff >= 0 && diff <= 7){
+      var rb = document.createElement('span');
+      rb.className = 'reminder-badge no-print';
+      var dlbl = diff === 0 ? 'today' : 'in ' + diff + ' day' + (diff > 1 ? 's' : '');
+      rb.textContent = '\uD83D\uDD14 ' + (f.reminderNote || 'Reminder') + ' (' + dlbl + ')';
+      rb.style.display = 'block';
+      card.insertBefore(rb, card.querySelector('.v18-print-btn'));
+    }
+  });
+}
+
+function openPrintSummary(fid){
+  var f = getFile(fid);
+  if(!f) return;
+
+  var sLbl = STATUSES.find(function(s){ return s.id === f.status; });
+  var done = f.checklist ? f.checklist.filter(function(c){ return c.done; }).length : 0;
+  var tot  = f.checklist ? f.checklist.length : 0;
+  var pct  = tot > 0 ? Math.round(done/tot*100) : 0;
+  var now  = new Date();
+  var MON  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  var h = '<div style="font-family:Georgia,serif;color:#1a3030;line-height:1.6">';
+
+  // Letterhead
+  h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #0d7377;padding-bottom:10px;margin-bottom:14px">';
+  h += '<div><div style="font-size:1.2rem;font-weight:700;color:#0b3d3f">KSS Matterkey Inc.</div>';
+  h += '<div style="font-size:.72rem;color:#3d5c5c">Real Estate Legal Closing Tracker</div></div>';
+  h += '<div style="text-align:right;font-size:.7rem;color:#6b7280">File No: <strong>' + esc(f.fileNumber) + '</strong><br/>Printed: ' + MON[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear() + '</div>';
+  h += '</div>';
+
+  // Two-column detail grid
+  var fields = [
+    ['Client Name', f.clientName], ['File Type', f.type],
+    ['Lawyer', f.lawyer||'—'], ['Clerk', f.clerk||'—'],
+    ['Property Address', f.address||'—'], ['Purchase Price', f.price||'—'],
+    ['Requisition Date', fmtDate(f.reqDate)], ['Closing Date', fmtDate(f.closingDate)],
+    ['Legal Fee', f.fee||'—'], ['Status', sLbl ? sLbl.label : f.status],
+    ['Priority', f.priority||'Normal'], ['File Number', f.fileNumber],
+    ['Reminder Date', f.reminderDate ? fmtDate(f.reminderDate) : '—'], ['Reminder Note', f.reminderNote||'—']
+  ];
+  h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">';
+  fields.forEach(function(pair){
+    h += '<div style="font-size:.78rem"><span style="display:block;font-size:.65rem;font-weight:700;color:#3d5c5c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1px">' + pair[0] + '</span>' + esc(String(pair[1])) + '</div>';
+  });
+  h += '</div>';
+
+  // Notes
+  if(f.notes){
+    h += '<div style="margin-bottom:12px">';
+    h += '<div style="font-size:.7rem;font-weight:700;color:#3d5c5c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Notes</div>';
+    h += '<div style="background:#f0fafa;border-left:3px solid #0d7377;padding:7px 10px;border-radius:4px;font-size:.78rem">' + esc(f.notes) + '</div>';
+    h += '</div>';
+  }
+
+  // Checklist
+  h += '<div style="margin-bottom:12px">';
+  h += '<div style="font-size:.7rem;font-weight:700;color:#3d5c5c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Checklist — ' + done + '/' + tot + ' (' + pct + '%)</div>';
+  if(f.checklist && f.checklist.length > 0){
+    f.checklist.forEach(function(c){
+      var tick = c.done ? '&#9989;' : '&#9634;';
+      h += '<div style="display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid #e5e7eb;font-size:.77rem">';
+      h += '<span style="flex-shrink:0">' + tick + '</span>';
+      h += '<span style="' + (c.done ? 'text-decoration:line-through;color:#6b7280' : '') + '">' + esc(c.text) + '</span>';
+      h += '</div>';
+    });
+  } else {
+    h += '<div style="font-size:.75rem;color:#9ca3af;font-style:italic">No checklist items</div>';
+  }
+  h += '</div>';
+
+  // Activity Log
+  if(f.activity && f.activity.length > 0){
+    h += '<div style="margin-bottom:8px">';
+    h += '<div style="font-size:.7rem;font-weight:700;color:#3d5c5c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Activity Log (recent 10)</div>';
+    var recent = f.activity.slice(-10).reverse();
+    recent.forEach(function(a){
+      var d = new Date(a.ts);
+      var dStr = MON[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+      h += '<div style="display:flex;gap:10px;padding:3px 0;border-bottom:1px dashed #e5e7eb;font-size:.72rem">';
+      h += '<span style="color:#6b7280;white-space:nowrap;flex-shrink:0">' + dStr + '</span>';
+      h += '<span>' + esc(a.msg) + '</span></div>';
+    });
+    h += '</div>';
+  }
+
+  h += '<div style="margin-top:12px;font-size:.68rem;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:8px">KSS Matterkey Inc. — Confidential</div>';
+  h += '</div>';
+
+  var preview = document.getElementById('print-preview-v18');
+  if(preview) preview.innerHTML = h;
+  openModal('modal-print-v18');
+}
+
+(function(){
+  var closeBtn  = document.getElementById('print-close-v18');
+  var cancelBtn = document.getElementById('print-cancel-v18');
+  var printBtn  = document.getElementById('do-print-v18');
+  if(closeBtn)  closeBtn.addEventListener('click',  function(){ closeModal('modal-print-v18'); });
+  if(cancelBtn) cancelBtn.addEventListener('click', function(){ closeModal('modal-print-v18'); });
+  if(printBtn)  printBtn.addEventListener('click',  function(){
+    var prev = document.getElementById('print-preview-v18');
+    if(!prev) return;
+    var w = window.open('','_blank');
+    if(!w){ showToast('Allow popups to print'); return; }
+    w.document.write('<!DOCTYPE html><html><head><title>KSS File Summary</title>');
+    w.document.write('<style>body{margin:2cm;font-family:Georgia,serif;color:#1a3030}@media print{@page{margin:1.5cm}}</style>');
+    w.document.write('</head><body>' + prev.innerHTML + '</body></html>');
+    w.document.close(); w.focus();
+    setTimeout(function(){ w.print(); }, 500);
+  });
+})();
+
+// Initial render calls
+renderCountdownBanner();
+if(document.getElementById('chart-volume-v18')) buildVolumeChart();
 
 }catch(e){console.error('KSS Init Error:',e)}
 </script>
