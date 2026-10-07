@@ -328,7 +328,7 @@ body.tab-matters-active{overflow:hidden}
 <div id="cl-progress-summary" style="margin-bottom:.75rem;padding:.5rem .75rem;background:var(--bg-col);border-radius:.5rem;display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border)"><span id="cl-prog-text" style="font-size:.78rem;font-weight:600;color:var(--tmid)"></span><div style="width:60%;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden"><div id="cl-prog-bar" style="height:100%;background:linear-gradient(90deg,#0d7377,#14a09a);border-radius:3px;transition:width .3s;width:0%"></div></div></div>
 <div data-id="207" id="checklist-body-k5l6m" class="space-y-1"></div>
 <div style="margin-top:.75rem;border-top:2px solid var(--border);padding-top:.75rem;display:flex;gap:.5rem;background:var(--bg-col);padding:.75rem;border-radius:.5rem">
-  <input id="cl-new-task-inp" type="text" class="w-full" placeholder="Add a task and press Enter…" style="font-size:.82rem" onkeydown="if(event.key==='Enter'){event.preventDefault();clAddTask();}" /
+  <input id="cl-new-task-inp" type="text" class="w-full" placeholder="Add a task and press Enter…" style="font-size:.82rem" onkeydown="if(event.key==='Enter'){event.preventDefault();clAddTask();}" />
   <button type="button" onclick="clAddTask()" style="background:var(--tmid);color:#fff;border:none;border-radius:.375rem;padding:.35rem .8rem;cursor:pointer;white-space:nowrap;font-size:.82rem;font-weight:600">+ Add</button>
 </div>
 </div>
@@ -480,7 +480,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.7';
+var KSS_VERSION='18.8';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
