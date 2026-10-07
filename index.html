@@ -64,6 +64,10 @@ h1,h2,h3,.font-display{font-family:'Playfair Display',serif}
 .matter-card:active{cursor:grabbing}
 .matter-card.dragging{opacity:.5;transform:scale(.97)}
 .drop-target{border:2px dashed #14a09a !important;background:rgba(20,160,154,.07) !important}
+/* Unpaid card highlight v18.11 */
+.matter-card.unpaid-card{background:rgba(217,119,6,.10) !important;border-left:3px solid #d97706 !important;box-shadow:0 2px 8px rgba(217,119,6,.15) !important;}
+[data-theme="dark"] .matter-card.unpaid-card{background:rgba(251,191,36,.09) !important;border-left:3px solid #f59e0b !important;box-shadow:0 2px 8px rgba(251,191,36,.12) !important;}
+
 .tab-btn{padding:.5rem 1.25rem;border-radius:.5rem .5rem 0 0;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--text-muted);transition:all .15s}
 .tab-btn.active{background:var(--bg-card);color:#0d7377;box-shadow:0 -2px 6px rgba(11,61,63,.08)}
 [data-theme="dark"] .tab-btn.active{color:#14a09a}
@@ -498,7 +502,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.10';
+var KSS_VERSION='18.11';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -611,7 +615,7 @@ var notesShort=f.notes?(f.notes.length>60?f.notes.substring(0,60)+'…':f.notes)
 var expanded=f.expanded!==false;
 
 var card=document.createElement('div');
-card.className='matter-card card-bg rounded-lg p-3 text-xs';
+card.className='matter-card card-bg rounded-lg p-3 text-xs'+((f.invoiceStatus==='unpaid'||f.invoiceStatus==='overdue')?' unpaid-card':'');
 card.setAttribute('draggable','true');
 card.dataset.id=f.id;
 
@@ -1912,7 +1916,7 @@ if(document.getElementById('chart-volume-v18')) buildVolumeChart();
 
 }catch(e){console.error('KSS Init Error:',e)}
 
-// CSV Import v18.10
+// CSV Import v18.11
 document.addEventListener('DOMContentLoaded',function(){
   var csvInput=document.getElementById('csv-file-input-v1910');
   if(!csvInput)return;
