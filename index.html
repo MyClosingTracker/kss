@@ -502,7 +502,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.13';
+var KSS_VERSION='18.14';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -602,7 +602,7 @@ var body=$('body-'+st.id);
 var count=$('count-'+st.id);
 if(!body)return;
 body.innerHTML='';
-var files=appData.filter(function(f){return f.status===st.id&&matchFilter(f,filters)});files.sort(function(a,b){var da=a.closingDate||'';var db=b.closingDate||'';var asc=(st.id==='col-new'||st.id==='col-req');return asc?da.localeCompare(db):db.localeCompare(da);});
+var files=appData.filter(function(f){return f.status===st.id&&matchFilter(f,filters)});files.sort(function(a,b){var da=a.closingDate||'';var db=b.closingDate||'';var asc=(st.id==='col-new'||st.id==='col-req'||st.id==='col-closing');return asc?da.localeCompare(db):db.localeCompare(da);});
 if(count)count.textContent='('+files.length+')';
 files.forEach(function(f){
 var cd=getCountdown(f);
