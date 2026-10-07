@@ -228,8 +228,8 @@ body.tab-matters-active{overflow:hidden}
 <h2 data-id="86" class="font-display text-2xl mb-4" style="color:var(--text-primary)">Dashboard</h2>
 <div data-id="87" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-4" id="kpi-row-i7j8"></div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
-<div class="card-bg rounded-xl p-4 lg:col-span-2"><div class="flex items-center justify-between mb-2"><h3 class="font-bold text-sm" style="color:var(--text-secondary)">Revenue by Lawyer</h3></div><div style="height:200px;position:relative"><canvas id="chart-revenue-k9l0"></canvas></div></div>
-<div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Files by Type</h3><div style="height:200px;position:relative"><canvas id="chart-pipeline-o3p4"></canvas></div></div>
+<div class="card-bg rounded-xl p-4 lg:col-span-2"><div class="flex items-center justify-between mb-2"><h3 class="font-bold text-sm" style="color:var(--text-secondary)">Referrals by Lawyer — Referred vs Received</h3></div><div style="height:220px;position:relative"><canvas id="chart-revenue-k9l0"></canvas></div></div>
+<div class="card-bg rounded-xl p-4"><h3 class="font-bold text-sm mb-2" style="color:var(--text-secondary)">Monthly Agency Income</h3><div style="height:220px;position:relative"><canvas id="chart-pipeline-o3p4"></canvas></div></div>
 </div>
 <div class="card-bg rounded-xl p-4 mb-4">
     <div class="flex items-center justify-between mb-2">
@@ -290,7 +290,24 @@ body.tab-matters-active{overflow:hidden}
 <div data-id="179"><label data-id="180" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Priority</label><select data-id="181" id="ef-priority-m9n0o"><option data-id="182">Normal</option><option data-id="183">High</option><option data-id="184">Urgent</option></select></div>
 <div data-id="185"><label data-id="186" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Status</label><select data-id="187" id="ef-status-p1q2r"><option data-id="188" value="col-new">New / Open</option><option data-id="189" value="col-req">Requisition</option><option data-id="190" value="col-closing">Closing Soon</option><option data-id="191" value="col-reporting">Reporting</option><option data-id="192" value="col-closed">Closed</option></select></div>
 </div>
-<div data-id="193"><label data-id="194" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Legal Fee</label><input data-id="195" id="ef-fee-s3t4u" placeholder="e.g. $1,500"/></div>
+<div data-id="193"><label data-id="194" class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Agency Fee</label><input data-id="195" id="ef-fee-s3t4u" type="number" min="0" step="0.01" placeholder="e.g. 850.00"/></div>
+<div class="grid grid-cols-2 gap-3" style="margin-top:.75rem">
+  <div>
+    <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">File Direction</label>
+    <select id="ef-direction-v19" class="w-full">
+      <option value="received">Received from Client</option>
+      <option value="referred">Referred to Client</option>
+    </select>
+  </div>
+  <div>
+    <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Invoice Status</label>
+    <select id="ef-invstatus-v19" class="w-full">
+      <option value="unpaid">⏳ Unpaid</option>
+      <option value="paid">✅ Paid</option>
+      <option value="overdue">🔴 Overdue</option>
+    </select>
+  </div>
+</div>
 <div class="grid grid-cols-2 gap-3">
       <div>
         <label class="text-xs font-semibold block mb-1" style="color:var(--text-muted)">Reminder Date</label>
@@ -480,7 +497,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.8';
+var KSS_VERSION='18.9';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -612,6 +629,16 @@ html+='<div class="flex flex-wrap gap-x-3 gap-y-0.5 mb-1.5" style="color:var(--t
 html+='<span>'+esc(f.lawyer||'—')+'</span>';
 html+='<span>Clerk: '+(f.clerk||'Unassigned')+'</span>';
 html+='</div>';
+var _invMap={'paid':'background:#d1fae5;color:#065f46','unpaid':'background:#fef3c7;color:#92400e','overdue':'background:#fee2e2;color:#991b1b'};
+var _invLabel={'paid':'✅ Paid','unpaid':'⏳ Unpaid','overdue':'🔴 Overdue'};
+var _dirMap={'received':'background:#e0f2fe;color:#075985','referred':'background:#fdf4ff;color:#7e22ce'};
+var _dirLabel={'received':'← Received','referred':'→ Referred'};
+var _ist=f.invoiceStatus||'unpaid';var _idir=f.direction||'received';
+html+='<div class="flex flex-wrap gap-1 mb-1.5">';
+html+='<span class="badge" style="'+(_invMap[_ist]||_invMap.unpaid)+'">'+(_invLabel[_ist]||'⏳ Unpaid')+'</span>';
+html+='<span class="badge" style="'+(_dirMap[_idir]||_dirMap.received)+'">'+(_dirLabel[_idir]||'← Received')+'</span>';
+if(f.fee)html+='<span class="badge" style="background:#f0fdf4;color:#15803d;font-weight:700">$'+parseFloat(f.fee||0).toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2})+'</span>';
+html+='</div>';
 html+='<div class="flex gap-x-3 mb-1" style="color:var(--text-muted)">';
 if(f.closingDate)html+='<span>Close: '+fmtDate(f.closingDate)+'</span>';
 if(f.reqDate)html+='<span>Req: '+fmtDate(f.reqDate)+'</span>';
@@ -710,6 +737,8 @@ var ecd=$('ef-closedate-j7k8l');if(ecd)ecd.value=f?f.closingDate:'';
 var epri=$('ef-priority-m9n0o');if(epri)epri.value=f?f.priority:'Normal';
 var est=$('ef-status-p1q2r');if(est)est.value=f?f.status:'col-new';
 var efe=$('ef-fee-s3t4u');if(efe)efe.value=f?f.fee:'';
+var edir=$('ef-direction-v19');if(edir)edir.value=f?f.direction||'received':'received';
+var einv=$('ef-invstatus-v19');if(einv)einv.value=f?f.invoiceStatus||'unpaid':'unpaid';
 var eno=$('ef-notes-v5w6x');if(eno)eno.value=f?f.notes:'';
 currentEditFileId=fileId||null;
 renderEditChecklist(f);
@@ -738,6 +767,8 @@ var newSt=$('ef-status-p1q2r').value;
 if(!isNew&&f.status!==newSt)addActivity(f,'Status: '+f.status+' → '+newSt);
 f.status=newSt;
 f.fee=$('ef-fee-s3t4u').value.trim();
+f.direction=$('ef-direction-v19')?$('ef-direction-v19').value:'received';
+f.invoiceStatus=$('ef-invstatus-v19')?$('ef-invstatus-v19').value:'unpaid';
 f.notes=$('ef-notes-v5w6x').value.trim();
 if(isNew){
 if(f.checklist.length===0&&CHECKLIST_TEMPLATES[f.type]){f.checklist=CHECKLIST_TEMPLATES[f.type].map(function(l){return{id:uuid(),text:l,done:false}})}
@@ -1037,15 +1068,32 @@ if(kpi){
 var isDark=document.documentElement.getAttribute('data-theme')==='dark';
 var labelColor=isDark?'#a0c4c4':'#3d5c5c';
 
-// Revenue by Lawyer
+// Referrals by Lawyer: Referred Out vs Received In
 var rCtx=$('chart-revenue-k9l0');
 if(rCtx&&typeof Chart!=='undefined'){
   if(chartRevenue)chartRevenue.destroy();
-  var lawyers={};
-  appData.forEach(function(f){var v=parsePrice(f.fee);if(v>0){if(!lawyers[f.lawyer||'Unknown'])lawyers[f.lawyer||'Unknown']=0;lawyers[f.lawyer||'Unknown']+=v;}});
-  var lNames=Object.keys(lawyers);
-  var lVals=lNames.map(function(n){return lawyers[n];});
-  chartRevenue=new Chart(rCtx.getContext('2d'),{type:'bar',data:{labels:lNames,datasets:[{label:'Revenue',data:lVals,backgroundColor:'rgba(13,115,119,.7)',borderColor:'#0d7377',borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:labelColor,font:{size:10}},grid:{display:false}},y:{ticks:{color:labelColor,font:{size:10},callback:function(v){return '$'+v.toLocaleString();}},grid:{color:isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}}}}});
+  var refLawyers={};
+  appData.forEach(function(f){
+    var ln=f.lawyer||'Unknown';
+    if(!refLawyers[ln])refLawyers[ln]={received:0,referred:0};
+    if(f.direction==='referred')refLawyers[ln].referred++;
+    else refLawyers[ln].received++;
+  });
+  var rNames=Object.keys(refLawyers);
+  var rReceived=rNames.map(function(n){return refLawyers[n].received;});
+  var rReferred=rNames.map(function(n){return refLawyers[n].referred;});
+  chartRevenue=new Chart(rCtx.getContext('2d'),{
+    type:'bar',
+    data:{labels:rNames,datasets:[
+      {label:'Received from Client',data:rReceived,backgroundColor:'rgba(13,115,119,.75)',borderColor:'#0d7377',borderWidth:1,borderRadius:4},
+      {label:'Referred to Client',data:rReferred,backgroundColor:'rgba(232,112,90,.75)',borderColor:'#e8705a',borderWidth:1,borderRadius:4}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{color:labelColor,font:{size:10},padding:8}}},
+      scales:{x:{ticks:{color:labelColor,font:{size:9}},grid:{display:false}},
+              y:{ticks:{color:labelColor,font:{size:10},stepSize:1},grid:{color:isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}}}
+    }
+  });
 }
 
 // Lawyer Workload
@@ -1060,13 +1108,40 @@ if(wCtx&&typeof Chart!=='undefined'){
   chartWorkload=new Chart(wCtx.getContext('2d'),{type:'bar',data:{labels:wNames,datasets:[{label:'Active Files',data:wVals,backgroundColor:wNames.map(function(_,i){return barColors[i%barColors.length];}),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:labelColor,font:{size:10}},grid:{display:false}},y:{ticks:{color:labelColor,font:{size:10}},grid:{color:isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}}}}});
 }
 
-// Files by Type donut
+// Monthly Agency Income (last 12 months)
 var pCtx=$('chart-pipeline-o3p4');
 if(pCtx&&typeof Chart!=='undefined'){
   if(chartPipeline)chartPipeline.destroy();
-  var tLbls=['Purchase','Sale','Refinance','Transfer'];
-  var tCnts=tLbls.map(function(tp){return appData.filter(function(f){return f.type===tp;}).length;});
-  chartPipeline=new Chart(pCtx.getContext('2d'),{type:'doughnut',data:{labels:tLbls,datasets:[{data:tCnts,backgroundColor:['#d1fae5','#dbeafe','#fde68a','#e9d5ff'],borderColor:['#065f46','#1e40af','#92400e','#6b21a8'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:labelColor,font:{size:10},padding:5}}}}});
+  var now=new Date();
+  var mLabels=[],mTotals=[];
+  for(var mi=11;mi>=0;mi--){
+    var d=new Date(now.getFullYear(),now.getMonth()-mi,1);
+    mLabels.push(d.toLocaleString('en-CA',{month:'short',year:'2-digit'}));
+    var total=0;
+    appData.forEach(function(f){
+      var fd=f.closingDate||f.reqDate;
+      if(!fd||!f.fee)return;
+      var fDate=new Date(fd);
+      if(fDate.getFullYear()===d.getFullYear()&&fDate.getMonth()===d.getMonth()){
+        total+=parseFloat(f.fee)||0;
+      }
+    });
+    mTotals.push(total);
+  }
+  chartPipeline=new Chart(pCtx.getContext('2d'),{
+    type:'line',
+    data:{labels:mLabels,datasets:[{
+      label:'Agency Income',data:mTotals,
+      borderColor:'#0d7377',backgroundColor:'rgba(13,115,119,.12)',
+      borderWidth:2,pointBackgroundColor:'#0d7377',pointRadius:4,fill:true,tension:.35
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{ticks:{color:labelColor,font:{size:9}},grid:{display:false}},
+              y:{ticks:{color:labelColor,font:{size:10},callback:function(v){return '$'+v.toLocaleString();}},
+                 grid:{color:isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}}}
+    }
+  });
 }
 
 // Recent Activity
