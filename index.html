@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="KSS Tracker"/>
+<meta name="application-name" content="KSS Tracker"/>
+<meta name="theme-color" content="#0b3d3f" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#0f1e1e" media="(prefers-color-scheme: dark)"/>
+<link rel="apple-touch-icon" sizes="192x192" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20192%20192%27%3E%3Crect%20width%3D%27192%27%20height%3D%27192%27%20rx%3D%2732%27%20fill%3D%27%25230b3d3f%27/%3E%3Crect%20x%3D%2740%27%20y%3D%2728%27%20rx%3D%278%27%20width%3D%27112%27%20height%3D%27136%27%20fill%3D%27white%27/%3E%3Crect%20x%3D%2740%27%20y%3D%2728%27%20rx%3D%278%27%20width%3D%27112%27%20height%3D%2728%27%20fill%3D%27%25230d7377%27/%3E%3Crect%20x%3D%2752%27%20y%3D%2778%27%20width%3D%2788%27%20height%3D%277%27%20rx%3D%273%27%20fill%3D%27%2523e6f4f4%27/%3E%3Crect%20x%3D%2752%27%20y%3D%2796%27%20width%3D%2770%27%20height%3D%277%27%20rx%3D%273%27%20fill%3D%27%2523e6f4f4%27/%3E%3Crect%20x%3D%2752%27%20y%3D%27114%27%20width%3D%2755%27%20height%3D%277%27%20rx%3D%273%27%20fill%3D%27%2523e6f4f4%27/%3E%3Crect%20x%3D%2752%27%20y%3D%27132%27%20width%3D%2740%27%20height%3D%277%27%20rx%3D%273%27%20fill%3D%27%2523e6f4f4%27/%3E%3C/svg%3E"/>
 <title>KSS Matterkey Legal Closing Tracker</title>
 <script>
 // Prevent flash of wrong theme
@@ -128,6 +136,52 @@ body.tab-matters-active{overflow:hidden}
 .checklist-item{display:flex;align-items:center;gap:.5rem;padding:.375rem 0;border-bottom:1px solid var(--border)}
 .checklist-item:last-child{border-bottom:none}
 .checklist-item input[type="checkbox"]{width:18px;height:18px;accent-color:#0d7377;cursor:pointer;flex-shrink:0}
+
+/* ══ v18.15 MOBILE OVERHAUL ══ */
+/* Kanban scroll */
+.kanban-scroll{-webkit-overflow-scrolling:touch;touch-action:pan-x;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:1.5rem}
+.kanban-scroll::-webkit-scrollbar{display:none}
+/* Swipe dots */
+.col-dots{display:none;justify-content:center;gap:8px;padding:8px 0 4px}
+.col-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .2s,transform .2s;cursor:pointer;border:none;padding:0;outline:none}
+.col-dot.active{background:#0d7377;transform:scale(1.4)}
+.swipe-hint{display:none;text-align:center;font-size:.7rem;color:var(--text-muted);padding:2px 0 6px;letter-spacing:.04em;user-select:none}
+/* Mobile filter toggle */
+.mob-filter-btn{display:none;width:100%;align-items:center;justify-content:space-between;gap:6px;padding:9px 14px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg-col);color:var(--text-secondary);margin-bottom:6px}
+/* Mobile restore banner */
+.mob-restore-banner{display:none;align-items:center;gap:8px;padding:10px 14px;background:rgba(232,112,90,.1);border:1px solid rgba(232,112,90,.3);border-radius:.75rem;margin-bottom:.75rem;font-size:.8rem;color:var(--text-secondary);flex-wrap:wrap}
+@media(max-width:767px){
+  body{padding-bottom:env(safe-area-inset-bottom,16px)}
+  /* Columns: nearly full-width, snapped */
+  .kanban-col{min-width:88vw!important;max-width:92vw!important;scroll-snap-align:start}
+  .kanban-scroll{padding:0 4vw 80px!important;gap:.75rem!important}
+  /* Show dots + hint */
+  .col-dots{display:flex!important}
+  .swipe-hint{display:block!important}
+  /* Show mobile filter btn, hide filter bar by default */
+  .mob-filter-btn{display:inline-flex!important}
+  .mob-restore-banner{display:flex!important}
+  /* Filter bar hidden until toggled */
+  #filter-bar-mob-wrap:not(.mob-open) > #filter-bar-inner{display:none!important}
+  #filter-bar-inner{flex-direction:column!important;align-items:stretch!important;gap:.5rem!important;padding:.75rem!important;background:var(--bg-col)!important;border:1px solid var(--border)!important;border-radius:.75rem!important;margin-bottom:.5rem!important}
+  #filter-bar-inner input,#filter-bar-inner select{max-width:100%!important;width:100%!important;font-size:.95rem!important;padding:.55rem .75rem!important}
+  #filter-bar-inner .btn-ghost{width:100%!important;text-align:center!important}
+  /* Tab bar scroll */
+  .tab-bar-scroll{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:none!important;display:flex!important;gap:.25rem!important}
+  .tab-bar-scroll::-webkit-scrollbar{display:none!important}
+  /* Modal bottom sheet */
+  .modal-box{max-width:100%!important;border-radius:1.25rem 1.25rem 0 0!important;position:fixed!important;bottom:0!important;left:0!important;right:0!important;top:auto!important;max-height:92dvh!important;overflow-y:auto!important}
+  .modal-overlay{align-items:flex-end!important;padding:0!important}
+  /* Dashboard KPI grid */
+  #kpi-row-i7j8{grid-template-columns:1fr 1fr!important;gap:.5rem!important}
+  /* Header compact */
+  .header-bg .font-display{font-size:1.2rem!important}
+}
+@media(min-width:768px){
+  #filter-bar-inner{display:flex!important}
+  .mob-restore-banner,.mob-filter-btn,.col-dots,.swipe-hint{display:none!important}
+}
+
 </style>
 </head>
 <body data-id="0">
@@ -191,17 +245,19 @@ body.tab-matters-active{overflow:hidden}
 
 <!-- TAB BAR -->
 <div data-id="46" class="no-print sticky top-[60px] z-40 bg-gradient-to-b from-[var(--bg-col)] to-transparent">
-<div data-id="47" class="max-w-[1600px] mx-auto px-4 flex gap-1 pt-2">
+<div data-id="47" class="max-w-[1600px] mx-auto px-4 pt-2"><div class="tab-bar-scroll">
 <button data-id="48" class="tab-btn active" data-tab="matters" id="tab-matters-k3l4">Matters</button>
 <button data-id="49" class="tab-btn" data-tab="dashboard" id="tab-dash-m5n6">Dashboard</button>
 <button data-id="50" class="tab-btn" data-tab="calendar" id="tab-cal-o7p8">Calendar</button>
-</div>
+</div></div>
 </div>
 
 <!-- TAB: MATTERS (Kanban) -->
 <main data-id="51" id="tab-content-matters" class="max-w-[1600px] mx-auto px-4 py-4">
 <!-- Filter bar -->
-<div data-id="52" class="flex flex-wrap gap-2 mb-4 items-center no-print">
+<div class="mob-restore-banner no-print">📱 <span><strong>Fewer files than expected?</strong> Mobile uses separate storage — <button onclick="document.getElementById('import-json-input-r5s6').click()" style="font-weight:700;color:#0d7377;text-decoration:underline;background:none;border:none;cursor:pointer;padding:0">restore from your JSON backup</button></span></div>
+<button class="mob-filter-btn no-print" id="mob-filter-toggle" onclick="toggleMobFilters()"><span>🔍 Search &amp; Filters</span><span id="mob-filter-arrow">▼</span></button>
+<div id="filter-bar-mob-wrap" class="no-print"><div id="filter-bar-inner" class="flex flex-wrap gap-2 mb-4 items-center no-print">
 <input data-id="53" type="text" id="filter-search-q9r0" placeholder="Search files..." class="max-w-[220px] text-sm"/>
 <select data-id="54" id="filter-lawyer-s1t2" class="max-w-[180px] text-sm"><option data-id="55" value="">All Lawyers</option></select>
 <select data-id="56" id="filter-type-u3v4" class="max-w-[140px] text-sm"><option data-id="57" value="">All Types</option></select>
@@ -209,7 +265,7 @@ body.tab-matters-active{overflow:hidden}
 <select data-id="60" id="filter-clerk-y7z8" class="max-w-[140px] text-sm"><option data-id="61" value="">All Clerks</option></select>
 <button data-id="62" class="btn-ghost" id="expand-all-a9b0">Expand All</button>
 <button data-id="63" class="btn-ghost" id="collapse-all-c1d2">Collapse All</button>
-</div>
+</div></div></div>
 <!-- V18: Countdown Banner -->
 <div id="countdown-banner-v18" class="no-print">
   <div style="background:linear-gradient(135deg,#7f1d1d,#b91c1c,#dc2626);border-radius:.75rem;padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
@@ -221,6 +277,9 @@ body.tab-matters-active{overflow:hidden}
 <!-- Kanban columns -->
 <div data-id="64" class="kanban-scroll" id="kanban-board-g5h6">
 <div data-id="65" class="kanban-col" data-status="col-new"><div data-id="66" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 100%);color:#fff">New / Open <span data-id="67" class="font-normal text-xs" id="count-col-new"></span></div><div data-id="68" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-new"></div></div>
+<p class="swipe-hint no-print">← Swipe between columns →</p>
+<div class="col-dots no-print" id="col-dots-nav"></div>
+
 <div data-id="69" class="kanban-col" data-status="col-req"><div data-id="70" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0d7377 0%,#14a09a 100%);color:#fff">Requisition <span data-id="71" class="font-normal text-xs" id="count-col-req"></span></div><div data-id="72" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-req"></div></div>
 <div data-id="73" class="kanban-col" data-status="col-closing"><div data-id="74" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#e8705a 0%,#cf5e4a 100%);color:#fff">Closing Soon <span data-id="75" class="font-normal text-xs" id="count-col-closing"></span></div><div data-id="76" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-closing"></div></div>
 <div data-id="77" class="kanban-col" data-status="col-reporting"><div data-id="78" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 60%,#14a09a 100%);color:#fff">Reporting <span data-id="79" class="font-normal text-xs" id="count-col-reporting"></span></div><div data-id="80" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-reporting"></div></div>
@@ -502,7 +561,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.14';
+var KSS_VERSION='18.15';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -1276,8 +1335,8 @@ document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.toggle('ac
 ['matters','dashboard','calendar'].forEach(function(t){
 var el=$('tab-content-'+t);if(el)el.style.display=(t===tabName?'':'none');
 });
-if(tabName==='dashboard')renderDashboard();
-if(tabName==='calendar')renderCalendar();
+if(tabName==='dashboard'){setTimeout(function(){renderDashboard();},60);}
+if(tabName==='calendar'){setTimeout(function(){renderCalendar();},60);}
 document.body.classList.toggle('tab-matters-active',tabName==='matters');
 }
 
@@ -2007,6 +2066,134 @@ function downloadIncomeCSV(){
   link.click();
   URL.revokeObjectURL(link.href);
 }
+
+// ══ v18.15 MOBILE JS ══
+
+// Mobile filter toggle
+function toggleMobFilters(){
+  var wrap=document.getElementById('filter-bar-mob-wrap');
+  var arrow=document.getElementById('mob-filter-arrow');
+  if(!wrap) return;
+  var open=wrap.classList.toggle('mob-open');
+  if(arrow) arrow.textContent=open?'▲':'▼';
+}
+
+// Column dot navigation
+function initColDots(){
+  var board=document.getElementById('kanban-board-g5h6');
+  var dotsNav=document.getElementById('col-dots-nav');
+  if(!board||!dotsNav) return;
+  var cols=board.querySelectorAll('.kanban-col');
+  if(!cols.length) return;
+  dotsNav.innerHTML='';
+  cols.forEach(function(col,i){
+    var dot=document.createElement('button');
+    dot.className='col-dot'+(i===0?' active':'');
+    dot.setAttribute('aria-label','Column '+(i+1));
+    dot.addEventListener('click',function(){
+      col.scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
+    });
+    dotsNav.appendChild(dot);
+  });
+  // Update active dot on scroll
+  var scrollHandler=function(){
+    var scrollLeft=board.scrollLeft;
+    var colW=cols[0].offsetWidth;
+    var gap=12;
+    var active=Math.round(scrollLeft/(colW+gap));
+    active=Math.max(0,Math.min(active,cols.length-1));
+    dotsNav.querySelectorAll('.col-dot').forEach(function(d,i){
+      d.classList.toggle('active',i===active);
+    });
+  };
+  board.addEventListener('scroll',scrollHandler,{passive:true});
+}
+
+// Re-init dots after kanban renders (patch renderKanban)
+var _origRenderKanban=typeof renderKanban==='function'?renderKanban:null;
+function patchRenderKanban(){
+  var orig=window.renderKanban;
+  if(orig&&orig._mobilePatchedV1815) return;
+  var patched=function(){
+    orig.apply(this,arguments);
+    if(window.innerWidth<768) setTimeout(initColDots,80);
+  };
+  patched._mobilePatchedV1815=true;
+  window.renderKanban=patched;
+}
+
+// Chart resize fix — force charts to resize after tab becomes visible
+var _origSwitchTab=typeof switchTab==='function'?switchTab:null;
+function patchSwitchTab(){
+  var orig=window.switchTab;
+  if(orig&&orig._mobilePatchedV1815) return;
+  var patched=function(tabName){
+    orig.apply(this,arguments);
+    // After dashboard tab shown, resize all Chart.js charts
+    if(tabName==='dashboard'){
+      setTimeout(function(){
+        if(window.Chart&&Chart.instances){
+          Object.values(Chart.instances).forEach(function(c){
+            try{c.resize();}catch(e){}
+          });
+        }
+        // Also re-render to rebuild canvases
+        if(typeof renderDashboard==='function') renderDashboard();
+      },120);
+    }
+  };
+  patched._mobilePatchedV1815=true;
+  window.switchTab=patched;
+}
+
+// Touch swipe support for kanban (prevent vertical scroll interference)
+function initKanbanTouch(){
+  var board=document.getElementById('kanban-board-g5h6');
+  if(!board) return;
+  var startX=0,startY=0,startScroll=0;
+  board.addEventListener('touchstart',function(e){
+    startX=e.touches[0].clientX;
+    startY=e.touches[0].clientY;
+    startScroll=board.scrollLeft;
+  },{passive:true});
+  board.addEventListener('touchmove',function(e){
+    var dx=e.touches[0].clientX-startX;
+    var dy=e.touches[0].clientY-startY;
+    if(Math.abs(dx)>Math.abs(dy)){
+      e.stopPropagation();
+    }
+  },{passive:true});
+}
+
+// Auto-show filter bar on desktop, hide on mobile on load
+function initMobileFilterState(){
+  if(window.innerWidth>=768){
+    var wrap=document.getElementById('filter-bar-mob-wrap');
+    if(wrap) wrap.classList.add('mob-open');
+  }
+}
+
+// Run all mobile init after DOM ready
+document.addEventListener('DOMContentLoaded',function(){
+  patchRenderKanban();
+  patchSwitchTab();
+  setTimeout(function(){
+    initColDots();
+    initKanbanTouch();
+    initMobileFilterState();
+  },300);
+});
+
+// Also patch on load (in case DOMContentLoaded already fired)
+window.addEventListener('load',function(){
+  patchRenderKanban();
+  patchSwitchTab();
+  setTimeout(function(){
+    initColDots();
+    initKanbanTouch();
+    initMobileFilterState();
+  },300);
+});
 </script>
 </body>
 </html>
