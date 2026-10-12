@@ -187,6 +187,11 @@ body.tab-matters-active{overflow:hidden}
 
 #sync-status-badge{font-size:.72rem;font-weight:600;letter-spacing:.03em;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.15);backdrop-filter:blur(4px);white-space:nowrap;transition:color .3s}
 
+
+/* Splash auto-hide safety net — fires even if JS crashes */
+@keyframes splashAutoHide{0%,60%{opacity:1;pointer-events:all}90%{opacity:0;pointer-events:none}100%{opacity:0;display:none;pointer-events:none}}
+.splash-screen{animation:splashAutoHide 4s ease-in-out forwards;}
+
 </style>
 </head>
 <body data-id="0">
@@ -566,7 +571,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.18';
+var KSS_VERSION='18.19';
 // ══ v18.17 Firebase Firestore Sync ══
 var firebaseConfig={
   apiKey:"AIzaSyDKqefTDqQ3CuNFfiU9R34VYCVamk0VrcM",
@@ -576,9 +581,12 @@ var firebaseConfig={
   messagingSenderId:"144027528390",
   appId:"1:144027528390:web:1784e0c494563a8f29bbc7"
 };
-var fbApp=firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);
-var db=firebase.firestore();
-var FSDoc=db.collection('kss_data').doc('matters');
+var fbApp=null,db=null,FSDoc=null;
+try{
+  fbApp=firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);
+  db=firebase.firestore();
+  FSDoc=db.collection('kss_data').doc('matters');
+}catch(e){console.warn('Firebase init error:',e);}
 var _fsUnsubscribe=null;
 var _syncDebounce=null;
 
@@ -641,7 +649,7 @@ function saveData(){
   clearTimeout(_syncDebounce);
   _syncDebounce=setTimeout(function(){
     setSyncStatus('syncing');
-    FSDoc.set({matters:appData,version:KSS_VERSION,updated:Date.now()})
+    if(FSDoc)FSDoc.set({matters:appData,version:KSS_VERSION,updated:Date.now()})
       .then(function(){setSyncStatus('synced');})
       .catch(function(e){setSyncStatus('error');console.warn('Firestore save:',e);});
   },300);
@@ -662,7 +670,7 @@ function loadData(){
   // 2) Attach Firestore real-time listener
   setSyncStatus('syncing');
   if(_fsUnsubscribe) _fsUnsubscribe(); // detach old listener
-  _fsUnsubscribe=FSDoc.onSnapshot(function(doc){
+  if(FSDoc){_fsUnsubscribe=FSDoc.onSnapshot(function(doc){
     if(doc.exists){
       var data=doc.data();
       if(data.matters&&data.matters.length>0){
@@ -677,21 +685,21 @@ function loadData(){
         setSyncStatus('synced');
       }else{
         // Firestore doc exists but empty — push local data up
-        FSDoc.set({matters:appData,version:KSS_VERSION,updated:Date.now()})
+        if(FSDoc)FSDoc.set({matters:appData,version:KSS_VERSION,updated:Date.now()})
           .then(function(){setSyncStatus('synced');})
           .catch(function(e){setSyncStatus('error');});
       }
     }else{
       // No Firestore doc yet — push local/seed data up (first device)
       setSyncStatus('syncing');
-      FSDoc.set({matters:appData,version:KSS_VERSION,updated:Date.now()})
+      if(FSDoc)FSDoc.set({matters:appData,version:KSS_VERSION,updated:Date.now()})
         .then(function(){setSyncStatus('synced');})
         .catch(function(e){setSyncStatus('error');console.warn('Firestore init push:',e);});
     }
   },function(err){
     setSyncStatus('offline');
     console.warn('Firestore listener error:',err);
-  });
+  });}
 }
 function getFile(id){return appData.find(function(f){return f.id===id})}
 function addActivity(file,msg){file.activity.push({ts:nowTS(),msg:msg})}
@@ -1547,11 +1555,16 @@ if('Notification' in window&&Notification.permission==='granted')scheduleNotific
 // Set dark mode button icon on init
 var dmBtnInit=document.getElementById('dm-btn-actual');
 if(dmBtnInit&&localStorage.getItem('kss_dark_mode')==='true')dmBtnInit.textContent='☀️';
+
+// Hide splash — always runs after init, even if Firebase fails
+var splashEl=document.getElementById('splash-scr');
+if(splashEl){setTimeout(function(){
+  splashEl.classList.add('fade');
+  setTimeout(function(){splashEl.style.display='none';},600);
+},1500);}
 }
 
-// ============ SPLASH SCREEN ============
-var splash=$('splash-scr');
-if(splash){setTimeout(function(){splash.classList.add('fade');setTimeout(function(){splash.style.display='none'},600)},2000)}
+// ============ SPLASH SCREEN — handled in init() ============
 
 // ============ LUCIDE ICONS ============
 function tryLucide(){if(typeof lucide!=='undefined'&&typeof lucide.createIcons==='function')lucide.createIcons();}tryLucide();document.addEventListener('DOMContentLoaded',tryLucide);setTimeout(tryLucide,500);
