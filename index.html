@@ -1,4 +1,4 @@
-<!DOCT<span id="kss-sync-badge"></span>YPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -183,7 +183,10 @@ body.tab-matters-active{overflow:hidden}
 }
 
 
-#kss-sync-badge{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;margin-left:6px;}
+/* KSS v18.23: splash auto-hides after 5s even if JS crashes */
+@keyframes kssHide{0%,75%{opacity:1;pointer-events:all}100%{opacity:0;pointer-events:none}}
+#splash-scr{animation:kssHide 5s ease-in-out forwards;}
+#splash-scr.fade{animation:none;opacity:0!important;pointer-events:none!important;transition:opacity .5s}
 </style>
 </head>
 <body data-id="0">
@@ -563,7 +566,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.21';
+var KSS_VERSION='18.23';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -1471,9 +1474,6 @@ var dmBtnInit=document.getElementById('dm-btn-actual');
 if(dmBtnInit&&localStorage.getItem('kss_dark_mode')==='true')dmBtnInit.textContent='☀️';
 }
 
-// ============ SPLASH SCREEN ============
-var splash=$('splash-scr');
-if(splash){setTimeout(function(){splash.classList.add('fade');setTimeout(function(){splash.style.display='none'},600)},2000)}
 
 // ============ LUCIDE ICONS ============
 function tryLucide(){if(typeof lucide!=='undefined'&&typeof lucide.createIcons==='function')lucide.createIcons();}tryLucide();document.addEventListener('DOMContentLoaded',tryLucide);setTimeout(tryLucide,500);
@@ -1744,95 +1744,7 @@ function updateBulkBar(){
     if(!w){ showToast('Allow popups to print reports'); return; }
     w.document.write('<!DOCTYPE html><html><head><title>KSS Report</title>');
     w.document.write('<style>body{font-family:Georgia,serif;margin:1.5cm;color:#1a3030;-webkit-print-color-adjust:exact;print-color-adjust:exact}table{width:100%;border-collapse:collapse;margin-top:8px}th{background:#0d7377!important;color:#fff!important;padding:6px 9px;text-align:left;font-size:.78rem;font-weight:600;-webkit-print-color-adjust:exact;print-color-adjust:exact}td{padding:5px 9px;border-bottom:1px solid #e5e7eb;font-size:.75rem}tr:nth-child(even) td{background:#f7fdfd!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.kpi-box{display:inline-block;background:#e6f4f4!important;border-radius:8px;padding:8px 12px;text-align:center;min-width:90px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.kpi-val{font-size:1.1rem;font-weight:700}.kpi-lbl{font-size:.65rem;color:#3d5c5c;text-transform:uppercase;letter-spacing:.04em}h1{font-size:1.3rem;font-weight:700;color:#0b3d3f;margin:0}.sub{font-size:.8rem;color:#3d5c5c}.gen{font-size:.72rem;color:#6b7280}.hdr{text-align:center;border-bottom:3px solid #0d7377;padding-bottom:10px;margin-bottom:14px}.kpi-row{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}.footer{margin-top:12px;font-size:.68rem;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:8px}@media print{@page{margin:1.5cm}* {-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}</style>');
-    w.document.write('</head><body>' + buildReportHTML() + '
-<script>
-// v18.21 — Lazy Firebase loader (loads AFTER splash hides, never blocks app)
-(function(){
-  var FB_CONFIG={
-    apiKey:"AIzaSyDKqefTDqQ3CuNFfiU9R34VYCVamk0VrcM",
-    authDomain:"kss-tracker.firebaseapp.com",
-    projectId:"kss-tracker",
-    storageBucket:"kss-tracker.firebasestorage.app",
-    messagingSenderId:"144027528390",
-    appId:"1:144027528390:web:1784e0c494563a8f29bbc7"
-  };
-  var badge=null;
-  var fsDoc=null;
-  var syncTimer=null;
-  var origSave=null;
-
-  function setStatus(s){
-    badge=badge||document.getElementById('kss-sync-badge');
-    if(!badge)return;
-    if(s==='synced')badge.textContent='☁ Synced';
-    else if(s==='syncing')badge.textContent='↻ Syncing';
-    else if(s==='offline')badge.textContent='';
-    else badge.textContent='';
-  }
-
-  function pushUp(){
-    if(!fsDoc||!window.appData)return;
-    setStatus('syncing');
-    fsDoc.set({matters:window.appData,ts:Date.now()})
-      .then(function(){setStatus('synced');})
-      .catch(function(){setStatus('offline');});
-  }
-
-  function startSync(){
-    try{
-      var app=firebase.apps.length?firebase.app():firebase.initializeApp(FB_CONFIG);
-      var db=firebase.firestore();
-      fsDoc=db.collection('kss_data').doc('matters');
-
-      // Patch saveData — original still runs first
-      origSave=window.saveData;
-      window.saveData=function(){
-        if(typeof origSave==='function')origSave();
-        clearTimeout(syncTimer);
-        syncTimer=setTimeout(pushUp,400);
-      };
-
-      // Live listener
-      setStatus('syncing');
-      fsDoc.onSnapshot(function(doc){
-        if(!doc.exists){pushUp();return;}
-        var d=doc.data();
-        if(!d||!Array.isArray(d.matters)||d.matters.length===0){pushUp();return;}
-        var local=JSON.stringify(window.appData||[]);
-        var remote=JSON.stringify(d.matters);
-        if(local!==remote){
-          window.appData=d.matters.map(function(f){
-            return typeof window.ensureFields==='function'?window.ensureFields(f):f;
-          });
-          try{localStorage.setItem('kss_matters_v18',JSON.stringify(window.appData));}catch(e){}
-          var tab=document.getElementById('tab-matters-k3l4');
-          if(tab&&!tab.classList.contains('hidden')&&typeof window.renderKanban==='function')window.renderKanban();
-        }
-        setStatus('synced');
-      },function(){setStatus('offline');});
-    }catch(e){setStatus('offline');}
-  }
-
-  function loadScript(src,cb){
-    var s=document.createElement('script');
-    s.src=src;
-    s.onload=cb;
-    s.onerror=function(){setStatus('offline');};
-    document.head.appendChild(s);
-  }
-
-  // Wait 2700ms — splash is fully gone by then, app is stable
-  setTimeout(function(){
-    loadScript('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js',function(){
-      loadScript('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js',function(){
-        startSync();
-      });
-    });
-  },2700);
-})();
-</script>
-
-</body></html>');
+    w.document.write('</head><body>' + buildReportHTML() + '</body></html>');
     w.document.close(); w.focus();
     setTimeout(function(){ w.print(); }, 500);
   });
@@ -2284,6 +2196,53 @@ window.addEventListener('load',function(){
     initMobileFilterState();
   },300);
 });
+</script>
+<script>
+/* KSS v18.23 - Standalone splash hider: runs outside init(), cannot be blocked by app errors */
+(function(){
+  function hide(){
+    var el=document.getElementById('splash-scr');
+    if(!el||el.style.display==='none')return;
+    el.classList.add('fade');
+    setTimeout(function(){el.style.display='none';},600);
+  }
+  setTimeout(hide,2500);
+  setTimeout(function(){var el=document.getElementById('splash-scr');if(el)el.style.display='none';},5000);
+})();
+</script>
+<script>
+/* KSS v18.23 - Firebase lazy loader: fires 3.5s after page load, never blocks app */
+setTimeout(function(){
+  function ld(src,cb){var s=document.createElement('script');s.src=src;s.onload=cb;s.onerror=function(){};document.head.appendChild(s);}
+  ld('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js',function(){
+    ld('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js',function(){
+      try{
+        var cfg={apiKey:"AIzaSyDKqefTDqQ3CuNFfiU9R34VYCVamk0VrcM",authDomain:"kss-tracker.firebaseapp.com",projectId:"kss-tracker",storageBucket:"kss-tracker.firebasestorage.app",messagingSenderId:"144027528390",appId:"1:144027528390:web:1784e0c494563a8f29bbc7"};
+        var app=firebase.apps.length?firebase.app():firebase.initializeApp(cfg);
+        var db=firebase.firestore();
+        var fsd=db.collection('kss_data').doc('matters');
+        var _o=window.saveData,_t=null;
+        window.saveData=function(){
+          if(typeof _o==='function')_o();
+          clearTimeout(_t);
+          _t=setTimeout(function(){if(window.appData)fsd.set({matters:window.appData,ts:Date.now()}).catch(function(){});},400);
+        };
+        fsd.onSnapshot(function(snap){
+          if(!snap.exists){window.saveData();return;}
+          var d=snap.data();
+          if(!d||!Array.isArray(d.matters)||!d.matters.length){window.saveData();return;}
+          if(JSON.stringify(window.appData||[])!==JSON.stringify(d.matters)){
+            window.appData=d.matters.map(function(f){return typeof window.ensureFields==='function'?window.ensureFields(f):f;});
+            try{localStorage.setItem('kss_matters_v18',JSON.stringify(window.appData));}catch(e){}
+            var tab=document.getElementById('tab-matters-k3l4');
+            if(tab&&!tab.classList.contains('hidden')&&typeof window.renderKanban==='function')window.renderKanban();
+          }
+        },function(){});
+        console.log('[KSS v18.23] Firebase sync active');
+      }catch(e){console.warn('[KSS] Firebase error:',e);}
+    });
+  });
+},3500);
 </script>
 </body>
 </html>
