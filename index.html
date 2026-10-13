@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCT<span id="kss-sync-badge"></span>YPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -22,8 +22,6 @@ tailwind.config={theme:{extend:{colors:{tdeep:'#0b3d3f',tmid:'#0d7377',tbright:'
 </script>
 <script src="https://unpkg.com/lucide@latest" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
@@ -185,8 +183,7 @@ body.tab-matters-active{overflow:hidden}
 }
 
 
-/* ── v18.20 Firebase Sync Badge ── */
-#kss-sync-badge{font-size:.7rem;font-weight:600;padding:2px 9px;border-radius:20px;background:rgba(255,255,255,.15);color:#fff;letter-spacing:.03em;white-space:nowrap;transition:opacity .3s}
+#kss-sync-badge{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;margin-left:6px;}
 </style>
 </head>
 <body data-id="0">
@@ -566,7 +563,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.20';
+var KSS_VERSION='18.21';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -1749,109 +1746,89 @@ function updateBulkBar(){
     w.document.write('<style>body{font-family:Georgia,serif;margin:1.5cm;color:#1a3030;-webkit-print-color-adjust:exact;print-color-adjust:exact}table{width:100%;border-collapse:collapse;margin-top:8px}th{background:#0d7377!important;color:#fff!important;padding:6px 9px;text-align:left;font-size:.78rem;font-weight:600;-webkit-print-color-adjust:exact;print-color-adjust:exact}td{padding:5px 9px;border-bottom:1px solid #e5e7eb;font-size:.75rem}tr:nth-child(even) td{background:#f7fdfd!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.kpi-box{display:inline-block;background:#e6f4f4!important;border-radius:8px;padding:8px 12px;text-align:center;min-width:90px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.kpi-val{font-size:1.1rem;font-weight:700}.kpi-lbl{font-size:.65rem;color:#3d5c5c;text-transform:uppercase;letter-spacing:.04em}h1{font-size:1.3rem;font-weight:700;color:#0b3d3f;margin:0}.sub{font-size:.8rem;color:#3d5c5c}.gen{font-size:.72rem;color:#6b7280}.hdr{text-align:center;border-bottom:3px solid #0d7377;padding-bottom:10px;margin-bottom:14px}.kpi-row{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}.footer{margin-top:12px;font-size:.68rem;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:8px}@media print{@page{margin:1.5cm}* {-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}</style>');
     w.document.write('</head><body>' + buildReportHTML() + '
 <script>
-// == v18.20 Firebase Sync Shim -- runs AFTER main script ==
-// Strategy: patch window.saveData to also write to Firestore.
-// Never touch splash, hamburger, dark mode, or any other function.
-(function() {
-  'use strict';
-
-  var FB_CONFIG = {
-    apiKey: "AIzaSyDKqefTDqQ3CuNFfiU9R34VYCVamk0VrcM",
-    authDomain: "kss-tracker.firebaseapp.com",
-    projectId: "kss-tracker",
-    storageBucket: "kss-tracker.firebasestorage.app",
-    messagingSenderId: "144027528390",
-    appId: "1:144027528390:web:1784e0c494563a8f29bbc7"
+// v18.21 — Lazy Firebase loader (loads AFTER splash hides, never blocks app)
+(function(){
+  var FB_CONFIG={
+    apiKey:"AIzaSyDKqefTDqQ3CuNFfiU9R34VYCVamk0VrcM",
+    authDomain:"kss-tracker.firebaseapp.com",
+    projectId:"kss-tracker",
+    storageBucket:"kss-tracker.firebasestorage.app",
+    messagingSenderId:"144027528390",
+    appId:"1:144027528390:web:1784e0c494563a8f29bbc7"
   };
+  var badge=null;
+  var fsDoc=null;
+  var syncTimer=null;
+  var origSave=null;
 
-  var badge = document.getElementById('kss-sync-badge');
-  var fsDoc = null;
-  var syncTimer = null;
-  var unsubscribe = null;
-  var originalSaveData = null;
-
-  function setStatus(s) {
-    if (!badge) return;
-    if (s === 'synced')  badge.textContent = '☁️ Synced';
-    else if (s === 'syncing') badge.textContent = '🔄 Syncing…';
-    else if (s === 'offline') badge.textContent = '🔴 Offline';
-    else badge.textContent = '';
+  function setStatus(s){
+    badge=badge||document.getElementById('kss-sync-badge');
+    if(!badge)return;
+    if(s==='synced')badge.textContent='☁ Synced';
+    else if(s==='syncing')badge.textContent='↻ Syncing';
+    else if(s==='offline')badge.textContent='';
+    else badge.textContent='';
   }
 
-  function pushToFirestore() {
-    if (!fsDoc || typeof window.appData === 'undefined') return;
+  function pushUp(){
+    if(!fsDoc||!window.appData)return;
     setStatus('syncing');
-    fsDoc.set({ matters: window.appData, updated: Date.now() })
-      .then(function() { setStatus('synced'); })
-      .catch(function(e) { console.warn('[KSS Firebase] push error:', e); setStatus('offline'); });
+    fsDoc.set({matters:window.appData,ts:Date.now()})
+      .then(function(){setStatus('synced');})
+      .catch(function(){setStatus('offline');});
   }
 
-  function initFirebase() {
-    try {
-      // Guard against double-init (page reload in same tab)
-      var app = firebase.apps.length ? firebase.app() : firebase.initializeApp(FB_CONFIG);
-      var db  = firebase.firestore();
-      fsDoc   = db.collection('kss_data').doc('matters');
+  function startSync(){
+    try{
+      var app=firebase.apps.length?firebase.app():firebase.initializeApp(FB_CONFIG);
+      var db=firebase.firestore();
+      fsDoc=db.collection('kss_data').doc('matters');
 
-      // Patch saveData — add Firestore write on top of localStorage
-      originalSaveData = window.saveData;
-      window.saveData = function() {
-        if (typeof originalSaveData === 'function') originalSaveData();
+      // Patch saveData — original still runs first
+      origSave=window.saveData;
+      window.saveData=function(){
+        if(typeof origSave==='function')origSave();
         clearTimeout(syncTimer);
-        syncTimer = setTimeout(pushToFirestore, 400); // debounce 400ms
+        syncTimer=setTimeout(pushUp,400);
       };
 
-      // Attach live listener — Firestore → app
+      // Live listener
       setStatus('syncing');
-      unsubscribe = fsDoc.onSnapshot(function(doc) {
-        if (!doc.exists) {
-          // First time ever: push local data up
-          pushToFirestore();
-          return;
-        }
-        var remote = doc.data();
-        if (!remote || !Array.isArray(remote.matters) || remote.matters.length === 0) {
-          pushToFirestore();
-          return;
-        }
-        // Only update if remote is different from local
-        var localStr  = JSON.stringify(window.appData || []);
-        var remoteStr = JSON.stringify(remote.matters);
-        if (localStr !== remoteStr) {
-          window.appData = remote.matters.map(function(f) {
-            return typeof window.ensureFields === 'function' ? window.ensureFields(f) : f;
+      fsDoc.onSnapshot(function(doc){
+        if(!doc.exists){pushUp();return;}
+        var d=doc.data();
+        if(!d||!Array.isArray(d.matters)||d.matters.length===0){pushUp();return;}
+        var local=JSON.stringify(window.appData||[]);
+        var remote=JSON.stringify(d.matters);
+        if(local!==remote){
+          window.appData=d.matters.map(function(f){
+            return typeof window.ensureFields==='function'?window.ensureFields(f):f;
           });
-          // Persist locally
-          try { localStorage.setItem('kss_matters_v18', JSON.stringify(window.appData)); } catch(e){}
-          // Re-render board if Matters tab is active
-          var mattersTab = document.getElementById('tab-matters-k3l4');
-          if (mattersTab && !mattersTab.classList.contains('hidden')) {
-            if (typeof window.renderKanban === 'function') window.renderKanban();
-          }
+          try{localStorage.setItem('kss_matters_v18',JSON.stringify(window.appData));}catch(e){}
+          var tab=document.getElementById('tab-matters-k3l4');
+          if(tab&&!tab.classList.contains('hidden')&&typeof window.renderKanban==='function')window.renderKanban();
         }
         setStatus('synced');
-      }, function(err) {
-        console.warn('[KSS Firebase] listener error:', err);
-        setStatus('offline');
+      },function(){setStatus('offline');});
+    }catch(e){setStatus('offline');}
+  }
+
+  function loadScript(src,cb){
+    var s=document.createElement('script');
+    s.src=src;
+    s.onload=cb;
+    s.onerror=function(){setStatus('offline');};
+    document.head.appendChild(s);
+  }
+
+  // Wait 2700ms — splash is fully gone by then, app is stable
+  setTimeout(function(){
+    loadScript('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js',function(){
+      loadScript('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js',function(){
+        startSync();
       });
-
-      console.log('[KSS Firebase] Sync active ✅');
-    } catch(e) {
-      // Firebase failed — app still works fine via localStorage
-      console.warn('[KSS Firebase] init failed (offline mode):', e);
-      setStatus('offline');
-    }
-  }
-
-  // Wait for init() to finish before patching
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(initFirebase, 100);
     });
-  } else {
-    setTimeout(initFirebase, 100);
-  }
-
+  },2700);
 })();
 </script>
 
