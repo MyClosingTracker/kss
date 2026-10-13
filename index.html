@@ -566,7 +566,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.25';
+var KSS_VERSION='18.26';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -1478,7 +1478,16 @@ if(dmBtnInit&&localStorage.getItem('kss_dark_mode')==='true')dmBtnInit.textConte
 function tryLucide(){if(typeof lucide!=='undefined'&&typeof lucide.createIcons==='function')lucide.createIcons();}tryLucide();document.addEventListener('DOMContentLoaded',tryLucide);setTimeout(tryLucide,500);
 
 // ============ RUN ============
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}else{init()}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){init();_kssExposeGlobals();})}else{init();_kssExposeGlobals();}
+function _kssExposeGlobals(){
+  window.appData=appData;
+  window.ensureFields=ensureFields;
+  window.renderKanban=window.renderKanban||renderKanban;
+  // Wrap saveData so window.appData stays fresh on every save
+  var _os=saveData;
+  saveData=function(){_os();window.appData=appData;};
+  window.saveData=saveData;
+}
 
 
 // ╔══════════════════════════════════════════════════════════╗
@@ -2210,20 +2219,19 @@ window.addEventListener('load',function(){
 })();
 </script>
 <script>
-/* KSS v18.25 - Firebase lazy loader: fires 3.5s after page load, never blocks app */
+/* KSS v18.26 Firebase sync - correct LS key, no visibility guard, window.saveData patch */
 var _kssSync={
   badge:null,
   set:function(s){
     this.badge=this.badge||document.getElementById('kss-sync-badge');
     if(!this.badge)return;
     this.badge.classList.remove('hidden');
-    if(s==='synced')this.badge.textContent='☁ Synced';
-    else if(s==='syncing')this.badge.textContent='↻ Syncing';
-    else if(s==='offline')this.badge.textContent='';
+    this.badge.textContent=(s==='synced'?'☁ Synced':s==='syncing'?'↻ Syncing':'');
   }
 };
 setTimeout(function(){
-  function ld(src,cb){var s=document.createElement('script');s.src=src;s.onload=cb;s.onerror=function(){};document.head.appendChild(s);}
+  var LS='kss_matters_v1'; // exact key app uses
+  function ld(src,cb){var s=document.createElement('script');s.src=src;s.onload=cb;s.onerror=function(){_kssSync.set('');};document.head.appendChild(s);}
   ld('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js',function(){
     ld('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js',function(){
       try{
@@ -2231,27 +2239,49 @@ setTimeout(function(){
         var app=firebase.apps.length?firebase.app():firebase.initializeApp(cfg);
         var db=firebase.firestore();
         var fsd=db.collection('kss_data').doc('matters');
-        var _o=window.saveData,_t=null;
-        _kssSync.set('syncing');
+        var pt=null;
+
+        function pushUp(){
+          var d=window.appData;
+          if(!d||!d.length)return;
+          _kssSync.set('syncing');
+          fsd.set({matters:d,ts:Date.now()})
+            .then(function(){_kssSync.set('synced');})
+            .catch(function(){_kssSync.set('');});
+        }
+
+        // Patch saveData — works because _kssExposeGlobals ran first
+        var _o=window.saveData;
         window.saveData=function(){
           if(typeof _o==='function')_o();
-          clearTimeout(_t);
-          _t=setTimeout(function(){if(window.appData)fsd.set({matters:window.appData,ts:Date.now()}).then(function(){_kssSync.set('synced');}).catch(function(){_kssSync.set('offline');});},400);
+          window.appData=window.appData;
+          clearTimeout(pt);
+          pt=setTimeout(pushUp,500);
         };
+
+        // Live Firestore listener → this device
+        _kssSync.set('syncing');
         fsd.onSnapshot(function(snap){
-          if(!snap.exists){window.saveData();return;}
+          if(!snap.exists){pushUp();return;}
           var d=snap.data();
-          if(!d||!Array.isArray(d.matters)||!d.matters.length){window.saveData();return;}
-          if(JSON.stringify(window.appData||[])!==JSON.stringify(d.matters)){
-            window.appData=d.matters.map(function(f){return typeof window.ensureFields==='function'?window.ensureFields(f):f;});
-            try{localStorage.setItem('kss_matters_v18',JSON.stringify(window.appData));}catch(e){}
-            var tab=document.getElementById('tab-matters-k3l4');
-            if(tab&&!tab.classList.contains('hidden')&&typeof window.renderKanban==='function')window.renderKanban();
+          if(!d||!Array.isArray(d.matters)||!d.matters.length){pushUp();return;}
+          var ls=JSON.stringify(window.appData||[]);
+          var rs=JSON.stringify(d.matters);
+          if(ls===rs){_kssSync.set('synced');return;}
+          // Apply remote data
+          var ef=window.ensureFields;
+          var updated=d.matters.map(function(f){return typeof ef==='function'?ef(f):f;});
+          window.appData=updated;
+          // Save to localStorage with correct key
+          try{localStorage.setItem(LS,JSON.stringify(updated));}catch(e){}
+          // Re-render — no visibility guard, always update
+          try{if(typeof window.renderKanban==='function')window.renderKanban();}catch(e){}
+          try{if(typeof window.renderDashboard==='function')window.renderDashboard();}catch(e){}
           _kssSync.set('synced');
-        }
-        },function(){_kssSync.set('offline');});
-        console.log('[KSS v18.23] Firebase sync active');
-      }catch(e){console.warn('[KSS] Firebase error:',e);}
+        },function(e){console.warn('[KSS sync]',e);_kssSync.set('');});
+
+        console.log('[KSS v18.26] Firebase sync active, LS key='+LS);
+      }catch(e){console.warn('[KSS] Firebase error:',e);_kssSync.set('');}
     });
   });
 },3500);
