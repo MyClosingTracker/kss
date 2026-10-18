@@ -105,7 +105,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 .cal-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
 /* Scroll Lock */
 body.tab-matters-active{overflow:hidden}
-.kanban-col-body{overflow-y:auto;max-height:calc(100vh - 220px);scrollbar-width:thin;scrollbar-color:rgba(13,115,119,.3) transparent}
+.kanban-col-body{overflow-y:auto;max-height:calc(100vh - 220px);padding-bottom:80px;scrollbar-width:thin;scrollbar-color:rgba(13,115,119,.3) transparent}
 .kanban-col-body::-webkit-scrollbar{width:4px}
 .kanban-col-body::-webkit-scrollbar-track{background:transparent}
 .kanban-col-body::-webkit-scrollbar-thumb{background:rgba(13,115,119,.3);border-radius:2px}
@@ -281,14 +281,14 @@ body.tab-matters-active{overflow:hidden}
 
 <!-- Kanban columns -->
 <div data-id="64" class="kanban-scroll" id="kanban-board-g5h6">
-<div data-id="65" class="kanban-col" data-status="col-new"><div data-id="66" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 100%);color:#fff">New / Open <span data-id="67" class="font-normal text-xs" id="count-col-new"></span></div><div data-id="68" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-new"></div></div>
+<div data-id="65" class="kanban-col" data-status="col-new"><div data-id="66" class="rounded-t-xl px-3 py-2 font-bold text-sm flex items-center gap-2" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 100%);color:#fff">New / Open <span data-id="67" class="font-normal text-xs" id="count-col-new"></span><button id="sort-btn-col-new" onclick="toggleColSort('col-new')" style="margin-left:auto;font-size:.65rem;font-weight:600;padding:1px 6px;border-radius:4px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap">↑ Asc</button></div><div data-id="68" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-new"></div></div>
 <p class="swipe-hint no-print">← Swipe between columns →</p>
 <div class="col-dots no-print" id="col-dots-nav"></div>
 
-<div data-id="69" class="kanban-col" data-status="col-req"><div data-id="70" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0d7377 0%,#14a09a 100%);color:#fff">Requisition <span data-id="71" class="font-normal text-xs" id="count-col-req"></span></div><div data-id="72" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-req"></div></div>
-<div data-id="73" class="kanban-col" data-status="col-closing"><div data-id="74" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#e8705a 0%,#cf5e4a 100%);color:#fff">Closing Soon <span data-id="75" class="font-normal text-xs" id="count-col-closing"></span></div><div data-id="76" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-closing"></div></div>
-<div data-id="77" class="kanban-col" data-status="col-reporting"><div data-id="78" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 60%,#14a09a 100%);color:#fff">Reporting <span data-id="79" class="font-normal text-xs" id="count-col-reporting"></span></div><div data-id="80" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-reporting"></div></div>
-<div data-id="81" class="kanban-col" data-status="col-closed"><div data-id="82" class="rounded-t-xl px-3 py-2 font-bold text-sm" style="background:linear-gradient(135deg,#16a34a 0%,#22c55e 100%);color:#fff">Closed <span data-id="83" class="font-normal text-xs" id="count-col-closed"></span></div><div data-id="84" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-closed"></div></div>
+<div data-id="69" class="kanban-col" data-status="col-req"><div data-id="70" class="rounded-t-xl px-3 py-2 font-bold text-sm flex items-center gap-2" style="background:linear-gradient(135deg,#0d7377 0%,#14a09a 100%);color:#fff">Requisition <span data-id="71" class="font-normal text-xs" id="count-col-req"></span><button id="sort-btn-col-req" onclick="toggleColSort('col-req')" style="margin-left:auto;font-size:.65rem;font-weight:600;padding:1px 6px;border-radius:4px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap">↑ Asc</button></div><div data-id="72" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-req"></div></div>
+<div data-id="73" class="kanban-col" data-status="col-closing"><div data-id="74" class="rounded-t-xl px-3 py-2 font-bold text-sm flex items-center gap-2" style="background:linear-gradient(135deg,#e8705a 0%,#cf5e4a 100%);color:#fff">Closing Soon <span data-id="75" class="font-normal text-xs" id="count-col-closing"></span><button id="sort-btn-col-closing" onclick="toggleColSort('col-closing')" style="margin-left:auto;font-size:.65rem;font-weight:600;padding:1px 6px;border-radius:4px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap">↑ Asc</button></div><div data-id="76" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-closing"></div></div>
+<div data-id="77" class="kanban-col" data-status="col-reporting"><div data-id="78" class="rounded-t-xl px-3 py-2 font-bold text-sm flex items-center gap-2" style="background:linear-gradient(135deg,#0b3d3f 0%,#0d7377 60%,#14a09a 100%);color:#fff">Reporting <span data-id="79" class="font-normal text-xs" id="count-col-reporting"></span><button id="sort-btn-col-reporting" onclick="toggleColSort('col-reporting')" style="margin-left:auto;font-size:.65rem;font-weight:600;padding:1px 6px;border-radius:4px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap">↑ Asc</button></div><div data-id="80" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-reporting"></div></div>
+<div data-id="81" class="kanban-col" data-status="col-closed"><div data-id="82" class="rounded-t-xl px-3 py-2 font-bold text-sm flex items-center gap-2" style="background:linear-gradient(135deg,#16a34a 0%,#22c55e 100%);color:#fff">Closed <span data-id="83" class="font-normal text-xs" id="count-col-closed"></span><button id="sort-btn-col-closed" onclick="toggleColSort('col-closed')" style="margin-left:auto;font-size:.65rem;font-weight:600;padding:1px 6px;border-radius:4px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap">↑ Asc</button></div><div data-id="84" class="col-bg rounded-b-xl p-2 min-h-[200px] space-y-2 kanban-col-body" id="body-col-closed"></div></div>
 </div>
 </main>
 
@@ -566,7 +566,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.29';
+var KSS_VERSION='18.30';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -580,6 +580,7 @@ var SEED_DATA=[{"id": "4e046a2a-72be-4fcb-9949-4eec123a83a7", "fileNumber": "KS2
 
 // ============ STATE ============
 var appData=[];
+var colSortOrder={}; // per-column sort: 'asc' or 'desc'
 var currentEmailFileId=null;
 var currentEditFileId=null;
 var currentChecklistFileId=null;
@@ -659,6 +660,11 @@ return true;
 }
 
 // ============ RENDER KANBAN ============
+function toggleColSort(colId){
+  var cur=colSortOrder[colId]||'asc';
+  colSortOrder[colId]=cur==='asc'?'desc':'asc';
+  renderKanban();
+}
 function renderKanban(){
 var filters=getFilters();
 STATUSES.forEach(function(st){
@@ -666,7 +672,13 @@ var body=$('body-'+st.id);
 var count=$('count-'+st.id);
 if(!body)return;
 body.innerHTML='';
-var files=appData.filter(function(f){return f.status===st.id&&matchFilter(f,filters)});files.sort(function(a,b){var da=a.closingDate||'';var db=b.closingDate||'';var asc=(st.id==='col-new'||st.id==='col-req'||st.id==='col-closing');return asc?da.localeCompare(db):db.localeCompare(da);});
+var files=appData.filter(function(f){return f.status===st.id&&matchFilter(f,filters)});var defaultAsc=(st.id==='col-new'||st.id==='col-req'||st.id==='col-closing');
+var sortDir=colSortOrder[st.id]||(defaultAsc?'asc':'desc');
+files.sort(function(a,b){var da=a.closingDate||'';var db=b.closingDate||'';
+return sortDir==='asc'?da.localeCompare(db):db.localeCompare(da);});
+// Update sort button label
+var sb=document.getElementById('sort-btn-'+st.id);
+if(sb){sb.textContent=sortDir==='asc'?'↑ Asc':'↓ Desc';}
 if(count)count.textContent='('+files.length+')';
 files.forEach(function(f){
 var cd=getCountdown(f);
