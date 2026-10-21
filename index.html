@@ -566,7 +566,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.31';
+var KSS_VERSION='18.32';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -665,6 +665,7 @@ function toggleColSort(colId){
   colSortOrder[colId]=cur==='asc'?'desc':'asc';
   renderKanban();
 }
+window.toggleColSort=toggleColSort;
 function renderKanban(){
 var filters=getFilters();
 STATUSES.forEach(function(st){
