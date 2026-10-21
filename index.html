@@ -566,7 +566,7 @@ body.tab-matters-active{overflow:hidden}
 <script>
 try{
 // ============ CONSTANTS ============
-var KSS_VERSION='18.30';
+var KSS_VERSION='18.31';
 var LS_KEY='kss_matters_v1';
 var LS_VER='kss_version';
 var LS_DARK='kss_dark_mode';
@@ -674,7 +674,8 @@ if(!body)return;
 body.innerHTML='';
 var files=appData.filter(function(f){return f.status===st.id&&matchFilter(f,filters)});var defaultAsc=(st.id==='col-new'||st.id==='col-req'||st.id==='col-closing');
 var sortDir=colSortOrder[st.id]||(defaultAsc?'asc':'desc');
-files.sort(function(a,b){var da=a.closingDate||'';var db=b.closingDate||'';
+var sortField=st.id==='col-req'?'reqDate':'closingDate';
+files.sort(function(a,b){var da=a[sortField]||'';var db=b[sortField]||'';
 return sortDir==='asc'?da.localeCompare(db):db.localeCompare(da);});
 // Update sort button label
 var sb=document.getElementById('sort-btn-'+st.id);
