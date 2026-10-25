@@ -625,8 +625,9 @@ function addActivity(file,msg){file.activity.push({ts:nowTS(),msg:msg})}
 // ============ COUNTDOWN ============
 function getCountdown(file){
 if(file.status==='col-closed')return{text:'Closed',cls:'countdown-closed'};
-if(!file.closingDate)return{text:'No date',cls:'countdown-grey'};
-var days=daysBetween(todayStr(),file.closingDate);
+var _cdDate=(file.status==='col-req')?file.reqDate:file.closingDate;
+if(!_cdDate)return{text:'No date',cls:'countdown-grey'};
+var days=daysBetween(todayStr(),_cdDate);
 if(days<0)return{text:Math.abs(days)+'d ago',cls:'countdown-red'};
 if(days===0)return{text:'Today!',cls:'countdown-red'};
 if(days<=3)return{text:days+' days',cls:'countdown-red'};
