@@ -678,6 +678,11 @@ var _sb=document.getElementById('sort-btn-'+st.id);
 var sortDir=_sb?(_sb.getAttribute('data-dir')||(defaultAsc?'asc':'desc')):(defaultAsc?'asc':'desc');
 var sortField=st.id==='col-req'?'reqDate':'closingDate';
 files.sort(function(a,b){var da=a[sortField]||'';var db=b[sortField]||'';
+if(st.id==='col-req'){
+if(!da&&!db){return String(a.fileNumber||'').localeCompare(String(b.fileNumber||''));}
+if(!da)return 1;if(!db)return -1;
+if(da===db){var ca=a.closingDate||'9999-12-31',cb=b.closingDate||'9999-12-31';if(ca!==cb)return ca.localeCompare(cb);return String(a.fileNumber||'').localeCompare(String(b.fileNumber||''));}
+}
 return sortDir==='asc'?da.localeCompare(db):db.localeCompare(da);});
 if(count)count.textContent='('+files.length+')';
 files.forEach(function(f){
