@@ -89,6 +89,13 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-sh
 /* v18.38 readable card text */
 .matter-card{font-size:.8rem}
 .matter-card .badge{font-size:.7rem}
+/* v18.39 keep calendar pickers and card buttons visible */
+:root{color-scheme:light}
+[data-theme="dark"]{color-scheme:dark}
+input[type="date"]{position:relative;min-height:2.4rem}
+input[type="date"]::-webkit-calendar-picker-indicator{opacity:1!important;cursor:pointer;display:block!important}
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(1)}
+.matter-card .btn-ghost{color:var(--text-primary)!important;border-color:var(--field-border)!important;opacity:1!important;visibility:visible!important}
 /* v18.37 visible form fields */
 :root{--field-bg:#eef6f6;--field-border:#8fb8b8}
 [data-theme="dark"]{--field-bg:#0c1a1a;--field-border:#5a8a8a}
