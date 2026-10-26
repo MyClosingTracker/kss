@@ -26,8 +26,8 @@ tailwind.config={theme:{extend:{colors:{tdeep:'#0b3d3f',tmid:'#0d7377',tbright:'
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
 <style>
-:root{--bg-page:linear-gradient(160deg,#e6f4f4 0%,#f0fafa 50%,#fdf5f3 100%);--bg-card:#fff;--bg-col:#f7fdfd;--text-primary:#1a3030;--text-secondary:#3d5c5c;--text-muted:#7a9f9f;--border:#d0e8e8;--shadow:0 2px 8px rgba(11,61,63,.08);--header-grad:linear-gradient(135deg,#0b3d3f 0%,#0d7377 60%,#14a09a 100%);--modal-bg:rgba(11,61,63,.45);--col-header-bg:#e6f4f4}
-[data-theme="dark"]{--bg-page:linear-gradient(160deg,#0f1e1e 0%,#111f1f 50%,#131f1e 100%);--bg-card:#1a2f30;--bg-col:#132323;--text-primary:#e6f4f4;--text-secondary:#a0c4c4;--text-muted:#6a9090;--border:#254040;--shadow:0 2px 8px rgba(0,0,0,.3);--modal-bg:rgba(0,0,0,.6);--col-header-bg:#1a3535}
+:root{--bg-page:linear-gradient(160deg,#e6f4f4 0%,#f0fafa 50%,#fdf5f3 100%);--bg-card:#fff;--bg-col:#f7fdfd;--text-primary:#1a3030;--text-secondary:#2b4747;--text-muted:#4a6b6b;--border:#d0e8e8;--shadow:0 2px 8px rgba(11,61,63,.08);--header-grad:linear-gradient(135deg,#0b3d3f 0%,#0d7377 60%,#14a09a 100%);--modal-bg:rgba(11,61,63,.45);--col-header-bg:#e6f4f4}
+[data-theme="dark"]{--bg-page:linear-gradient(160deg,#0f1e1e 0%,#111f1f 50%,#131f1e 100%);--bg-card:#1a2f30;--bg-col:#132323;--text-primary:#e6f4f4;--text-secondary:#cfe4e4;--text-muted:#a9c9c9;--border:#254040;--shadow:0 2px 8px rgba(0,0,0,.3);--modal-bg:rgba(0,0,0,.6);--col-header-bg:#1a3535}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:var(--bg-page);color:var(--text-primary);min-height:100vh}
 h1,h2,h3,.font-display{font-family:'Playfair Display',serif}
@@ -86,6 +86,15 @@ h1,h2,h3,.font-display{font-family:'Playfair Display',serif}
 [data-theme="dark"] .progress-bar{background:#374151}
 input,select,textarea{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border);border-radius:.5rem;padding:.5rem .75rem;font-size:.875rem;font-family:'Inter',sans-serif;width:100%}
 input:focus,select:focus,textarea:focus{outline:none;border-color:#0d7377;box-shadow:0 0 0 3px rgba(13,115,119,.15)}
+/* v18.38 readable card text */
+.matter-card{font-size:.8rem}
+.matter-card .badge{font-size:.7rem}
+/* v18.37 visible form fields */
+:root{--field-bg:#eef6f6;--field-border:#8fb8b8}
+[data-theme="dark"]{--field-bg:#0c1a1a;--field-border:#5a8a8a}
+.modal-box input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),.modal-box select,.modal-box textarea{background:var(--field-bg)!important;border:1.5px solid var(--field-border)!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}
+.modal-box input:focus,.modal-box select:focus,.modal-box textarea:focus{border-color:#14a09a!important;box-shadow:0 0 0 3px rgba(20,160,154,.3)!important}
+.modal-box input::placeholder,.modal-box textarea::placeholder{color:var(--text-muted);opacity:.8}
 .btn-primary{background:linear-gradient(135deg,#0d7377,#14a09a);color:#fff;border:none;padding:.5rem 1.25rem;border-radius:.5rem;font-weight:600;cursor:pointer;font-size:.85rem;transition:all .15s}
 .btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .btn-coral{background:linear-gradient(135deg,#e8705a,#cf5e4a);color:#fff;border:none;padding:.5rem 1rem;border-radius:.5rem;font-weight:600;cursor:pointer;font-size:.8rem;transition:all .15s}
