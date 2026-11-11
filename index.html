@@ -290,7 +290,7 @@ body.tab-matters-active{overflow:hidden}
 <!-- V18: Countdown Banner -->
 <div id="countdown-banner-v18" class="no-print">
   <div style="background:linear-gradient(135deg,#7f1d1d,#b91c1c,#dc2626);border-radius:.75rem;padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
-    <span style="font-size:.78rem;font-weight:800;letter-spacing:.05em;color:#fff;white-space:nowrap">&#128276; CLOSING ALERT</span>
+    <span style="font-size:.78rem;font-weight:800;letter-spacing:.05em;color:#fff;white-space:nowrap">&#128276; CLOSING &amp; REQUISITION ALERT</span>
     <div id="countdown-items-v18" style="display:flex;gap:.4rem;flex-wrap:wrap"></div>
   </div>
 </div>
@@ -1112,14 +1112,22 @@ var body=$('alerts-body-d5e6f');if(!body)return;
 var t=todayStr();
 var overdue=appData.filter(function(f){return f.closingDate&&f.closingDate<t&&f.status!=='col-closed'});
 var soon=appData.filter(function(f){if(!f.closingDate||f.status==='col-closed')return false;var d=daysBetween(t,f.closingDate);return d>=0&&d<=3});
+var reqOver=appData.filter(function(f){return f.status==='col-req'&&f.reqDate&&f.reqDate<t});
+var reqSoon=appData.filter(function(f){if(f.status!=='col-req'||!f.reqDate)return false;var d=daysBetween(t,f.reqDate);return d>=0&&d<=3});
 var html='';
-if(overdue.length>0){html+='<h4 class="font-bold mb-1" style="color:#dc2626">⚠️ Overdue Files</h4>';
+if(reqOver.length>0){html+='<h4 class="font-bold mb-1" style="color:#dc2626">⚠️ Requisitions Overdue</h4>';
+reqOver.forEach(function(f){html+='<div class="card-bg rounded p-2 mb-1"><strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+' — requisition was due '+fmtDate(f.reqDate)+'</div>'});
+}
+if(reqSoon.length>0){html+='<h4 class="font-bold mt-3 mb-1" style="color:#d97706">📝 Requisitions Due Within 3 Days</h4>';
+reqSoon.forEach(function(f){html+='<div class="card-bg rounded p-2 mb-1"><strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+' — '+fmtDate(f.reqDate)+'</div>'});
+}
+if(overdue.length>0){html+='<h4 class="font-bold mt-3 mb-1" style="color:#dc2626">⚠️ Overdue Files</h4>';
 overdue.forEach(function(f){html+='<div class="card-bg rounded p-2 mb-1"><strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+' — was due '+fmtDate(f.closingDate)+'</div>'});
 }
 if(soon.length>0){html+='<h4 class="font-bold mt-3 mb-1" style="color:#d97706">⏰ Closing Within 3 Days</h4>';
 soon.forEach(function(f){html+='<div class="card-bg rounded p-2 mb-1"><strong>'+esc(f.fileNumber)+'</strong> — '+esc(f.clientName)+' — '+fmtDate(f.closingDate)+'</div>'});
 }
-if(!overdue.length&&!soon.length)html='<p style="color:var(--text-muted)">No alerts at this time. All clear! ✅</p>';
+if(!overdue.length&&!soon.length&&!reqOver.length&&!reqSoon.length)html='<p style="color:var(--text-muted)">No alerts at this time. All clear! ✅</p>';
 body.innerHTML=html;
 openModal('modal-alerts-x1y2z');
 }
@@ -1583,17 +1591,20 @@ function renderCountdownBanner(){
   }
   var d1 = addDays(t, 1), d2 = addDays(t, 2);
 
+  function alertDate(f){return f.status==='col-req'?f.reqDate:f.closingDate;}
   var urgent = appData.filter(function(f){
-    return f.status !== 'col-closed' && f.closingDate &&
-           (f.closingDate === t || f.closingDate === d1 || f.closingDate === d2);
+    var ad=alertDate(f);
+    return f.status !== 'col-closed' && ad &&
+           (ad === t || ad === d1 || ad === d2);
   });
 
   banner.style.display = urgent.length ? 'block' : 'none';
   items.innerHTML = '';
 
   urgent.forEach(function(f){
-    var diff = daysBetween(t, f.closingDate);
+    var diff = daysBetween(t, alertDate(f));
     var lbl  = diff === 0 ? '🔴 TODAY' : diff === 1 ? '🟠 TOMORROW' : '🟡 in 2 days';
+    if(f.status==='col-req') lbl = 'REQ ' + lbl;
     var pill = document.createElement('span');
     pill.className = 'cd-pill';
     pill.textContent = f.fileNumber + ' — ' + f.clientName + ' (' + lbl + ')';
@@ -2274,6 +2285,41 @@ window.addEventListener('load',function(){
   var _db  = null;
   var _fsd = null;
   var _ready = false;
+  var _auth = null;
+  var OWNER_EMAIL = 'kssmatterkey@gmail.com';
+
+  function authModal(onOk, onSkip){
+    if(document.getElementById('kss-auth-modal')) return;
+    var o=document.createElement('div');o.id='kss-auth-modal';
+    o.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:1rem';
+    o.innerHTML='<div style="background:var(--bg-card,#fff);color:var(--text-primary,#1a3030);border-radius:1rem;max-width:380px;width:100%;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,.35)">'
+     +'<h3 style="font-weight:700;font-size:1.1rem;margin-bottom:.25rem">Sign in to sync</h3>'
+     +'<p style="font-size:.8rem;color:var(--text-muted,#4a6b6b);margin-bottom:.9rem">Sign in once on this device to save to and load from the cloud.</p>'
+     +'<input id="kss-auth-email" type="email" autocomplete="username" style="margin-bottom:.5rem">'
+     +'<input id="kss-auth-pass" type="password" autocomplete="current-password" placeholder="Password" style="margin-bottom:.5rem">'
+     +'<div id="kss-auth-err" style="color:#dc2626;font-size:.78rem;min-height:1.1rem;margin-bottom:.5rem"></div>'
+     +'<div style="display:flex;gap:.5rem;justify-content:flex-end"><button id="kss-auth-skip" type="button" class="btn-ghost">Not now</button>'
+     +'<button id="kss-auth-go" type="button" style="background:#0d7377;color:#fff;border:none;border-radius:.5rem;padding:.45rem 1rem;font-weight:600;cursor:pointer">Sign in</button></div></div>';
+    document.body.appendChild(o);
+    var em=document.getElementById('kss-auth-email'),pw=document.getElementById('kss-auth-pass'),er=document.getElementById('kss-auth-err');
+    em.value=OWNER_EMAIL;pw.focus();
+    function close(){o.remove();}
+    function go(){
+      er.textContent='';
+      _auth.signInWithEmailAndPassword(em.value.trim(),pw.value).then(function(){close();onOk();})
+        .catch(function(e){er.textContent='Sign-in failed. Check your email and password.';console.warn('[KSS] auth',e);});
+    }
+    document.getElementById('kss-auth-go').onclick=go;
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+    document.getElementById('kss-auth-skip').onclick=function(){close();onSkip&&onSkip();};
+  }
+  function withAuth(cb, onSkip){
+    var done=false;
+    var off=_auth.onAuthStateChanged(function(u){
+      if(done) return; done=true; off();
+      if(u) cb(); else authModal(cb,onSkip);
+    });
+  }
 
   function badge(msg, col){
     var el = document.getElementById('kss-sync-badge');
@@ -2288,6 +2334,7 @@ window.addEventListener('load',function(){
     try{
       var app = firebase.apps.length ? firebase.app() : firebase.initializeApp(CFG);
       _db  = firebase.firestore();
+      _auth = firebase.auth();
       _fsd = _db.collection('kss_data').doc('matters');
       _ready = true;
       cb && cb();
@@ -2356,8 +2403,9 @@ window.addEventListener('load',function(){
         });
     }
 
+    function reenable(){ btn.textContent = '☁ Save and Close'; btn.disabled = false; }
     if(_ready){
-      doSave();
+      withAuth(doSave, reenable);
     } else {
       function ls(src, cb){
         var s = document.createElement('script');
@@ -2366,8 +2414,10 @@ window.addEventListener('load',function(){
         document.head.appendChild(s);
       }
       ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js', function(){
-        ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js', function(){
-          initFirebase(doSave);
+        ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js', function(){
+          ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js', function(){
+            initFirebase(function(){ withAuth(doSave, reenable); });
+          });
         });
       });
     }
@@ -2382,8 +2432,10 @@ window.addEventListener('load',function(){
       document.head.appendChild(s);
     }
     ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js', function(){
+      ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js', function(){
       ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js', function(){
-        initFirebase(autoLoad);
+        initFirebase(function(){ withAuth(autoLoad, function(){ badge('', ''); }); });
+      });
       });
     });
   }
