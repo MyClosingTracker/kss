@@ -2285,6 +2285,41 @@ window.addEventListener('load',function(){
   var _db  = null;
   var _fsd = null;
   var _ready = false;
+  var _auth = null;
+  var OWNER_EMAIL = 'kssmatterkey@gmail.com';
+
+  function authModal(onOk, onSkip){
+    if(document.getElementById('kss-auth-modal')) return;
+    var o=document.createElement('div');o.id='kss-auth-modal';
+    o.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:1rem';
+    o.innerHTML='<div style="background:var(--bg-card,#fff);color:var(--text-primary,#1a3030);border-radius:1rem;max-width:380px;width:100%;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,.35)">'
+     +'<h3 style="font-weight:700;font-size:1.1rem;margin-bottom:.25rem">Sign in to sync</h3>'
+     +'<p style="font-size:.8rem;color:var(--text-muted,#4a6b6b);margin-bottom:.9rem">Sign in once on this device to save to and load from the cloud.</p>'
+     +'<input id="kss-auth-email" type="email" autocomplete="username" style="margin-bottom:.5rem">'
+     +'<input id="kss-auth-pass" type="password" autocomplete="current-password" placeholder="Password" style="margin-bottom:.5rem">'
+     +'<div id="kss-auth-err" style="color:#dc2626;font-size:.78rem;min-height:1.1rem;margin-bottom:.5rem"></div>'
+     +'<div style="display:flex;gap:.5rem;justify-content:flex-end"><button id="kss-auth-skip" type="button" class="btn-ghost">Not now</button>'
+     +'<button id="kss-auth-go" type="button" style="background:#0d7377;color:#fff;border:none;border-radius:.5rem;padding:.45rem 1rem;font-weight:600;cursor:pointer">Sign in</button></div></div>';
+    document.body.appendChild(o);
+    var em=document.getElementById('kss-auth-email'),pw=document.getElementById('kss-auth-pass'),er=document.getElementById('kss-auth-err');
+    em.value=OWNER_EMAIL;pw.focus();
+    function close(){o.remove();}
+    function go(){
+      er.textContent='';
+      _auth.signInWithEmailAndPassword(em.value.trim(),pw.value).then(function(){close();onOk();})
+        .catch(function(e){er.textContent='Sign-in failed. Check your email and password.';console.warn('[KSS] auth',e);});
+    }
+    document.getElementById('kss-auth-go').onclick=go;
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+    document.getElementById('kss-auth-skip').onclick=function(){close();onSkip&&onSkip();};
+  }
+  function withAuth(cb, onSkip){
+    var done=false;
+    var off=_auth.onAuthStateChanged(function(u){
+      if(done) return; done=true; off();
+      if(u) cb(); else authModal(cb,onSkip);
+    });
+  }
 
   function badge(msg, col){
     var el = document.getElementById('kss-sync-badge');
@@ -2299,6 +2334,7 @@ window.addEventListener('load',function(){
     try{
       var app = firebase.apps.length ? firebase.app() : firebase.initializeApp(CFG);
       _db  = firebase.firestore();
+      _auth = firebase.auth();
       _fsd = _db.collection('kss_data').doc('matters');
       _ready = true;
       cb && cb();
@@ -2367,8 +2403,9 @@ window.addEventListener('load',function(){
         });
     }
 
+    function reenable(){ btn.textContent = '☁ Save and Close'; btn.disabled = false; }
     if(_ready){
-      doSave();
+      withAuth(doSave, reenable);
     } else {
       function ls(src, cb){
         var s = document.createElement('script');
@@ -2377,8 +2414,10 @@ window.addEventListener('load',function(){
         document.head.appendChild(s);
       }
       ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js', function(){
-        ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js', function(){
-          initFirebase(doSave);
+        ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js', function(){
+          ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js', function(){
+            initFirebase(function(){ withAuth(doSave, reenable); });
+          });
         });
       });
     }
@@ -2393,8 +2432,10 @@ window.addEventListener('load',function(){
       document.head.appendChild(s);
     }
     ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js', function(){
+      ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js', function(){
       ls('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js', function(){
-        initFirebase(autoLoad);
+        initFirebase(function(){ withAuth(autoLoad, function(){ badge('', ''); }); });
+      });
       });
     });
   }
